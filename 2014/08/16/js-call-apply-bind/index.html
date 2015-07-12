@@ -1,0 +1,704 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aikin'blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: 'UA-53634746-1'
+    },
+    sidebar: 'hide'
+  };
+</script>
+
+
+
+
+  <title> “随心所欲”指定 this 的绑定对象 // aikin'blog </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">aikin'blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-brief">
+          <a href="/brief-thought">
+            <i class="menu-item-icon icon-brief"></i> <br />
+            brief
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            tags
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              “随心所欲”指定 this 的绑定对象
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Aug 16 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/08/16/js-call-apply-bind/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/16/js-call-apply-bind/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>　　有的时候，函数的调用者(<code>this</code>关键字的绑定对象)并不是你期望的对象。面对这样情况，我们希望可以自定义<code>this</code>的绑定对象。在 javascript 中可以是用<strong><em><code>call apply bind</code></em></strong>方法来指定 this 关键字的绑定对象。
+　</p>
+<h3 id="a-_call_方法">a. <strong>call 方法</strong></h3><h4 id="先看个例子：">先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    fullName: <span class="string">'aikin'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">    fullName: <span class="string">'you'</span></span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></span><br><span class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></span><br><span class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<ul>
+<li><p>在第一次直接调用函数<code>speakFullName()</code>后，函数的<code>this</code>关键字的绑定对象为全局对象，也就是<code>window</code>对象，同时在 <code>window</code> 对象中没有<code>fullName</code>这个属性，所以<code>undefined</code>也就产生了。</p>
+</li>
+<li><p>而第二次和第三次使用<strong><em><code>call</code></em></strong>方法来指定了，函数<code>speakFullName</code>的<code>this</code>关键字的绑定者，所以打印的结果就是，被绑定对象的<code>fullName</code>。</p>
+</li>
+</ul>
+<p>　　关于<strong><em><code>call</code></em></strong>方法的参数，在<strong><em>eg-1</em></strong>的例子中调用<strong><em><code>call</code></em></strong>方法时，只给它传了一个参数。如果想传入多个参数，可以这样:<code>func.call(obj, arg1, arg2, ....)</code>，第一个参数是 <code>this</code>关键字要绑定的对象，其它的参数则是被调用函数所需要的参数。下面的语法介绍是引用于 <a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="external">MDN</a>。</p>
+<blockquote>
+<p><strong><em>语法</em></strong><br>  <strong><code>fun.call(thisArg[, arg1[, arg2[, ...]]])</code></strong></p>
+<p><strong><em>参数</em></strong><br>  <strong><code>thisArg</code></strong></p>
+<ul>
+<li>在<code>fun</code>函数运行时指定的<code>this</code>值。需要注意的是，指定的<code>this</code>值并不一定是该函数执行时真正<code>this</code>值，如果这个函数处于非严格模式下，则指定为<code>null</code>和<code>undefined</code>的<code>this</code>值会自动指向全局对象(浏览器中就是<code>window</code>对象)，同时值为原始值(数字，字符串，布尔值)的<code>this</code>会指向该原始值的自动包装对象。</li>
+</ul>
+<p><strong><code>arg1, arg2, ...</code></strong></p>
+<ul>
+<li>指定的参数列表。</li>
+</ul>
+</blockquote>
+<p>来看的例子：<br><strong>eg-2：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    fullname : <span class="string">'aikin'</span>,</span><br><span class="line">    friends  : [<span class="string">'yuki'</span>, <span class="string">'bobi'</span>]</span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addFriend</span>(<span class="params">friend</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.friends.push(friend);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">addFriend.call(me, <span class="string">'kuki'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.friends);</span><br><span class="line">　</span><br><span class="line"><span class="comment">//=&gt; ["yuki", "bobi", "kuki"]</span></span><br></pre></td></tr></table></figure></p>
+<p>　</p>
+<h3 id="b-_apply()_方法">b. <strong>apply() 方法</strong></h3><p>　　<strong><code>apply</code></strong>方法和 <strong><code>call</code></strong>方法的区别在于参数的不同。</p>
+<blockquote>
+<p>该方法的作用和<strong><code>call</code></strong>方法类似，只有一个区别就是，<strong><code>call</code></strong>方法接受的是若干个参数的列表，而<strong><code>apply</code></strong>方法接受的是一个包含多个参数的数组（或类数组对象）。</p>
+</blockquote>
+<p>　　在<strong>eg-1</strong>和<strong>eg-2</strong>的例子同样可以使用<strong><code>apply</code></strong>来实现，如下：</p>
+<p><strong>eg-3：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// eg-1 的例子，使用 apply 方法</span></span><br><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    fullName: <span class="string">'aikin'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">    fullName: <span class="string">'you'</span></span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">speakFullName();            <span class="comment">//=&gt; undefined</span></span><br><span class="line">speakFullName.apply(me);    <span class="comment">//=&gt; aikin</span></span><br><span class="line">speakFullName.apply(you);   <span class="comment">//=&gt; you</span></span><br><span class="line">　</span><br><span class="line"><span class="comment">//eg-2的例子，使用 apply 方法</span></span><br><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    fullname : <span class="string">'aikin'</span>,</span><br><span class="line">    friends  : [<span class="string">'yuki'</span>, <span class="string">'bobi'</span>]</span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addFriend</span>(<span class="params">friend</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.friends.push(friend);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">addFriend.apply(me, [<span class="string">'kuki'</span>]);</span><br><span class="line"><span class="built_in">console</span>.log(me.friends);</span><br><span class="line">　</span><br><span class="line"><span class="comment">//=&gt; ["yuki", "bobi", "kuki"]</span></span><br></pre></td></tr></table></figure></p>
+<p>　　下面引用一下 <a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="external">MDN</a> 对该方法语法的介绍。</p>
+<blockquote>
+<p><strong><em>语法</em></strong><br>  <strong><code>fun.apply(thisArg[, argsArray])</code></strong></p>
+<p><strong><em>参数</em></strong><br>   <strong><code>thisArg</code></strong></p>
+<ul>
+<li>在<code>fun</code>函数运行时指定的<code>this</code>值。需要注意的是，指定的<code>this</code>值并不一定是该函数执行时真正<code>this</code>值，如果这个函数处于非严格模式下，则指定为<code>null</code>和<code>undefined</code>的<code>this</code>值会自动指向全局对象(浏览器中就是<code>window</code>对象)，同时值为原始值(数字，字符串，布尔值)的<code>this</code>会指向该原始值的自动包装对象。</li>
+</ul>
+<p><strong><code>argsArray</code></strong></p>
+<ul>
+<li>一个数组或者类数组对象，其中的数组元素将作为单独的参数传给<code>fun</code>函数。如果该参数的值为<code>null</code>或<code>undefined</code>，则表示不需要传入任何参数。</li>
+</ul>
+</blockquote>
+<p>　</p>
+<h3 id="c-_bind_方法">c. <strong>bind 方法</strong></h3><p>　　1. 通过使用<strong><code>bind</code></strong>方法，可以返回一个新的函数，而这个函数的<code>this</code>关键字绑定的对象和参数可以通过<strong><code>bind</code></strong>方法来，在函数调用前预先指定。</p>
+<blockquote>
+<ul>
+<li><strong><code>bind</code></strong>方法会创建一个新函数，称为绑定函数.当调用这个绑定函数时,绑定函数会以创建它时传入<strong><code>bind</code></strong>方法的第一个参数作为<code>this</code>，传入<strong><code>bind</code></strong>方法的第二个以及以后的参数加上绑定函数运行时本身的参数按照顺序作为原函数的参数来调用原函数.</li>
+</ul>
+</blockquote>
+<p><strong>eg-4：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + b);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    a: <span class="string">'ai'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> bindedAdd = add.bind(obj);</span><br><span class="line">　</span><br><span class="line">bindedAdd(<span class="string">'kin'</span>); <span class="comment">//=&gt; aikin</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>在上面的例子中，<code>add</code>函数通过调用<strong><code>bind</code></strong>方法，返回了一个绑定了<code>obj</code>对象的函数，并将返回的函数赋值给了<code>binedAdd</code>变量，这时函数<code>binedAdd</code>的<code>this</code>关键字的绑定对象就是<code>obj</code>。当调用<code>binedAdd()</code>时产生的结果，就相对于<code>add.call(obj, &#39;kin&#39;)</code>。</li>
+</ul>
+<p>关于<strong><code>bind</code></strong>的语法:
+　</p>
+<blockquote>
+<p><strong><em>语法</em></strong><br>  <strong><code>fun.bind(thisArg[, arg1[, arg2[, ...]]])</code></strong></p>
+<p><strong><em>参数</em></strong><br>   <strong><code>thisArg</code></strong></p>
+<ul>
+<li>当绑定函数被调用时，该参数会作为原函数运行时的this指向，当使用<code>new</code>操作符调用绑定函数时，该参数无效。</li>
+</ul>
+<p><strong><code>arg1, arg2, ...</code></strong></p>
+<ul>
+<li>当绑定函数被调用时，这些参数加上绑定函数本身的参数会按照顺序作为原函数运行时的参数。</li>
+</ul>
+</blockquote>
+<p>　　2. 当要将一个对象的方法，作为回调函数直接传递给高阶函数(可以理解为用函数作为参数的函数)时。如果希望，传入的对象的方法，的调用者，还为该对象，就可以使用<strong><code>bind</code></strong>方法，让该对象绑定到回调函数的<code>this</code>关键字。</p>
+<p><strong>eg-5：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    score    : <span class="number">90</span>,</span><br><span class="line">    getScore : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printScore</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我的分数：'</span> + callback());</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">printScore(obj.getScore);            <span class="comment">//=&gt; 我的分数：undefined</span></span><br><span class="line">printScore(obj.getScore.bind(obj));  <span class="comment">//=&gt;我的分数：90</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>在<strong>eg-5</strong>的例子中，<code>printScore</code>函数接收一个回调函数作为参数。<code>obj</code>对象的<code>getScore</code>方法返回的是该对象的<code>score</code>。</p>
+</li>
+<li><p>当调用<code>printScore(obj.getScore)</code>时，打印出来的<code>score</code>为<code>undefined</code>。因为在函数体内调用回调函数时， 没有指定回调函数的调用者，也就是回调函数的<code>this</code>的绑定对象为全局对象(<code>window</code>)。</p>
+</li>
+<li><p>当调用<code>printScore(obj.getScore.bind(obj))</code>时，函数体内的回调函数的<code>this</code>关键字的绑定对象为<code>obj</code>。所以<code>this.score</code>的值为<code>obj</code>的<code>score</code>。</p>
+</li>
+</ul>
+<p>　3. 还可以使用<strong><code>bind</code></strong>实现“柯里化”(本人理解就是为函数预先传入某些参数)。</p>
+<p><strong>eg-6：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//bind 的第一个参数为 null 时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">x, y, z</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y + z;</span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="keyword">var</span> sumBind = sum.bind(<span class="literal">null</span>, <span class="number">3</span>, <span class="number">6</span>);</span><br><span class="line">sumBind(<span class="number">8</span>);  <span class="comment">//=&gt; 17</span></span><br><span class="line">　</span><br><span class="line"><span class="comment">//bind 的第一个参数为 obj 时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">average</span> (<span class="params">age1, age2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span>.age + age1 + age2) / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    age: <span class="number">23</span></span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="keyword">var</span> averageBind = average.bind(obj, <span class="number">21</span>);</span><br><span class="line">averageBind(<span class="number">22</span>);  <span class="comment">//=&gt; 22</span></span><br></pre></td></tr></table></figure></p>
+<p>　　</p>
+<h3 id="这三方法都好有趣啊，让this绑定变得如此“随心所欲”。">这三方法都好有趣啊，让<code>this</code>绑定变得如此“随心所欲”。</h3><h3 id="this_is_so_cool-_coding_is_so_funny_-"><strong><code>this</code> is so cool. <code>coding is so funny ...</code></strong></h3><h2 id="参考">参考</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call" target="_blank" rel="external">MDN, call</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" target="_blank" rel="external">MDN, apply</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="external">MDN, bind</a></li>
+<li>David Herman, 《Effective JavaScript》</li>
+</ul>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/"> #javascript </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/28/mongoose-remove-function/">使用 mongoose 清除数据</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/08/install-atom-on-ubuntu/">Ubuntu 14.04 安装 Atom</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/08/16/js-call-apply-bind/"
+     data-title="“随心所欲”指定 this 的绑定对象"
+     data-content=""
+     data-url="http://aikin.github.io/2014/08/16/js-call-apply-bind/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2014/08/16/js-call-apply-bind/"
+               data-title="“随心所欲”指定 this 的绑定对象" data-url="http://aikin.github.io/2014/08/16/js-call-apply-bind/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/avatar.png" alt="aikin" />
+          <p class="site-author-name">aikin</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/uneffacement" target="_blank">Weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/aikin" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2854005/aikin" target="_blank">Stackoverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://segmentfault.com/u/aikin" target="_blank">Segmentfault</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-_call_方法"><span class="nav-number">1.</span> <span class="nav-text">a. call 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先看个例子："><span class="nav-number">1.1.</span> <span class="nav-text">先看个例子：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-_apply()_方法"><span class="nav-number">2.</span> <span class="nav-text">b. apply() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-_bind_方法"><span class="nav-number">3.</span> <span class="nav-text">c. bind 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这三方法都好有趣啊，让this绑定变得如此“随心所欲”。"><span class="nav-number">4.</span> <span class="nav-text">这三方法都好有趣啊，让this绑定变得如此“随心所欲”。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this_is_so_cool-_coding_is_so_funny_-"><span class="nav-number">5.</span> <span class="nav-text">this is so cool. coding is so funny ...</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">aikin</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"aikin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script>
+
+
+  
+  <!-- lazyload -->
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+      <script type="text/javascript">
+        jQuery(function() {          
+            jQuery("#posts img").lazyload({
+              placeholder:"http://www.arao.me/loading.gif",  
+                effect:"fadeIn"
+              });
+            });
+    </script>   
+</body>
+</html>

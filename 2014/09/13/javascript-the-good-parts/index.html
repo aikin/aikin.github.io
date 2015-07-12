@@ -1,0 +1,667 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="reading-notes," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aikin'blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: 'UA-53634746-1'
+    },
+    sidebar: 'hide'
+  };
+</script>
+
+
+
+
+  <title> 《JavaScipt 语言精粹》养分 // aikin'blog </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">aikin'blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-brief">
+          <a href="/brief-thought">
+            <i class="menu-item-icon icon-brief"></i> <br />
+            brief
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            tags
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              《JavaScipt 语言精粹》养分
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Sep 13 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/09/13/javascript-the-good-parts/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/13/javascript-the-good-parts/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <h2 id="《JavaScipt_语言精粹》_作者:_Douglas_Crockford">《JavaScipt 语言精粹》 作者: Douglas Crockford</h2><h4 id="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。">拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得<strong>铁路图</strong>实在看着有点费劲。</h4><h3 id="养分">养分</h3><p><strong>1. <code>beget</code>创建一个使用原对象作为其原型的新的对象。</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.beget !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.beget = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">       F.prototype = obj;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p><strong>2. 使用 <code>hasOwnProperty</code> 方法来判断对象是否拥有独有的属性。这个方法不会检查原型链的属性。</strong></p>
+<p><strong>3. 减少全局变量污染: </strong></p>
+<ul>
+<li>可以把所有的全局变量放在一个全局对象里面。 把多个全局变量都整理在一个名称空间下。</li>
+<li>也可以使用闭包来实现。</li>
+</ul>
+<p><strong>4. 模块，可以使用函数和闭包来构造模块。模块是一个提供接口却隐藏状态与实现的函数或对象。几乎可以完全摒弃全局变量的使用。通过特权函数(可以理解为接口)访问外部函数的局部变量。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> moduleDemo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> _name = <span class="string">''</span>;</span><br><span class="line">	<span class="keyword">var</span> _age = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		setName: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">			_name = name;</span><br><span class="line">		&#125;,</span><br><span class="line">		setAge: <span class="function"><span class="keyword">function</span>(<span class="params">age</span>) </span>&#123;</span><br><span class="line">			_age = age;</span><br><span class="line">		&#125;,</span><br><span class="line">		getProfile: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">'name:'</span> + _name + <span class="string">' age:'</span> + _age;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = moduleDeme();</span><br><span class="line"><span class="built_in">module</span>.setName(<span class="string">'aikin'</span>);</span><br><span class="line"><span class="built_in">module</span>.setAge(<span class="number">24</span>);</span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">module</span>.getProfile();</span><br><span class="line"></span><br><span class="line"><span class="comment">// _name 和 _age 都是匿名函数 moduleDemo 的局部变量(私有变量)。函数 moduleDemo // 内，通过闭包的方式提供了访问_name 和 _age 的特权函数(也可以理解我接口)。</span></span><br></pre></td></tr></table></figure>
+<p><strong>5. 级联， 就是有点像函数式编程的样子。通过不断‘点’来调用，如 jquery对某个元素操作:</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#demoId'</span>)</span><br><span class="line">.removeClass(<span class="string">'yellow'</span>)</span><br><span class="line">.addClass(<span class="string">'blue'</span>)</span><br><span class="line">.on(<span class="string">'mousedown'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line">.on(<span class="string">'mousemove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里调用的方法都是同一个对象的，然后每个方法返回的变量是 this 。</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>6. 套用，使用闭包实现 curry 化。调用一个函数，将传入的参数，作为闭包使用的变量。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> add = curry(<span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">4</span>));  <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+<p><strong>7. 记忆，使用对象缓存(记忆)先前操作的结果，从而避免无用功操作。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fibonacci = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n &lt; <span class="number">2</span> ? n : fibonacci(n - <span class="number">1</span>) + fibonacci(n - <span class="number">2</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i += <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'//'</span> + i + <span class="string">': '</span> + fibonacci(i));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现 记忆模式</span></span><br><span class="line"><span class="keyword">var</span> fibonacci = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> memo = [<span class="number">0</span>, <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">var</span> fib  = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> result = memo[n];</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> result !== <span class="string">'number'</span>) &#123;</span><br><span class="line">            result  = fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>);</span><br><span class="line">            memo[n] = result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> fib;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重构 让递归流程不变，初始化存储结果和基本公式</span></span><br><span class="line"><span class="keyword">var</span> memoizer = <span class="function"><span class="keyword">function</span>(<span class="params">memo, fundamental</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> shell = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> result = memo[n];</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> result !== <span class="string">'number'</span>) &#123;</span><br><span class="line">        	result  = fundamental(shell, n);</span><br><span class="line">            memo[n] = result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> shell;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fibonacci = memoizer([<span class="number">0</span>, <span class="number">1</span>], <span class="function"><span class="keyword">function</span>(<span class="params">shell, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> shell(n - <span class="number">1</span>) + shell(n - <span class="number">2</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现阶乘</span></span><br><span class="line"><span class="keyword">var</span> factorial = memoizer([<span class="number">1</span>, <span class="number">1</span>], <span class="function"><span class="keyword">function</span>(<span class="params">shell, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n * shell(n - <span class="number">1</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>8. 函数化。解决继承模式无法设置保护隐私问题。实现更好的风筝和信息隐藏。用函数化的样式创建一个对象，并且该对象的所有方法都不使用 this 或 that，那么该对象就是持久性的。一个持久性对象就是一个简单功能函数集合。</strong></p>
+<p>函数化构造器的伪代码模板:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> constructor = <span class="function"><span class="keyword">function</span>(<span class="params">spec, my</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that;	<span class="comment">// 其他的私有实例变量</span></span><br><span class="line">    my = my || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    把共享的变量和函数加到 my 中</span><br><span class="line"></span><br><span class="line">    that = 一个新对象</span><br><span class="line"></span><br><span class="line">    添加给 that 的特权方法</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> that;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// spec 对象包含构造器需要构造一个新实例的所有信息。</span></span><br><span class="line"><span class="comment">// my 对象是一个为继承链中的构造器提供秘密共享的容器。my 对象可变参数。</span></span><br></pre></td></tr></table></figure>
+<p><strong>9. 部件。就是通过调用一个函数返回一个对象。而被调用的函数就像是一个中间者，函数的外部不需要知道内部发生什么。把传入的参数，经过函数内部的加工后，而具有了某些或某类的功能和属性。这些功能和属性就像部件一样。</strong></p>
+<p>构造一个能添加简单事件处理特性到任何对象上的函数。它会给对象添加一个 on 方法、一个 fire 方法和一个私有的事件注册表对象(可以把这个函数理解为一个小车间，一个对象经过这个小车间加工后，就组装了部件 on 方法、fire 方法、和事件注册表)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eventuality = <span class="function"><span class="keyword">function</span>(<span class="params">that</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> registry = &#123;&#125;;</span><br><span class="line">    that.fire = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> array,</span><br><span class="line">            func,</span><br><span class="line">            handler,</span><br><span class="line">            i,</span><br><span class="line">            type = <span class="keyword">typeof</span> event === <span class="string">'string'</span> ?</span><br><span class="line">                   event : event.type;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (registry.hasOwnProperty(type)) &#123;</span><br><span class="line">            array = registry[type];</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; array.lenght; i += <span class="number">1</span>) &#123;</span><br><span class="line">                handler = array[i];</span><br><span class="line">                func = handler.method;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">typeof</span> func === <span class="string">'string'</span>) &#123;</span><br><span class="line">                    func = <span class="keyword">this</span>[func];</span><br><span class="line">                &#125;</span><br><span class="line">                func.apply(<span class="keyword">this</span>, handler.parameters || [event]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    that.on = <span class="function"><span class="keyword">function</span>(<span class="params">type, method, parameters</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> handler = &#123;</span><br><span class="line">            method： method,</span><br><span class="line">            parameters: parameters</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (registry.hasOwnProperty(type)) &#123;</span><br><span class="line">            registry[type].push(handler);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            registry[type] = [handler];</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> that;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>eventuality(that); 用这种方式，一个构造函数可以从一套部件中组装处对象来。</p>
+<p><strong>10. 正则表达式，嵌套的正则表达式也能导致极恶劣的性能问题，因此简单是最好的策略。使用非捕获型分组来代替少量不优美的捕获型分组是很好的方法，因为捕获会有性能上的损失。</strong></p>
+<p>解析 url 例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_url = <span class="regexp">/^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</span>;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">"http://www.ora.com:80/googparts?q#fragment"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = parse_url.exec(url);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["http://www.ora.com:80/googparts?q#fragment", "http", "//", "www.ora.com", "80", "googparts", "q", "fragment"]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>^</code> 表示这个字符串的开始。</li>
+<li><code>(?:([A-Za-z]+):)?</code> 用于匹配一个协议名，当仅当它之后跟随一个<code>:</code>的时候才匹配。<code>(?: ... )</code> 表示一个非捕获型分组。后缀<code>?</code>表示这个分组是可选的，他表示重复 0或1次。<code>(...)</code>表示一个捕获型分组，一个捕获型分组将复制它所匹配的文本，并将其放入 result 数组中，每个捕获型分组都将被指定一个编号。第一个捕获型分组的编号是 1， 所以该分组所匹配的文本拷贝将出现在 result[1] 中。<code>[...]</code>表示一个字符类，这个字符类<code>A-Za-z</code>包含26个大写字母和26个小写字母。连字符<code>-</code>表示范围从 A 到 Z。后缀<code>+</code>表示这个字符类将被匹配 1 次或多次。这组后面跟着字符<code>:</code>表示按字面进行匹配。</li>
+<li><code>(\/{0,3})</code> 是捕获型分组 2。<code>\/</code>表示一个应该被匹配的 /(斜杠)。(反斜杠)表示转义。<code>{0,3}</code>表示 / 将被匹配0次，或者1到3次之间。</li>
+<li><code>([0-9.\-A-Za-z]+)</code>  是捕获型分组 3。它将匹配一个主机名，由1个或多个数字、字母或 . 或 - 组成。因为 - 将被转义为 \- 以防止与表示范围的连字符相混淆。</li>
+<li><code>(?::(\d+))?</code> 可选的匹配端口号的分组。它由一个前置 : 加上1一个或着多个数字而组成的序列。<code>(?::)</code>表示不会捕获<code>:</code>，只会捕获<code>:</code>后的数字。<code>\d</code>表示一个数字字符，<code>(\d+)</code>表示捕获型分组4， 1个或多个数字串将被捕获。</li>
+<li><code>(?:\/([^?#]*))?</code> 可选的分组。<code>[^?#]</code>以一个<code>^</code>开始，表示这个字符类包含除了<code>?</code>和<code>#</code>之外的所有字符。<code>*</code>表示这个字符类将被匹配0次或多次。</li>
+<li><code>(?:\?([^#]*))?</code> 是一个<code>?</code>开始的可选分组。<code>([^#]*)</code>是捕获型分组，包含0个或多个非<code>#</code>字符。</li>
+<li><code>(?:#(.*))?</code> 以<code>#</code>开始，<code>.</code>将匹配除行结束符以外的所有字符。</li>
+<li><code>$</code> 表示这个字非常的结束。</li>
+</ul>
+<p>判断是否为数字</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_number = <span class="regexp">/^-?\d+(?:\.\d*)?(?:e[+\-]?\d+)?$/i</span>;</span><br><span class="line"><span class="keyword">var</span> is_number    = parse_number.test(<span class="string">'1222.45'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>(?:e[+\-]?\d+)?</code> 可选的非捕获型分组。它将匹配一个 e(或 E)，<code>[+\-]?</code>表示一个可选的正负号。<code>\d+</code>表示一个或多个数字。</li>
+</ul>
+<p><strong>11. 方法</strong></p>
+<p><strong><em>array.concat(item…) 可以对数组进行浅拷贝，并将一个或多个参数item附加到新数组最后。</em></strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];</span><br><span class="line"><span class="keyword">var</span> b = [<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>];</span><br><span class="line"><span class="keyword">var</span> c = a.concat(b, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// c 是 ['a', 'b', 'c', 'x', 'y', 'z', true];</span></span><br></pre></td></tr></table></figure></p>
+<p><strong><em>array.slice(start, end) 对 array 中的一段做浅拷贝。</em></strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];&#10;var b = a.slice(0, 1);      // [&#39;a&#39;]&#10;var c = a.slice(1);         // [&#39;b&#39;, &#39;c&#39;]&#10;var d = a.slice(1, 2);      // [&#39;b&#39;];&#10;var e = a.slice(4);&#9;&#9;    // [];</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>array.splice(start, deleteCount, item…) 从 array 中移除一个或多个元素，并用新的 item 替换它们。item 是可选参数。</em></strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];&#10;var b = a.splice(1, 1, &#39;ache&#39;, &#39;bug&#39;);&#10;&#10;// a &#26159; [&#39;a&#39;, &#39;ache&#39;, &#39;bug&#39;, &#39;c&#39;];&#10;// b &#26159; [&#39;b&#39;];</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>string.charAt(pos)</em></strong><br><strong><em>string.chartCodeAt(pos)</em></strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'Curly'</span>;</span><br><span class="line"><span class="keyword">var</span> initial = name.chatAt(<span class="number">0</span>);    <span class="comment">// 'C'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> otherInitial = name.chatACodet(<span class="number">0</span>); <span class="comment">// 67</span></span><br></pre></td></tr></table></figure></p>
+<p><strong><em>string.slice(start, end)</em></strong><br><strong><em>string.substring(start, end)</em></strong><br>这个两个方法相似，都是复制字符串的指定部分。但是 substring 不能 start 参数不能为负数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">'and in it he says "Any damn fool could'</span>;</span><br><span class="line"><span class="keyword">var</span> a 	 = text.slice(<span class="number">18</span>);       <span class="comment">// '"Any damn fool could'</span></span><br><span class="line"><span class="keyword">var</span> b 	 = text.slice(<span class="number">0</span>, <span class="number">3</span>);     <span class="comment">// 'and'</span></span><br><span class="line"><span class="keyword">var</span> c    = text.slice(-<span class="number">5</span>);		 <span class="comment">// 'could'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong><em>string.split(separator, limit)</em></strong><br>将字符串分割成数组。separator 可以是个字符串或正则表达式，limit是可选参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> digits = <span class="string">'0123456789'</span>;</span><br><span class="line"><span class="keyword">var</span> a      = digits.split(<span class="string">''</span>, <span class="number">5</span>);    <span class="comment">// ['0', '1', '2', '3', '456789']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> text   = <span class="string">'last, first, middle'</span>;</span><br><span class="line"><span class="keyword">var</span> d      = text.split(<span class="regexp">/\s*,\s*/</span>);  <span class="comment">// ["last", "first", "middle"]</span></span><br><span class="line"><span class="keyword">var</span> e      = text.split(<span class="regexp">/\s*(,)\s*/</span>) <span class="comment">// ["last", ",", "first", ",", "middle"]</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/reading-notes/"> #reading-notes </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/26/angular-events/">AngularJS 事件</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/28/mongoose-remove-function/">使用 mongoose 清除数据</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2014/09/13/javascript-the-good-parts/"
+     data-title="《JavaScipt 语言精粹》养分"
+     data-content=""
+     data-url="http://aikin.github.io/2014/09/13/javascript-the-good-parts/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2014/09/13/javascript-the-good-parts/"
+               data-title="《JavaScipt 语言精粹》养分" data-url="http://aikin.github.io/2014/09/13/javascript-the-good-parts/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/avatar.png" alt="aikin" />
+          <p class="site-author-name">aikin</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/uneffacement" target="_blank">Weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/aikin" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2854005/aikin" target="_blank">Stackoverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://segmentfault.com/u/aikin" target="_blank">Segmentfault</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#《JavaScipt_语言精粹》_作者:_Douglas_Crockford"><span class="nav-number">1.</span> <span class="nav-text">《JavaScipt 语言精粹》 作者: Douglas Crockford</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"><span class="nav-number">1.0.1.</span> <span class="nav-text">拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#养分"><span class="nav-number">1.1.</span> <span class="nav-text">养分</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">aikin</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"aikin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script>
+
+
+  
+  <!-- lazyload -->
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+      <script type="text/javascript">
+        jQuery(function() {          
+            jQuery("#posts img").lazyload({
+              placeholder:"http://www.arao.me/loading.gif",  
+                effect:"fadeIn"
+              });
+            });
+    </script>   
+</body>
+</html>
