@@ -201,18 +201,19 @@
 <p>　　通过 <strong>eg-1</strong>，<strong>eg-2</strong>，<strong>eg-3</strong> 可以知道，在不同的执行上下文中，this 的值是不相同的。即，在全局的执行上文中，this 表示的是全局对象本身（window)；在函数执行上文中，this 的值绑定的是调用函数的对象。</p>
 <p><strong><em>接下来做个练习：</em></strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">practice</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'this in practice'</span>, <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">this</span>.practice();</span><br><span class="line">　　</span><br><span class="line"><span class="comment">// 打印的结果会是?</span></span><br></pre></td></tr></table></figure></p>
 <p>　　在 javascript 中，随着函数的调用方式不同，将会导致函数的执行上下文不同，也就是将会导致函数内部 this 关键字绑定的对象不同。下面探索一下：<strong>构造函数调用</strong>，<strong>方法调用</strong>，<strong>函数调用</strong>。</p>
-<h3 id="a-_构造函数调用">a. <strong>构造函数调用</strong></h3><p>　　构造函数和函数其实是一样，如果不使用关键字 new 调用，和其他的普通函数是一样的。</p>
+<p>  ###a. <strong>构造函数调用</strong><br>　　构造函数和函数其实是一样，如果不使用关键字 new 调用，和其他的普通函数是一样的。</p>
 <p><strong>eg-4:</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">User</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> me =  <span class="keyword">new</span> User (<span class="string">'aikin'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(me.name);</span><br><span class="line">　　</span><br><span class="line"><span class="comment">//=&gt; 'aikin'</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>使用 new 操作符来调用 User， 就会将User视为构造函数。 构造函数的调用会将一个全新的对象(也就是 new 出来的对象)作为 this 关键字的绑定对象。</li>
 </ul>
-<h3 id="b-_函数调用">b. <strong>函数调用</strong></h3><p>　　函数调用，也就是直接调用函数，正如上面 <strong>eg-1</strong> 例子所描述的， 这时 this 绑定的对象是全局对象(window)。</p>
-<h3 id="c-_方法调用">c. <strong>方法调用</strong></h3><p>　　当函数作为一个对象的属性时，这个函数就称为方法。</p>
+<p>  ###b. <strong>函数调用</strong><br>　　函数调用，也就是直接调用函数，正如上面 <strong>eg-1</strong> 例子所描述的， 这时 this 绑定的对象是全局对象(window)。</p>
+<p>  ###c. <strong>方法调用</strong><br>　　当函数作为一个对象的属性时，这个函数就称为方法。</p>
 <p><strong>eg-5:</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    name   : <span class="string">"aikin"</span>,</span><br><span class="line">    helllo : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello, '</span> + <span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.hello();</span><br><span class="line">　　</span><br><span class="line"> <span class="comment">//=&gt; "hello, aikin"</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>在这个例子(<strong>eg-5</strong>)中，obj 是 hello 方法的调用者，也就是说，hello 方法中的 this 关键字将会绑定 obj 对象。</li>
 </ul>
-<h4 id="所以，"><strong>所以，</strong></h4><ul>
+<p>####<strong>所以，</strong></p>
+<ul>
 <li><p>函数调用时，将会将全局对象作为 this 的绑定对象。</p>
 </li>
 <li><p>方法调用时，方法调用者将会成为 this 的绑定对象。</p>
@@ -402,7 +403,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-_构造函数调用"><span class="nav-number">1.</span> <span class="nav-text">a. 构造函数调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-_函数调用"><span class="nav-number">2.</span> <span class="nav-text">b. 函数调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-_方法调用"><span class="nav-number">3.</span> <span class="nav-text">c. 方法调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#所以，"><span class="nav-number">3.1.</span> <span class="nav-text">所以，</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -420,7 +421,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2014 - 
-  2015
+  2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

@@ -188,7 +188,8 @@
 
       
         
-          <h1 id="《JavaScript_模式》作者:_Stoyan_Stefanov_译:_陈新">《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</h1><h3 id="养分">养分</h3><p><strong><em>1. 自调用构造函数: </em></strong> 实现不使用<code>new</code>关键字，构造出实例。</p>
+          <h1 id="《JavaScript_模式》作者:_Stoyan_Stefanov_译:_陈新">《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</h1><p>###养分</p>
+<p><strong><em>1. 自调用构造函数: </em></strong> 实现不使用<code>new</code>关键字，构造出实例。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Waffle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> ((!<span class="keyword">this</span> <span class="keyword">instanceof</span> Waffle)) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Waffle();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span>.tastes = <span class="string">"yummy"</span>;</span><br><span class="line">&#125;</span><br><span class="line">Waffle.prototype.wantAnother = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> first   = <span class="keyword">new</span> Waffle(),</span><br><span class="line">    section = Waffle();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(first.tastes);     <span class="comment">// yummy</span></span><br><span class="line"><span class="built_in">console</span>.log(section.tastes);   <span class="comment">// yummy</span></span><br></pre></td></tr></table></figure>
 <p><strong><em>2. 备忘模式: </em></strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cachekey = <span class="built_in">JSON</span>.stringify(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)),</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!myFunc.cache[cachekey]) &#123;</span><br><span class="line">       result = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 开销很大的操作</span></span><br><span class="line">       myFunc.cache[cachekey] = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> myFunc.cache[cachekey];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存存储</span></span><br><span class="line">myFunc.cache = &#123;&#125;;</span><br></pre></td></tr></table></figure>
@@ -334,7 +335,8 @@
       
         
           <p>　　这里记录的是笔者在 <a href="https://github.com/">github</a>上 Star 的库，持续更新。</p>
-<h2 id="JS_类">JS 类</h2><ul>
+<p>##JS 类</p>
+<ul>
 <li><a href="https://github.com/getify/LABjs.git">LABjs</a></li>
 <li><a href="https://github.com/jrburke/requirejs.git">requirejs</a></li>
 <li><a href="https://github.com/seajs/seajs.git">seajs</a><blockquote>
@@ -482,7 +484,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2014 - 
-  2015
+  2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
