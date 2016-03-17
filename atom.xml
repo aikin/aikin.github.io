@@ -1521,6 +1521,44 @@
   </entry>
   
   <entry>
+    <title>MongoDB GUI 之 RockMogo</title>
+    <link href="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/"/>
+    <id>http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/</id>
+    <published>2014-03-15T15:17:22.000Z</published>
+    <updated>2016-03-17T15:32:46.000Z</updated>
+    
+    <content type="html">&lt;p&gt;  &lt;a href=&quot;https://github.com/iwind/rockmongo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RockMongo&lt;/a&gt; 是一个PHP5写的，开源的 MongoDB 管理工具。&lt;/p&gt;
+&lt;h3 id=&quot;安装-php&quot;&gt;&lt;a href=&quot;#安装-php&quot; class=&quot;headerlink&quot; title=&quot;安装 php&quot;&gt;&lt;/a&gt;安装 php&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install apache2 php5 php5-dev dh-make-php&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;安装-RockMongo&quot;&gt;&lt;a href=&quot;#安装-RockMongo&quot; class=&quot;headerlink&quot; title=&quot;安装 RockMongo&quot;&gt;&lt;/a&gt;安装 RockMongo&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1. 下载 RockMongo：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo wget http://rock-php.googlecode.com/files/rockmongo-v1.1.2.zip&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 解压rockmongo，并将解压后的文件移动到 /var/www 下：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo  unzip rockmongo-v1.1.2.zip&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo mv rockmongo /var/www/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo chown -R www-data:www-data /var/www/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;安装-mongo-依赖&quot;&gt;&lt;a href=&quot;#安装-mongo-依赖&quot; class=&quot;headerlink&quot; title=&quot;安装 mongo 依赖&quot;&gt;&lt;/a&gt;安装 mongo 依赖&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo pecl install &lt;span class=&quot;_&quot;&gt;-f&lt;/span&gt; mongo 2.2.0&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;编辑-php-ini文件-终端输入&quot;&gt;&lt;a href=&quot;#编辑-php-ini文件-终端输入&quot; class=&quot;headerlink&quot; title=&quot;编辑 php.ini文件 终端输入&quot;&gt;&lt;/a&gt;编辑 php.ini文件 终端输入&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo gedit /etc/php5/apache2/php.ini&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;添加内容如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;extension_dir = “/usr/lib/php5/20100525+lfs”&lt;br&gt;extension = “mongo.so”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;重启-apach&quot;&gt;&lt;a href=&quot;#重启-apach&quot; class=&quot;headerlink&quot; title=&quot;重启 apach&quot;&gt;&lt;/a&gt;重启 apach&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo /etc/init.d/apache2 restart&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;使用-rockmongo&quot;&gt;&lt;a href=&quot;#使用-rockmongo&quot; class=&quot;headerlink&quot; title=&quot;使用 rockmongo&quot;&gt;&lt;/a&gt;使用 rockmongo&lt;/h3&gt;&lt;p&gt; &lt;strong&gt;1. 在浏览器上输入url：&lt;a href=&quot;http://127.0.1.1/rockmongo/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://127.0.1.1/rockmongo/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; &lt;img src=&quot;./rockmongo-login.png&quot; alt=&quot;login&quot;&gt;&lt;/p&gt;
+&lt;p&gt; &lt;strong&gt;2. 默认的登入的用户名和密码： admin admin  。 登陆后将会出现：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;  &lt;img src=&quot;./rockmongo-index.png&quot; alt=&quot;index&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  &lt;a href=&quot;https://github.com/iwind/rockmongo&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;RockMongo&lt;/a&gt; 是一个PHP5写的，开源的 MongoDB 管理工具。&lt;/p&gt;
+&lt;h3 id=&quot;安装-ph
+    
+    </summary>
+    
+    
+      <category term="MongoDB" scheme="http://aikin.github.io/tags/MongoDB/"/>
+    
+      <category term="RockMongo" scheme="http://aikin.github.io/tags/RockMongo/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Rails 使用 Paperclip 上传图片</title>
     <link href="http://aikin.github.io/2014/02/20/rails-paperclip/"/>
     <id>http://aikin.github.io/2014/02/20/rails-paperclip/</id>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/</loc>
+    
+    <lastmod>2016-03-17T15:32:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2014/11/08/star-repos/</loc>
     
     <lastmod>2016-03-17T14:57:14.000Z</lastmod>
@@ -58,7 +65,7 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/instagram/index.html</loc>
+    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
@@ -66,13 +73,6 @@
   
   <url>
     <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
-    
-    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
@@ -93,14 +93,21 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
+    <loc>http://aikin.github.io/instagram/index.html</loc>
+    
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
@@ -114,14 +121,7 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
+    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
@@ -135,14 +135,21 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
+    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
+    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     

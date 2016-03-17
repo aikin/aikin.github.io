@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="mongoose,nodejs," />
+  <meta name="keywords" content="MongoDB,RockMongo," />
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-  <title> 使用 mongoose 清除数据 // aikin'blog </title>
+  <title> MongoDB GUI 之 RockMogo // aikin'blog </title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
           
           
             
-              使用 mongoose 清除数据
+              MongoDB GUI 之 RockMogo
             
           
         </h1>
@@ -164,7 +164,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on Aug 28 2014
+          Posted on Mar 15 2014
         </span>
 
         
@@ -173,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/08/28/mongoose-remove-function/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/28/mongoose-remove-function/"></span>
+            <a href="/2014/03/15/mongodb-gui-rockmongo/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/15/mongodb-gui-rockmongo/"></span>
             </a>
           </span>
           
@@ -188,20 +188,21 @@
       
 
       
-        <p>　　使用 mongoose 封装的方法来删除 mongodb 数据库中的 database、 collections、docs。</p>
-<ul>
-<li><h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</span><br><span class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</span><br><span class="line">    db.dropDatabase(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</span><br><span class="line">	    mongoose.disconnect();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<ul>
-<li><h3 id="删除所有collections"><a href="#删除所有collections" class="headerlink" title="删除所有collections"></a>删除所有collections</h3></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">async</span>    = <span class="built_in">require</span>(<span class="string">'async'</span>);</span><br><span class="line"><span class="keyword">var</span> _        = <span class="built_in">require</span>(<span class="string">'lodash'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</span><br><span class="line"></span><br><span class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</span><br><span class="line"></span><br><span class="line">    db.collections(<span class="function"><span class="keyword">function</span> (<span class="params">err, collections</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> collectionsName =</span><br><span class="line">                _(collections)</span><br><span class="line">                    .pluck(<span class="string">'collectionName'</span>)</span><br><span class="line">                    .filter(<span class="function"><span class="keyword">function</span>(<span class="params">collectionName</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> collectionName.split(<span class="string">'.'</span>)[<span class="number">0</span>] !== <span class="string">'system'</span>;</span><br><span class="line">                    &#125;)</span><br><span class="line">                    .value();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">async</span>.forEach(</span><br><span class="line">            collectionsName,</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">collectionName, done</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">                db.dropCollection(collectionName, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (err &amp;&amp; err.message != <span class="string">'ns not found'</span>) <span class="keyword">return</span> done(err);</span><br><span class="line">                    done(<span class="literal">null</span>);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                mongoose.connection.close(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><h3 id="删除所有-collections-下的-docs"><a href="#删除所有-collections-下的-docs" class="headerlink" title="删除所有 collections 下的 docs"></a>删除所有 collections 下的 docs</h3></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">async</span>    = <span class="built_in">require</span>(<span class="string">'async'</span>);</span><br><span class="line"><span class="keyword">var</span> _        = <span class="built_in">require</span>(<span class="string">'lodash'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</span><br><span class="line"></span><br><span class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</span><br><span class="line"></span><br><span class="line">    db.collections(<span class="function"><span class="keyword">function</span>(<span class="params">err, collections</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> collectionsWithoutSystem = _.filter(collections, <span class="function"><span class="keyword">function</span>(<span class="params">collection</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> collection.collectionName.split(<span class="string">'.'</span>)[<span class="number">0</span>] !== <span class="string">'system'</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">async</span>.forEach(</span><br><span class="line">            collectionsWithoutSystem,</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">collection, done</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">                collection.remove(&#123;&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (err) <span class="keyword">return</span> done(err);</span><br><span class="line">                    done(<span class="literal">null</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;,</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                mongoose.connection.close(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+        <p>  <a href="https://github.com/iwind/rockmongo" target="_blank" rel="external">RockMongo</a> 是一个PHP5写的，开源的 MongoDB 管理工具。</p>
+<h3 id="安装-php"><a href="#安装-php" class="headerlink" title="安装 php"></a>安装 php</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install apache2 php5 php5-dev dh-make-php</span><br></pre></td></tr></table></figure>
+<h3 id="安装-RockMongo"><a href="#安装-RockMongo" class="headerlink" title="安装 RockMongo"></a>安装 RockMongo</h3><p><strong>1. 下载 RockMongo：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo wget http://rock-php.googlecode.com/files/rockmongo-v1.1.2.zip</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 解压rockmongo，并将解压后的文件移动到 /var/www 下：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo  unzip rockmongo-v1.1.2.zip</span><br><span class="line">$ sudo mv rockmongo /var/www/</span><br><span class="line">$ sudo chown -R www-data:www-data /var/www/</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装-mongo-依赖"><a href="#安装-mongo-依赖" class="headerlink" title="安装 mongo 依赖"></a>安装 mongo 依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pecl install <span class="_">-f</span> mongo 2.2.0</span><br></pre></td></tr></table></figure>
+<h3 id="编辑-php-ini文件-终端输入"><a href="#编辑-php-ini文件-终端输入" class="headerlink" title="编辑 php.ini文件 终端输入"></a>编辑 php.ini文件 终端输入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit /etc/php5/apache2/php.ini</span><br></pre></td></tr></table></figure>
+<p>添加内容如下：</p>
+<blockquote>
+<p>extension_dir = “/usr/lib/php5/20100525+lfs”<br>extension = “mongo.so”</p>
+</blockquote>
+<h3 id="重启-apach"><a href="#重启-apach" class="headerlink" title="重启 apach"></a>重启 apach</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/apache2 restart</span><br></pre></td></tr></table></figure>
+<h3 id="使用-rockmongo"><a href="#使用-rockmongo" class="headerlink" title="使用 rockmongo"></a>使用 rockmongo</h3><p> <strong>1. 在浏览器上输入url：<a href="http://127.0.1.1/rockmongo/" target="_blank" rel="external">http://127.0.1.1/rockmongo/</a></strong></p>
+<p> <img src="./rockmongo-login.png" alt="login"></p>
+<p> <strong>2. 默认的登入的用户名和密码： admin admin  。 登陆后将会出现：</strong></p>
+<p>  <img src="./rockmongo-index.png" alt="index"></p>
 
       
     </div>
@@ -210,9 +211,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mongoose/"> #mongoose </a>
+            <a href="/tags/MongoDB/"> #MongoDB </a>
           
-            <a href="/tags/nodejs/"> #nodejs </a>
+            <a href="/tags/RockMongo/"> #RockMongo </a>
           
         </div>
       
@@ -221,13 +222,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/09/13/javascript-the-good-parts/">《JavaScipt 语言精粹》养分</a>
+              <a href="/2014/08/03/init/">init blog</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/08/16/js-call-apply-bind/">“随心所欲”指定 this 的绑定对象</a>
+              <a href="/2014/02/20/rails-paperclip/">Rails 使用 Paperclip 上传图片</a>
             
           </div>
         </div>
@@ -242,10 +243,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/08/28/mongoose-remove-function/"
-     data-title="使用 mongoose 清除数据"
+        <div class="ds-share flat" data-thread-key="2014/03/15/mongodb-gui-rockmongo/"
+     data-title="MongoDB GUI 之 RockMogo"
      data-content=""
-     data-url="http://aikin.github.io/2014/08/28/mongoose-remove-function/">
+     data-url="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -266,8 +267,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2014/08/28/mongoose-remove-function/"
-               data-title="使用 mongoose 清除数据" data-url="http://aikin.github.io/2014/08/28/mongoose-remove-function/">
+          <div class="ds-thread" data-thread-key="2014/03/15/mongodb-gui-rockmongo/"
+               data-title="MongoDB GUI 之 RockMogo" data-url="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/">
           </div>
         
       </div>
@@ -381,7 +382,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据库"><span class="nav-number">1.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除所有collections"><span class="nav-number">2.</span> <span class="nav-text">删除所有collections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除所有-collections-下的-docs"><span class="nav-number">3.</span> <span class="nav-text">删除所有 collections 下的 docs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-php"><span class="nav-number">1.</span> <span class="nav-text">安装 php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-RockMongo"><span class="nav-number">2.</span> <span class="nav-text">安装 RockMongo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-mongo-依赖"><span class="nav-number">3.</span> <span class="nav-text">安装 mongo 依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑-php-ini文件-终端输入"><span class="nav-number">4.</span> <span class="nav-text">编辑 php.ini文件 终端输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重启-apach"><span class="nav-number">5.</span> <span class="nav-text">重启 apach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-rockmongo"><span class="nav-number">6.</span> <span class="nav-text">使用 rockmongo</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

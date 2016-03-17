@@ -54,7 +54,7 @@
 
 
 
-  <title> Tag: javascript // aikin'blog </title>
+  <title> Archive // aikin'blog </title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
   </div>
 <![endif]-->
 
-  <div class="container one-column ">
+  <div class="container one-column  page-archive ">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -145,14 +145,31 @@
           
 
   <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        javascript
-        <small>Tag</small>
-      </h2>
-    </div>
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      Um..! 18 posts in total. Keep on posting.
+    </span>
 
     
+
+      
+      
+      
+
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2014">2014</h2>
+        </div>
+      
+      
+
       
 
   <div class="post post-type-normal">
@@ -160,71 +177,26 @@
 
       <div class="post-title">
         
-            <a class="post-title-link" href="/2014/12/07/window-life-cycle-events/">
-              window 对象的“生命周期”事件
+            <a class="post-title-link" href="/2014/03/15/mongodb-gui-rockmongo/">
+              MongoDB GUI 之 RockMogo
             </a>
         
       </div>
 
       <div class="post-meta">
-        <span class="post-time"> 12-07 </span>
+        <span class="post-time"> 03-15 </span>
       </div>
 
     </div>
   </div>
 
 
-    
-      
-
-  <div class="post post-type-normal">
-    <div class="post-header">
-
-      <div class="post-title">
-        
-            <a class="post-title-link" href="/2014/11/10/prototype-proto/">
-              理解 prototype 和 __proto__
-            </a>
-        
-      </div>
-
-      <div class="post-meta">
-        <span class="post-time"> 11-10 </span>
-      </div>
-
-    </div>
-  </div>
-
 
     
-      
 
-  <div class="post post-type-normal">
-    <div class="post-header">
-
-      <div class="post-title">
-        
-            <a class="post-title-link" href="/2014/09/26/angular-events/">
-              AngularJS 事件
-            </a>
-        
-      </div>
-
-      <div class="post-meta">
-        <span class="post-time"> 09-26 </span>
-      </div>
-
-    </div>
-  </div>
-
-
-    
   </div>
 
   
-  <div class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/tags/javascript/page/2/">2</a><a class="extend next" rel="next" href="/tags/javascript/page/2/">&raquo;</a>
-  </div>
 
 
         </div>
@@ -386,6 +358,12 @@
   <script type="text/javascript" src="/js/search-toggle.js"></script>
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   <script type="text/javascript">
     $(document).ready(function () {

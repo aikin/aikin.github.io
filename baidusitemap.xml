@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/</loc>
+    <lastmod>2016-03-17T15:32:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>MongoDB GUI 之 RockMogo</title>
+        <pubTime>2014-03-15T15:17:22.000Z</pubTime>
+        
+        <tag>MongoDB</tag>
+         
+        <tag>RockMongo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2014/11/08/star-repos/</loc>
     <lastmod>2016-03-17T14:57:14.000Z</lastmod>
     <data>
@@ -127,6 +146,22 @@
 
     
     
+  <url>
+    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu 14.04 安装 Atom</title>
+        <pubTime>2014-08-08T12:14:45.000Z</pubTime>
+        
+        <tag>atom</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
@@ -139,23 +174,6 @@
         <tag>mongoose</tag>
          
         <tag>nodejs</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
-    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ubuntu 14.04 安装 Atom</title>
-        <pubTime>2014-08-08T12:14:45.000Z</pubTime>
-        
-        <tag>atom</tag>
          
          
            
@@ -182,13 +200,14 @@
 
     
     
+    
   <url>
-    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
+    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>window 对象的“生命周期”事件</title>
-        <pubTime>2014-12-07T06:42:23.000Z</pubTime>
+        <title>理解 prototype 和 __proto__</title>
+        <pubTime>2014-11-10T12:07:10.000Z</pubTime>
         
         <tag>javascript</tag>
          
@@ -200,14 +219,14 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>Ubuntu 服务自动启动</title>
-        <pubTime>2014-12-20T11:26:25.000Z</pubTime>
+        <title>window 对象的“生命周期”事件</title>
+        <pubTime>2014-12-07T06:42:23.000Z</pubTime>
         
-        <tag>linux</tag>
+        <tag>javascript</tag>
          
          
            
@@ -236,14 +255,14 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
+    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>《JavaScript 模式》养分</title>
-        <pubTime>2014-11-20T13:09:15.000Z</pubTime>
+        <title>Ubuntu 服务自动启动</title>
+        <pubTime>2014-12-20T11:26:25.000Z</pubTime>
         
-        <tag>reading-notes</tag>
+        <tag>linux</tag>
          
          
            
@@ -251,6 +270,7 @@
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
@@ -269,6 +289,22 @@
     </url>
 
     
+  <url>
+    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>《JavaScript 模式》养分</title>
+        <pubTime>2014-11-20T13:09:15.000Z</pubTime>
+        
+        <tag>reading-notes</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
@@ -279,23 +315,6 @@
         <pubTime>2015-04-03T03:18:59.000Z</pubTime>
         
         <tag>linux</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>理解 prototype 和 __proto__</title>
-        <pubTime>2014-11-10T12:07:10.000Z</pubTime>
-        
-        <tag>javascript</tag>
          
          
            
