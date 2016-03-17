@@ -263,8 +263,7 @@
 
       
         
-          <p>##《JavaScipt 语言精粹》 作者: Douglas Crockford</p>
-<h4 id="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。">拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得<strong>铁路图</strong>实在看着有点费劲。</h4><h3 id="养分">养分</h3><p><strong>1. <code>beget</code>创建一个使用原对象作为其原型的新的对象。</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.beget !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.beget = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">       F.prototype = obj;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+          <h2 id="《JavaScipt-语言精粹》-作者-Douglas-Crockford"><a href="#《JavaScipt-语言精粹》-作者-Douglas-Crockford" class="headerlink" title="《JavaScipt 语言精粹》 作者: Douglas Crockford"></a>《JavaScipt 语言精粹》 作者: Douglas Crockford</h2><h4 id="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"><a href="#拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。" class="headerlink" title="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"></a>拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得<strong>铁路图</strong>实在看着有点费劲。</h4><h3 id="养分"><a href="#养分" class="headerlink" title="养分"></a>养分</h3><p><strong>1. <code>beget</code>创建一个使用原对象作为其原型的新的对象。</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.beget !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.beget = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">       F.prototype = obj;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/09/13/javascript-the-good-parts/#more">
               Read more &raquo;
@@ -334,9 +333,9 @@
 
       
         
-          <p>###　　使用 mongoose 封装的方法来删除 mongodb 数据库中的 database、 collections、docs。</p>
+          <p>　　使用 mongoose 封装的方法来删除 mongodb 数据库中的 database、 collections、docs。</p>
 <ul>
-<li>###删除数据库</li>
+<li><h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3></li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</span><br><span class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</span><br><span class="line">    db.dropDatabase(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</span><br><span class="line">	    mongoose.disconnect();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
@@ -400,7 +399,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -414,7 +413,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

@@ -190,7 +190,7 @@
       
         <p>　　由于 linux 是多用户操作系统，所以基于安全的考虑，需要具备保障个人隐私和系统安全的机制。因此在使用 linux 系统的时候，经常会出现权限的问题(比如: 删除文件、安装软件、运行应用等等)，期初遇到这些问题的时候，大部分都使用<code>sudo</code>或者是<code>sudo chmod 777 file</code>(后面会讲解这个命令)来解决的。虽然这种方式可以解决问题，但是这样是不安全的，特别是在服务器上操作的时候，因为不是所有的文件和文件夹都可以被其它用户操作的，不是所有的用户都有<code>root</code>权限的，不是所有的应用都可以用<code>root</code>用户启动的。那么我们要如何正确的处理这些权限问题呢？那就让我们来学习一下 linux 权限相关的知识。</p>
 <a id="more"></a>
-<h3 id="用户的权限">用户的权限</h3><p>　　要确定一个用户对某个文件或文件夹是否具有相应的操作权限，先要明确该用户与文件或文件夹之间的关系。在 linux 系统中，定义了如下三种关系：</p>
+<h3 id="用户的权限"><a href="#用户的权限" class="headerlink" title="用户的权限"></a>用户的权限</h3><p>　　要确定一个用户对某个文件或文件夹是否具有相应的操作权限，先要明确该用户与文件或文件夹之间的关系。在 linux 系统中，定义了如下三种关系：</p>
 <blockquote>
 <ul>
 <li><strong> 文件或文件夹的所有者(owner) </strong>: 文件或文件夹的拥有者，开始创建文件或文件夹时为创建者。</li>
@@ -231,7 +231,7 @@
 </tbody>
 </table>
 </blockquote>
-<h3 id="文件或文件夹和用户的三种关系的基础操作权限">文件或文件夹和用户的三种关系的基础操作权限</h3><p>　　在 linux 使用<code>ls -la</code>命令可以查看文件夹内文件的属性，下面是我电脑上某个文件夹下文件的属性:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ls -la</span><br><span class="line">drwxr-xr-x <span class="number">14</span> root root     <span class="number">4096</span> Apr  <span class="number">3</span> <span class="number">18</span>:<span class="number">47</span> .</span><br><span class="line">drwxr-xr-x <span class="number">23</span> root root     <span class="number">4096</span> Mar  <span class="number">2</span> <span class="number">05</span>:<span class="number">48</span> ..</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Apr  <span class="number">3</span> <span class="number">07</span>:<span class="number">44</span> backups</span><br><span class="line">drwxr-xr-x <span class="number">17</span> root root     <span class="number">4096</span> Jul <span class="number">22</span>  <span class="number">2014</span> cache</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root     <span class="number">4096</span> Mar  <span class="number">2</span> <span class="number">04</span>:<span class="number">26</span> docker-registry</span><br><span class="line">lrwxrwxrwx  <span class="number">1</span> root root        <span class="number">9</span> Feb <span class="number">25</span> <span class="number">13</span>:<span class="number">31</span> lock -&gt; /run/lock</span><br><span class="line">drwxrwxr-x <span class="number">15</span> root syslog   <span class="number">4096</span> Apr  <span class="number">3</span> <span class="number">07</span>:<span class="number">44</span> <span class="built_in">log</span></span><br><span class="line">-rw-r--r--  <span class="number">1</span> root root        <span class="number">0</span> Apr  <span class="number">3</span> <span class="number">18</span>:<span class="number">47</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="文件或文件夹和用户的三种关系的基础操作权限"><a href="#文件或文件夹和用户的三种关系的基础操作权限" class="headerlink" title="文件或文件夹和用户的三种关系的基础操作权限"></a>文件或文件夹和用户的三种关系的基础操作权限</h3><p>　　在 linux 使用<code>ls -la</code>命令可以查看文件夹内文件的属性，下面是我电脑上某个文件夹下文件的属性:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ ls -la</span><br><span class="line">drwxr-xr-x 14 root root     4096 Apr  3 18:47 .</span><br><span class="line">drwxr-xr-x 23 root root     4096 Mar  2 05:48 ..</span><br><span class="line">drwxr-xr-x  2 root root     4096 Apr  3 07:44 backups</span><br><span class="line">drwxr-xr-x 17 root root     4096 Jul 22  2014 cache</span><br><span class="line">drwxr-xr-x  2 root root     4096 Mar  2 04:26 docker-registry</span><br><span class="line">lrwxrwxrwx  1 root root        9 Feb 25 13:31 lock -&gt; /run/lock</span><br><span class="line">drwxrwxr-x 15 root syslog   4096 Apr  3 07:44 <span class="built_in">log</span></span><br><span class="line">-rw-r--r--  1 root root        0 Apr  3 18:47 <span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li><p>上面的有九列数据，第一列数据表示和文件或文件夹相应关系用户的操作权限，第二列表示文件夹内文件和文件夹的总数量(包括文件夹本身)，第三列表示文件夹或文件的拥有者，第四列表示文件或文件夹的所属的组，第五列表示文件或文件夹的大小，第六、七、八列表示文件或文件夹最后被修改的时间，第九列文件或文件夹的名字。</p>
 </li>
@@ -243,28 +243,28 @@
 <li><p><code>drwxrwxr-x</code>除出去第一个字母<code>d</code>后的<code>rwxrwxr-x</code>表示的是三种用户关系对文件或文件夹的操作权限。从左到右每三个一组，依次表示所有者权限、组权限、其他用户权限。每组的顺序均为<code>rwx</code>，如果用户有相应的操作权限就用相应的字母表示，如果不具有相应的操作权限就用<code>-</code>表示。比如: <code>rwxrwxr-x</code>表示文件或文件夹的所有者具有<code>rwx</code>(可读，可写，可执行)的操作权限，组用户也具有<code>rwx</code>(可读，可写，可执行)的权限，其他用户具有<code>r-x</code>(可读，可执行，没有可读)的操作权限。</p>
 </li>
 </ul>
-<h3 id="特殊权限SUID、SGID、Sticky">特殊权限<code>SUID</code>、<code>SGID</code>、<code>Sticky</code></h3><p>　　在 linux 系统中还有三种与用户身份无关的三个文件权限属性。即<code>SUID、SGID和Sticky</code>。</p>
+<h3 id="特殊权限SUID、SGID、Sticky"><a href="#特殊权限SUID、SGID、Sticky" class="headerlink" title="特殊权限SUID、SGID、Sticky"></a>特殊权限<code>SUID</code>、<code>SGID</code>、<code>Sticky</code></h3><p>　　在 linux 系统中还有三种与用户身份无关的三个文件权限属性。即<code>SUID、SGID和Sticky</code>。</p>
 <ul>
 <li><p><strong><em> SUID(Set User ID, 4): </em></strong></p>
 <blockquote>
 <p>该属性只对有执行权限的文件有效，对目录无效。执行具有<code>SUID</code>权限的程序时，引发的进程的所有者是程序文件的所有者，而不是启动程序的用户（除非二者是同一个人）。比如，如果一个程序的所有者是<code>root</code>且具有<code>SUID</code>属性，一个普通用户执行此程序时，如同<code>root</code>执行此程序一样。（请注意该属性对<code>Shell</code>脚本程序无效）该属性为一些特殊程序（如lpr）的启动带来了方便。但有时也带来了安全隐患：比如一个具有<code>SUID</code>属性的程序如果在执行时运行了一个<code>shell</code>，那么用户可以籍此得到系统的最高权限。<code>SUID</code>可用<code>s</code>表示，如:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> /usr/bin/passwd</span><br><span class="line">-rwsr-xr-x <span class="number">1</span> root root <span class="number">47032</span> Feb <span class="number">16</span>  <span class="number">2014</span> /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="_">-l</span> /usr/bin/passwd</span><br><span class="line">-rwsr-xr-x 1 root root 47032 Feb 16  2014 /usr/bin/passwd</span><br></pre></td></tr></table></figure>
 </blockquote>
 </li>
 <li><p><strong><em> SGID(Set Group ID, 4): </em></strong></p>
 <blockquote>
 <p>对于可执行文件，<code>SGID</code>与<code>SUID</code>类似，引发的进程的所有组是程序文件所属的组。对于目录，<code>SGID</code>属性会使目录中新建文件的所属组与该目录相同。<code>SGID</code>也可以用s表示，如:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> /var</span><br><span class="line">drwxrwsr-x  <span class="number">2</span> root staff    <span class="number">4096</span> Apr <span class="number">10</span>  <span class="number">2014</span> <span class="built_in">local</span></span><br><span class="line">drwxrwxr-x <span class="number">15</span> root syslog   <span class="number">4096</span> Apr  <span class="number">4</span> <span class="number">19</span>:<span class="number">57</span> <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="_">-l</span> /var</span><br><span class="line">drwxrwsr-x  2 root staff    4096 Apr 10  2014 <span class="built_in">local</span></span><br><span class="line">drwxrwxr-x 15 root syslog   4096 Apr  4 19:57 <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 </blockquote>
 </li>
 <li><p><strong><em>Sticky, 1 :</em></strong></p>
 <blockquote>
 <p>仅对目录有效。带<code>sticky</code>属性的目录下的文件或目录可以被其拥有者删除或改名。常利用<code>sticky</code>属性创建这样的目录：组用户可以在此目录中创建新文件、修改文件内容，但只有文件所有者才能对自己的文件进行删除或改名。如系统中的<code>/tmp</code>文件夹。在属性字符串中，通常用t表示。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> /</span><br><span class="line">drwxrwxrwt   <span class="number">8</span> root root  <span class="number">4096</span> Apr  <span class="number">4</span> <span class="number">23</span>:<span class="number">57</span> tmp</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="_">-l</span> /</span><br><span class="line">drwxrwxrwt   8 root root  4096 Apr  4 23:57 tmp</span><br></pre></td></tr></table></figure>
 </blockquote>
 </li>
 </ul>
-<h3 id="修改文件或文件夹对应用户的操作权限">修改文件或文件夹对应用户的操作权限</h3><p>　　在 linux 系统中，可以使用<code>chmod</code>命令来修改文件或文件夹对应用户的操作权限，<code>chmod</code>命令也有两种方式修改，一种是使用代表相应操作权限的字母简写表示，另一种是使用代表相应操作权限的数字表示。</p>
+<h3 id="修改文件或文件夹对应用户的操作权限"><a href="#修改文件或文件夹对应用户的操作权限" class="headerlink" title="修改文件或文件夹对应用户的操作权限"></a>修改文件或文件夹对应用户的操作权限</h3><p>　　在 linux 系统中，可以使用<code>chmod</code>命令来修改文件或文件夹对应用户的操作权限，<code>chmod</code>命令也有两种方式修改，一种是使用代表相应操作权限的字母简写表示，另一种是使用代表相应操作权限的数字表示。</p>
 <ul>
 <li><p><strong><em> 使用简写字母 </em></strong></p>
 <blockquote>
@@ -285,18 +285,18 @@
 <li><p><strong><em> 使用数字表示(八进制数) </em></strong></p>
 <blockquote>
 <p>为了简化表述，也可使用八进制数来表示权限。即用一个四位八进制数来表示，其中最高位表示特殊权限，随后的三位依次是所有者权限、组权限和其他人权限。每一个八进制位的权限数值是文件具有的相应权限所对应的数值之后，如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0755</span>=rwxr-xr-x=<span class="number">0</span>(<span class="number">4</span>+<span class="number">2</span>+<span class="number">1</span>)(<span class="number">4</span>+<span class="number">0</span>+<span class="number">1</span>)(<span class="number">4</span>+<span class="number">0</span>+<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0755=rwxr-xr-x=0(4+2+1)(4+0+1)(4+0+1)</span><br></pre></td></tr></table></figure>
 <p>数值权限的算法，比如<code>rw-</code>其实就是<code>110</code>的二进制，也就是<code>0*2^0 + 1*2^1 + 1*2^2 = 6</code>。有相应的权限就用<code>1</code>表示，没有相应的权限就用<code>0</code>表示。不过这种算法特殊权限不包含在内。</p>
 </blockquote>
 <ul>
 <li><p>给文件或文件夹<code>try</code>的拥有者加<code>rwx</code>权限，组用户加<code>r-x</code>权限，其他用户<code>r--</code>权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod <span class="number">0754</span> try</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod 0754 try</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>chmod</code>命令也可以递归的修改文件夹下所有的文件的权限，如给 try 文件夹下得所有文件加上 0755 权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod -R <span class="number">0755</span> try</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod -R 0755 try</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>批量只修改文件或文件夹权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ find -type d|xargs chmod <span class="number">745</span>     // 只修改文件夹权限</span><br><span class="line">$ find -type f|xargs chmod <span class="number">644</span>     // 只修改文件权限</span><br><span class="line">// 或者</span><br><span class="line">$ chmod <span class="number">745</span> `find 路径 -type d`     // 只修改文件夹权限</span><br><span class="line">$ chmod <span class="number">644</span> `find 路径 -type f`    // 只修改文件权限</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ find -type d|xargs chmod 745     // 只修改文件夹权限</span><br><span class="line">$ find -type f|xargs chmod 644     // 只修改文件权限</span><br><span class="line">// 或者</span><br><span class="line">$ chmod 745 `find 路径 -type d`     // 只修改文件夹权限</span><br><span class="line">$ chmod 644 `find 路径 -type f`    // 只修改文件权限</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>相应权限的数值:</p>
 <blockquote>
@@ -311,7 +311,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="修改文件或文件夹的拥有者和所属的组">修改文件或文件夹的拥有者和所属的组</h3><p>　　使用<code>chown</code>可以修改文件或文件夹的拥有者和所属的组。</p>
+<h3 id="修改文件或文件夹的拥有者和所属的组"><a href="#修改文件或文件夹的拥有者和所属的组" class="headerlink" title="修改文件或文件夹的拥有者和所属的组"></a>修改文件或文件夹的拥有者和所属的组</h3><p>　　使用<code>chown</code>可以修改文件或文件夹的拥有者和所属的组。</p>
 <ul>
 <li><p>将文件或文件夹<code>try</code>的拥有者修改成<code>aikin</code>，所属的组修改成<code>adm</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown aikin:adm try</span><br></pre></td></tr></table></figure>
@@ -320,7 +320,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chown -R aikin:adm try</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="创建组和用户">创建组和用户</h3><ul>
+<h3 id="创建组和用户"><a href="#创建组和用户" class="headerlink" title="创建组和用户"></a>创建组和用户</h3><ul>
 <li><p><strong><em>组相关操作: </em></strong></p>
 <ul>
 <li><p>创建一个<code>try</code>组</p>
@@ -347,25 +347,25 @@
 <p>在 linux 系统上虽然可以使用<code>useradd</code>或<code>adduser</code>来创建用户，但是这两个命令是有区别的。</p>
 <ol>
 <li>使用<code>useradd</code>时，如果后面不添加任何参数选项，例如：<code>$sudo useradd test</code>创建出来的用户将是默认“三无”用户：一无Home Directory，二无密码，三无系统Shell。</li>
-<li>使用<code>adduser</code>时，创建用户的过程更像是一种人机对话，系统会提示你输入各种信息，然后会根据这些信息帮你创建新用户。<br>下面创建用户使用的是<code>adduser</code>命令:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> $ sudo adduser <span class="built_in">test</span></span><br><span class="line"> Adding user `<span class="built_in">test</span><span class="string">' ...</span><br><span class="line"> Adding new group `test'</span> (<span class="number">1002</span>) ...</span><br><span class="line"> Adding new user `<span class="built_in">test</span><span class="string">' (1001) with group `test'</span> ...</span><br><span class="line"> Creating home directory `/home/<span class="built_in">test</span><span class="string">' ...</span><br><span class="line"> Copying files from `/etc/skel'</span> ...</span><br><span class="line"> Enter new UNIX password:</span><br><span class="line"> Retype new UNIX password:</span><br><span class="line"> passwd: password updated successfully</span><br><span class="line"> Changing the user information <span class="keyword">for</span> <span class="built_in">test</span></span><br><span class="line"> Enter the new value, or press ENTER <span class="keyword">for</span> the default</span><br><span class="line">Full Name []: <span class="built_in">test</span></span><br><span class="line">Room Number []:</span><br><span class="line">Work Phone []:</span><br><span class="line">Home Phone []:</span><br><span class="line">Other []:</span><br><span class="line"> Is the information correct? [Y/n] y</span><br></pre></td></tr></table></figure>
+<li>使用<code>adduser</code>时，创建用户的过程更像是一种人机对话，系统会提示你输入各种信息，然后会根据这些信息帮你创建新用户。<br>下面创建用户使用的是<code>adduser</code>命令:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> $ sudo adduser <span class="built_in">test</span></span><br><span class="line"> Adding user `<span class="built_in">test</span><span class="string">' ...</span><br><span class="line"> Adding new group `test'</span> (1002) ...</span><br><span class="line"> Adding new user `<span class="built_in">test</span><span class="string">' (1001) with group `test'</span> ...</span><br><span class="line"> Creating home directory `/home/<span class="built_in">test</span><span class="string">' ...</span><br><span class="line"> Copying files from `/etc/skel'</span> ...</span><br><span class="line"> Enter new UNIX password:</span><br><span class="line"> Retype new UNIX password:</span><br><span class="line"> passwd: password updated successfully</span><br><span class="line"> Changing the user information <span class="keyword">for</span> <span class="built_in">test</span></span><br><span class="line"> Enter the new value, or press ENTER <span class="keyword">for</span> the default</span><br><span class="line">Full Name []: <span class="built_in">test</span></span><br><span class="line">Room Number []:</span><br><span class="line">Work Phone []:</span><br><span class="line">Home Phone []:</span><br><span class="line">Other []:</span><br><span class="line"> Is the information correct? [Y/n] y</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </blockquote>
 </li>
 <li><p>修改用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd <span class="built_in">test</span>    // 修改用户密码</span><br><span class="line">$ sudo usermod <span class="operator">-d</span> /home/<span class="built_in">test</span> -G try2 <span class="built_in">test</span>   // 将<span class="built_in">test</span>用户的登录目录改成/home/<span class="built_in">test</span>，并加入 try 组，注意这里是大 G。</span><br><span class="line">$ sudo gpasswd <span class="operator">-a</span> <span class="built_in">test</span> try     // 将用户 <span class="built_in">test</span> 加入到 try2 组。</span><br><span class="line">$ sudo gpasswd <span class="operator">-d</span> <span class="built_in">test</span> try2    // 将用户 <span class="built_in">test</span> 从 try 组中移除</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo passwd <span class="built_in">test</span>    // 修改用户密码</span><br><span class="line">$ sudo usermod <span class="_">-d</span> /home/<span class="built_in">test</span> -G try2 <span class="built_in">test</span>   // 将<span class="built_in">test</span>用户的登录目录改成/home/<span class="built_in">test</span>，并加入 try 组，注意这里是大 G。</span><br><span class="line">$ sudo gpasswd <span class="_">-a</span> <span class="built_in">test</span> try     // 将用户 <span class="built_in">test</span> 加入到 try2 组。</span><br><span class="line">$ sudo gpasswd <span class="_">-d</span> <span class="built_in">test</span> try2    // 将用户 <span class="built_in">test</span> 从 try 组中移除</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>删除用户<code>test</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo userdel <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看所有用户</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cut <span class="operator">-d</span> : <span class="operator">-f</span> <span class="number">1</span> /etc/passwd</span><br><span class="line">// 或者</span><br><span class="line">$ cat /etc/passwd |awk -F \: <span class="string">'&#123;print $1&#125;'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cut <span class="_">-d</span> : <span class="_">-f</span> 1 /etc/passwd</span><br><span class="line">// 或者</span><br><span class="line">$ cat /etc/passwd |awk -F \: <span class="string">'&#123;print $1&#125;'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ul>
 <p>　　<strong><em>了解 linux 用户操作权限，安全就掌握在手中。</em></strong></p>
-<h2 id="参考">参考</h2><ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://www.ibm.com/developerworks/cn/linux/l-lpic1-v3-104-5/" target="_blank" rel="external">学习 Linux，101: 管理文件权限和所有权</a></li>
 <li><a href="http://linux-wiki.cn/wiki/zh-hans/%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90" target="_blank" rel="external">文件权限</a></li>
 <li><a href="http://blog.51yip.com/linux/1137.html" target="_blank" rel="external">linux下添加，删除，修改，查看用户和用户组</a></li>
@@ -478,7 +478,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -492,7 +492,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

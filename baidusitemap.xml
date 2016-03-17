@@ -3,150 +3,9 @@
 
 
     
-    
-  <url>
-    <loc>http://aikin.github.io/2014/08/03/init/</loc>
-    <lastmod>2015-11-29T06:57:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>init blog</title>
-        <pubTime>2014-08-03T12:15:07.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
-    <lastmod>2015-07-10T14:31:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>Mongoose 使用 Population 填充'关联表'数据</title>
-        <pubTime>2014-11-02T13:30:17.000Z</pubTime>
-        
-        <tag>mongoose</tag>
-         
-        <tag>nodejs</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
-    <lastmod>2015-07-10T14:31:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ubuntu 14.04 安装 Atom</title>
-        <pubTime>2014-08-08T12:14:45.000Z</pubTime>
-        
-        <tag>atom</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
-    <lastmod>2015-07-10T14:31:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>Gulp API 初探和 gulp-nodemon gulp-livereload 配置</title>
-        <pubTime>2014-10-24T13:08:09.000Z</pubTime>
-        
-        <tag>gulp</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-    
-    
-  <url>
-    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>《JavaScript 模式》养分</title>
-        <pubTime>2014-11-20T13:09:15.000Z</pubTime>
-        
-        <tag>reading-notes</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/08/16/js-call-apply-bind/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>“随心所欲”指定 this 的绑定对象</title>
-        <pubTime>2014-08-16T12:36:47.000Z</pubTime>
-        
-        <tag>javascript</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/09/13/javascript-the-good-parts/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>《JavaScipt 语言精粹》养分</title>
-        <pubTime>2014-09-13T12:23:15.000Z</pubTime>
-        
-        <tag>reading-notes</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ubuntu 服务自动启动</title>
-        <pubTime>2014-12-20T11:26:25.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
   <url>
     <loc>http://aikin.github.io/2014/11/08/star-repos/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <lastmod>2016-03-17T14:57:14.000Z</lastmod>
     <data>
         <display>
         <title>Star Repositories On GitHub</title>
@@ -162,14 +21,14 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <loc>http://aikin.github.io/2014/09/13/javascript-the-good-parts/</loc>
+    <lastmod>2016-03-17T14:55:59.000Z</lastmod>
     <data>
         <display>
-        <title>理解 prototype 和 __proto__</title>
-        <pubTime>2014-11-10T12:07:10.000Z</pubTime>
+        <title>《JavaScipt 语言精粹》养分</title>
+        <pubTime>2014-09-13T12:23:15.000Z</pubTime>
         
-        <tag>javascript</tag>
+        <tag>reading-notes</tag>
          
          
            
@@ -180,7 +39,7 @@
     
   <url>
     <loc>http://aikin.github.io/2014/08/28/mongoose-remove-function/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <lastmod>2016-03-17T14:55:42.000Z</lastmod>
     <data>
         <display>
         <title>使用 mongoose 清除数据</title>
@@ -198,15 +57,13 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <loc>http://aikin.github.io/2014/08/05/js-this/</loc>
+    <lastmod>2016-03-17T14:54:16.000Z</lastmod>
     <data>
         <display>
-        <title>AngularJS 事件</title>
-        <pubTime>2014-09-26T11:30:23.000Z</pubTime>
+        <title>javascript 中的 this 关键字</title>
+        <pubTime>2014-08-05T12:14:33.000Z</pubTime>
         
-        <tag>angularjs</tag>
-         
         <tag>javascript</tag>
          
          
@@ -217,12 +74,48 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <loc>http://aikin.github.io/2014/08/16/js-call-apply-bind/</loc>
+    <lastmod>2016-03-17T14:53:19.000Z</lastmod>
     <data>
         <display>
-        <title>ipad 添加 QQ 邮件账户</title>
-        <pubTime>2014-10-04T10:05:39.000Z</pubTime>
+        <title>“随心所欲”指定 this 的绑定对象</title>
+        <pubTime>2014-08-16T12:36:47.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/02/20/rails-paperclip/</loc>
+    <lastmod>2016-03-17T14:52:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Rails 使用 Paperclip 上传图片</title>
+        <pubTime>2014-02-20T14:07:00.000Z</pubTime>
+        
+        <tag>rails</tag>
+         
+        <tag>paperclip</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/08/03/init/</loc>
+    <lastmod>2016-03-17T14:47:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>init blog</title>
+        <pubTime>2014-08-03T12:15:07.000Z</pubTime>
         
         <tag>生活</tag>
          
@@ -233,9 +126,118 @@
     </url>
 
     
+    
+  <url>
+    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu 14.04 安装 Atom</title>
+        <pubTime>2014-08-08T12:14:45.000Z</pubTime>
+        
+        <tag>atom</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mongoose 使用 Population 填充'关联表'数据</title>
+        <pubTime>2014-11-02T13:30:17.000Z</pubTime>
+        
+        <tag>mongoose</tag>
+         
+        <tag>nodejs</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gulp API 初探和 gulp-nodemon gulp-livereload 配置</title>
+        <pubTime>2014-10-24T13:08:09.000Z</pubTime>
+        
+        <tag>gulp</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>AngularJS 事件</title>
+        <pubTime>2014-09-26T11:30:23.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>angularjs</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>理解 prototype 和 __proto__</title>
+        <pubTime>2014-11-10T12:07:10.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu 服务自动启动</title>
+        <pubTime>2014-12-20T11:26:25.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
         <title>window 对象的“生命周期”事件</title>
@@ -251,8 +253,25 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>ipad 添加 QQ 邮件账户</title>
+        <pubTime>2014-10-04T10:05:39.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
         <title>了解 Linux 文件和文件夹的操作权限</title>
@@ -268,14 +287,14 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/08/05/js-this/</loc>
-    <lastmod>2015-05-11T05:14:24.000Z</lastmod>
+    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>javascript 中的 this 关键字</title>
-        <pubTime>2014-08-05T12:14:33.000Z</pubTime>
+        <title>《JavaScript 模式》养分</title>
+        <pubTime>2014-11-20T13:09:15.000Z</pubTime>
         
-        <tag>javascript</tag>
+        <tag>reading-notes</tag>
          
          
            
