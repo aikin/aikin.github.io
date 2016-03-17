@@ -4,6 +4,44 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
+    <lastmod>2016-03-17T15:59:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>《JavaScript 模式》养分</title>
+        <pubTime>2014-11-20T13:09:15.000Z</pubTime>
+        
+        <tag>reading-notes</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/</loc>
+    <lastmod>2016-03-17T15:58:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS7 UINavigationController 导致 UIScollView 尺寸变化</title>
+        <pubTime>2014-03-16T15:38:11.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>UINavigationController</tag>
+         
+        <tag>UIScollView</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/</loc>
     <lastmod>2016-03-17T15:32:46.000Z</lastmod>
     <data>
@@ -146,6 +184,8 @@
 
     
     
+    
+    
   <url>
     <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
@@ -199,7 +239,22 @@
     </url>
 
     
-    
+  <url>
+    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Ubuntu 服务自动启动</title>
+        <pubTime>2014-12-20T11:26:25.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
@@ -236,43 +291,6 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>AngularJS 事件</title>
-        <pubTime>2014-09-26T11:30:23.000Z</pubTime>
-        
-        <tag>javascript</tag>
-         
-        <tag>angularjs</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>Ubuntu 服务自动启动</title>
-        <pubTime>2014-12-20T11:26:25.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
     <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
@@ -290,23 +308,6 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>《JavaScript 模式》养分</title>
-        <pubTime>2014-11-20T13:09:15.000Z</pubTime>
-        
-        <tag>reading-notes</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
@@ -315,6 +316,26 @@
         <pubTime>2015-04-03T03:18:59.000Z</pubTime>
         
         <tag>linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>AngularJS 事件</title>
+        <pubTime>2014-09-26T11:30:23.000Z</pubTime>
+        
+        <tag>javascript</tag>
+         
+        <tag>angularjs</tag>
          
          
            

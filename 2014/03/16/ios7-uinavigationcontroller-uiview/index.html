@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="atom," />
+  <meta name="keywords" content="iOS,UINavigationController,UIScollView," />
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-  <title> Ubuntu 14.04 安装 Atom // aikin'blog </title>
+  <title> iOS7 UINavigationController 导致 UIScollView 尺寸变化 // aikin'blog </title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
           
           
             
-              Ubuntu 14.04 安装 Atom
+              iOS7 UINavigationController 导致 UIScollView 尺寸变化
             
           
         </h1>
@@ -164,7 +164,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on Aug 8 2014
+          Posted on Mar 16 2014
         </span>
 
         
@@ -173,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/08/08/install-atom-on-ubuntu/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/08/install-atom-on-ubuntu/"></span>
+            <a href="/2014/03/16/ios7-uinavigationcontroller-uiview/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/16/ios7-uinavigationcontroller-uiview/"></span>
             </a>
           </span>
           
@@ -188,17 +188,17 @@
       
 
       
-        <p>  <img src="/images/atom.png"></p>
-<p> <a href="https://atom.io/" target="_blank" rel="external">Atom</a> 是 github 内部的编辑软件。按照 Github 的说法，这是一款非同一般的编辑器，是 21 世纪的创新产品，他们希望将来“从菜鸟到黑客都在使用 Atom 编写代码”。</p>
-<a id="more"></a>
-<ol>
-<li><p>增加 Atom 源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository ppa:webupd8team/atom</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装 Atom</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install atom</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <p>  在 iOS 7 中，如果某个<code>UIViewController</code>的 self.view 第一个子视图是<code>UIScollView</code>， 同时当这个<code>UIViewController</code>被 push 或initWithRootController 成为<code>UINavigationController</code>控制的 Controller 时，这个<code>UIViewControlle</code>的 view 的子视图<code>UIScollView</code>的所有子视图， 都会被下移<code>64px</code>。</p>
+<p>  这个下移 64px 的前提是 navigationBar 和 statusBar 没有隐藏。因为为 statusBar 默认的 Height 是 20px，而 navigatiBar  默认的 Height 是 44px</p>
+<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p><strong>1. 在 AppDelegate.m 文件中：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</span><br><span class="line">&#123;</span><br><span class="line">  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];</span><br><span class="line">  self.window.backgroundColor = [UIColor whiteColor];                              </span><br><span class="line">  //下面两行为增加的代码                                                         </span><br><span class="line">  ViewController *rootViewController = [[ViewController alloc] init];</span><br><span class="line">  [self.window setRootViewController:rootViewController];</span><br><span class="line"></span><br><span class="line">  [self.window makeKeyAndVisible];</span><br><span class="line">  return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 在 ViewController.m 中：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">  [super viewDidLoad];</span><br><span class="line">  UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(30.0,                                                           64.0, 260.0, 300.0)];</span><br><span class="line">  [scrollView setBackgroundColor:[UIColor redColor]];</span><br><span class="line"></span><br><span class="line">  UIView *view = [[UIView alloc] initWithFrame:scrollView.bounds];</span><br><span class="line">  [view setBackgroundColor:[UIColor blueColor]];</span><br><span class="line">  [scrollView addSubview:view];</span><br><span class="line"></span><br><span class="line">  [self.view addSubview:scrollView];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 运行后的结果：</strong><br><img src="./ios7-blue.png" alt="blue"></p>
+<p><strong>4. 现在使用 UINavigationController,  将开始 AppDelegate.m 增加的那两行代码修改成：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ViewController *rootViewController = [[ViewController alloc] init];</span><br><span class="line">UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];</span><br><span class="line">[self.window setRootViewController:navController];</span><br></pre></td></tr></table></figure></p>
+<p><strong>5. 现在再次运行程序：</strong><br><img src="./ios7-red-out.png" alt="blue"></p>
+<p><strong><em>依据结果显示， scrollView 背景色为蓝色的子视图位置自动下移了。 而这个下移的距离刚好是 64.0px</em></strong></p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><strong>1. 第一种：在 ViewController 的 init 的方法中增加一行代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.automaticallyAdjustsScrollViewInsets = NO;</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 第二种： 让UIScrollView 不要成为 ViewController 的 View 的第一个子视图。具体操作：将 viewDidLoad方法 修改成如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">  [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">  UIView *firstSubView = [[UIView alloc] initWithFrame:self.view.bounds];</span><br><span class="line">  [self.view addSubview:firstSubView];</span><br><span class="line"></span><br><span class="line">  UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(30.0,                                                           64.0, 260.0, 300.0)];</span><br><span class="line">  [scrollView setBackgroundColor:[UIColor redColor]];</span><br><span class="line"></span><br><span class="line">  UIView *view = [[UIView alloc] initWithFrame:scrollView.bounds];</span><br><span class="line">  [view setBackgroundColor:[UIColor blueColor]];</span><br><span class="line">  [scrollView addSubview:view];</span><br><span class="line"></span><br><span class="line">  [self.view addSubview:scrollView];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 第三种：将 UIScorllView 的子视图上移 64.0px 。修改 viewDidLoad 方法：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(30.0,                                                           64.0, 260.0, 300.0)];</span><br><span class="line">[scrollView setBackgroundColor:[UIColor redColor]];</span><br><span class="line"></span><br><span class="line">CGRect viewFrame = CGRectMake(0, -64.0, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));</span><br><span class="line"></span><br><span class="line">UIView *view = [[UIView alloc] initWithFrame: viewFrame];</span><br><span class="line">[view setBackgroundColor:[UIColor blueColor]];</span><br><span class="line">[scrollView addSubview:view];</span><br><span class="line"></span><br><span class="line">[self.view addSubview:scrollView];</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -207,7 +207,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/atom/"> #atom </a>
+            <a href="/tags/iOS/"> #iOS </a>
+          
+            <a href="/tags/UINavigationController/"> #UINavigationController </a>
+          
+            <a href="/tags/UIScollView/"> #UIScollView </a>
           
         </div>
       
@@ -216,13 +220,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/08/16/js-call-apply-bind/">“随心所欲”指定 this 的绑定对象</a>
+              <a href="/2014/08/03/init/">init blog</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/08/05/js-this/">javascript 中的 this 关键字</a>
+              <a href="/2014/03/15/mongodb-gui-rockmongo/">MongoDB GUI 之 RockMogo</a>
             
           </div>
         </div>
@@ -237,10 +241,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/08/08/install-atom-on-ubuntu/"
-     data-title="Ubuntu 14.04 安装 Atom"
+        <div class="ds-share flat" data-thread-key="2014/03/16/ios7-uinavigationcontroller-uiview/"
+     data-title="iOS7 UINavigationController 导致 UIScollView 尺寸变化"
      data-content=""
-     data-url="http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/">
+     data-url="http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -261,8 +265,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2014/08/08/install-atom-on-ubuntu/"
-               data-title="Ubuntu 14.04 安装 Atom" data-url="http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/">
+          <div class="ds-thread" data-thread-key="2014/03/16/ios7-uinavigationcontroller-uiview/"
+               data-title="iOS7 UINavigationController 导致 UIScollView 尺寸变化" data-url="http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/">
           </div>
         
       </div>
@@ -376,7 +380,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例："><span class="nav-number">1.</span> <span class="nav-text">实例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

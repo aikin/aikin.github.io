@@ -188,12 +188,11 @@
       
 
       
-        <h1 id="《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新"><a href="#《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新" class="headerlink" title="《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新"></a>《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</h1><p>###养分</p>
-<p><strong><em>1. 自调用构造函数: </em></strong> 实现不使用<code>new</code>关键字，构造出实例。</p>
+        <h1 id="《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新"><a href="#《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新" class="headerlink" title="《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新"></a>《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</h1><h3 id="养分"><a href="#养分" class="headerlink" title="养分"></a>养分</h3><p><strong><em>1. 自调用构造函数: </em></strong> 实现不使用<code>new</code>关键字，构造出实例。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Waffle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> ((!<span class="keyword">this</span> <span class="keyword">instanceof</span> Waffle)) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Waffle();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span>.tastes = <span class="string">"yummy"</span>;</span><br><span class="line">&#125;</span><br><span class="line">Waffle.prototype.wantAnother = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> first   = <span class="keyword">new</span> Waffle(),</span><br><span class="line">    section = Waffle();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(first.tastes);     <span class="comment">// yummy</span></span><br><span class="line"><span class="built_in">console</span>.log(section.tastes);   <span class="comment">// yummy</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p><strong><em>2. 备忘模式: </em></strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cachekey = <span class="built_in">JSON</span>.stringify(<span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>)),</span><br><span class="line">    result = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!myFunc.cache[cachekey]) &#123;</span><br><span class="line">       result = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 开销很大的操作</span></span><br><span class="line">       myFunc.cache[cachekey] = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> myFunc.cache[cachekey];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存存储</span></span><br><span class="line">myFunc.cache = &#123;&#125;;</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
 <p><strong><em>3. 配置对象模式: </em></strong>将参数列表封装到一个对象内。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addPerson</span>(<span class="params">first, last, dob, gender, address</span>) </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line">addPerson(<span class="string">"Bruce"</span>, <span class="string">"Wayne"</span>, <span class="keyword">new</span> <span class="built_in">Date</span>(), <span class="literal">null</span>, <span class="literal">null</span>, <span class="string">"batma"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置</span></span><br><span class="line"><span class="keyword">var</span> conf = &#123;</span><br><span class="line">    username : <span class="string">"batman"</span>,</span><br><span class="line">    first    : <span class="string">"Bruce"</span>,</span><br><span class="line">    last     : <span class="string">"Wayne"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addPerson(conf);</span><br></pre></td></tr></table></figure>
 <p><strong><em>4. 通用命名空间函数: </em></strong>减少全局变量，避免命名冲突。</p>
@@ -336,7 +335,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -350,7 +349,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -403,7 +402,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新"><span class="nav-number">1.</span> <span class="nav-text">《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新"><span class="nav-number">1.</span> <span class="nav-text">《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#养分"><span class="nav-number">1.0.1.</span> <span class="nav-text">养分</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
