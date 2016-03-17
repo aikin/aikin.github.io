@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2014/06/16/ie-iframe-cache/</loc>
+    <lastmod>2016-03-17T16:16:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>IE reload iframe</title>
+        <pubTime>2014-06-15T16:05:24.000Z</pubTime>
+        
+        <tag>iframe</tag>
+         
+        <tag>ie</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
     <lastmod>2016-03-17T16:02:10.000Z</lastmod>
     <data>
@@ -204,6 +223,23 @@
     
     
   <url>
+    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gulp API 初探和 gulp-nodemon gulp-livereload 配置</title>
+        <pubTime>2014-10-24T13:08:09.000Z</pubTime>
+        
+        <tag>gulp</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     <data>
@@ -223,14 +259,16 @@
     
     
   <url>
-    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
-    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>Gulp API 初探和 gulp-nodemon gulp-livereload 配置</title>
-        <pubTime>2014-10-24T13:08:09.000Z</pubTime>
+        <title>AngularJS 事件</title>
+        <pubTime>2014-09-26T11:30:23.000Z</pubTime>
         
-        <tag>gulp</tag>
+        <tag>javascript</tag>
+         
+        <tag>angularjs</tag>
          
          
            
@@ -240,14 +278,31 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
+    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>理解 prototype 和 __proto__</title>
-        <pubTime>2014-11-10T12:07:10.000Z</pubTime>
+        <title>window 对象的“生命周期”事件</title>
+        <pubTime>2014-12-07T06:42:23.000Z</pubTime>
         
         <tag>javascript</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>ipad 添加 QQ 邮件账户</title>
+        <pubTime>2014-10-04T10:05:39.000Z</pubTime>
+        
+        <tag>生活</tag>
          
          
            
@@ -274,12 +329,12 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
+    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     <data>
         <display>
-        <title>window 对象的“生命周期”事件</title>
-        <pubTime>2014-12-07T06:42:23.000Z</pubTime>
+        <title>理解 prototype 和 __proto__</title>
+        <pubTime>2014-11-10T12:07:10.000Z</pubTime>
         
         <tag>javascript</tag>
          
@@ -289,7 +344,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
@@ -308,39 +362,4 @@
     </url>
 
     
-  <url>
-    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>AngularJS 事件</title>
-        <pubTime>2014-09-26T11:30:23.000Z</pubTime>
-        
-        <tag>javascript</tag>
-         
-        <tag>angularjs</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>ipad 添加 QQ 邮件账户</title>
-        <pubTime>2014-10-04T10:05:39.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
 </urlset>

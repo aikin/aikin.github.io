@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/2014/06/16/ie-iframe-cache/</loc>
+    
+    <lastmod>2016-03-17T16:16:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
     
     <lastmod>2016-03-17T16:02:10.000Z</lastmod>
@@ -86,14 +93,14 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
+    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://aikin.github.io/tags/index.html</loc>
+    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
@@ -107,21 +114,14 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
+    <loc>http://aikin.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
@@ -135,7 +135,21 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/about/index.html</loc>
+    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
@@ -149,14 +163,7 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
+    <loc>http://aikin.github.io/about/index.html</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     

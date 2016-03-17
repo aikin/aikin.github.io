@@ -1517,6 +1517,59 @@
   </entry>
   
   <entry>
+    <title>IE reload iframe</title>
+    <link href="http://aikin.github.io/2014/06/16/ie-iframe-cache/"/>
+    <id>http://aikin.github.io/2014/06/16/ie-iframe-cache/</id>
+    <published>2014-06-15T16:05:24.000Z</published>
+    <updated>2016-03-17T16:16:39.000Z</updated>
+    
+    <content type="html">&lt;p&gt;最近“致力于”调 IE9  、IE10 、 firefox 、 chrome 浏览器对 iframe刷新。 发现在IE浏览器中，有些刷新 iframe 的方法会加载缓存。以下就对一些方法在 IE9 、IE10(以下简称IE)的产生效果介绍一下：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 对 iframe 的 src 属性重新赋值来实现刷新&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&lt;span class=&quot;string&quot;&gt;&quot;#iframeId&quot;&lt;/span&gt;).attr(&lt;span class=&quot;string&quot;&gt;&quot;src&quot;&lt;/span&gt;, $(&lt;span class=&quot;string&quot;&gt;&quot;#iframeId&quot;&lt;/span&gt;).attr(&lt;span class=&quot;string&quot;&gt;&quot;src&quot;&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;效果：&lt;code&gt;在 IE 中，使用这个方法后 iframe 没有刷新的效果。iframe反应很平静。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. location.replace(URL) 方法&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&lt;span class=&quot;string&quot;&gt;&quot;#iframeId&quot;&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;].contentWindow.location.replace(url);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;或&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&quot;iframeId&quot;&lt;/span&gt;).contentWindow.location.replace(url);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;注: contentWindow.location.replace === contentWindow.document.location.replace&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;返回值为 &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;， 也就是两个方法是相同的。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;W3School对这个方法是这么描述的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;replace() 方法可用一个新文档取代当前文档;&lt;/li&gt;
+&lt;li&gt;replace() 方法不会在 History 对象中生成一个新的记录。当使用该方法时，新的 URL 将覆盖 History 对象中的当前记录。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也就是说该方法通过指定URL替换当前缓存在历史的记录，因此当使用replace方法之后，不能通过“前进”和“后退”来访问已经被替换的URL。&lt;br&gt;效果：&lt;code&gt;但是在 IE 中使用这个方法和描述的效果。将会用新的 url 内容替换掉当前的历史记录。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. location.reload(force)方法&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$(&lt;span class=&quot;string&quot;&gt;&quot;#iframeId&quot;&lt;/span&gt;)[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;].contentWindow.location.relaod(&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;或&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&quot;iframeId&quot;&lt;/span&gt;).contentWindow.location.reload(&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;注: contentWindow.location.reload === contentWindow.document.location.reload&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;返回值为 &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;， 也就是两个方法是相同的。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; 该方法用于重新加载当前页面。可选参数：force 是Boolean类型的。&lt;br&gt;在W3School上对该方法的描述：  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果该方法没有规定参数，或者参数是 false，它就会用 HTTP 头 If-Modified-Since 来检测服务器上的文档是否已改变。&lt;/li&gt;
+&lt;li&gt;如果文档已改变，reload() 会再次下载该文档。&lt;/li&gt;
+&lt;li&gt;如果文档未改变，则该方法将从缓存中装载文档。这与用户单击浏览器的刷新按钮的效果是完全一样的。&lt;/li&gt;
+&lt;li&gt;如果把该方法的参数设置为 true，那么无论文档的最后修改日期是什么，它都会绕过缓存，从服务器上重新下载该文档。这与用户在单击浏览器的刷新按钮时按住 Shift 健的效果是完全一样。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;code&gt;在 IE中使用该方法，会重新从服务器获取新的页面，不会加载缓存。&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. 替换缓存&lt;/strong&gt;&lt;br&gt;虽然这个方法可以实现重新从服务器上，获取新的页面，但是它只能获取当前窗口的。当一个 iframe 中有两个或两个以上的可以相互跳转的页面，你同时要重新去加载这些页面。这时 reload 方法，就不是很适用了(因为 reload 方法没法同时从服务器上获取多个页面)。所以在 IE 中，可以使用&lt;code&gt;ajax&lt;/code&gt;去 GET 这些页面，来替换更新本地的缓存，在刷新 iframe。下面的方法就是用 ajax 去替换本地的缓存的方法。&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$.ajax(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    type: &lt;span class=&quot;string&quot;&gt;&quot;GET&quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    url: url,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    dataType: &lt;span class=&quot;string&quot;&gt;&quot;text&quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    beforeSend: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;xmlHttp&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        xmlHttp.setRequestHeader(&lt;span class=&quot;string&quot;&gt;&quot;If-Modified-Since&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        xmlHttp.setRequestHeader(&lt;span class=&quot;string&quot;&gt;&quot;Cache-Control&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;no-cache&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;).done(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&quot;replace cache ok&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;If-Modified-Since控制缓存页面时间，在发送HTTP请求时，把浏览器端缓存页面的最后修改时间一起发到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行比较。&lt;/li&gt;
+&lt;li&gt;Cache-Control 控制是否要进行缓存页面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近“致力于”调 IE9  、IE10 、 firefox 、 chrome 浏览器对 iframe刷新。 发现在IE浏览器中，有些刷新 iframe 的方法会加载缓存。以下就对一些方法在 IE9 、IE10(以下简称IE)的产生效果介绍一下：&lt;/p&gt;
+&lt;p&gt;&lt;strong
+    
+    </summary>
+    
+    
+      <category term="iframe" scheme="http://aikin.github.io/tags/iframe/"/>
+    
+      <category term="ie" scheme="http://aikin.github.io/tags/ie/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS7 UINavigationController 导致 UIScollView 尺寸变化</title>
     <link href="http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/"/>
     <id>http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/</id>
