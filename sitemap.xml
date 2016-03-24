@@ -4,7 +4,14 @@
   <url>
     <loc>http://aikin.github.io/2014/06/16/ie-iframe-cache/</loc>
     
-    <lastmod>2016-03-17T16:16:39.000Z</lastmod>
+    <lastmod>2016-03-24T08:08:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/</loc>
+    
+    <lastmod>2016-03-24T08:08:31.000Z</lastmod>
     
   </url>
   
@@ -19,13 +26,6 @@
     <loc>http://aikin.github.io/2014/11/20/javascript-patterns/</loc>
     
     <lastmod>2016-03-17T15:59:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/</loc>
-    
-    <lastmod>2016-03-17T15:58:24.000Z</lastmod>
     
   </url>
   
@@ -121,27 +121,6 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
@@ -156,7 +135,7 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
+    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
@@ -164,6 +143,27 @@
   
   <url>
     <loc>http://aikin.github.io/about/index.html</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
