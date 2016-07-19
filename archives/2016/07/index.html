@@ -54,7 +54,7 @@
 
 
 
-  <title> Tag: paperclip // aikin'blog </title>
+  <title> Archive // aikin'blog </title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
   </div>
 <![endif]-->
 
-  <div class="container one-column ">
+  <div class="container one-column  page-archive ">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -145,14 +145,31 @@
           
 
   <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        paperclip
-        <small>Tag</small>
-      </h2>
-    </div>
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      Um..! 21 posts in total. Keep on posting.
+    </span>
 
     
+
+      
+      
+      
+
+      
+        
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        </div>
+      
+      
+
       
 
   <div class="post post-type-normal">
@@ -160,24 +177,27 @@
 
       <div class="post-title">
         
-            <a class="post-title-link" href="/2014/02/20/rails-paperclip/">
-              Rails 使用 Paperclip 上传图片
+            <a class="post-title-link" href="/2016/07/20/dockerize-dev-env/">
+              容器化开发环境
             </a>
         
       </div>
 
       <div class="post-meta">
-        <span class="post-time"> 02-20 </span>
+        <span class="post-time"> 07-20 </span>
       </div>
 
     </div>
   </div>
 
 
+
     
+
   </div>
 
   
+
 
         </div>
 
@@ -338,6 +358,12 @@
   <script type="text/javascript" src="/js/search-toggle.js"></script>
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   <script type="text/javascript">
     $(document).ready(function () {

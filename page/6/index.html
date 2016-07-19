@@ -158,6 +158,78 @@
           
           
             
+              <a class="post-title-link" href="/2014/08/05/js-this/">
+                javascript 中的 this 关键字
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Aug 5 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/08/05/js-this/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/05/js-this/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>　　what is this？ 在 javascript 中，每个 function 都有一个 this 关键字的隐私绑定。当调用某个 function 时，这个 function 的 this 绑定将会被确定。</p>
+<p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line">　</span><br><span class="line"><span class="comment">// this is ---Window &#123;top: Window, window: Window, location: Location, external: Object, chrome: Object…&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>eg-2：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test2 = &#123;</span><br><span class="line">    <span class="built_in">console</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">test2.console();</span><br><span class="line">　</span><br><span class="line"><span class="comment">// this is ---Object &#123;console: function&#125;</span></span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/05/js-this/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/08/03/init/">
                 init blog
               </a>
@@ -287,77 +359,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/03/16/ios7-uinavigationcontroller-uiview/">
-                iOS7 UINavigationController 导致 UIScollView 尺寸变化
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Mar 16 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/03/16/ios7-uinavigationcontroller-uiview/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/03/16/ios7-uinavigationcontroller-uiview/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>  在 iOS 7 中，如果某个<code>UIViewController</code>的 self.view 第一个子视图是<code>UIScollView</code>， 同时当这个<code>UIViewController</code>被 push 或initWithRootController 成为<code>UINavigationController</code>控制的 Controller 时，这个<code>UIViewControlle</code>的 view 的子视图<code>UIScollView</code>的所有子视图， 都会被下移<code>64px</code>。</p>
-<p>  这个下移 64px 的前提是 navigationBar 和 statusBar 没有隐藏。因为为 statusBar 默认的 Height 是 20px，而 navigatiBar  默认的 Height 是 44px</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/03/16/ios7-uinavigationcontroller-uiview/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -396,7 +397,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
