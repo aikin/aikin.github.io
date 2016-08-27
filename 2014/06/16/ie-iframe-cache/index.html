@@ -54,7 +54,7 @@
 
 
 
-  <title> IE reload iframe // aikin'blog </title>
+  <title> IE reload iframe </title>
 </head>
 
 <body>
@@ -190,9 +190,9 @@
       
         <p>最近“致力于”调 IE9  、IE10 、 firefox 、 chrome 浏览器对 iframe刷新。 发现在IE浏览器中，有些刷新 iframe 的方法会加载缓存。以下就对一些方法在 IE9 、IE10(以下简称IE)的产生效果介绍一下：</p>
 <a id="more"></a>
-<p><strong>1. 对 iframe 的 src 属性重新赋值来实现刷新</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#iframeId"</span>).attr(<span class="string">"src"</span>, $(<span class="string">"#iframeId"</span>).attr(<span class="string">"src"</span>));</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 对 iframe 的 src 属性重新赋值来实现刷新</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframeId"</span>).attr(<span class="string">"src"</span>, $(<span class="string">"#iframeId"</span>).attr(<span class="string">"src"</span>));</div></pre></td></tr></table></figure></p>
 <p>效果：<code>在 IE 中，使用这个方法后 iframe 没有刷新的效果。iframe反应很平静。</code></p>
-<p><strong>2. location.replace(URL) 方法</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#iframeId"</span>)[<span class="number">0</span>].contentWindow.location.replace(url);</span><br><span class="line">或</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"iframeId"</span>).contentWindow.location.replace(url);</span><br><span class="line"></span><br><span class="line">注: contentWindow.location.replace === contentWindow.document.location.replace</span><br><span class="line">返回值为 <span class="literal">true</span>， 也就是两个方法是相同的。</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. location.replace(URL) 方法</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframeId"</span>)[<span class="number">0</span>].contentWindow.location.replace(url);</div><div class="line">或</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"iframeId"</span>).contentWindow.location.replace(url);</div><div class="line"></div><div class="line">注: contentWindow.location.replace === contentWindow.document.location.replace</div><div class="line">返回值为 <span class="literal">true</span>， 也就是两个方法是相同的。</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>W3School对这个方法是这么描述的：</p>
 <ul>
@@ -201,7 +201,7 @@
 </ul>
 </blockquote>
 <p>也就是说该方法通过指定URL替换当前缓存在历史的记录，因此当使用replace方法之后，不能通过“前进”和“后退”来访问已经被替换的URL。<br>效果：<code>但是在 IE 中使用这个方法和描述的效果。将会用新的 url 内容替换掉当前的历史记录。</code></p>
-<p><strong>3. location.reload(force)方法</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#iframeId"</span>)[<span class="number">0</span>].contentWindow.location.relaod(<span class="literal">true</span>);</span><br><span class="line">或</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"iframeId"</span>).contentWindow.location.reload(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">注: contentWindow.location.reload === contentWindow.document.location.reload</span><br><span class="line">返回值为 <span class="literal">true</span>， 也就是两个方法是相同的。</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. location.reload(force)方法</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframeId"</span>)[<span class="number">0</span>].contentWindow.location.relaod(<span class="literal">true</span>);</div><div class="line">或</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"iframeId"</span>).contentWindow.location.reload(<span class="literal">true</span>);</div><div class="line"></div><div class="line">注: contentWindow.location.reload === contentWindow.document.location.reload</div><div class="line">返回值为 <span class="literal">true</span>， 也就是两个方法是相同的。</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p> 该方法用于重新加载当前页面。可选参数：force 是Boolean类型的。<br>在W3School上对该方法的描述：  </p>
 <ul>
@@ -212,7 +212,7 @@
 </ul>
 </blockquote>
 <p>效果：<code>在 IE中使用该方法，会重新从服务器获取新的页面，不会加载缓存。</code></p>
-<p><strong>4. 替换缓存</strong><br>虽然这个方法可以实现重新从服务器上，获取新的页面，但是它只能获取当前窗口的。当一个 iframe 中有两个或两个以上的可以相互跳转的页面，你同时要重新去加载这些页面。这时 reload 方法，就不是很适用了(因为 reload 方法没法同时从服务器上获取多个页面)。所以在 IE 中，可以使用<code>ajax</code>去 GET 这些页面，来替换更新本地的缓存，在刷新 iframe。下面的方法就是用 ajax 去替换本地的缓存的方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    type: <span class="string">"GET"</span>,</span><br><span class="line">    url: url,</span><br><span class="line">    dataType: <span class="string">"text"</span>,</span><br><span class="line">    beforeSend: <span class="function"><span class="keyword">function</span> (<span class="params">xmlHttp</span>) </span>&#123;</span><br><span class="line">        xmlHttp.setRequestHeader(<span class="string">"If-Modified-Since"</span>, <span class="string">"0"</span>);</span><br><span class="line">        xmlHttp.setRequestHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-cache"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).done(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"replace cache ok"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>4. 替换缓存</strong><br>虽然这个方法可以实现重新从服务器上，获取新的页面，但是它只能获取当前窗口的。当一个 iframe 中有两个或两个以上的可以相互跳转的页面，你同时要重新去加载这些页面。这时 reload 方法，就不是很适用了(因为 reload 方法没法同时从服务器上获取多个页面)。所以在 IE 中，可以使用<code>ajax</code>去 GET 这些页面，来替换更新本地的缓存，在刷新 iframe。下面的方法就是用 ajax 去替换本地的缓存的方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    type: <span class="string">"GET"</span>,</div><div class="line">    url: url,</div><div class="line">    dataType: <span class="string">"text"</span>,</div><div class="line">    beforeSend: <span class="function"><span class="keyword">function</span> (<span class="params">xmlHttp</span>) </span>&#123;</div><div class="line">        xmlHttp.setRequestHeader(<span class="string">"If-Modified-Since"</span>, <span class="string">"0"</span>);</div><div class="line">        xmlHttp.setRequestHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-cache"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;).done(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"replace cache ok"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <blockquote>
 <ul>
 <li>If-Modified-Since控制缓存页面时间，在发送HTTP请求时，把浏览器端缓存页面的最后修改时间一起发到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行比较。</li>
@@ -331,7 +331,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -638,16 +638,16 @@
 
 
   
-  
+
   <!-- lazyload -->
   <script type="text/javascript" src="/js/lazyload.js"></script>
       <script type="text/javascript">
-        jQuery(function() {          
+        jQuery(function() {
             jQuery("#posts img").lazyload({
-              placeholder:"http://www.arao.me/loading.gif",  
+              placeholder:"http://www.arao.me/loading.gif",
                 effect:"fadeIn"
               });
             });
-    </script>   
+    </script>
 </body>
 </html>

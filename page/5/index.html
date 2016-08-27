@@ -158,6 +158,76 @@
           
           
             
+              <a class="post-title-link" href="/2014/09/13/javascript-the-good-parts/">
+                《JavaScipt 语言精粹》养分
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Sep 13 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/09/13/javascript-the-good-parts/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/13/javascript-the-good-parts/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="《JavaScipt-语言精粹》-作者-Douglas-Crockford"><a href="#《JavaScipt-语言精粹》-作者-Douglas-Crockford" class="headerlink" title="《JavaScipt 语言精粹》 作者: Douglas Crockford"></a>《JavaScipt 语言精粹》 作者: Douglas Crockford</h2><h4 id="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"><a href="#拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。" class="headerlink" title="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"></a>拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得<strong>铁路图</strong>实在看着有点费劲。</h4><h3 id="养分"><a href="#养分" class="headerlink" title="养分"></a>养分</h3><p><strong>1. <code>beget</code>创建一个使用原对象作为其原型的新的对象。</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.beget !== <span class="string">'function'</span>) &#123;</div><div class="line">    <span class="built_in">Object</span>.beget = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">       <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">       F.prototype = obj;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/09/13/javascript-the-good-parts/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/08/28/mongoose-remove-function/">
                 使用 mongoose 清除数据
               </a>
@@ -197,7 +267,7 @@
 <ul>
 <li><h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3></li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</span><br><span class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</span><br><span class="line">    db.dropDatabase(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</span><br><span class="line">	    mongoose.disconnect();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</div><div class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</div><div class="line">    db.dropDatabase(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</div><div class="line">	    mongoose.disconnect();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/08/28/mongoose-remove-function/#more">
               Read more &raquo;
@@ -269,80 +339,9 @@
         
           <p>　　有的时候，函数的调用者(<code>this</code>关键字的绑定对象)并不是你期望的对象。面对这样情况，我们希望可以自定义<code>this</code>的绑定对象。在 javascript 中可以是用<strong><em><code>call apply bind</code></em></strong>方法来指定 this 关键字的绑定对象。
 　</p>
-<h3 id="a-call-方法"><a href="#a-call-方法" class="headerlink" title="a. call 方法"></a>a. <strong>call 方法</strong></h3><h4 id="先看个例子："><a href="#先看个例子：" class="headerlink" title="先看个例子："></a>先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    fullName: <span class="string">'aikin'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">    fullName: <span class="string">'you'</span></span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></span><br><span class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></span><br><span class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="a-call-方法"><a href="#a-call-方法" class="headerlink" title="a. call 方法"></a>a. <strong>call 方法</strong></h3><h4 id="先看个例子："><a href="#先看个例子：" class="headerlink" title="先看个例子："></a>先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullName: <span class="string">'aikin'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> you = &#123;</div><div class="line">    fullName: <span class="string">'you'</span></div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></div><div class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></div><div class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></div></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2014/08/16/js-call-apply-bind/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/08/08/install-atom-on-ubuntu/">
-                Ubuntu 14.04 安装 Atom
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Aug 8 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/08/08/install-atom-on-ubuntu/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/08/install-atom-on-ubuntu/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>  <img src='/images/atom.png' /></p>
-<p> <a href="https://atom.io/">Atom</a> 是 github 内部的编辑软件。按照 Github 的说法，这是一款非同一般的编辑器，是 21 世纪的创新产品，他们希望将来“从菜鸟到黑客都在使用 Atom 编写代码”。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/08/install-atom-on-ubuntu/#more">
               Read more &raquo;
             </a>
           </div>
@@ -368,7 +367,7 @@
 
   
   <div class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">&raquo;</a>
   </div>
 
 
@@ -402,7 +401,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -559,16 +558,16 @@
 
 
   
-  
+
   <!-- lazyload -->
   <script type="text/javascript" src="/js/lazyload.js"></script>
       <script type="text/javascript">
-        jQuery(function() {          
+        jQuery(function() {
             jQuery("#posts img").lazyload({
-              placeholder:"http://www.arao.me/loading.gif",  
+              placeholder:"http://www.arao.me/loading.gif",
                 effect:"fadeIn"
               });
             });
-    </script>   
+    </script>
 </body>
 </html>

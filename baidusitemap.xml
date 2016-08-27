@@ -4,6 +4,57 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2015/10/03/auto-test-writed/</loc>
+    <lastmod>2016-08-27T11:05:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>我写过的那几类自动化测试</title>
+        <pubTime>2015-10-03T14:16:25.000Z</pubTime>
+        
+        <tag>automated testing</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
+    <lastmod>2016-07-24T06:12:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gulp API 初探和 gulp-nodemon gulp-livereload 配置</title>
+        <pubTime>2014-10-24T13:08:09.000Z</pubTime>
+        
+        <tag>gulp</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
+    <lastmod>2016-07-24T06:02:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>ipad 添加 QQ 邮件账户</title>
+        <pubTime>2014-10-04T10:05:39.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
     <lastmod>2016-07-19T18:21:15.000Z</lastmod>
     <data>
@@ -258,41 +309,7 @@
     </url>
 
     
-  <url>
-    <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
-    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>Gulp API 初探和 gulp-nodemon gulp-livereload 配置</title>
-        <pubTime>2014-10-24T13:08:09.000Z</pubTime>
-        
-        <tag>gulp</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
-    
-    
-  <url>
-    <loc>http://aikin.github.io/2014/10/04/add-qq-mail-into-ipad-air/</loc>
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>ipad 添加 QQ 邮件账户</title>
-        <pubTime>2014-10-04T10:05:39.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
