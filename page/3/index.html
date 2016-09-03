@@ -158,6 +158,77 @@
           
           
             
+              <a class="post-title-link" href="/2014/11/20/javascript-patterns/">
+                《JavaScript 模式》养分
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Nov 20 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/11/20/javascript-patterns/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/20/javascript-patterns/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新"><a href="#《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新" class="headerlink" title="《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新"></a>《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</h1><h3 id="养分"><a href="#养分" class="headerlink" title="养分"></a>养分</h3><p><strong><em>1. 自调用构造函数: </em></strong> 实现不使用<code>new</code>关键字，构造出实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Waffle</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> ((!<span class="keyword">this</span> <span class="keyword">instanceof</span> Waffle)) &#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Waffle();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">this</span>.tastes = <span class="string">"yummy"</span>;</div><div class="line">&#125;</div><div class="line">Waffle.prototype.wantAnother = <span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> first   = <span class="keyword">new</span> Waffle(),</div><div class="line">    section = Waffle();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(first.tastes);     <span class="comment">// yummy</span></div><div class="line"><span class="built_in">console</span>.log(section.tastes);   <span class="comment">// yummy</span></div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/11/20/javascript-patterns/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/11/10/prototype-proto/">
                 理解 prototype 和 __proto__
               </a>
@@ -302,83 +373,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/11/02/mongoose-population/">
-                Mongoose 之 Population
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Nov 2 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/11/02/mongoose-population/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/02/mongoose-population/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>  <a href="http://mongoosejs.com/index.html">Mongoose</a> 是 <a href="http://www.mongodb.org/">MongoDB</a> 的 <strong>ODM(Object Document Mapper)</strong>。</p>
-<p><img src='/images/mongoose.png' /></p>
-<blockquote>
-<ul>
-<li>什么是<strong>ODM</strong>? 其实和<strong>ORM(Object Relational Mapper)</strong>是同类型的工具。都是将数据库的数据转化为代码对象的库，使用转化后的对象可以直接对数据库的数据进行<strong><em>CRUD(增删改查)</em></strong>。</li>
-<li><code>MongoDB</code> 是文档型数据库(Document Database)，不是关系型数据库(Relational Database)。而<code>Mongoose</code>可以将 <strong>MongonDB</strong> 数据库存储的文档(documents)转化为 javascript 对象，然后可以直接进行数据的增删改查。</li>
-</ul>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/02/mongoose-population/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -417,7 +411,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -431,7 +425,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

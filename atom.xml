@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2016-07-19T18:21:15.000Z</updated>
+  <updated>2016-09-03T09:50:17.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -16,11 +16,89 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>如何断点调试容器中的应用</title>
+    <link href="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/"/>
+    <id>http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/</id>
+    <published>2016-08-28T15:36:46.000Z</published>
+    <updated>2016-09-03T09:50:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　上一篇<a href="http://aikin.me/2016/07/20/dockerize-dev-env/#more" target="_blank" rel="external">容器化开发环境</a>已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过<code>断点的方式</code>来调试程序或定位<code>BUG</code>，那么如何断点调试运行在容器中的应用呢？？？<br>　　容器就像一个虚拟机，就像一个远程的服务器，要断点调试容器中的应用，就像要断点调试虚拟机和远程的服务器上的应用一样。如何配置一个可以远程断点调试的应用，每个语言，每个框架都有不同的方式，接下来介绍的例子使用的技术栈如下：</p>
+<a id="more"></a>
+<ul>
+<li>Java8</li>
+<li>spring-boot</li>
+<li>gradle</li>
+<li>IntelliJ IDEA</li>
+</ul>
+<h4 id="接下来会基于上一篇博客中的DEMO-hello-dockerize-进行扩展。"><a href="#接下来会基于上一篇博客中的DEMO-hello-dockerize-进行扩展。" class="headerlink" title="接下来会基于上一篇博客中的DEMO hello-dockerize 进行扩展。"></a>接下来会基于上一篇博客中的<code>DEMO</code> <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">hello-dockerize</a> 进行扩展。</h4><hr>
+<ul>
+<li><p><strong>clone code repo</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/aikin/hello-dockerize.git</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>更新<code>build.gradle</code>文件，在文件中写入<code>apply plugin: &quot;application&quot;</code> 和</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">  remote debug setup</div><div class="line"> */</div><div class="line">applicationDefaultJvmArgs = [</div><div class="line">        <span class="string">"-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n"</span></div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>更新<code>docker-compose.yml</code>文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">web:</div><div class="line">  build: ./dockerize</div><div class="line">  environment:</div><div class="line">    - LANG=C.UTF-8</div><div class="line">    - TERM=xterm</div><div class="line">    - DEBUG=true</div><div class="line">  ports:</div><div class="line">    - &quot;8080:8080&quot;</div><div class="line">    - &quot;5005:5005&quot;</div><div class="line">  volumes:</div><div class="line">    - .:/hello-dockerize</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动容器</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker-compose run --service-ports web</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置 IntelliJ IDEA</strong></p>
+<ul>
+<li>打开工具栏<code>Run</code> –&gt; <code>Edit Configurations</code><blockquote>
+<p><img src="./open.png" alt="config"></p>
+</blockquote>
+</li>
+<li>添加新配置 点击加号，选择<code>Remote</code>，将 Host <code>localhost</code> 修改为<code>docker-machine ip machine-name</code>获取的<code>IP</code>，在<code>/etc/hosts</code>文件中绑定的本地域名<code>dockerhost</code><blockquote>
+<p><img src="./add.png" alt="add"></p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><strong>在容器中启动服务：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@b73c06ebe59f:/hello-dockerize<span class="comment"># ./gradlew bootRun --debug-jvm --stacktrace</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动 IntelliJ IDEA 的 debugger 模式</strong></p>
+<ul>
+<li>点击<code>debug</code>按钮<blockquote>
+<p><img src="./debugger.png" alt="debugger"></p>
+</blockquote>
+</li>
+<li>打开浏览器访问<code>http://dockerhost:8080/hello-dockerize</code>，如果你也看到下面的画面，恭喜你成功啦。<blockquote>
+<p><img src="./debugging.png" alt="debugging">　　</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>　　<br><strong><em>学会断点调试容器中的应用，再也不用为我那乌黑亮丽的头发着急啦！！！</em></strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　上一篇&lt;a href=&quot;http://aikin.me/2016/07/20/dockerize-dev-env/#more&quot;&gt;容器化开发环境&lt;/a&gt;已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过&lt;code&gt;断点的方式&lt;/code&gt;来调试程序或定位&lt;code&gt;BUG&lt;/code&gt;，那么如何断点调试运行在容器中的应用呢？？？&lt;br&gt;　　容器就像一个虚拟机，就像一个远程的服务器，要断点调试容器中的应用，就像要断点调试虚拟机和远程的服务器上的应用一样。如何配置一个可以远程断点调试的应用，每个语言，每个框架都有不同的方式，接下来介绍的例子使用的技术栈如下：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
+    
+      <category term="debugger" scheme="http://aikin.github.io/tags/debugger/"/>
+    
+      <category term="break point" scheme="http://aikin.github.io/tags/break-point/"/>
+    
+  </entry>
+  
+  <entry>
     <title>容器化开发环境</title>
     <link href="http://aikin.github.io/2016/07/20/dockerize-dev-env/"/>
     <id>http://aikin.github.io/2016/07/20/dockerize-dev-env/</id>
     <published>2016-07-19T18:12:44.000Z</published>
-    <updated>2016-07-19T18:21:15.000Z</updated>
+    <updated>2016-09-03T09:32:56.000Z</updated>
     
     <content type="html"><![CDATA[<p>　　有没有过项目之间各种<code>Java</code>版本开发环境切换的场景；有没有过<code>github</code>上<code>clone</code>回来的代码库，由于各种开发环境依赖无法运行的问题；有没有过进入一个新项目时各种配开发环境到深夜的经历…<code>Come On!</code>为什么会这样，一切都是开发环境问题。为了不让别人痛苦，更不想让自己痛苦，请容器化开发环境吧，让我们享受一键部署开发环境的痛快吧。</p>
 <p>　　用什么容器化呢？当然是<code>Docker</code>啦，轻量级又好用，又流行，最关键点是本人仅<code>Docker</code>比较熟悉，所以就拿它来搞起啦。</p>
@@ -34,7 +112,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(dockerize) Unable to get the latest Boot2Docker ISO release version:  Error getting a version tag from the Github API response.</div><div class="line">(dockerize) You may be getting rate limited by Github.</div><div class="line"></div><div class="line">// 如果在安装过程遇到上述类似的问题，可以尝试方式解决：</div><div class="line"></div><div class="line">通过浏览器下载 boot2docker 镜像 https://github.com/boot2docker/boot2docker/releases/download/v1.10.3/boot2docker.iso</div><div class="line">将镜像移动到 ~/.docker/machine/cache/ 目录下</div></pre></td></tr></table></figure>
 <h2 id="Setup-Hello-Dockerize"><a href="#Setup-Hello-Dockerize" class="headerlink" title="Setup Hello Dockerize"></a>Setup Hello Dockerize</h2><hr>
 <p><strong>使用<code>Gradle</code>初始化一个  <a href="http://projects.spring.io/spring-boot/" target="_blank" rel="external">spring-boot</a> DEMO，<a href="https://github.com/aikin/hello-dockerize/blob/master/build.gradle" target="_blank" rel="external">build.gradle</a> 文件如下: </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">group <span class="string">"com.xxx.hello.dockerize"</span></div><div class="line">version <span class="string">"1.0.0"</span></div><div class="line"></div><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://repo.spring.io/snapshot"</span> &#125;</div><div class="line">        maven &#123; url <span class="string">"http://repo.spring.io/milestone"</span> &#125;</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath(<span class="string">"org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: <span class="string">"idea"</span></div><div class="line">apply plugin: <span class="string">"java"</span></div><div class="line">apply plugin: <span class="string">"spring-boot"</span></div><div class="line"></div><div class="line">sourceCompatibility = <span class="number">1.8</span></div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    jcenter()</div><div class="line">    maven &#123; url <span class="string">"http://repo.spring.io/snapshot"</span> &#125;</div><div class="line">    maven &#123; url <span class="string">"http://repo.spring.io/milestone"</span> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ext &#123;</div><div class="line">    junitVersion = <span class="string">"4.11"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line"></div><div class="line">    compile <span class="string">"org.springframework.boot:spring-boot-starter-jersey"</span></div><div class="line"></div><div class="line">    testCompile <span class="string">"junit:junit:$junitVersion"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong> 实现展示<code>hello-dockerize</code>的API，创建以下文件：</strong></p>
+<p><strong> 实现<code>hello-dockerize</code>的API，创建以下文件：</strong></p>
 <blockquote>
 <p><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/Application.java" target="_blank" rel="external">Application.java</a><br><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/config/JerseyConfig.java" target="_blank" rel="external">JerseyConfig.java</a><br><a href="https://github.com/aikin/hello-dockerize/tree/master/src/main/java/com/ulaijn/hello/dockerize/resources" target="_blank" rel="external">HelloDockerizeResource.java</a></p>
 </blockquote>
@@ -44,7 +122,7 @@
 <p><strong>启动容器服务：</strong><br>在 DEMO 目录下执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker-compose run --service-ports web</div></pre></td></tr></table></figure></p>
 <p>上述命令执行成功后，将会进入容器内，显示如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@7b438758ccae:/hello-dockerize<span class="comment">#</span></div></pre></td></tr></table></figure></p>
 <p>在容器中启动服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@7b438758ccae:/hello-dockerize<span class="comment"># ./gradlew bootRun</span></div></pre></td></tr></table></figure></p>
-<p><strong>为了在容器外可以访问容器内部的服务，可以通过<code>docker-machine ip machine-name</code>获取 machine 的 <code>IP</code>，再通过浏览器访问<code>http://IP:8080/hello-dockerize</code>，页面将会出现<code>Hello Dockerize!</code></strong></p>
+<p><strong>为了在容器外可以访问容器内部的服务，可以通过<code>docker-machine ip machine-name</code>获取 machine 的 <code>IP</code>，修改<code>/etc/hosts</code>将<code>machine IP</code>绑定上<code>dockerhost</code>的域名，再通过浏览器访问<code>http://dockerhost:8080/hello-dockerize</code>，页面将会出现<code>Hello Dockerize!</code></strong></p>
 <p>　　</p>
 <blockquote>
 <p>DEMO REPO: <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">HelloDockerize</a>，你只需要 clone 到本地，然后执行 <code>docker-compose run --service-ports web</code>， DEMO 开发环境将会快速构建完毕，秒级的体验，不容错过~~~</p>
@@ -1259,9 +1337,9 @@
     </summary>
     
     
-      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
-    
       <category term="angularjs" scheme="http://aikin.github.io/tags/angularjs/"/>
+    
+      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
     
   </entry>
   
@@ -1651,43 +1729,6 @@
       <category term="iframe" scheme="http://aikin.github.io/tags/iframe/"/>
     
       <category term="ie" scheme="http://aikin.github.io/tags/ie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS7 UINavigationController 导致 UIScollView 尺寸变化</title>
-    <link href="http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/"/>
-    <id>http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/</id>
-    <published>2014-03-16T15:38:11.000Z</published>
-    <updated>2016-03-24T08:08:31.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>  在 iOS 7 中，如果某个<code>UIViewController</code>的 self.view 第一个子视图是<code>UIScollView</code>， 同时当这个<code>UIViewController</code>被 push 或initWithRootController 成为<code>UINavigationController</code>控制的 Controller 时，这个<code>UIViewControlle</code>的 view 的子视图<code>UIScollView</code>的所有子视图， 都会被下移<code>64px</code>。</p>
-<p>  这个下移 64px 的前提是 navigationBar 和 statusBar 没有隐藏。因为为 statusBar 默认的 Height 是 20px，而 navigatiBar  默认的 Height 是 44px</p>
-<a id="more"></a>
-<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p><strong>1. 在 AppDelegate.m 文件中：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions</div><div class="line">&#123;</div><div class="line">  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];</div><div class="line">  self.window.backgroundColor = [UIColor whiteColor];                              </div><div class="line">  //下面两行为增加的代码                                                         </div><div class="line">  ViewController *rootViewController = [[ViewController alloc] init];</div><div class="line">  [self.window setRootViewController:rootViewController];</div><div class="line"></div><div class="line">  [self.window makeKeyAndVisible];</div><div class="line">  return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>2. 在 ViewController.m 中：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad</div><div class="line">&#123;</div><div class="line">  [super viewDidLoad];</div><div class="line">  UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(30.0,                                                           64.0, 260.0, 300.0)];</div><div class="line">  [scrollView setBackgroundColor:[UIColor redColor]];</div><div class="line"></div><div class="line">  UIView *view = [[UIView alloc] initWithFrame:scrollView.bounds];</div><div class="line">  [view setBackgroundColor:[UIColor blueColor]];</div><div class="line">  [scrollView addSubview:view];</div><div class="line"></div><div class="line">  [self.view addSubview:scrollView];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>3. 运行后的结果：</strong><br><img src="./ios7-blue.png" alt="blue"></p>
-<p><strong>4. 现在使用 UINavigationController,  将开始 AppDelegate.m 增加的那两行代码修改成：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ViewController *rootViewController = [[ViewController alloc] init];</div><div class="line">UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];</div><div class="line">[self.window setRootViewController:navController];</div></pre></td></tr></table></figure></p>
-<p><strong>5. 现在再次运行程序：</strong><br><img src="./ios7-red-out.png" alt="blue"></p>
-<p><strong><em>依据结果显示， scrollView 背景色为蓝色的子视图位置自动下移了。 而这个下移的距离刚好是 64.0px</em></strong></p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><strong>1. 第一种：在 ViewController 的 init 的方法中增加一行代码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.automaticallyAdjustsScrollViewInsets = NO;</div></pre></td></tr></table></figure></p>
-<p><strong>2. 第二种： 让UIScrollView 不要成为 ViewController 的 View 的第一个子视图。具体操作：将 viewDidLoad方法 修改成如下：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad</div><div class="line">&#123;</div><div class="line">  [super viewDidLoad];</div><div class="line"></div><div class="line">  UIView *firstSubView = [[UIView alloc] initWithFrame:self.view.bounds];</div><div class="line">  [self.view addSubview:firstSubView];</div><div class="line"></div><div class="line">  UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(30.0,                                                           64.0, 260.0, 300.0)];</div><div class="line">  [scrollView setBackgroundColor:[UIColor redColor]];</div><div class="line"></div><div class="line">  UIView *view = [[UIView alloc] initWithFrame:scrollView.bounds];</div><div class="line">  [view setBackgroundColor:[UIColor blueColor]];</div><div class="line">  [scrollView addSubview:view];</div><div class="line"></div><div class="line">  [self.view addSubview:scrollView];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p><strong>3. 第三种：将 UIScorllView 的子视图上移 64.0px 。修改 viewDidLoad 方法：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(30.0,                                                           64.0, 260.0, 300.0)];</div><div class="line">[scrollView setBackgroundColor:[UIColor redColor]];</div><div class="line"></div><div class="line">CGRect viewFrame = CGRectMake(0, -64.0, CGRectGetWidth(scrollView.frame), CGRectGetHeight(scrollView.frame));</div><div class="line"></div><div class="line">UIView *view = [[UIView alloc] initWithFrame: viewFrame];</div><div class="line">[view setBackgroundColor:[UIColor blueColor]];</div><div class="line">[scrollView addSubview:view];</div><div class="line"></div><div class="line">[self.view addSubview:scrollView];</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  在 iOS 7 中，如果某个&lt;code&gt;UIViewController&lt;/code&gt;的 self.view 第一个子视图是&lt;code&gt;UIScollView&lt;/code&gt;， 同时当这个&lt;code&gt;UIViewController&lt;/code&gt;被 push 或initWithRootController 成为&lt;code&gt;UINavigationController&lt;/code&gt;控制的 Controller 时，这个&lt;code&gt;UIViewControlle&lt;/code&gt;的 view 的子视图&lt;code&gt;UIScollView&lt;/code&gt;的所有子视图， 都会被下移&lt;code&gt;64px&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;  这个下移 64px 的前提是 navigationBar 和 statusBar 没有隐藏。因为为 statusBar 默认的 Height 是 20px，而 navigatiBar  默认的 Height 是 44px&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://aikin.github.io/tags/iOS/"/>
-    
-      <category term="UINavigationController" scheme="http://aikin.github.io/tags/UINavigationController/"/>
-    
-      <category term="UIScollView" scheme="http://aikin.github.io/tags/UIScollView/"/>
     
   </entry>
   
