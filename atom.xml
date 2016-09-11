@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2016-09-03T09:50:17.000Z</updated>
+  <updated>2016-09-11T08:42:03.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker 的操作系统虚拟化</title>
+    <link href="http://aikin.github.io/2016/09/11/docker/"/>
+    <id>http://aikin.github.io/2016/09/11/docker/</id>
+    <published>2016-09-11T07:19:15.000Z</published>
+    <updated>2016-09-11T08:42:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　<a href="https://www.docker.com/" target="_blank" rel="external">Docker</a> 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？</p>
+<a id="more"></a>
+<blockquote>
+<ul>
+<li>虚拟化，是指通过虚拟化技术将一台计算机虚拟为多台逻辑计算机。在一台计算机上同时运行多个逻辑计算机，每个逻辑计算机可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。<br>物理机，是相对于虚拟机而言的对实体计算机的称呼。物理机提供给虚拟机以硬件环境，有时也称为“寄主”或“宿主”。通过物理机和虚拟机的配合，一台计算机上可以安装上多个操作系统（一个外界操作系统和虚拟机中的数个操作系统），并且几个操作系统间还可以实现通信，就像是有多台计算机一样。</li>
+<li>操作系统级虚拟化: 在传统操作系统中，所有用户的进程本质上是在同一个操作系统的实例中运行，因此内核或应用程序的缺陷可能影响到其它进程也可能受其它进程的影响。它是一种在服务器操作系统中使用的轻量级的虚拟化技术，内核通过创建多个虚拟的操作系统实例（内核和库）来隔离不同的进程，不同实例中的进程完全不了解对方的存在。它并不在物理系统里创建多个虚拟机环境，而是让一个操作系统创建多个彼此独立的应用环境，这些应用环境都访问同一个内核。<br><img src="./os-virtualization.jpg" alt="os-virtualization"></li>
+</ul>
+</blockquote>
+<h3 id="Containers-VS-VMs"><a href="#Containers-VS-VMs" class="headerlink" title="Containers VS VMs"></a><code>Containers</code> VS <code>VMs</code></h3><p>　Docker Container 和 普通的虚拟机 Image 相比, 最大的区别是它并不包含操作系统内核。</p>
+<h5 id="传统的虚拟化技术-VM"><a href="#传统的虚拟化技术-VM" class="headerlink" title="传统的虚拟化技术(VM)"></a><strong><em>传统的虚拟化技术(VM)</em></strong></h5><blockquote>
+<p><img style="margin: auto;" src="vm.jpg"><br>传统的虚拟化技术(VM)的 <code>Hypervisor</code> 需要实现对硬件的虚拟化，并且还要搭载自己的操作系统，自然在启动速度和资源利用率以及性能上有比较大的开销。普通虚拟机将整个操作系统运行在虚拟的硬件平台上, 进而提供完整的运行环境供应用程序运行。<br>VM 是一个运行在宿主机之上的完整的操作系统，包含了大量类似硬件驱动、虚拟处理器、网络接口等等并不需要的信息。VM运行自身操作系统会占用较多的CPU、内存、硬盘资源。</p>
+</blockquote>
+<h5 id="容器虚拟化技术-Docker"><a href="#容器虚拟化技术-Docker" class="headerlink" title="容器虚拟化技术(Docker)"></a><strong><em>容器虚拟化技术(Docker)</em></strong></h5><blockquote>
+<p><img style="margin: auto;" src="docker.jpg"><br><code>Docker</code> 几乎就没有什么虚拟化的东西，并且直接复用了 Host 主机的 OS，在 Docker Engine 层面实现了调度和隔离重量一下子就降低了好几个档次。 Docker 的容器利用了 <code>LXC</code>，管理利用了 <code>namespaces</code> 来做权限的控制和隔离， <code>cgroups</code> 来进行资源的配置，并且还通过 <code>aufs</code> 来进一步提高文件系统的资源利用率。<br><code>Docker Container</code> 来说启动和销毁都是秒级的，而且它底层依赖的技术<code>lxc(linux container)</code>完全是内核特性，没有任何中间层开销，对于资源的利用率极高性能接近物理机。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/docker-core-technology-preview" target="_blank" rel="external">Docker核心技术预览</a><br><a href="http://book.51cto.com/art/201301/377685.htm" target="_blank" rel="external">CPU虚拟化</a><br><a href="https://www.docker.com/what-docker" target="_blank" rel="external">what docker</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　&lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt; 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>如何断点调试容器中的应用</title>
@@ -1337,9 +1373,9 @@
     </summary>
     
     
-      <category term="angularjs" scheme="http://aikin.github.io/tags/angularjs/"/>
-    
       <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
+    
+      <category term="angularjs" scheme="http://aikin.github.io/tags/angularjs/"/>
     
   </entry>
   
@@ -1676,59 +1712,6 @@
     
     
       <category term="生活" scheme="http://aikin.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IE reload iframe</title>
-    <link href="http://aikin.github.io/2014/06/16/ie-iframe-cache/"/>
-    <id>http://aikin.github.io/2014/06/16/ie-iframe-cache/</id>
-    <published>2014-06-15T16:05:24.000Z</published>
-    <updated>2016-03-24T08:08:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近“致力于”调 IE9  、IE10 、 firefox 、 chrome 浏览器对 iframe刷新。 发现在IE浏览器中，有些刷新 iframe 的方法会加载缓存。以下就对一些方法在 IE9 、IE10(以下简称IE)的产生效果介绍一下：</p>
-<a id="more"></a>
-<p><strong>1. 对 iframe 的 src 属性重新赋值来实现刷新</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframeId"</span>).attr(<span class="string">"src"</span>, $(<span class="string">"#iframeId"</span>).attr(<span class="string">"src"</span>));</div></pre></td></tr></table></figure></p>
-<p>效果：<code>在 IE 中，使用这个方法后 iframe 没有刷新的效果。iframe反应很平静。</code></p>
-<p><strong>2. location.replace(URL) 方法</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframeId"</span>)[<span class="number">0</span>].contentWindow.location.replace(url);</div><div class="line">或</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"iframeId"</span>).contentWindow.location.replace(url);</div><div class="line"></div><div class="line">注: contentWindow.location.replace === contentWindow.document.location.replace</div><div class="line">返回值为 <span class="literal">true</span>， 也就是两个方法是相同的。</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>W3School对这个方法是这么描述的：</p>
-<ul>
-<li>replace() 方法可用一个新文档取代当前文档;</li>
-<li>replace() 方法不会在 History 对象中生成一个新的记录。当使用该方法时，新的 URL 将覆盖 History 对象中的当前记录。</li>
-</ul>
-</blockquote>
-<p>也就是说该方法通过指定URL替换当前缓存在历史的记录，因此当使用replace方法之后，不能通过“前进”和“后退”来访问已经被替换的URL。<br>效果：<code>但是在 IE 中使用这个方法和描述的效果。将会用新的 url 内容替换掉当前的历史记录。</code></p>
-<p><strong>3. location.reload(force)方法</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframeId"</span>)[<span class="number">0</span>].contentWindow.location.relaod(<span class="literal">true</span>);</div><div class="line">或</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"iframeId"</span>).contentWindow.location.reload(<span class="literal">true</span>);</div><div class="line"></div><div class="line">注: contentWindow.location.reload === contentWindow.document.location.reload</div><div class="line">返回值为 <span class="literal">true</span>， 也就是两个方法是相同的。</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p> 该方法用于重新加载当前页面。可选参数：force 是Boolean类型的。<br>在W3School上对该方法的描述：  </p>
-<ul>
-<li>如果该方法没有规定参数，或者参数是 false，它就会用 HTTP 头 If-Modified-Since 来检测服务器上的文档是否已改变。</li>
-<li>如果文档已改变，reload() 会再次下载该文档。</li>
-<li>如果文档未改变，则该方法将从缓存中装载文档。这与用户单击浏览器的刷新按钮的效果是完全一样的。</li>
-<li>如果把该方法的参数设置为 true，那么无论文档的最后修改日期是什么，它都会绕过缓存，从服务器上重新下载该文档。这与用户在单击浏览器的刷新按钮时按住 Shift 健的效果是完全一样。</li>
-</ul>
-</blockquote>
-<p>效果：<code>在 IE中使用该方法，会重新从服务器获取新的页面，不会加载缓存。</code></p>
-<p><strong>4. 替换缓存</strong><br>虽然这个方法可以实现重新从服务器上，获取新的页面，但是它只能获取当前窗口的。当一个 iframe 中有两个或两个以上的可以相互跳转的页面，你同时要重新去加载这些页面。这时 reload 方法，就不是很适用了(因为 reload 方法没法同时从服务器上获取多个页面)。所以在 IE 中，可以使用<code>ajax</code>去 GET 这些页面，来替换更新本地的缓存，在刷新 iframe。下面的方法就是用 ajax 去替换本地的缓存的方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">    type: <span class="string">"GET"</span>,</div><div class="line">    url: url,</div><div class="line">    dataType: <span class="string">"text"</span>,</div><div class="line">    beforeSend: <span class="function"><span class="keyword">function</span> (<span class="params">xmlHttp</span>) </span>&#123;</div><div class="line">        xmlHttp.setRequestHeader(<span class="string">"If-Modified-Since"</span>, <span class="string">"0"</span>);</div><div class="line">        xmlHttp.setRequestHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-cache"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;).done(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"replace cache ok"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<blockquote>
-<ul>
-<li>If-Modified-Since控制缓存页面时间，在发送HTTP请求时，把浏览器端缓存页面的最后修改时间一起发到服务器去，服务器会把这个时间与服务器上实际文件的最后修改时间进行比较。</li>
-<li>Cache-Control 控制是否要进行缓存页面。</li>
-</ul>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近“致力于”调 IE9  、IE10 、 firefox 、 chrome 浏览器对 iframe刷新。 发现在IE浏览器中，有些刷新 iframe 的方法会加载缓存。以下就对一些方法在 IE9 、IE10(以下简称IE)的产生效果介绍一下：&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="iframe" scheme="http://aikin.github.io/tags/iframe/"/>
-    
-      <category term="ie" scheme="http://aikin.github.io/tags/ie/"/>
     
   </entry>
   
