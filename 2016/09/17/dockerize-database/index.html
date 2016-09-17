@@ -1,0 +1,675 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+  <meta name="google-site-verification" content="sXwupEqUXeSBb8k_Geoi-m4kCgGFfthSCmW0PKEuQrE" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="dockerize,mysql,docker mysql," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aikin'blog" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: 'UA-53634746-1'
+    },
+    sidebar: 'hide'
+  };
+</script>
+
+  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script>
+
+
+
+
+
+  <title> 容器化开发环境 - 配置 MySQL 数据库 </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">aikin'blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-brief">
+          <a href="/brief-thought">
+            <i class="menu-item-icon icon-brief"></i> <br />
+            brief
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            tags
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              容器化开发环境 - 配置 MySQL 数据库
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Sep 17 2016
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/09/17/dockerize-database/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/17/dockerize-database/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>　在<a href="http://aikin.me/2016/07/20/dockerize-dev-env/" target="_blank" rel="external">容器化开发环境</a>中介绍了如何容器化本地的开发环境。对于一个<code>Web</code>应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何<code>Setup</code>一个容器中的数据库。例子将会使用的技术栈：</p>
+<ul>
+<li><a href="https://www.mysql.com/" target="_blank" rel="external">MySQL</a></li>
+<li><a href="https://flywaydb.org/" target="_blank" rel="external">Flyway</a></li>
+<li>…</li>
+</ul>
+<a id="more"></a>
+<h3 id="Setup-Codebase"><a href="#Setup-Codebase" class="headerlink" title="Setup Codebase"></a>Setup Codebase</h3><ul>
+<li>clone <a href="https://github.com/aikin/hello-dockerize.git" target="_blank" rel="external">hello-dockerize</a> repo<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/aikin/hello-dockerize.git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Install-MySQL-On-Docker-Image"><a href="#Install-MySQL-On-Docker-Image" class="headerlink" title="Install MySQL On Docker Image"></a>Install MySQL On Docker Image</h3><ul>
+<li>在<code>dockerize</code>目录下新建文件<a href="https://github.com/aikin/hello-dockerize/blob/master/dockerize/docker-entrypoint.sh" target="_blank" rel="external">docker-entrypoint.sh</a>，用于控制<code>MySQL</code>数据库的启动。</li>
+<li><p>修改<a href="https://github.com/aikin/hello-dockerize/blob/master/dockerize/Dockerfile" target="_blank" rel="external">Dockerfile</a>，添加安装<code>MySQL</code>的配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># === Install Mysql ===</span></div><div class="line">RUN groupadd -r mysql &amp;&amp; useradd -r -g mysql mysql</div><div class="line"></div><div class="line">RUN mkdir /docker-entrypoint-initdb.d</div><div class="line"></div><div class="line">ENV MYSQL_MAJOR 5.7</div><div class="line">ENV MYSQL_VERSION 5.7.11-1ubuntu14.04</div><div class="line"></div><div class="line"><span class="comment"># gpg: key 5072E1F5: public key "MySQL Release Engineering &lt;mysql-build@oss.oracle.com&gt;" imported</span></div><div class="line">RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5</div><div class="line"></div><div class="line">RUN <span class="built_in">echo</span> <span class="string">"deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-<span class="variable">$&#123;MYSQL_MAJOR&#125;</span>"</span> &gt; /etc/apt/sources.list.d/mysql.list</div><div class="line"></div><div class="line"><span class="comment"># the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)</span></div><div class="line"><span class="comment"># also, we set debconf keys to make APT a little quieter</span></div><div class="line">RUN &#123; \</div><div class="line">		<span class="built_in">echo</span> mysql-community-server mysql-community-server/data-dir select <span class="string">''</span>; \</div><div class="line">		<span class="built_in">echo</span> mysql-community-server mysql-community-server/root-pass password <span class="string">''</span>; \</div><div class="line">		<span class="built_in">echo</span> mysql-community-server mysql-community-server/re-root-pass password <span class="string">''</span>; \</div><div class="line">		<span class="built_in">echo</span> mysql-community-server mysql-community-server/remove-test-db select <span class="literal">false</span>; \</div><div class="line">	&#125; | debconf-set-selections</div><div class="line"></div><div class="line">RUN apt-get update</div><div class="line">RUN apt-get install -y mysql-server=<span class="string">"<span class="variable">$&#123;MYSQL_VERSION&#125;</span>"</span></div><div class="line">RUN rm -rf /var/lib/apt/lists/*</div><div class="line">RUN rm -rf /var/lib/mysql &amp;&amp; mkdir -p /var/lib/mysql</div><div class="line"></div><div class="line"><span class="comment"># comment out a few problematic configuration values</span></div><div class="line"><span class="comment"># don't reverse lookup hostnames, they are usually another container</span></div><div class="line">RUN sed -Ei <span class="string">'s/^(bind-address|log)/#&amp;/'</span> /etc/mysql/my.cnf \</div><div class="line">	&amp;&amp; <span class="built_in">echo</span> <span class="string">'skip-host-cache\nskip-name-resolve'</span> | awk <span class="string">'&#123; print &#125; $1 == "[mysqld]" &amp;&amp; c == 0 &#123; c = 1; system("cat") &#125;'</span> /etc/mysql/my.cnf &gt; /tmp/my.cnf \</div><div class="line">	&amp;&amp; mv /tmp/my.cnf /etc/mysql/my.cnf</div><div class="line"></div><div class="line">VOLUME /var/lib/mysql</div><div class="line"></div><div class="line">COPY docker-entrypoint.sh /usr/<span class="built_in">local</span>/bin/</div><div class="line">RUN chmod +x /usr/<span class="built_in">local</span>/bin/docker-entrypoint.sh</div><div class="line">RUN ln <span class="_">-s</span> usr/<span class="built_in">local</span>/bin/docker-entrypoint.sh /entrypoint.sh <span class="comment"># backwards compat</span></div><div class="line">ENTRYPOINT [<span class="string">"docker-entrypoint.sh"</span>]</div><div class="line"></div><div class="line">EXPOSE 3306</div><div class="line">CMD [<span class="string">"mysqld"</span>]</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建文件<a href="https://github.com/aikin/hello-dockerize/blob/master/dockerize/dev.env" target="_blank" rel="external">dev.env</a>，用于配置数据库账号和密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">MYSQL_USER=mysql</div><div class="line">MYSQL_PASSWORD=mysql</div><div class="line">MYSQL_DATABASE=hello_dockerize</div><div class="line">MYSQL_ROOT_PASSWORD=12345678</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/aikin/hello-dockerize/blob/master/docker-compose.yml" target="_blank" rel="external">docker-compose.yml</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">web:</div><div class="line">  build: ./dockerize</div><div class="line">  env_file: ./dockerize/dev.env</div><div class="line">  environment:</div><div class="line">    - LANG=C.UTF-8</div><div class="line">    - TERM=xterm</div><div class="line">    - DEBUG=true</div><div class="line">  ports:</div><div class="line">    - &quot;8080:8080&quot;</div><div class="line">    - &quot;3306:3306&quot;</div><div class="line">    - &quot;5005:5005&quot;</div><div class="line">  volumes:</div><div class="line">    - .:/hello-dockerize</div><div class="line">    - /var/lib/mysql:/var/lib/mysql</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker-compose run --service-ports web</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Use-Database-Migrations-Flyway"><a href="#Use-Database-Migrations-Flyway" class="headerlink" title="Use Database Migrations Flyway"></a>Use Database Migrations Flyway</h3><ul>
+<li><p>新建文件<a href="https://github.com/aikin/hello-dockerize/blob/master/db.mysql.gradle" target="_blank" rel="external">db.mysql.gradle</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">flyway &#123;</div><div class="line">    driver = &apos;com.mysql.jdbc.Driver&apos;</div><div class="line">    url = &quot;jdbc:mysql://dockerhost:3306/hello_dockerize&quot;</div><div class="line">    user = &apos;mysql&apos;</div><div class="line">    password = &apos;mysql&apos;</div><div class="line">    table = &apos;hello_dockerize_schema_version&apos;</div><div class="line">    initOnMigrate = true</div><div class="line">    locations = [&quot;filesystem:$&#123;projectDir&#125;/src/main/resources/db/migration/mysql&quot;]</div><div class="line">    sqlMigrationPrefix = &apos;MySQL-&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile &apos;mysql:mysql-connector-java:5.1.34&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/aikin/hello-dockerize/blob/master/build.gradle" target="_blank" rel="external">build.gradle</a>文件，添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url &quot;http://repo.spring.io/snapshot&quot; &#125;</div><div class="line">        maven &#123; url &quot;http://repo.spring.io/milestone&quot; &#125;</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath(&quot;org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE&quot;)</div><div class="line">        classpath &quot;org.flywaydb:flyway-gradle-plugin:3.0&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">apply plugin: &apos;flyway&apos;</div><div class="line">apply from: &quot;db.mysql.gradle&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建目录 <code>src/main/resources/db/migration/mysql</code>，添加 migration sql 脚本<code>MySQL-1_1__create_user.sql</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">User</span> (</div><div class="line">	<span class="keyword">ID</span>          <span class="built_in">BIGINT</span> PRIMARY <span class="keyword">KEY</span>   AUTO_INCREMENT,</div><div class="line">	FIRST_NAME  <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">	LAST_NAME   <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span> = utf8;</div><div class="line"></div><div class="line"><span class="keyword">insert</span> <span class="keyword">into</span> <span class="keyword">User</span> (FIRST_NAME, LAST_NAME) <span class="keyword">values</span> (<span class="string">'Laijin'</span>, <span class="string">'Lu'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行 migrate 命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./gradlew flywayClean flywayInit flywayMigrate</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Check-Migrate-Result-On-Intellij-IDEA"><a href="#Check-Migrate-Result-On-Intellij-IDEA" class="headerlink" title="Check Migrate Result On Intellij IDEA"></a>Check Migrate Result On Intellij IDEA</h3><ul>
+<li><p>安装 Intellij IDEA plugin <code>Database Navigator</code>，配置<code>connections</code>：</p>
+<blockquote>
+<p><img src="./database-connections.png" alt="connections"></p>
+</blockquote>
+</li>
+<li><p>查看<code>User</code>表数据</p>
+<blockquote>
+<p><img src="./user-table.png" alt="user table"><br><img src="./user-data.png" alt="user data"></p>
+</blockquote>
+</li>
+</ul>
+<p>　<strong><em> 结束了吗？并没有，未来将带来，如何从应用和数据库分离成两个独立的容器。 </em></strong></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dockerize/"> #dockerize </a>
+          
+            <a href="/tags/mysql/"> #mysql </a>
+          
+            <a href="/tags/docker-mysql/"> #docker mysql </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/11/docker/">Docker 的操作系统虚拟化</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/17/dockerize-database/"
+     data-title="容器化开发环境 - 配置 MySQL 数据库"
+     data-content=""
+     data-url="http://aikin.github.io/2016/09/17/dockerize-database/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+          <div class="ds-thread" data-thread-key="2016/09/17/dockerize-database/"
+               data-title="容器化开发环境 - 配置 MySQL 数据库" data-url="http://aikin.github.io/2016/09/17/dockerize-database/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/avatar.png" alt="aikin" />
+          <p class="site-author-name">aikin</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/uneffacement" target="_blank">Weibo</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/aikin" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/2854005/aikin" target="_blank">Stackoverflow</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://segmentfault.com/u/aikin" target="_blank">Segmentfault</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-Codebase"><span class="nav-number">1.</span> <span class="nav-text">Setup Codebase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-MySQL-On-Docker-Image"><span class="nav-number">2.</span> <span class="nav-text">Install MySQL On Docker Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Database-Migrations-Flyway"><span class="nav-number">3.</span> <span class="nav-text">Use Database Migrations Flyway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-Migrate-Result-On-Intellij-IDEA"><span class="nav-number">4.</span> <span class="nav-text">Check Migrate Result On Intellij IDEA</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">aikin</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"aikin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+
+  <!-- lazyload -->
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+      <script type="text/javascript">
+        jQuery(function() {
+            jQuery("#posts img").lazyload({
+              placeholder:"http://www.arao.me/loading.gif",
+                effect:"fadeIn"
+              });
+            });
+    </script>
+</body>
+</html>
