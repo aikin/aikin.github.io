@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2016-09-17T14:11:59.000Z</updated>
+  <updated>2016-09-24T17:35:02.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -16,13 +16,74 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>容器化开发环境 - 应用和数据库隔离</title>
+    <link href="http://aikin.github.io/2016/09/24/dockerize-db-isolation/"/>
+    <id>http://aikin.github.io/2016/09/24/dockerize-db-isolation/</id>
+    <published>2016-09-24T12:50:46.000Z</published>
+    <updated>2016-09-24T17:35:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　上一篇<a href="http://aikin.github.io/2016/09/17/dockerize-database/">容器化开发环境 - 数据库连接和迁移</a>分享了关于如何给容器中的应用创建数据库连接，接下来将分享一下如何将数据库从应用容器中分离出来。<br>　　为什么要进行分离？当应用和数据库在同一个容器中运行时，也就意味着，应用和数据库的生命周期捆绑在了一起，应用和数据库的运行就会出现相互干扰现象，应用的异常将有可能导致容器的停止，同时也将导致数据库的关闭。更主要的原因是，很多时候需要多个容器中的应用连接一个数据库，为了保证容器之间的运行相互独立，相互不影响，就有必要将数据库隔离在独立的容器中运行，让数据库和容器独处二人世界，同时保证数据库的生命周期不在受其它应用影响。</p>
+<a id="more"></a>
+<h3 id="Setup-Codebase"><a href="#Setup-Codebase" class="headerlink" title="Setup Codebase"></a>Setup Codebase</h3><ul>
+<li>clone <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external"><code>hello-dockerie</code></a> repo<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/aikin/hello-dockerize.git</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Separate-MySQL-Dockerfile"><a href="#Separate-MySQL-Dockerfile" class="headerlink" title="Separate MySQL Dockerfile"></a>Separate MySQL Dockerfile</h3><ul>
+<li>在<code>dockerize</code>目录下创建<code>mysql/Dockerfle</code></li>
+<li><p>修改<a href="https://github.com/aikin/hello-dockerize/blob/master/dockerize/mysql/Dockerfile" target="_blank" rel="external"><code>mysql/Dockerfile</code></a>，配置安装<code>MySQL</code>脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">FROM ubuntu:14.04</div><div class="line"></div><div class="line">RUN apt-get update</div><div class="line"></div><div class="line"># === Install Mysql ===</div><div class="line"></div><div class="line">RUN groupadd -r mysql &amp;&amp; useradd -r -g mysql mysql</div><div class="line"></div><div class="line">RUN mkdir /docker-entrypoint-initdb.d</div><div class="line"></div><div class="line">ENV MYSQL_MAJOR 5.7</div><div class="line">ENV MYSQL_VERSION 5.7.11-1ubuntu14.04</div><div class="line"></div><div class="line"># gpg: key 5072E1F5: public key &quot;MySQL Release Engineering &lt;mysql-build@oss.oracle.com&gt;&quot; imported</div><div class="line">RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5</div><div class="line"></div><div class="line">RUN echo &quot;deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-$&#123;MYSQL_MAJOR&#125;&quot; &gt; /etc/apt/sources.list.d/mysql.list</div><div class="line"></div><div class="line"># the &quot;/var/lib/mysql&quot; stuff here is because the mysql-server postinst doesn&apos;t have an explicit way to disable the mysql_install_db codepath besides having a database already &quot;configured&quot; (ie, stuff in /var/lib/mysql/mysql)</div><div class="line"># also, we set debconf keys to make APT a little quieter</div><div class="line">RUN &#123; \</div><div class="line">		echo mysql-community-server mysql-community-server/data-dir select &apos;&apos;; \</div><div class="line">		echo mysql-community-server mysql-community-server/root-pass password &apos;&apos;; \</div><div class="line">		echo mysql-community-server mysql-community-server/re-root-pass password &apos;&apos;; \</div><div class="line">		echo mysql-community-server mysql-community-server/remove-test-db select false; \</div><div class="line">	&#125; | debconf-set-selections</div><div class="line"></div><div class="line">RUN apt-get update &amp;&amp; apt-get install -y mysql-server=&quot;$&#123;MYSQL_VERSION&#125;&quot;</div><div class="line">RUN rm -rf /var/lib/apt/lists/*</div><div class="line">RUN rm -rf /var/lib/mysql &amp;&amp; mkdir -p /var/lib/mysql</div><div class="line"></div><div class="line"># comment out a few problematic configuration values</div><div class="line"># don&apos;t reverse lookup hostnames, they are usually another container</div><div class="line">RUN sed -Ei &apos;s/^(bind-address|log)/#&amp;/&apos; /etc/mysql/my.cnf \</div><div class="line">	&amp;&amp; echo &apos;skip-host-cache\nskip-name-resolve&apos; | awk &apos;&#123; print &#125; $1 == &quot;[mysqld]&quot; &amp;&amp; c == 0 &#123; c = 1; system(&quot;cat&quot;) &#125;&apos; /etc/mysql/my.cnf &gt; /tmp/my.cnf \</div><div class="line">	&amp;&amp; mv /tmp/my.cnf /etc/mysql/my.cnf</div><div class="line"></div><div class="line">VOLUME /var/lib/mysql</div><div class="line"></div><div class="line">COPY docker-entrypoint.sh /usr/local/bin/</div><div class="line">RUN chmod +x /usr/local/bin/docker-entrypoint.sh</div><div class="line">RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat</div><div class="line">ENTRYPOINT [&quot;docker-entrypoint.sh&quot;]</div><div class="line"></div><div class="line">EXPOSE 3306</div><div class="line">CMD [&quot;mysqld&quot;]</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改<a href="https://github.com/aikin/hello-dockerize/blob/master/dockerize/Dockerfile" target="_blank" rel="external">dockerize/Dockerfile</a>，移除安装<code>MySQL</code>的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">FROM ubuntu:14.04</div><div class="line"></div><div class="line">RUN apt-get update</div><div class="line"></div><div class="line"></div><div class="line">ENV VERSION 8</div><div class="line">ENV UPDATE 66</div><div class="line">ENV BUILD 17</div><div class="line"></div><div class="line">ENV JAVA_HOME /usr/lib/jvm/java-$&#123;VERSION&#125;-oracle</div><div class="line">ENV JRE_HOME $&#123;JAVA_HOME&#125;/jre</div><div class="line"></div><div class="line"></div><div class="line">RUN apt-get install ca-certificates curl \</div><div class="line">        gcc libc6-dev libssl-dev make \</div><div class="line">        -y --no-install-recommends</div><div class="line"></div><div class="line">RUN	curl --silent --location --retry 3 --cacert /etc/ssl/certs/GeoTrust_Global_CA.pem \</div><div class="line">	--header &quot;Cookie: oraclelicense=accept-securebackup-cookie;&quot; \</div><div class="line">	http://download.oracle.com/otn-pub/java/jdk/&quot;$&#123;VERSION&#125;&quot;u&quot;$&#123;UPDATE&#125;&quot;-b&quot;$&#123;BUILD&#125;&quot;/server-jre-&quot;$&#123;VERSION&#125;&quot;u&quot;$&#123;UPDATE&#125;&quot;-linux-x64.tar.gz \</div><div class="line">	| tar xz -C /tmp</div><div class="line"></div><div class="line">RUN	mkdir -p /usr/lib/jvm &amp;&amp; mv /tmp/jdk1.$&#123;VERSION&#125;.0_$&#123;UPDATE&#125; &quot;$&#123;JAVA_HOME&#125;&quot;</div><div class="line"></div><div class="line">RUN apt-get install -y openssl</div><div class="line"></div><div class="line">RUN apt-get remove --purge --auto-remove -y \</div><div class="line">        gcc \</div><div class="line">        libc6-dev \</div><div class="line">        libssl-dev \</div><div class="line">        make</div><div class="line"></div><div class="line">RUN	apt-get autoclean &amp;&amp; apt-get --purge -y autoremove</div><div class="line"></div><div class="line">RUN	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*</div><div class="line"></div><div class="line">RUN update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;$&#123;JRE_HOME&#125;/bin/java&quot; 1 &amp;&amp; \</div><div class="line">	update-alternatives --install &quot;/usr/bin/javac&quot; &quot;javac&quot; &quot;$&#123;JAVA_HOME&#125;/bin/javac&quot; 1 &amp;&amp; \</div><div class="line">	update-alternatives --set java &quot;$&#123;JRE_HOME&#125;/bin/java&quot; &amp;&amp; \</div><div class="line">	update-alternatives --set javac &quot;$&#123;JAVA_HOME&#125;/bin/javac&quot;</div><div class="line"></div><div class="line">WORKDIR /hello-dockerize</div><div class="line"></div><div class="line">EXPOSE 8080</div><div class="line">EXPOSE 5005</div><div class="line">CMD [&quot;bash&quot;]</div></pre></td></tr></table></figure>
+</li>
+<li><p>将<code>dockerize/docker-entrypoint.sh</code>移动到<code>dockerize/mysql</code>目录下</p>
+</li>
+</ul>
+<h3 id="Startup"><a href="#Startup" class="headerlink" title="Startup"></a>Startup</h3><ul>
+<li><p>修改<a href="https://github.com/aikin/hello-dockerize/blob/master/docker-compose.yml" target="_blank" rel="external"><code>docker-compose.yml</code></a>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">web:</div><div class="line">  build: ./dockerize</div><div class="line">  environment:</div><div class="line">    - LANG=C.UTF-8</div><div class="line">    - TERM=xterm</div><div class="line">    - DEBUG=true</div><div class="line">  links:</div><div class="line">      - mysql:mysql</div><div class="line">  ports:</div><div class="line">    - &quot;8080:8080&quot;</div><div class="line">    - &quot;5005:5005&quot;</div><div class="line">  volumes:</div><div class="line">    - .:/hello-dockerize</div><div class="line"></div><div class="line">mysql:</div><div class="line">  build: ./dockerize/mysql</div><div class="line">  env_file: ./dockerize/dev.env</div><div class="line">  ports:</div><div class="line">    - &quot;3306:3306&quot;</div><div class="line">  volumes:</div><div class="line">    - /var/lib/mysql:/var/lib/mysql</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker-compose up</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ docker-compse ps</div><div class="line"></div><div class="line"><span class="comment">######</span></div><div class="line">Name                       Command             State                       Ports</div><div class="line">---------------------------------------------------------------------------------------------------------------</div><div class="line">hellodockerize_mysql_1     docker-entrypoint.sh mysqld   Up      0.0.0.0:3306-&gt;3306/tcp</div><div class="line">hellodockerize_web_run_1   bash                          Up      0.0.0.0:5005-&gt;5005/tcp, 0.0.0.0:8080-&gt;8080/tcp</div><div class="line"><span class="comment">######</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>执行 migrate 命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@6485a7a48988:/hello-dockerize# ./gradlew flywayClean flywayInit flywayMigrate</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Check-Migrate-Result-On-Intellij-IDEA"><a href="#Check-Migrate-Result-On-Intellij-IDEA" class="headerlink" title="Check Migrate Result On Intellij IDEA"></a>Check Migrate Result On Intellij IDEA</h3><ul>
+<li>查看 User 表<blockquote>
+<p><img src="./user.png" alt="user"></p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　上一篇&lt;a href=&quot;http://aikin.github.io/2016/09/17/dockerize-database/&quot;&gt;容器化开发环境 - 数据库连接和迁移&lt;/a&gt;分享了关于如何给容器中的应用创建数据库连接，接下来将分享一下如何将数据库从应用容器中分离出来。&lt;br&gt;　　为什么要进行分离？当应用和数据库在同一个容器中运行时，也就意味着，应用和数据库的生命周期捆绑在了一起，应用和数据库的运行就会出现相互干扰现象，应用的异常将有可能导致容器的停止，同时也将导致数据库的关闭。更主要的原因是，很多时候需要多个容器中的应用连接一个数据库，为了保证容器之间的运行相互独立，相互不影响，就有必要将数据库隔离在独立的容器中运行，让数据库和容器独处二人世界，同时保证数据库的生命周期不在受其它应用影响。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
+    
+      <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
+    
+      <category term="db" scheme="http://aikin.github.io/tags/db/"/>
+    
+  </entry>
+  
+  <entry>
     <title>容器化开发环境 - 数据库连接和迁移</title>
     <link href="http://aikin.github.io/2016/09/17/dockerize-database/"/>
     <id>http://aikin.github.io/2016/09/17/dockerize-database/</id>
     <published>2016-09-17T08:50:29.000Z</published>
-    <updated>2016-09-17T14:11:59.000Z</updated>
+    <updated>2016-09-24T12:56:02.000Z</updated>
     
-    <content type="html"><![CDATA[<p>　在<a href="http://aikin.me/2016/07/20/dockerize-dev-env/" target="_blank" rel="external">容器化开发环境</a>中介绍了如何容器化本地的开发环境。对于一个<code>Web</code>应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何<code>Setup</code>一个容器中的数据库。例子将会使用的技术栈：</p>
+    <content type="html"><![CDATA[<p>　在<a href="http://aikin.me/2016/07/20/dockerize-dev-env/" target="_blank" rel="external">容器化开发环境</a>中分享了如何容器化本地的开发环境。对于一个<code>Web</code>应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何<code>Setup</code>一个容器中的数据库。例子将会使用的技术栈：</p>
 <ul>
 <li><a href="https://www.mysql.com/" target="_blank" rel="external">MySQL</a></li>
 <li><a href="https://flywaydb.org/" target="_blank" rel="external">Flyway</a></li>
@@ -74,12 +135,12 @@
 </blockquote>
 </li>
 </ul>
-<p>　<strong><em> 结束了吗？并没有，未来将带来，如何从应用和数据库分离成两个独立的容器。 </em></strong></p>
+<p>　<strong><em> 结束了吗？并没有，如何将应用和数据库分离成两个独立的容器。 </em></strong></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;　在&lt;a href=&quot;http://aikin.me/2016/07/20/dockerize-dev-env/&quot;&gt;容器化开发环境&lt;/a&gt;中介绍了如何容器化本地的开发环境。对于一个&lt;code&gt;Web&lt;/code&gt;应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何&lt;code&gt;Setup&lt;/code&gt;一个容器中的数据库。例子将会使用的技术栈：&lt;/p&gt;
+      &lt;p&gt;　在&lt;a href=&quot;http://aikin.me/2016/07/20/dockerize-dev-env/&quot;&gt;容器化开发环境&lt;/a&gt;中分享了如何容器化本地的开发环境。对于一个&lt;code&gt;Web&lt;/code&gt;应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何&lt;code&gt;Setup&lt;/code&gt;一个容器中的数据库。例子将会使用的技术栈：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.mysql.com/&quot;&gt;MySQL&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://flywaydb.org/&quot;&gt;Flyway&lt;/a&gt;&lt;/li&gt;
@@ -138,15 +199,14 @@
     <link href="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/"/>
     <id>http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/</id>
     <published>2016-08-28T15:36:46.000Z</published>
-    <updated>2016-09-17T13:44:01.000Z</updated>
+    <updated>2016-09-17T14:42:35.000Z</updated>
     
     <content type="html"><![CDATA[<p>　　上一篇<a href="http://aikin.me/2016/07/20/dockerize-dev-env/#more" target="_blank" rel="external">容器化开发环境</a>已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过<code>断点的方式</code>来调试程序或定位<code>BUG</code>，那么如何断点调试运行在容器中的应用呢？？？<br>　　容器就像一个虚拟机，就像一个远程的服务器，要断点调试容器中的应用，就像要断点调试虚拟机和远程的服务器上的应用一样。如何配置一个可以远程断点调试的应用，每个语言，每个框架都有不同的方式，接下来介绍的例子使用的技术栈如下：</p>
 <a id="more"></a>
 <ul>
-<li>Java8</li>
-<li>spring-boot</li>
-<li>gradle</li>
-<li>IntelliJ IDEA</li>
+<li><a href="http://projects.spring.io/spring-boot/" target="_blank" rel="external">Spring Boot</a></li>
+<li><a href="https://gradle.org/" target="_blank" rel="external">Gradle</a></li>
+<li><a href="https://www.jetbrains.com/idea/" target="_blank" rel="external">IntelliJ IDEA</a></li>
 </ul>
 <h4 id="接下来会基于上一篇博客中的DEMO-hello-dockerize-进行扩展。"><a href="#接下来会基于上一篇博客中的DEMO-hello-dockerize-进行扩展。" class="headerlink" title="接下来会基于上一篇博客中的DEMO hello-dockerize 进行扩展。"></a>接下来会基于上一篇博客中的<code>DEMO</code> <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">hello-dockerize</a> 进行扩展。</h4><hr>
 <ul>
@@ -216,7 +276,7 @@
     <link href="http://aikin.github.io/2016/07/20/dockerize-dev-env/"/>
     <id>http://aikin.github.io/2016/07/20/dockerize-dev-env/</id>
     <published>2016-07-19T18:12:44.000Z</published>
-    <updated>2016-09-03T09:32:56.000Z</updated>
+    <updated>2016-09-17T15:04:30.000Z</updated>
     
     <content type="html"><![CDATA[<p>　　有没有过项目之间各种<code>Java</code>版本开发环境切换的场景；有没有过<code>github</code>上<code>clone</code>回来的代码库，由于各种开发环境依赖无法运行的问题；有没有过进入一个新项目时各种配开发环境到深夜的经历…<code>Come On!</code>为什么会这样，一切都是开发环境问题。为了不让别人痛苦，更不想让自己痛苦，请容器化开发环境吧，让我们享受一键部署开发环境的痛快吧。</p>
 <p>　　用什么容器化呢？当然是<code>Docker</code>啦，轻量级又好用，又流行，最关键点是本人仅<code>Docker</code>比较熟悉，所以就拿它来搞起啦。</p>
@@ -226,11 +286,13 @@
 <ul>
 <li>docker-machine</li>
 <li>docker-compose</li>
+<li>…</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(dockerize) Unable to get the latest Boot2Docker ISO release version:  Error getting a version tag from the Github API response.</div><div class="line">(dockerize) You may be getting rate limited by Github.</div><div class="line"></div><div class="line">// 如果在安装过程遇到上述类似的问题，可以尝试方式解决：</div><div class="line"></div><div class="line">通过浏览器下载 boot2docker 镜像 https://github.com/boot2docker/boot2docker/releases/download/v1.10.3/boot2docker.iso</div><div class="line">将镜像移动到 ~/.docker/machine/cache/ 目录下</div></pre></td></tr></table></figure>
 <h2 id="Setup-Hello-Dockerize"><a href="#Setup-Hello-Dockerize" class="headerlink" title="Setup Hello Dockerize"></a>Setup Hello Dockerize</h2><hr>
 <p><strong>使用<code>Gradle</code>初始化一个  <a href="http://projects.spring.io/spring-boot/" target="_blank" rel="external">spring-boot</a> DEMO，<a href="https://github.com/aikin/hello-dockerize/blob/master/build.gradle" target="_blank" rel="external">build.gradle</a> 文件如下: </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">group <span class="string">"com.xxx.hello.dockerize"</span></div><div class="line">version <span class="string">"1.0.0"</span></div><div class="line"></div><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://repo.spring.io/snapshot"</span> &#125;</div><div class="line">        maven &#123; url <span class="string">"http://repo.spring.io/milestone"</span> &#125;</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath(<span class="string">"org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: <span class="string">"idea"</span></div><div class="line">apply plugin: <span class="string">"java"</span></div><div class="line">apply plugin: <span class="string">"spring-boot"</span></div><div class="line"></div><div class="line">sourceCompatibility = <span class="number">1.8</span></div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    jcenter()</div><div class="line">    maven &#123; url <span class="string">"http://repo.spring.io/snapshot"</span> &#125;</div><div class="line">    maven &#123; url <span class="string">"http://repo.spring.io/milestone"</span> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ext &#123;</div><div class="line">    junitVersion = <span class="string">"4.11"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line"></div><div class="line">    compile <span class="string">"org.springframework.boot:spring-boot-starter-jersey"</span></div><div class="line"></div><div class="line">    testCompile <span class="string">"junit:junit:$junitVersion"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><strong> 实现<code>hello-dockerize</code>的API，创建以下文件：</strong></p>
+<figure class="highlight java"><figcaption><span>Application.java</span><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/Application.java" target="_blank" rel="external">application</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code snippet</div></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/Application.java" target="_blank" rel="external">Application.java</a><br><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/config/JerseyConfig.java" target="_blank" rel="external">JerseyConfig.java</a><br><a href="https://github.com/aikin/hello-dockerize/tree/master/src/main/java/com/ulaijn/hello/dockerize/resources" target="_blank" rel="external">HelloDockerizeResource.java</a></p>
 </blockquote>
@@ -243,7 +305,7 @@
 <p><strong>为了在容器外可以访问容器内部的服务，可以通过<code>docker-machine ip machine-name</code>获取 machine 的 <code>IP</code>，修改<code>/etc/hosts</code>将<code>machine IP</code>绑定上<code>dockerhost</code>的域名，再通过浏览器访问<code>http://dockerhost:8080/hello-dockerize</code>，页面将会出现<code>Hello Dockerize!</code></strong></p>
 <p>　　</p>
 <blockquote>
-<p>DEMO REPO: <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">HelloDockerize</a>，你只需要 clone 到本地，然后执行 <code>docker-compose run --service-ports web</code>， DEMO 开发环境将会快速构建完毕，秒级的体验，不容错过~~~</p>
+<p>DEMO REPO: <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">hello-dockerize</a>，你只需要 clone 到本地，然后执行 <code>docker-compose run --service-ports web</code>， DEMO 开发环境将会快速构建完毕，秒级的体验，不容错过~~~</p>
 </blockquote>
 <p>　　<br>写在最后： 由于最近打算把写博客的习惯捡回来，才让这篇在草稿箱中沉睡了一年多的<code>Dockerize</code>重返人间，接下继续努力完成<code>如何在容器中使用断点的方式 DEBUG</code>、<code>如何使用 Jenkins 控制测试环境 Docker container 创建和销毁</code>、<code>如何使用 Nginx 控制容器的启动</code>…博文。</p>
 ]]></content>
@@ -1183,7 +1245,7 @@
     <link href="http://aikin.github.io/2014/11/02/mongoose-population/"/>
     <id>http://aikin.github.io/2014/11/02/mongoose-population/</id>
     <published>2014-11-02T13:30:17.000Z</published>
-    <updated>2016-03-17T16:02:10.000Z</updated>
+    <updated>2016-09-17T14:54:21.000Z</updated>
     
     <content type="html"><![CDATA[<p>  <a href="http://mongoosejs.com/index.html" target="_blank" rel="external">Mongoose</a> 是 <a href="http://www.mongodb.org/" target="_blank" rel="external">MongoDB</a> 的 <strong>ODM(Object Document Mapper)</strong>。</p>
 <p><img src="/images/mongoose.png"></p>
@@ -1249,9 +1311,9 @@
 <li><h3 id="填充User的posts字段-1"><a href="#填充User的posts字段-1" class="headerlink" title="填充User的posts字段:"></a><strong>填充<code>User</code>的<code>posts</code>字段:</strong></h3></li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">User.findOne(&#123;name: <span class="string">'aikin'</span>&#125;)</div><div class="line">    .exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>) </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> opts = [&#123;</div><div class="line">            path   : <span class="string">'posts'</span>,</div><div class="line">            select : <span class="string">'title'</span></div><div class="line">        &#125;];</div><div class="line"></div><div class="line">        doc.populate(opts, <span class="function"><span class="keyword">function</span>(<span class="params">err, populatedDoc</span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(populatedDoc.posts[<span class="number">0</span>].title);  <span class="comment">// post-by-aikin</span></div><div class="line">        &#125;);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<script src="//gist.github.com/534fae3c95039b7dee09.js?file=population-try"></script>
 <p><strong><em>博文涉及的完整例子在 <a href="https://gist.github.com/aikin/534fae3c95039b7dee09" target="_blank" rel="external">gist</a> 上。(ps: 貌似 gist 今天被墙了。)</em></strong></p>
-<p>##参考</p>
-<ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://mongoosejs.com/docs/populate.html" target="_blank" rel="external">mongoose-api-docs</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2014/07/database_implementation.html" target="_blank" rel="external">数据库的最简单实现</a></li>
 <li><a href="http://my.oschina.net/calvinchen/blog/137932" target="_blank" rel="external">Mongoose 使用之 Population</a></li>
@@ -1705,70 +1767,6 @@
     
     
       <category term="atom" scheme="http://aikin.github.io/tags/atom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>javascript 中的 this 关键字</title>
-    <link href="http://aikin.github.io/2014/08/05/js-this/"/>
-    <id>http://aikin.github.io/2014/08/05/js-this/</id>
-    <published>2014-08-05T12:14:33.000Z</published>
-    <updated>2016-03-17T14:54:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>　　what is this？ 在 javascript 中，每个 function 都有一个 this 关键字的隐私绑定。当调用某个 function 时，这个 function 的 this 绑定将会被确定。</p>
-<p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line">test();</div><div class="line">　</div><div class="line"><span class="comment">// this is ---Window &#123;top: Window, window: Window, location: Location, external: Object, chrome: Object…&#125;</span></div></pre></td></tr></table></figure></p>
-<p><strong>eg-2：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> test2 = &#123;</div><div class="line">    <span class="built_in">console</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">test2.console();</div><div class="line">　</div><div class="line"><span class="comment">// this is ---Object &#123;console: function&#125;</span></div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<ul>
-<li><p>对于 <strong>eg-1</strong> 代码执行的结果可以看出，调用 <code>test()</code> 后， test函数 this 绑定的对象是 window 对象。因为在定义 test 函数的时候，这个函数会被加在 window 这个全局对象中，其实在执行 <code>test()</code> 的时候，相当于 <code>window.test()</code>，这样可以明显的看出，调用 <code>test()</code> 的对象是 window，也就是 this 绑定的对象是 window 。</p>
-</li>
-<li><p>在 <strong>eg-2</strong> 中，当执行 <code>test2.console()</code> 时，调用 console 方法(函数)的对象为 test2，也就是 console 方法(函数)的 this 的值，就绑定了 test2 对象。</p>
-</li>
-</ul>
-<p>　　上面两个例子，描述的只是在函数体内的 this关键字。让我们来看一下，在全局中使用 this：</p>
-<p><strong>eg-3：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name = <span class="string">'aikin'</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">　</div><div class="line"><span class="comment">// 'aikin'</span></div></pre></td></tr></table></figure></p>
-<ul>
-<li>从 <strong>eg-3</strong>这个例子看来，全局对象中的 this，表示的就是全局对象本身(window)。</li>
-</ul>
-<p>　　通过 <strong>eg-1</strong>，<strong>eg-2</strong>，<strong>eg-3</strong> 可以知道，在不同的执行上下文中，this 的值是不相同的。即，在全局的执行上文中，this 表示的是全局对象本身（window)；在函数执行上文中，this 的值绑定的是调用函数的对象。</p>
-<p><strong><em>接下来做个练习：</em></strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">practice</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'this in practice'</span>, <span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">this</span>.practice();</div><div class="line">　　</div><div class="line"><span class="comment">// 打印的结果会是?</span></div></pre></td></tr></table></figure></p>
-<p>　　在 javascript 中，随着函数的调用方式不同，将会导致函数的执行上下文不同，也就是将会导致函数内部 this 关键字绑定的对象不同。下面探索一下：<strong>构造函数调用</strong>，<strong>方法调用</strong>，<strong>函数调用</strong>。</p>
-<h3 id="a-构造函数调用"><a href="#a-构造函数调用" class="headerlink" title="a. 构造函数调用"></a>a. <strong>构造函数调用</strong></h3><p>　　构造函数和函数其实是一样，如果不使用关键字 new 调用，和其他的普通函数是一样的。</p>
-<p><strong>eg-4:</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>  <span class="title">User</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> me =  <span class="keyword">new</span> User (<span class="string">'aikin'</span>);</div><div class="line"><span class="built_in">console</span>.log(me.name);</div><div class="line">　　</div><div class="line"><span class="comment">//=&gt; 'aikin'</span></div></pre></td></tr></table></figure></p>
-<ul>
-<li>使用 new 操作符来调用 User， 就会将User视为构造函数。 构造函数的调用会将一个全新的对象(也就是 new 出来的对象)作为 this 关键字的绑定对象。</li>
-</ul>
-<h3 id="b-函数调用"><a href="#b-函数调用" class="headerlink" title="b. 函数调用"></a>b. <strong>函数调用</strong></h3><p>　　函数调用，也就是直接调用函数，正如上面 <strong>eg-1</strong> 例子所描述的， 这时 this 绑定的对象是全局对象(window)。</p>
-<h3 id="c-方法调用"><a href="#c-方法调用" class="headerlink" title="c. 方法调用"></a>c. <strong>方法调用</strong></h3><p>　　当函数作为一个对象的属性时，这个函数就称为方法。</p>
-<p><strong>eg-5:</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    name   : <span class="string">"aikin"</span>,</div><div class="line">    helllo : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'hello, '</span> + <span class="keyword">this</span>.name)</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">obj.hello();</div><div class="line">　　</div><div class="line"> <span class="comment">//=&gt; "hello, aikin"</span></div></pre></td></tr></table></figure></p>
-<ul>
-<li>在这个例子(<strong>eg-5</strong>)中，obj 是 hello 方法的调用者，也就是说，hello 方法中的 this 关键字将会绑定 obj 对象。</li>
-</ul>
-<h4 id="所以，"><a href="#所以，" class="headerlink" title="所以，"></a><strong>所以，</strong></h4><ul>
-<li><p>函数调用时，将会将全局对象作为 this 的绑定对象。</p>
-</li>
-<li><p>方法调用时，方法调用者将会成为 this 的绑定对象。</p>
-</li>
-<li><p>构造函数，通过 new 关键字来调用后，将会产生一个新的对象作为其 this 的绑定对象。</p>
-</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>王群锋, <a href="http://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/index.html" target="_blank" rel="external">深入浅出 JavaScript 中的 this</a></li>
-<li>MDN, <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this" target="_blank" rel="external">this</a></li>
-<li>David Herman, 《Effective JavaScript》</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;　　what is this？ 在 javascript 中，每个 function 都有一个 this 关键字的隐私绑定。当调用某个 function 时，这个 function 的 this 绑定将会被确定。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;eg-1：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;test&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;this is ---&#39;&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;test();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;　&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// this is ---Window &amp;#123;top: Window, window: Window, location: Location, external: Object, chrome: Object…&amp;#125;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;eg-2：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; test2 = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;string&quot;&gt;&#39;this is ---&#39;&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;test2.console();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;　&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// this is ---Object &amp;#123;console: function&amp;#125;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
     
   </entry>
   

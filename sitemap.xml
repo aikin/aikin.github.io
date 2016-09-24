@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/2016/09/24/dockerize-db-isolation/</loc>
+    
+    <lastmod>2016-09-24T17:35:02.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2016/09/17/dockerize-database/</loc>
     
-    <lastmod>2016-09-17T14:11:59.000Z</lastmod>
+    <lastmod>2016-09-24T12:56:02.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
+    
+    <lastmod>2016-09-17T15:04:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
+    
+    <lastmod>2016-09-17T14:54:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/</loc>
+    
+    <lastmod>2016-09-17T14:42:35.000Z</lastmod>
     
   </url>
   
@@ -12,20 +40,6 @@
     <loc>http://aikin.github.io/2016/09/11/docker/</loc>
     
     <lastmod>2016-09-17T14:03:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/</loc>
-    
-    <lastmod>2016-09-17T13:44:01.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
-    
-    <lastmod>2016-09-03T09:32:56.000Z</lastmod>
     
   </url>
   
@@ -75,13 +89,6 @@
     <loc>http://aikin.github.io/2014/03/16/ios7-uinavigationcontroller-uiview/</loc>
     
     <lastmod>2016-03-24T08:08:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/11/02/mongoose-population/</loc>
-    
-    <lastmod>2016-03-17T16:02:10.000Z</lastmod>
     
   </url>
   
@@ -142,6 +149,13 @@
   </url>
   
   <url>
+    <loc>http://aikin.github.io/instagram/index.html</loc>
+    
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
@@ -156,21 +170,14 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/instagram/index.html</loc>
-    
-    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
+    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
+    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
@@ -184,13 +191,6 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://aikin.github.io/2014/11/10/prototype-proto/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
@@ -198,7 +198,14 @@
   </url>
   
   <url>
-    <loc>http://aikin.github.io/2014/12/20/ubuntu-auto-startup/</loc>
+    <loc>http://aikin.github.io/2014/09/26/angular-events/</loc>
+    
+    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2015/04/03/linux-file-permission-ower/</loc>
     
     <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     

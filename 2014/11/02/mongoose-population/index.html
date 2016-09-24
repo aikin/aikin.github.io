@@ -252,9 +252,9 @@
 <li><h3 id="填充User的posts字段-1"><a href="#填充User的posts字段-1" class="headerlink" title="填充User的posts字段:"></a><strong>填充<code>User</code>的<code>posts</code>字段:</strong></h3></li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">User.findOne(&#123;name: <span class="string">'aikin'</span>&#125;)</div><div class="line">    .exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>) </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> opts = [&#123;</div><div class="line">            path   : <span class="string">'posts'</span>,</div><div class="line">            select : <span class="string">'title'</span></div><div class="line">        &#125;];</div><div class="line"></div><div class="line">        doc.populate(opts, <span class="function"><span class="keyword">function</span>(<span class="params">err, populatedDoc</span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(populatedDoc.posts[<span class="number">0</span>].title);  <span class="comment">// post-by-aikin</span></div><div class="line">        &#125;);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<script src="//gist.github.com/534fae3c95039b7dee09.js?file=population-try"></script>
 <p><strong><em>博文涉及的完整例子在 <a href="https://gist.github.com/aikin/534fae3c95039b7dee09" target="_blank" rel="external">gist</a> 上。(ps: 貌似 gist 今天被墙了。)</em></strong></p>
-<p>##参考</p>
-<ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="http://mongoosejs.com/docs/populate.html" target="_blank" rel="external">mongoose-api-docs</a></li>
 <li><a href="http://www.ruanyifeng.com/blog/2014/07/database_implementation.html" target="_blank" rel="external">数据库的最简单实现</a></li>
 <li><a href="http://my.oschina.net/calvinchen/blog/137932" target="_blank" rel="external">Mongoose 使用之 Population</a></li>
@@ -371,7 +371,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -385,7 +385,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -438,7 +438,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来分享下-Query-populate-Model-populate-Document-populate的用法"><span class="nav-number">1.</span> <span class="nav-text">接下来分享下:Query#populate Model#populate Document#populate的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Query-populate"><span class="nav-number">2.</span> <span class="nav-text">1. Query#populate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#填充User的posts字段"><span class="nav-number">2.1.</span> <span class="nav-text">填充User的posts字段:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充Post的poster和comments字段"><span class="nav-number">2.2.</span> <span class="nav-text">填充Post的poster和comments字段:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Model-populate"><span class="nav-number">3.</span> <span class="nav-text">2. Model#populate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#填充Post的poster和comments字段以及comments的commenter字段"><span class="nav-number">3.1.</span> <span class="nav-text">填充Post的poster和comments字段以及comments的commenter字段:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Document-populate"><span class="nav-number">4.</span> <span class="nav-text">3. Document#populate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#填充User的posts字段-1"><span class="nav-number">4.1.</span> <span class="nav-text">填充User的posts字段:</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来分享下-Query-populate-Model-populate-Document-populate的用法"><span class="nav-number">1.</span> <span class="nav-text">接下来分享下:Query#populate Model#populate Document#populate的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Query-populate"><span class="nav-number">2.</span> <span class="nav-text">1. Query#populate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#填充User的posts字段"><span class="nav-number">2.1.</span> <span class="nav-text">填充User的posts字段:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充Post的poster和comments字段"><span class="nav-number">2.2.</span> <span class="nav-text">填充Post的poster和comments字段:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Model-populate"><span class="nav-number">3.</span> <span class="nav-text">2. Model#populate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#填充Post的poster和comments字段以及comments的commenter字段"><span class="nav-number">3.1.</span> <span class="nav-text">填充Post的poster和comments字段以及comments的commenter字段:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Document-populate"><span class="nav-number">4.</span> <span class="nav-text">3. Document#populate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#填充User的posts字段-1"><span class="nav-number">4.1.</span> <span class="nav-text">填充User的posts字段:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

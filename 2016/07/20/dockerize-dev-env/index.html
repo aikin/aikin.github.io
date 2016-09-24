@@ -196,11 +196,13 @@
 <ul>
 <li>docker-machine</li>
 <li>docker-compose</li>
+<li>…</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">(dockerize) Unable to get the latest Boot2Docker ISO release version:  Error getting a version tag from the Github API response.</div><div class="line">(dockerize) You may be getting rate limited by Github.</div><div class="line"></div><div class="line">// 如果在安装过程遇到上述类似的问题，可以尝试方式解决：</div><div class="line"></div><div class="line">通过浏览器下载 boot2docker 镜像 https://github.com/boot2docker/boot2docker/releases/download/v1.10.3/boot2docker.iso</div><div class="line">将镜像移动到 ~/.docker/machine/cache/ 目录下</div></pre></td></tr></table></figure>
 <h2 id="Setup-Hello-Dockerize"><a href="#Setup-Hello-Dockerize" class="headerlink" title="Setup Hello Dockerize"></a>Setup Hello Dockerize</h2><hr>
 <p><strong>使用<code>Gradle</code>初始化一个  <a href="http://projects.spring.io/spring-boot/" target="_blank" rel="external">spring-boot</a> DEMO，<a href="https://github.com/aikin/hello-dockerize/blob/master/build.gradle" target="_blank" rel="external">build.gradle</a> 文件如下: </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">group <span class="string">"com.xxx.hello.dockerize"</span></div><div class="line">version <span class="string">"1.0.0"</span></div><div class="line"></div><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        jcenter()</div><div class="line">        maven &#123; url <span class="string">"http://repo.spring.io/snapshot"</span> &#125;</div><div class="line">        maven &#123; url <span class="string">"http://repo.spring.io/milestone"</span> &#125;</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath(<span class="string">"org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: <span class="string">"idea"</span></div><div class="line">apply plugin: <span class="string">"java"</span></div><div class="line">apply plugin: <span class="string">"spring-boot"</span></div><div class="line"></div><div class="line">sourceCompatibility = <span class="number">1.8</span></div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    jcenter()</div><div class="line">    maven &#123; url <span class="string">"http://repo.spring.io/snapshot"</span> &#125;</div><div class="line">    maven &#123; url <span class="string">"http://repo.spring.io/milestone"</span> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ext &#123;</div><div class="line">    junitVersion = <span class="string">"4.11"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line"></div><div class="line">    compile <span class="string">"org.springframework.boot:spring-boot-starter-jersey"</span></div><div class="line"></div><div class="line">    testCompile <span class="string">"junit:junit:$junitVersion"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><strong> 实现<code>hello-dockerize</code>的API，创建以下文件：</strong></p>
+<figure class="highlight java"><figcaption><span>Application.java</span><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/Application.java" target="_blank" rel="external">application</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code snippet</div></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/Application.java" target="_blank" rel="external">Application.java</a><br><a href="https://github.com/aikin/hello-dockerize/blob/master/src/main/java/com/ulaijn/hello/dockerize/config/JerseyConfig.java" target="_blank" rel="external">JerseyConfig.java</a><br><a href="https://github.com/aikin/hello-dockerize/tree/master/src/main/java/com/ulaijn/hello/dockerize/resources" target="_blank" rel="external">HelloDockerizeResource.java</a></p>
 </blockquote>
@@ -213,7 +215,7 @@
 <p><strong>为了在容器外可以访问容器内部的服务，可以通过<code>docker-machine ip machine-name</code>获取 machine 的 <code>IP</code>，修改<code>/etc/hosts</code>将<code>machine IP</code>绑定上<code>dockerhost</code>的域名，再通过浏览器访问<code>http://dockerhost:8080/hello-dockerize</code>，页面将会出现<code>Hello Dockerize!</code></strong></p>
 <p>　　</p>
 <blockquote>
-<p>DEMO REPO: <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">HelloDockerize</a>，你只需要 clone 到本地，然后执行 <code>docker-compose run --service-ports web</code>， DEMO 开发环境将会快速构建完毕，秒级的体验，不容错过~~~</p>
+<p>DEMO REPO: <a href="https://github.com/aikin/hello-dockerize" target="_blank" rel="external">hello-dockerize</a>，你只需要 clone 到本地，然后执行 <code>docker-compose run --service-ports web</code>， DEMO 开发环境将会快速构建完毕，秒级的体验，不容错过~~~</p>
 </blockquote>
 <p>　　<br>写在最后： 由于最近打算把写博客的习惯捡回来，才让这篇在草稿箱中沉睡了一年多的<code>Dockerize</code>重返人间，接下继续努力完成<code>如何在容器中使用断点的方式 DEBUG</code>、<code>如何使用 Jenkins 控制测试环境 Docker container 创建和销毁</code>、<code>如何使用 Nginx 控制容器的启动</code>…博文。</p>
 
@@ -328,7 +330,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -342,7 +344,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
