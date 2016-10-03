@@ -188,8 +188,8 @@
       
 
       
-        <p>　　“生命周期”事件？什么是”生命周期”事件？好吧，我只是想不到标题，于是就想了个“生命周期”名词，个人觉得比较”高大上” (*^__^*)。其实就是网页加载或关闭时触发的事件。</p>
-<p>　　访问一个网页时，可能会触发 window 对象的一些事件(onload, onbeforeunload, onunload, onfocus, onblur等)。我们可以在这些事件触发时，实现一些功能，也可以根据这些事件来捕获用户的一些本地行为等等。<br><a id="more"></a><br>  <strong><em> 下面这些事件只是在 chrome 上实践过。</em></strong></p>
+        <p>“生命周期”事件？什么是”生命周期”事件？好吧，我只是想不到标题，于是就想了个“生命周期”名词，个人觉得比较”高大上” (*^__^*)。其实就是网页加载或关闭时触发的事件。</p>
+<p>访问一个网页时，可能会触发 window 对象的一些事件(onload, onbeforeunload, onunload, onfocus, onblur等)。我们可以在这些事件触发时，实现一些功能，也可以根据这些事件来捕获用户的一些本地行为等等。<br><a id="more"></a><br>  <strong><em> 下面这些事件只是在 chrome 上实践过。</em></strong></p>
 <h2 id="window-onload"><a href="#window-onload" class="headerlink" title=" window.onload: "></a><strong> window.onload: </strong></h2><p>onload 事件，会在页面内容包括图片的所有元素加载完毕后才能触发。而<code>jqery</code>的  $(document).ready() 事件，是DOM结构绘制完毕后就触发。同时 window.onload 不能同时编写多个，如果有多个 window.onload 方法，只会触发其中一个。$(document).ready() 可以同时编写多个，并且都可以得到执行。</p>
 <blockquote>
 <p>支持该事件的 HTML 标签：<br><code>&lt;body&gt;, &lt;frame&gt;, &lt;frameset&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;script&gt;</code></p>

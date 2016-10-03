@@ -188,7 +188,7 @@
       
 
       
-        <p>　<a href="https://www.docker.com/" target="_blank" rel="external">Docker</a> 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？</p>
+        <p><a href="https://www.docker.com/" target="_blank" rel="external">Docker</a> 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？</p>
 <a id="more"></a>
 <blockquote>
 <ul>
@@ -196,7 +196,7 @@
 <li>操作系统级虚拟化: 在传统操作系统中，所有用户的进程本质上是在同一个操作系统的实例中运行，因此内核或应用程序的缺陷可能影响到其它进程也可能受其它进程的影响。它是一种在服务器操作系统中使用的轻量级的虚拟化技术，内核通过创建多个虚拟的操作系统实例（内核和库）来隔离不同的进程，不同实例中的进程完全不了解对方的存在。它并不在物理系统里创建多个虚拟机环境，而是让一个操作系统创建多个彼此独立的应用环境，这些应用环境都访问同一个内核。<br><img src="./os-virtualization.jpg" alt="os-virtualization"></li>
 </ul>
 </blockquote>
-<h3 id="Containers-VS-VMs"><a href="#Containers-VS-VMs" class="headerlink" title="Containers VS VMs"></a><code>Containers</code> VS <code>VMs</code></h3><p>　Docker Container 和 普通的虚拟机 Image 相比, 最大的区别是它并不包含操作系统内核。</p>
+<h3 id="Containers-VS-VMs"><a href="#Containers-VS-VMs" class="headerlink" title="Containers VS VMs"></a><code>Containers</code> VS <code>VMs</code></h3><p>Docker Container 和 普通的虚拟机 Image 相比, 最大的区别是它并不包含操作系统内核。</p>
 <h5 id="传统的虚拟化技术-VM"><a href="#传统的虚拟化技术-VM" class="headerlink" title="传统的虚拟化技术(VM)"></a><strong><em>传统的虚拟化技术(VM)</em></strong></h5><blockquote>
 <p><img style="margin: auto;" src="vm.jpg"><br>传统的虚拟化技术(VM)的 <code>Hypervisor</code> 需要实现对硬件的虚拟化，并且还要搭载自己的操作系统，自然在启动速度和资源利用率以及性能上有比较大的开销。普通虚拟机将整个操作系统运行在虚拟的硬件平台上, 进而提供完整的运行环境供应用程序运行。<br>VM 是一个运行在宿主机之上的完整的操作系统，包含了大量类似硬件驱动、虚拟处理器、网络接口等等并不需要的信息。VM运行自身操作系统会占用较多的CPU、内存、硬盘资源。</p>
 </blockquote>

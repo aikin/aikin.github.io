@@ -188,9 +188,9 @@
       
 
       
-        <p>　　由于 linux 是多用户操作系统，所以基于安全的考虑，需要具备保障个人隐私和系统安全的机制。因此在使用 linux 系统的时候，经常会出现权限的问题(比如: 删除文件、安装软件、运行应用等等)，期初遇到这些问题的时候，大部分都使用<code>sudo</code>或者是<code>sudo chmod 777 file</code>(后面会讲解这个命令)来解决的。虽然这种方式可以解决问题，但是这样是不安全的，特别是在服务器上操作的时候，因为不是所有的文件和文件夹都可以被其它用户操作的，不是所有的用户都有<code>root</code>权限的，不是所有的应用都可以用<code>root</code>用户启动的。那么我们要如何正确的处理这些权限问题呢？那就让我们来学习一下 linux 权限相关的知识。</p>
+        <p>由于 linux 是多用户操作系统，所以基于安全的考虑，需要具备保障个人隐私和系统安全的机制。因此在使用 linux 系统的时候，经常会出现权限的问题(比如: 删除文件、安装软件、运行应用等等)，期初遇到这些问题的时候，大部分都使用<code>sudo</code>或者是<code>sudo chmod 777 file</code>(后面会讲解这个命令)来解决的。虽然这种方式可以解决问题，但是这样是不安全的，特别是在服务器上操作的时候，因为不是所有的文件和文件夹都可以被其它用户操作的，不是所有的用户都有<code>root</code>权限的，不是所有的应用都可以用<code>root</code>用户启动的。那么我们要如何正确的处理这些权限问题呢？那就让我们来学习一下 linux 权限相关的知识。</p>
 <a id="more"></a>
-<h3 id="用户的权限"><a href="#用户的权限" class="headerlink" title="用户的权限"></a>用户的权限</h3><p>　　要确定一个用户对某个文件或文件夹是否具有相应的操作权限，先要明确该用户与文件或文件夹之间的关系。在 linux 系统中，定义了如下三种关系：</p>
+<h3 id="用户的权限"><a href="#用户的权限" class="headerlink" title="用户的权限"></a>用户的权限</h3><p>要确定一个用户对某个文件或文件夹是否具有相应的操作权限，先要明确该用户与文件或文件夹之间的关系。在 linux 系统中，定义了如下三种关系：</p>
 <blockquote>
 <ul>
 <li><strong> 文件或文件夹的所有者(owner) </strong>: 文件或文件夹的拥有者，开始创建文件或文件夹时为创建者。</li>
@@ -198,7 +198,7 @@
 <li><strong> 其他人(other) </strong>: 除了文件或文件夹的所有者和文件或文件夹所属的组的其他成员，剩下的 linux 的用户。</li>
 </ul>
 </blockquote>
-<p>　　因为在 linux 下的文件和文件夹都有<code>读取(r)</code>、<code>写入(w)</code>、<code>执行(x)</code>的操作，所以上面描述的每种关系的用户分别都可以赋予这些操作权限。操作权限介绍:</p>
+<p>因为在 linux 下的文件和文件夹都有<code>读取(r)</code>、<code>写入(w)</code>、<code>执行(x)</code>的操作，所以上面描述的每种关系的用户分别都可以赋予这些操作权限。操作权限介绍:</p>
 <blockquote>
 <table>
 <thead>
@@ -231,7 +231,7 @@
 </tbody>
 </table>
 </blockquote>
-<h3 id="文件或文件夹和用户的三种关系的基础操作权限"><a href="#文件或文件夹和用户的三种关系的基础操作权限" class="headerlink" title="文件或文件夹和用户的三种关系的基础操作权限"></a>文件或文件夹和用户的三种关系的基础操作权限</h3><p>　　在 linux 使用<code>ls -la</code>命令可以查看文件夹内文件的属性，下面是我电脑上某个文件夹下文件的属性:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ ls -la</div><div class="line">drwxr-xr-x 14 root root     4096 Apr  3 18:47 .</div><div class="line">drwxr-xr-x 23 root root     4096 Mar  2 05:48 ..</div><div class="line">drwxr-xr-x  2 root root     4096 Apr  3 07:44 backups</div><div class="line">drwxr-xr-x 17 root root     4096 Jul 22  2014 cache</div><div class="line">drwxr-xr-x  2 root root     4096 Mar  2 04:26 docker-registry</div><div class="line">lrwxrwxrwx  1 root root        9 Feb 25 13:31 lock -&gt; /run/lock</div><div class="line">drwxrwxr-x 15 root syslog   4096 Apr  3 07:44 <span class="built_in">log</span></div><div class="line">-rw-r--r--  1 root root        0 Apr  3 18:47 <span class="built_in">test</span></div></pre></td></tr></table></figure></p>
+<h3 id="文件或文件夹和用户的三种关系的基础操作权限"><a href="#文件或文件夹和用户的三种关系的基础操作权限" class="headerlink" title="文件或文件夹和用户的三种关系的基础操作权限"></a>文件或文件夹和用户的三种关系的基础操作权限</h3><p>在 linux 使用<code>ls -la</code>命令可以查看文件夹内文件的属性，下面是我电脑上某个文件夹下文件的属性:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ ls -la</div><div class="line">drwxr-xr-x 14 root root     4096 Apr  3 18:47 .</div><div class="line">drwxr-xr-x 23 root root     4096 Mar  2 05:48 ..</div><div class="line">drwxr-xr-x  2 root root     4096 Apr  3 07:44 backups</div><div class="line">drwxr-xr-x 17 root root     4096 Jul 22  2014 cache</div><div class="line">drwxr-xr-x  2 root root     4096 Mar  2 04:26 docker-registry</div><div class="line">lrwxrwxrwx  1 root root        9 Feb 25 13:31 lock -&gt; /run/lock</div><div class="line">drwxrwxr-x 15 root syslog   4096 Apr  3 07:44 <span class="built_in">log</span></div><div class="line">-rw-r--r--  1 root root        0 Apr  3 18:47 <span class="built_in">test</span></div></pre></td></tr></table></figure></p>
 <ul>
 <li><p>上面的有九列数据，第一列数据表示和文件或文件夹相应关系用户的操作权限，第二列表示文件夹内文件和文件夹的总数量(包括文件夹本身)，第三列表示文件夹或文件的拥有者，第四列表示文件或文件夹的所属的组，第五列表示文件或文件夹的大小，第六、七、八列表示文件或文件夹最后被修改的时间，第九列文件或文件夹的名字。</p>
 </li>
@@ -243,7 +243,7 @@
 <li><p><code>drwxrwxr-x</code>除出去第一个字母<code>d</code>后的<code>rwxrwxr-x</code>表示的是三种用户关系对文件或文件夹的操作权限。从左到右每三个一组，依次表示所有者权限、组权限、其他用户权限。每组的顺序均为<code>rwx</code>，如果用户有相应的操作权限就用相应的字母表示，如果不具有相应的操作权限就用<code>-</code>表示。比如: <code>rwxrwxr-x</code>表示文件或文件夹的所有者具有<code>rwx</code>(可读，可写，可执行)的操作权限，组用户也具有<code>rwx</code>(可读，可写，可执行)的权限，其他用户具有<code>r-x</code>(可读，可执行，没有可读)的操作权限。</p>
 </li>
 </ul>
-<h3 id="特殊权限SUID、SGID、Sticky"><a href="#特殊权限SUID、SGID、Sticky" class="headerlink" title="特殊权限SUID、SGID、Sticky"></a>特殊权限<code>SUID</code>、<code>SGID</code>、<code>Sticky</code></h3><p>　　在 linux 系统中还有三种与用户身份无关的三个文件权限属性。即<code>SUID、SGID和Sticky</code>。</p>
+<h3 id="特殊权限SUID、SGID、Sticky"><a href="#特殊权限SUID、SGID、Sticky" class="headerlink" title="特殊权限SUID、SGID、Sticky"></a>特殊权限<code>SUID</code>、<code>SGID</code>、<code>Sticky</code></h3><p>在 linux 系统中还有三种与用户身份无关的三个文件权限属性。即<code>SUID、SGID和Sticky</code>。</p>
 <ul>
 <li><p><strong><em> SUID(Set User ID, 4): </em></strong></p>
 <blockquote>
@@ -264,7 +264,7 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="修改文件或文件夹对应用户的操作权限"><a href="#修改文件或文件夹对应用户的操作权限" class="headerlink" title="修改文件或文件夹对应用户的操作权限"></a>修改文件或文件夹对应用户的操作权限</h3><p>　　在 linux 系统中，可以使用<code>chmod</code>命令来修改文件或文件夹对应用户的操作权限，<code>chmod</code>命令也有两种方式修改，一种是使用代表相应操作权限的字母简写表示，另一种是使用代表相应操作权限的数字表示。</p>
+<h3 id="修改文件或文件夹对应用户的操作权限"><a href="#修改文件或文件夹对应用户的操作权限" class="headerlink" title="修改文件或文件夹对应用户的操作权限"></a>修改文件或文件夹对应用户的操作权限</h3><p>在 linux 系统中，可以使用<code>chmod</code>命令来修改文件或文件夹对应用户的操作权限，<code>chmod</code>命令也有两种方式修改，一种是使用代表相应操作权限的字母简写表示，另一种是使用代表相应操作权限的数字表示。</p>
 <ul>
 <li><p><strong><em> 使用简写字母 </em></strong></p>
 <blockquote>
@@ -311,7 +311,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="修改文件或文件夹的拥有者和所属的组"><a href="#修改文件或文件夹的拥有者和所属的组" class="headerlink" title="修改文件或文件夹的拥有者和所属的组"></a>修改文件或文件夹的拥有者和所属的组</h3><p>　　使用<code>chown</code>可以修改文件或文件夹的拥有者和所属的组。</p>
+<h3 id="修改文件或文件夹的拥有者和所属的组"><a href="#修改文件或文件夹的拥有者和所属的组" class="headerlink" title="修改文件或文件夹的拥有者和所属的组"></a>修改文件或文件夹的拥有者和所属的组</h3><p>使用<code>chown</code>可以修改文件或文件夹的拥有者和所属的组。</p>
 <ul>
 <li><p>将文件或文件夹<code>try</code>的拥有者修改成<code>aikin</code>，所属的组修改成<code>adm</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo chown aikin:adm try</div></pre></td></tr></table></figure>
