@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/2014/03/05/rails-user-agent/</loc>
+    
+    <lastmod>2016-10-30T09:01:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2014/07/16/cocos2d-html5-sprite/</loc>
+    
+    <lastmod>2016-10-30T08:51:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
+    
+    <lastmod>2016-10-29T14:48:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2014/12/07/window-life-cycle-events/</loc>
     
     <lastmod>2016-10-03T17:35:56.000Z</lastmod>
@@ -117,13 +138,6 @@
     <loc>http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/</loc>
     
     <lastmod>2016-10-03T17:25:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
-    
-    <lastmod>2016-10-03T17:25:14.000Z</lastmod>
     
   </url>
   
