@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2016-10-03T17:27:51.000Z</updated>
+  <updated>2016-11-13T09:19:07.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL Server 单用户模式到多用户模式</title>
+    <link href="http://aikin.github.io/2016/10/04/locked-sql-user/"/>
+    <id>http://aikin.github.io/2016/10/04/locked-sql-user/</id>
+    <published>2016-10-04T08:39:10.000Z</published>
+    <updated>2016-11-13T09:19:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> yourdatabase;</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</div><div class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</div><div class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</div><div class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>结果并没有发现锁的存在，但是发现数据库设置是单用户模式。将单用户模式修改为多用户模式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> [<span class="keyword">master</span>]</div><div class="line"><span class="keyword">GO</span></div><div class="line"></div><div class="line"><span class="comment">--查询运行的用户</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> master.dbo.sysprocesses</div><div class="line"><span class="keyword">WHERE</span> dbid=db_id(<span class="string">'dbname'</span>)</div><div class="line"></div><div class="line"><span class="comment">--将第一个语句运行后的结果替代 spid</span></div><div class="line"><span class="keyword">Kill</span> spid</div><div class="line"></div><div class="line"><span class="comment">--修改为多用户模式</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> DBNAME <span class="keyword">SET</span> MULTI_USER</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面&lt;code&gt;SQL&lt;/code&gt;语句查询相关被锁的表：&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;USE&lt;/span&gt; yourdatabase;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;GO&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;SELECT&lt;/span&gt; request_session_id &lt;span class=&quot;keyword&quot;&gt;AS&lt;/span&gt; spid,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;       OBJECT_NAME(resource_associated_entity_id) &lt;span class=&quot;keyword&quot;&gt;AS&lt;/span&gt; tableName&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;FROM&lt;/span&gt; sys.dm_tran_locks&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;WHERE&lt;/span&gt; resource_type=&lt;span class=&quot;string&quot;&gt;&#39;OBJECT&#39;&lt;/span&gt;;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="SQLServer" scheme="http://aikin.github.io/tags/SQLServer/"/>
+    
+  </entry>
   
   <entry>
     <title>容器化开发环境 - 应用和数据库隔离</title>
@@ -1739,38 +1762,6 @@
     
     
       <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu 14.04 安装 Atom</title>
-    <link href="http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/"/>
-    <id>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</id>
-    <published>2014-08-08T12:14:45.000Z</published>
-    <updated>2016-03-17T14:47:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>  <img src="/images/atom.png"></p>
-<p> <a href="https://atom.io/" target="_blank" rel="external">Atom</a> 是 github 内部的编辑软件。按照 Github 的说法，这是一款非同一般的编辑器，是 21 世纪的创新产品，他们希望将来“从菜鸟到黑客都在使用 Atom 编写代码”。</p>
-<a id="more"></a>
-<ol>
-<li><p>增加 Atom 源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:webupd8team/atom</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装 Atom</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install atom</div></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  &lt;img src=&#39;/images/atom.png&#39; /&gt;&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;https://atom.io/&quot;&gt;Atom&lt;/a&gt; 是 github 内部的编辑软件。按照 Github 的说法，这是一款非同一般的编辑器，是 21 世纪的创新产品，他们希望将来“从菜鸟到黑客都在使用 Atom 编写代码”。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="atom" scheme="http://aikin.github.io/tags/atom/"/>
     
   </entry>
   
