@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="cocos2d," />
+  <meta name="keywords" content="angularjs," />
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-  <title> Cocos2d HTML5 Sprite 绑定点击事件 </title>
+  <title> AngularJS 无聊知识点 </title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
           
           
             
-              Cocos2d HTML5 Sprite 绑定点击事件
+              AngularJS 无聊知识点
             
           
         </h1>
@@ -164,7 +164,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on Jul 16 2014
+          Posted on Oct 11 2016
         </span>
 
         
@@ -173,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2014/07/16/cocos2d-html5-sprite/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/16/cocos2d-html5-sprite/"></span>
+            <a href="/2016/10/11/angularjs-one-tips/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/angularjs-one-tips/"></span>
             </a>
           </span>
           
@@ -188,9 +188,17 @@
       
 
       
-        <p>在<code>Cocos2d HTML5</code>,  发现 Sprite 类没有点击事件，需要注册点击的代理, 才能接受点击事件。下面一段代码写了一个可以接受点击事件的 DemoSprite 类。</p>
+        <p>  整理以前笔记时，发现几个简单的无聊的<code>AngularJS</code>知识点。</p>
+<ul>
+<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="string">`use strict`</span></div><div class="line">angular.module(<span class="string">"App"</span>)</div><div class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</div><div class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></div><div class="line">    <span class="keyword">var</span> original = $location.path;</div><div class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</div><div class="line">        <span class="keyword">var</span> lastRoute = $route.current;</div><div class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          $route.current = lastRoute;</div><div class="line">          un();</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> original.apply($location, [path]);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> DemoSprite = cc.Sprite.extend(&#123;</div><div class="line"></div><div class="line">    _touchBegan: <span class="literal">false</span>,</div><div class="line">    _touchEnabled: <span class="literal">true</span>,</div><div class="line"></div><div class="line">    ctor: <span class="function"><span class="keyword">function</span> (<span class="params">image</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>._super();</div><div class="line">        <span class="keyword">this</span>.init(image);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onEnter: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        cc.Director.getInstance().getTouchDispatcher()._addTargetedDelegate(<span class="keyword">this</span>, <span class="number">0</span>);  <span class="comment">// 当Sprite加载完后， 注册点击事件（有好几种注册的方式，在这里就不一一介绍了）。</span></div><div class="line">        <span class="keyword">this</span>._touchEnabled = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">this</span>._super();</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onExit: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        cc.Director.getInstance().getTouchDispatcher()._removeDelegate(<span class="keyword">this</span>);</div><div class="line">          <span class="comment">//当Sprite退出后，取消点击事件的注册。</span></div><div class="line">        <span class="keyword">this</span>._touchEnabled = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">this</span>._super();</div><div class="line">    &#125;,</div><div class="line">    touchRect: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getBoundingBoxToWorld();</div><div class="line">    &#125;,</div><div class="line">    onTouchBegan: <span class="function"><span class="keyword">function</span> (<span class="params">touch, event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (cc.rectContainsPoint(<span class="keyword">this</span>.touchRect(), touch.getLocation())) &#123;</div><div class="line">            <span class="comment">//当点击在 Sprite 范围内时，执行。</span></div><div class="line">            <span class="comment">//在这里处理点击事件。</span></div><div class="line">            <span class="keyword">this</span>._touchBegan = <span class="literal">true</span>;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回true， 才会执行 onTouchEnded方法。</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onTouchEnded: <span class="function"><span class="keyword">function</span> (<span class="params">touch, event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._touchBegan) &#123;</div><div class="line">            <span class="keyword">this</span>._touchBegan = <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li><strong><em>统计 <code>angularJS</code> 的 <code>watchers</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</div><div class="line">  <span class="keyword">var</span> watchers = [];</div><div class="line">  <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</div><div class="line">      angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</div><div class="line">        watchers.push(watcher);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</div><div class="line">      f($(childElement));</div><div class="line">    &#125;);</div><div class="line">  &#125;;</div><div class="line">  f(root);</div><div class="line">  <span class="built_in">console</span>.log(watchers.length);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>只是想找个地方记录一下。。。</p>
 
       
     </div>
@@ -199,7 +207,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/cocos2d/"> #cocos2d </a>
+            <a href="/tags/angularjs/"> #angularjs </a>
           
         </div>
       
@@ -208,13 +216,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/08/03/init/">init blog</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/06/16/ie-iframe-cache/">IE reload iframe</a>
+              <a href="/2016/10/04/locked-sql-user/">SQL Server 单用户模式到多用户模式</a>
             
           </div>
         </div>
@@ -229,10 +235,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/07/16/cocos2d-html5-sprite/"
-     data-title="Cocos2d HTML5 Sprite 绑定点击事件"
+        <div class="ds-share flat" data-thread-key="2016/10/11/angularjs-one-tips/"
+     data-title="AngularJS 无聊知识点"
      data-content=""
-     data-url="http://aikin.github.io/2014/07/16/cocos2d-html5-sprite/">
+     data-url="http://aikin.github.io/2016/10/11/angularjs-one-tips/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -253,8 +259,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2014/07/16/cocos2d-html5-sprite/"
-               data-title="Cocos2d HTML5 Sprite 绑定点击事件" data-url="http://aikin.github.io/2014/07/16/cocos2d-html5-sprite/">
+          <div class="ds-thread" data-thread-key="2016/10/11/angularjs-one-tips/"
+               data-title="AngularJS 无聊知识点" data-url="http://aikin.github.io/2016/10/11/angularjs-one-tips/">
           </div>
         
       </div>

@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2016/10/11/angularjs-one-tips/</loc>
+    <lastmod>2016-12-11T07:02:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>AngularJS 无聊知识点</title>
+        <pubTime>2016-10-11T06:41:34.000Z</pubTime>
+        
+        <tag>angularjs</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2016/10/04/locked-sql-user/</loc>
     <lastmod>2016-11-13T09:19:07.000Z</lastmod>
     <data>
@@ -64,9 +81,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
          
            
@@ -333,9 +350,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
         <tag>db</tag>
          

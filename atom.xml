@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2016-11-13T09:19:07.000Z</updated>
+  <updated>2016-12-11T07:02:22.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AngularJS 无聊知识点</title>
+    <link href="http://aikin.github.io/2016/10/11/angularjs-one-tips/"/>
+    <id>http://aikin.github.io/2016/10/11/angularjs-one-tips/</id>
+    <published>2016-10-11T06:41:34.000Z</published>
+    <updated>2016-12-11T07:02:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>  整理以前笔记时，发现几个简单的无聊的<code>AngularJS</code>知识点。</p>
+<ul>
+<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="string">`use strict`</span></div><div class="line">angular.module(<span class="string">"App"</span>)</div><div class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</div><div class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></div><div class="line">    <span class="keyword">var</span> original = $location.path;</div><div class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</div><div class="line">        <span class="keyword">var</span> lastRoute = $route.current;</div><div class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          $route.current = lastRoute;</div><div class="line">          un();</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> original.apply($location, [path]);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><strong><em>统计 <code>angularJS</code> 的 <code>watchers</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</div><div class="line">  <span class="keyword">var</span> watchers = [];</div><div class="line">  <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</div><div class="line">      angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</div><div class="line">        watchers.push(watcher);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</div><div class="line">      f($(childElement));</div><div class="line">    &#125;);</div><div class="line">  &#125;;</div><div class="line">  f(root);</div><div class="line">  <span class="built_in">console</span>.log(watchers.length);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>只是想找个地方记录一下。。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  整理以前笔记时，发现几个简单的无聊的&lt;code&gt;AngularJS&lt;/code&gt;知识点。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;实现修改 URL， 不刷新页面&lt;/em&gt;&lt;/strong&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;`use strict`&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;angular.module(&lt;span class=&quot;string&quot;&gt;&quot;App&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  .run(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;$rootScope, $route, $location, $routeParams&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 重写 $location.path 实现修改 url, 但不刷新页面。&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; original = $location.path;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    $location.path = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;path, reload&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (reload === &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; lastRoute = $route.current;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; un = $rootScope.$on(&lt;span class=&quot;string&quot;&gt;&#39;$locationChangeSuccess&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          $route.current = lastRoute;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          un();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;#125;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; original.apply($location, [path]);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &amp;#125;);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="angularjs" scheme="http://aikin.github.io/tags/angularjs/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL Server 单用户模式到多用户模式</title>
@@ -93,9 +128,9 @@
     </summary>
     
     
-      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
-    
       <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
+    
+      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
     
       <category term="db" scheme="http://aikin.github.io/tags/db/"/>
     
@@ -344,9 +379,9 @@
     </summary>
     
     
-      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
-    
       <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
+    
+      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
     
   </entry>
   
@@ -1655,113 +1690,6 @@
       <category term="mongoose" scheme="http://aikin.github.io/tags/mongoose/"/>
     
       <category term="nodejs" scheme="http://aikin.github.io/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>“随心所欲”指定 this 的绑定对象</title>
-    <link href="http://aikin.github.io/2014/08/16/js-call-apply-bind/"/>
-    <id>http://aikin.github.io/2014/08/16/js-call-apply-bind/</id>
-    <published>2014-08-16T12:36:47.000Z</published>
-    <updated>2016-10-03T17:30:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>有的时候，函数的调用者(<code>this</code>关键字的绑定对象)并不是你期望的对象。面对这样情况，我们希望可以自定义<code>this</code>的绑定对象。在 javascript 中可以是用<strong><em><code>call apply bind</code></em></strong>方法来指定 this 关键字的绑定对象。
-　</p>
-<h3 id="a-call-方法"><a href="#a-call-方法" class="headerlink" title="a. call 方法"></a>a. <strong>call 方法</strong></h3><h4 id="先看个例子："><a href="#先看个例子：" class="headerlink" title="先看个例子："></a>先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullName: <span class="string">'aikin'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> you = &#123;</div><div class="line">    fullName: <span class="string">'you'</span></div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></div><div class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></div><div class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<ul>
-<li><p>在第一次直接调用函数<code>speakFullName()</code>后，函数的<code>this</code>关键字的绑定对象为全局对象，也就是<code>window</code>对象，同时在 <code>window</code> 对象中没有<code>fullName</code>这个属性，所以<code>undefined</code>也就产生了。</p>
-</li>
-<li><p>而第二次和第三次使用<strong><em><code>call</code></em></strong>方法来指定了，函数<code>speakFullName</code>的<code>this</code>关键字的绑定者，所以打印的结果就是，被绑定对象的<code>fullName</code>。</p>
-</li>
-</ul>
-<p>　　关于<strong><em><code>call</code></em></strong>方法的参数，在<strong><em>eg-1</em></strong>的例子中调用<strong><em><code>call</code></em></strong>方法时，只给它传了一个参数。如果想传入多个参数，可以这样:<code>func.call(obj, arg1, arg2, ....)</code>，第一个参数是 <code>this</code>关键字要绑定的对象，其它的参数则是被调用函数所需要的参数。下面的语法介绍是引用于 <a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="external">MDN</a>。</p>
-<blockquote>
-<p><strong><em>语法</em></strong><br>  <strong><code>fun.call(thisArg[, arg1[, arg2[, ...]]])</code></strong></p>
-<p><strong><em>参数</em></strong><br>  <strong><code>thisArg</code></strong></p>
-<ul>
-<li>在<code>fun</code>函数运行时指定的<code>this</code>值。需要注意的是，指定的<code>this</code>值并不一定是该函数执行时真正<code>this</code>值，如果这个函数处于非严格模式下，则指定为<code>null</code>和<code>undefined</code>的<code>this</code>值会自动指向全局对象(浏览器中就是<code>window</code>对象)，同时值为原始值(数字，字符串，布尔值)的<code>this</code>会指向该原始值的自动包装对象。</li>
-</ul>
-<p><strong><code>arg1, arg2, ...</code></strong></p>
-<ul>
-<li>指定的参数列表。</li>
-</ul>
-</blockquote>
-<p>来看的例子：<br><strong>eg-2：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullname : <span class="string">'aikin'</span>,</div><div class="line">    friends  : [<span class="string">'yuki'</span>, <span class="string">'bobi'</span>]</div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addFriend</span>(<span class="params">friend</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.friends.push(friend);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">addFriend.call(me, <span class="string">'kuki'</span>);</div><div class="line"><span class="built_in">console</span>.log(me.friends);</div><div class="line">　</div><div class="line"><span class="comment">//=&gt; ["yuki", "bobi", "kuki"]</span></div></pre></td></tr></table></figure></p>
-<p>　</p>
-<h3 id="b-apply-方法"><a href="#b-apply-方法" class="headerlink" title="b. apply() 方法"></a>b. <strong>apply() 方法</strong></h3><p>　　<strong><code>apply</code></strong>方法和 <strong><code>call</code></strong>方法的区别在于参数的不同。</p>
-<blockquote>
-<p>该方法的作用和<strong><code>call</code></strong>方法类似，只有一个区别就是，<strong><code>call</code></strong>方法接受的是若干个参数的列表，而<strong><code>apply</code></strong>方法接受的是一个包含多个参数的数组（或类数组对象）。</p>
-</blockquote>
-<p>　　在<strong>eg-1</strong>和<strong>eg-2</strong>的例子同样可以使用<strong><code>apply</code></strong>来实现，如下：</p>
-<p><strong>eg-3：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// eg-1 的例子，使用 apply 方法</span></div><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullName: <span class="string">'aikin'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> you = &#123;</div><div class="line">    fullName: <span class="string">'you'</span></div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">speakFullName();            <span class="comment">//=&gt; undefined</span></div><div class="line">speakFullName.apply(me);    <span class="comment">//=&gt; aikin</span></div><div class="line">speakFullName.apply(you);   <span class="comment">//=&gt; you</span></div><div class="line">　</div><div class="line"><span class="comment">//eg-2的例子，使用 apply 方法</span></div><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullname : <span class="string">'aikin'</span>,</div><div class="line">    friends  : [<span class="string">'yuki'</span>, <span class="string">'bobi'</span>]</div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addFriend</span>(<span class="params">friend</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.friends.push(friend);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">addFriend.apply(me, [<span class="string">'kuki'</span>]);</div><div class="line"><span class="built_in">console</span>.log(me.friends);</div><div class="line">　</div><div class="line"><span class="comment">//=&gt; ["yuki", "bobi", "kuki"]</span></div></pre></td></tr></table></figure></p>
-<p>　　下面引用一下 <a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="external">MDN</a> 对该方法语法的介绍。</p>
-<blockquote>
-<p><strong><em>语法</em></strong><br>  <strong><code>fun.apply(thisArg[, argsArray])</code></strong></p>
-<p><strong><em>参数</em></strong><br>   <strong><code>thisArg</code></strong></p>
-<ul>
-<li>在<code>fun</code>函数运行时指定的<code>this</code>值。需要注意的是，指定的<code>this</code>值并不一定是该函数执行时真正<code>this</code>值，如果这个函数处于非严格模式下，则指定为<code>null</code>和<code>undefined</code>的<code>this</code>值会自动指向全局对象(浏览器中就是<code>window</code>对象)，同时值为原始值(数字，字符串，布尔值)的<code>this</code>会指向该原始值的自动包装对象。</li>
-</ul>
-<p><strong><code>argsArray</code></strong></p>
-<ul>
-<li>一个数组或者类数组对象，其中的数组元素将作为单独的参数传给<code>fun</code>函数。如果该参数的值为<code>null</code>或<code>undefined</code>，则表示不需要传入任何参数。</li>
-</ul>
-</blockquote>
-<p>　</p>
-<h3 id="c-bind-方法"><a href="#c-bind-方法" class="headerlink" title="c. bind 方法"></a>c. <strong>bind 方法</strong></h3><p>　　1. 通过使用<strong><code>bind</code></strong>方法，可以返回一个新的函数，而这个函数的<code>this</code>关键字绑定的对象和参数可以通过<strong><code>bind</code></strong>方法来，在函数调用前预先指定。</p>
-<blockquote>
-<ul>
-<li><strong><code>bind</code></strong>方法会创建一个新函数，称为绑定函数.当调用这个绑定函数时,绑定函数会以创建它时传入<strong><code>bind</code></strong>方法的第一个参数作为<code>this</code>，传入<strong><code>bind</code></strong>方法的第二个以及以后的参数加上绑定函数运行时本身的参数按照顺序作为原函数的参数来调用原函数.</li>
-</ul>
-</blockquote>
-<p><strong>eg-4：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">b</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + b);</div><div class="line">&#125;</div><div class="line">　</div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    a: <span class="string">'ai'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> bindedAdd = add.bind(obj);</div><div class="line">　</div><div class="line">bindedAdd(<span class="string">'kin'</span>); <span class="comment">//=&gt; aikin</span></div></pre></td></tr></table></figure></p>
-<ul>
-<li>在上面的例子中，<code>add</code>函数通过调用<strong><code>bind</code></strong>方法，返回了一个绑定了<code>obj</code>对象的函数，并将返回的函数赋值给了<code>binedAdd</code>变量，这时函数<code>binedAdd</code>的<code>this</code>关键字的绑定对象就是<code>obj</code>。当调用<code>binedAdd()</code>时产生的结果，就相对于<code>add.call(obj, &#39;kin&#39;)</code>。</li>
-</ul>
-<p>关于<strong><code>bind</code></strong>的语法:
-　</p>
-<blockquote>
-<p><strong><em>语法</em></strong><br>  <strong><code>fun.bind(thisArg[, arg1[, arg2[, ...]]])</code></strong></p>
-<p><strong><em>参数</em></strong><br>   <strong><code>thisArg</code></strong></p>
-<ul>
-<li>当绑定函数被调用时，该参数会作为原函数运行时的this指向，当使用<code>new</code>操作符调用绑定函数时，该参数无效。</li>
-</ul>
-<p><strong><code>arg1, arg2, ...</code></strong></p>
-<ul>
-<li>当绑定函数被调用时，这些参数加上绑定函数本身的参数会按照顺序作为原函数运行时的参数。</li>
-</ul>
-</blockquote>
-<p>　　2. 当要将一个对象的方法，作为回调函数直接传递给高阶函数(可以理解为用函数作为参数的函数)时。如果希望，传入的对象的方法，的调用者，还为该对象，就可以使用<strong><code>bind</code></strong>方法，让该对象绑定到回调函数的<code>this</code>关键字。</p>
-<p><strong>eg-5：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    score    : <span class="number">90</span>,</div><div class="line">    getScore : <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.score;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">printScore</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'我的分数：'</span> + callback());</div><div class="line">&#125;</div><div class="line">　</div><div class="line">printScore(obj.getScore);            <span class="comment">//=&gt; 我的分数：undefined</span></div><div class="line">printScore(obj.getScore.bind(obj));  <span class="comment">//=&gt;我的分数：90</span></div></pre></td></tr></table></figure></p>
-<ul>
-<li><p>在<strong>eg-5</strong>的例子中，<code>printScore</code>函数接收一个回调函数作为参数。<code>obj</code>对象的<code>getScore</code>方法返回的是该对象的<code>score</code>。</p>
-</li>
-<li><p>当调用<code>printScore(obj.getScore)</code>时，打印出来的<code>score</code>为<code>undefined</code>。因为在函数体内调用回调函数时， 没有指定回调函数的调用者，也就是回调函数的<code>this</code>的绑定对象为全局对象(<code>window</code>)。</p>
-</li>
-<li><p>当调用<code>printScore(obj.getScore.bind(obj))</code>时，函数体内的回调函数的<code>this</code>关键字的绑定对象为<code>obj</code>。所以<code>this.score</code>的值为<code>obj</code>的<code>score</code>。</p>
-</li>
-</ul>
-<p>　3. 还可以使用<strong><code>bind</code></strong>实现“柯里化”(本人理解就是为函数预先传入某些参数)。</p>
-<p><strong>eg-6：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//bind 的第一个参数为 null 时</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">x, y, z</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> x + y + z;</div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="keyword">var</span> sumBind = sum.bind(<span class="literal">null</span>, <span class="number">3</span>, <span class="number">6</span>);</div><div class="line">sumBind(<span class="number">8</span>);  <span class="comment">//=&gt; 17</span></div><div class="line">　</div><div class="line"><span class="comment">//bind 的第一个参数为 obj 时</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">average</span> (<span class="params">age1, age2</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (<span class="keyword">this</span>.age + age1 + age2) / <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    age: <span class="number">23</span></div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="keyword">var</span> averageBind = average.bind(obj, <span class="number">21</span>);</div><div class="line">averageBind(<span class="number">22</span>);  <span class="comment">//=&gt; 22</span></div></pre></td></tr></table></figure></p>
-<p>　　</p>
-<h3 id="这三方法都好有趣啊，让this绑定变得如此“随心所欲”。"><a href="#这三方法都好有趣啊，让this绑定变得如此“随心所欲”。" class="headerlink" title="这三方法都好有趣啊，让this绑定变得如此“随心所欲”。"></a>这三方法都好有趣啊，让<code>this</code>绑定变得如此“随心所欲”。</h3><h3 id="this-is-so-cool-coding-is-so-funny"><a href="#this-is-so-cool-coding-is-so-funny" class="headerlink" title="this is so cool. coding is so funny ..."></a><strong><code>this</code> is so cool. <code>coding is so funny ...</code></strong></h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call" target="_blank" rel="external">MDN, call</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" target="_blank" rel="external">MDN, apply</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind" target="_blank" rel="external">MDN, bind</a></li>
-<li>David Herman, 《Effective JavaScript》</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有的时候，函数的调用者(&lt;code&gt;this&lt;/code&gt;关键字的绑定对象)并不是你期望的对象。面对这样情况，我们希望可以自定义&lt;code&gt;this&lt;/code&gt;的绑定对象。在 javascript 中可以是用&lt;strong&gt;&lt;em&gt;&lt;code&gt;call apply bind&lt;/code&gt;&lt;/em&gt;&lt;/strong&gt;方法来指定 this 关键字的绑定对象。
-　&lt;/p&gt;
-&lt;h3 id=&quot;a-call-方法&quot;&gt;&lt;a href=&quot;#a-call-方法&quot; class=&quot;headerlink&quot; title=&quot;a. call 方法&quot;&gt;&lt;/a&gt;a. &lt;strong&gt;call 方法&lt;/strong&gt;&lt;/h3&gt;&lt;h4 id=&quot;先看个例子：&quot;&gt;&lt;a href=&quot;#先看个例子：&quot; class=&quot;headerlink&quot; title=&quot;先看个例子：&quot;&gt;&lt;/a&gt;先看个例子：&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;eg-1：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; me = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    fullName: &lt;span class=&quot;string&quot;&gt;&#39;aikin&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; you = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    fullName: &lt;span class=&quot;string&quot;&gt;&#39;you&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;　&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;speakFullName&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.fullName);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;　&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;speakFullName();           &lt;span class=&quot;comment&quot;&gt;//=&amp;gt; undefined&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;speakFullName.call(me);    &lt;span class=&quot;comment&quot;&gt;//=&amp;gt; aikin&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;speakFullName.call(you);   &lt;span class=&quot;comment&quot;&gt;//=&amp;gt; you&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
     
   </entry>
   
