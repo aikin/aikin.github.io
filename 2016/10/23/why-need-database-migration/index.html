@@ -192,6 +192,17 @@
 <a id="more"></a>
 <p>为什么需要<code>Database Migration</code>？数据库是个复杂的应用，具有无数不同的特征，行为，数据类型，以及支持工具和技术。在开发和维护一个数据驱动的应用程序时，数据库的<code>schema</code>会发生改变，特别是在一个不断开发的项目中，随着需求的变化，数据库的<code>schema</code>也会跟着变化，而追踪记录这些变化一向都是费成本的问题。</p>
 <p>大部分项目都会有多个的环境（test, stage, prod），那么保证这些环境下的数据库的一致性的难度会成倍增加。比如，在开发应用的程序的过程中，创建一张新表、同时建立索引，那也就意味着，这些操作也需要在其它的每一个环境（test，stage，prod）发生，当然也包括团队其他成员的本地环境，这样才能保证数据库的一致性， 这个过程将面临很大的挑战。 为了让整个流程更加简单方便安全，可以给数据库加上版本控制功能，也就是数据库迁移功能，这样可以让团队在修改数据库结构或内容的同时，可以保持彼此本地环境数据库版本的一致性。</p>
+<p><strong><em>数据库迁移的工具：</em></strong></p>
+<ul>
+<li><p><a href="https://flywaydb.org/" target="_blank" rel="external">Flyway</a> <code>Java</code></p>
+</li>
+<li><p><a href="http://www.mybatis.org/migrations/" target="_blank" rel="external">MyBatis Migrations</a> <code>Java</code></p>
+</li>
+<li><p><a href="http://docs.sequelizejs.com/en/latest/docs/migrations/" target="_blank" rel="external">Sequelize</a> <code>Node.js</code></p>
+</li>
+<li><p><a href="http://www.fluentnhibernate.org/" target="_blank" rel="external">Fluent NHibernate</a> <code>C#</code></p>
+</li>
+</ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://flywaydb.org/getstarted/why" target="_blank" rel="external">Flyway</a></p>
 
       
