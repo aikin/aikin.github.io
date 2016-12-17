@@ -4,12 +4,29 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2016/10/11/angularjs-one-tips/</loc>
-    <lastmod>2016-12-11T07:02:22.000Z</lastmod>
+    <loc>http://aikin.github.io/2016/10/23/why-need-database-migration/</loc>
+    <lastmod>2016-12-17T17:13:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>Database Schema Migrations</title>
+        <pubTime>2016-10-23T12:56:38.000Z</pubTime>
+        
+        <tag>DB</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2016/10/16/angularjs-one-tips/</loc>
+    <lastmod>2016-12-17T17:01:29.000Z</lastmod>
     <data>
         <display>
         <title>AngularJS 无聊知识点</title>
-        <pubTime>2016-10-11T06:41:34.000Z</pubTime>
+        <pubTime>2016-10-16T06:41:34.000Z</pubTime>
         
         <tag>angularjs</tag>
          
@@ -81,9 +98,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>dockerize</tag>
-         
         <tag>docker</tag>
+         
+        <tag>dockerize</tag>
          
          
            
@@ -350,9 +367,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>dockerize</tag>
-         
         <tag>docker</tag>
+         
+        <tag>dockerize</tag>
          
         <tag>db</tag>
          

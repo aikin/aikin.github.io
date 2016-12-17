@@ -158,6 +158,78 @@
           
           
             
+              <a class="post-title-link" href="/2014/08/16/js-call-apply-bind/">
+                “随心所欲”指定 this 的绑定对象
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Aug 16 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/08/16/js-call-apply-bind/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/16/js-call-apply-bind/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>有的时候，函数的调用者(<code>this</code>关键字的绑定对象)并不是你期望的对象。面对这样情况，我们希望可以自定义<code>this</code>的绑定对象。在 javascript 中可以是用<strong><em><code>call apply bind</code></em></strong>方法来指定 this 关键字的绑定对象。
+　</p>
+<h3 id="a-call-方法"><a href="#a-call-方法" class="headerlink" title="a. call 方法"></a>a. <strong>call 方法</strong></h3><h4 id="先看个例子："><a href="#先看个例子：" class="headerlink" title="先看个例子："></a>先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullName: <span class="string">'aikin'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> you = &#123;</div><div class="line">    fullName: <span class="string">'you'</span></div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></div><div class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></div><div class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></div></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/08/16/js-call-apply-bind/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/08/08/install-atom-on-ubuntu/">
                 Ubuntu 14.04 安装 Atom
               </a>
@@ -290,81 +362,11 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/08/03/init/">
-                init blog
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Aug 3 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/08/03/init/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/03/init/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>借助着开源，搭建好了自己的博客。以后将会在这里，记录知识和回忆。<br>感谢 Hexo，感谢 NexT.Mist，感谢 GitHub，感谢 Markdown，感谢开源组织。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/03/init/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
   <div class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">&raquo;</a>
   </div>
 
 
@@ -398,7 +400,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -412,7 +414,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

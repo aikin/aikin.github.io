@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="SQLServer," />
+  <meta name="keywords" content="angularjs," />
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-  <title> SQL Server 单用户模式到多用户模式 </title>
+  <title> AngularJS 无聊知识点 </title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
           
           
             
-              SQL Server 单用户模式到多用户模式
+              AngularJS 无聊知识点
             
           
         </h1>
@@ -164,7 +164,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on Oct 4 2016
+          Posted on Oct 16 2016
         </span>
 
         
@@ -173,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/10/04/locked-sql-user/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/locked-sql-user/"></span>
+            <a href="/2016/10/16/angularjs-one-tips/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/angularjs-one-tips/"></span>
             </a>
           </span>
           
@@ -188,9 +188,17 @@
       
 
       
-        <p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> yourdatabase;</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</div><div class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</div><div class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</div><div class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</div></pre></td></tr></table></figure></p>
+        <p>  整理以前笔记时，发现几个简单的无聊的<code>AngularJS</code>知识点。</p>
+<ul>
+<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="string">`use strict`</span></div><div class="line">angular.module(<span class="string">"App"</span>)</div><div class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</div><div class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></div><div class="line">    <span class="keyword">var</span> original = $location.path;</div><div class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</div><div class="line">        <span class="keyword">var</span> lastRoute = $route.current;</div><div class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          $route.current = lastRoute;</div><div class="line">          un();</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> original.apply($location, [path]);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <a id="more"></a>
-<p>结果并没有发现锁的存在，但是发现数据库设置是单用户模式。将单用户模式修改为多用户模式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> [<span class="keyword">master</span>]</div><div class="line"><span class="keyword">GO</span></div><div class="line"></div><div class="line"><span class="comment">--查询运行的用户</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> master.dbo.sysprocesses</div><div class="line"><span class="keyword">WHERE</span> dbid=db_id(<span class="string">'dbname'</span>)</div><div class="line"></div><div class="line"><span class="comment">--将第一个语句运行后的结果替代 spid</span></div><div class="line"><span class="keyword">Kill</span> spid</div><div class="line"></div><div class="line"><span class="comment">--修改为多用户模式</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> DBNAME <span class="keyword">SET</span> MULTI_USER</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong><em>统计 <code>angularJS</code> 的 <code>watchers</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</div><div class="line">  <span class="keyword">var</span> watchers = [];</div><div class="line">  <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</div><div class="line">      angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</div><div class="line">        watchers.push(watcher);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</div><div class="line">      f($(childElement));</div><div class="line">    &#125;);</div><div class="line">  &#125;;</div><div class="line">  f(root);</div><div class="line">  <span class="built_in">console</span>.log(watchers.length);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>只是想找个地方记录一下。。。</p>
 
       
     </div>
@@ -199,7 +207,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQLServer/"> #SQLServer </a>
+            <a href="/tags/angularjs/"> #angularjs </a>
           
         </div>
       
@@ -208,13 +216,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/16/angularjs-one-tips/">AngularJS 无聊知识点</a>
+              <a href="/2016/10/23/why-need-database-migration/">Database Schema Migrations</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/24/dockerize-db-isolation/">容器化开发环境 - 应用和数据库隔离</a>
+              <a href="/2016/10/04/locked-sql-user/">SQL Server 单用户模式到多用户模式</a>
             
           </div>
         </div>
@@ -229,10 +237,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/04/locked-sql-user/"
-     data-title="SQL Server 单用户模式到多用户模式"
+        <div class="ds-share flat" data-thread-key="2016/10/16/angularjs-one-tips/"
+     data-title="AngularJS 无聊知识点"
      data-content=""
-     data-url="http://aikin.github.io/2016/10/04/locked-sql-user/">
+     data-url="http://aikin.github.io/2016/10/16/angularjs-one-tips/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -253,8 +261,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/10/04/locked-sql-user/"
-               data-title="SQL Server 单用户模式到多用户模式" data-url="http://aikin.github.io/2016/10/04/locked-sql-user/">
+          <div class="ds-thread" data-thread-key="2016/10/16/angularjs-one-tips/"
+               data-title="AngularJS 无聊知识点" data-url="http://aikin.github.io/2016/10/16/angularjs-one-tips/">
           </div>
         
       </div>

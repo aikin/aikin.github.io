@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="SQLServer," />
+  <meta name="keywords" content="DB," />
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-  <title> SQL Server 单用户模式到多用户模式 </title>
+  <title> Database Schema Migrations </title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
           
           
             
-              SQL Server 单用户模式到多用户模式
+              Database Schema Migrations
             
           
         </h1>
@@ -164,7 +164,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on Oct 4 2016
+          Posted on Oct 23 2016
         </span>
 
         
@@ -173,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/10/04/locked-sql-user/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/locked-sql-user/"></span>
+            <a href="/2016/10/23/why-need-database-migration/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/23/why-need-database-migration/"></span>
             </a>
           </span>
           
@@ -188,9 +188,11 @@
       
 
       
-        <p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> yourdatabase;</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</div><div class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</div><div class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</div><div class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</div></pre></td></tr></table></figure></p>
+        <p>对于企业和基于 web 的应用程序来说，<code>Migration</code> 就是将一个平台移到另一个平台。<code>Database Migration</code>就是通过<code>migration scripts</code>数据库从一个状态转换到另一个状态，每一个<code>migration script</code>都会对数据库进行修改，修改的内容可能是创建一张新表、更新表的结构、更新表中的数据、删除一张表和创建索引，等等。一般迁移脚本会提供两个“互斥”功能，一个是<code>Up</code>用于升级数据库，一个是<code>Down</code>用于撤销数据库的升级。</p>
 <a id="more"></a>
-<p>结果并没有发现锁的存在，但是发现数据库设置是单用户模式。将单用户模式修改为多用户模式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> [<span class="keyword">master</span>]</div><div class="line"><span class="keyword">GO</span></div><div class="line"></div><div class="line"><span class="comment">--查询运行的用户</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> master.dbo.sysprocesses</div><div class="line"><span class="keyword">WHERE</span> dbid=db_id(<span class="string">'dbname'</span>)</div><div class="line"></div><div class="line"><span class="comment">--将第一个语句运行后的结果替代 spid</span></div><div class="line"><span class="keyword">Kill</span> spid</div><div class="line"></div><div class="line"><span class="comment">--修改为多用户模式</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> DBNAME <span class="keyword">SET</span> MULTI_USER</div></pre></td></tr></table></figure></p>
+<p>为什么需要<code>Database Migration</code>？数据库是个复杂的应用，具有无数不同的特征，行为，数据类型，以及支持工具和技术。在开发和维护一个数据驱动的应用程序时，数据库的<code>schema</code>会发生改变，特别是在一个不断开发的项目中，随着需求的变化，数据库的<code>schema</code>也会跟着变化，而追踪记录这些变化一向都是费成本的问题。</p>
+<p>大部分项目都会有多个的环境（test, stage, prod），那么保证这些环境下的数据库的一致性的难度会成倍增加。比如，在开发应用的程序的过程中，创建一张新表、同时建立索引，那也就意味着，这些操作也需要在其它的每一个环境（test，stage，prod）发生，当然也包括团队其他成员的本地环境，这样才能保证数据库的一致性， 这个过程将面临很大的挑战。 为了让整个流程更加简单方便安全，可以给数据库加上版本控制功能，也就是数据库迁移功能，这样可以让团队在修改数据库结构或内容的同时，可以保持彼此本地环境数据库版本的一致性。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://flywaydb.org/getstarted/why" target="_blank" rel="external">Flyway</a></p>
 
       
     </div>
@@ -199,7 +201,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQLServer/"> #SQLServer </a>
+            <a href="/tags/DB/"> #DB </a>
           
         </div>
       
@@ -208,13 +210,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/16/angularjs-one-tips/">AngularJS 无聊知识点</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/24/dockerize-db-isolation/">容器化开发环境 - 应用和数据库隔离</a>
+              <a href="/2016/10/16/angularjs-one-tips/">AngularJS 无聊知识点</a>
             
           </div>
         </div>
@@ -229,10 +229,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/04/locked-sql-user/"
-     data-title="SQL Server 单用户模式到多用户模式"
+        <div class="ds-share flat" data-thread-key="2016/10/23/why-need-database-migration/"
+     data-title="Database Schema Migrations"
      data-content=""
-     data-url="http://aikin.github.io/2016/10/04/locked-sql-user/">
+     data-url="http://aikin.github.io/2016/10/23/why-need-database-migration/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -253,8 +253,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/10/04/locked-sql-user/"
-               data-title="SQL Server 单用户模式到多用户模式" data-url="http://aikin.github.io/2016/10/04/locked-sql-user/">
+          <div class="ds-thread" data-thread-key="2016/10/23/why-need-database-migration/"
+               data-title="Database Schema Migrations" data-url="http://aikin.github.io/2016/10/23/why-need-database-migration/">
           </div>
         
       </div>
@@ -368,7 +368,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
