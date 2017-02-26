@@ -26,7 +26,7 @@
 
 
 
-  <meta name="keywords" content="angularjs," />
+  <meta name="keywords" content="flyway,db migration," />
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-  <title> AngularJS 无聊知识点 </title>
+  <title> 数据迁移工具之 - Flyway </title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
           
           
             
-              AngularJS 无聊知识点
+              数据迁移工具之 - Flyway
             
           
         </h1>
@@ -164,7 +164,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on Oct 11 2016
+          Posted on Feb 26 2017
         </span>
 
         
@@ -173,8 +173,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2016/10/11/angularjs-one-tips/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/angularjs-one-tips/"></span>
+            <a href="/2017/02/26/db-migration-flyway/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/26/db-migration-flyway/"></span>
             </a>
           </span>
           
@@ -188,17 +188,48 @@
       
 
       
-        <p>  整理以前笔记时，发现几个简单的无聊的<code>AngularJS</code>知识点。</p>
-<ul>
-<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="string">`use strict`</span></div><div class="line">angular.module(<span class="string">"App"</span>)</div><div class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</div><div class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></div><div class="line">    <span class="keyword">var</span> original = $location.path;</div><div class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</div><div class="line">        <span class="keyword">var</span> lastRoute = $route.current;</div><div class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          $route.current = lastRoute;</div><div class="line">          un();</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> original.apply($location, [path]);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+        <p>对于数据迁移的概念，相信大家已经都比较熟悉。那么，什么是数据迁移？为什么需要数据迁移？在这里就不做相关分享啦~。接下来主要分享一下数据迁移工具 <a href="https://github.com/flyway/flyway" target="_blank" rel="external">Flyway</a> 使用。<br><a id="more"></a></p>
+<p><img src="./flyway-home.png" alt="flyway home"></p>
+<blockquote>
+<p>Flyway is the Apache v2 licensed open-source tool that makes database migrations easy. It strongly favors simplicity and convention over configuration.</p>
+</blockquote>
+<p><code>Flyway</code> 是一款开源的数据库迁移工具，它认为简单和约定优于配置。没有繁琐的配置，有 6 个主要基本命令：<a href="https://flywaydb.org/documentation/command/migrate" target="_blank" rel="external">Migrate</a>, <a href="https://flywaydb.org/documentation/command/clean" target="_blank" rel="external">Clean</a>, <a href="https://flywaydb.org/documentation/command/info" target="_blank" rel="external">Info</a>, <a href="https://flywaydb.org/documentation/command/validate" target="_blank" rel="external">Validate</a>, <a href="https://flywaydb.org/documentation/command/baseline" target="_blank" rel="external">Baseline</a> 和 <a href="https://flywaydb.org/documentation/command/repair" target="_blank" rel="external">Repair</a>。</p>
+<blockquote>
+<p>Flyway received the highest distinction on the <a href="https://www.thoughtworks.com/radar/tools/flyway" target="_blank" rel="external">Thoughtworks Technology Radar</a> by being placed in the adopt category.</p>
+</blockquote>
+<h3 id="如何使用-Flyway？"><a href="#如何使用-Flyway？" class="headerlink" title="如何使用 Flyway？"></a>如何使用 Flyway？</h3><p><code>Flyway</code>支持很多种和应用集成的方法，这里主要分享一下<code>Gradle</code>集成<code>Flyway</code>的使用。</p>
+<h4 id="Setup-Repo-db-migration-flyway："><a href="#Setup-Repo-db-migration-flyway：" class="headerlink" title="Setup Repo db-migration-flyway："></a>Setup Repo <a href="https://github.com/aikin/db-migration-flyway/tree/42ba4a654a49503e97a84a899c42377202645c72" target="_blank" rel="external">db-migration-flyway</a>：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gradle init --type java-libray</div></pre></td></tr></table></figure>
+<p><img src="./init.png" alt="init"></p>
+<h4 id="Add-Gradle-Flyway-plugin"><a href="#Add-Gradle-Flyway-plugin" class="headerlink" title="Add Gradle Flyway plugin"></a>Add Gradle Flyway plugin</h4><ul>
+<li><p>Change <a href="https://github.com/aikin/db-migration-flyway/blob/42ba4a654a49503e97a84a899c42377202645c72/build.gradle" target="_blank" rel="external"><code>build.gradle</code></a> file content</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        maven &#123; url <span class="string">"https://plugins.gradle.org/m2/"</span> &#125;</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath <span class="string">"gradle.plugin.com.boxfuse.client:flyway-release:4.1.1"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: <span class="string">"idea"</span></div><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line">apply plugin: <span class="string">"org.flywaydb.flyway"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Build repo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./gradlew build</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<a id="more"></a>
-<ul>
-<li><strong><em>统计 <code>angularJS</code> 的 <code>watchers</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</div><div class="line">  <span class="keyword">var</span> watchers = [];</div><div class="line">  <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</div><div class="line">      angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</div><div class="line">        watchers.push(watcher);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</div><div class="line">      f($(childElement));</div><div class="line">    &#125;);</div><div class="line">  &#125;;</div><div class="line">  f(root);</div><div class="line">  <span class="built_in">console</span>.log(watchers.length);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h4 id="Config-Flyway"><a href="#Config-Flyway" class="headerlink" title="Config Flyway"></a>Config Flyway</h4><ul>
+<li><p>Change [<code>build.gradle</code>] file content</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">    repositories &#123;</div><div class="line">        maven &#123; url <span class="string">"https://plugins.gradle.org/m2/"</span> &#125;</div><div class="line">    &#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath <span class="string">"gradle.plugin.com.boxfuse.client:flyway-release:4.1.1"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin: <span class="string">"idea"</span></div><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line">apply plugin: <span class="string">"org.flywaydb.flyway"</span></div><div class="line"></div><div class="line">flyway &#123;</div><div class="line">    driver = <span class="string">'com.mysql.jdbc.Driver'</span></div><div class="line">    url = <span class="string">"jdbc:mysql://127.0.0.1:3306/flyway_dev"</span></div><div class="line">    user = <span class="string">'mysql'</span></div><div class="line">    password = <span class="string">'mysql'</span></div><div class="line">    table = <span class="string">'flyway_dev_schema_version'</span></div><div class="line">    locations = [<span class="string">"filesystem:$&#123;projectDir&#125;/src/main/resources/db/migration/mysql"</span>]</div><div class="line">    sqlMigrationPrefix = <span class="string">'MySQL-'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">repositories &#123;</div><div class="line">    jcenter()</div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile <span class="string">'mysql:mysql-connector-java:5.1.34'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Build repo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./gradlew build</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>只是想找个地方记录一下。。。</p>
+<h4 id="Add-Migration-Scripts"><a href="#Add-Migration-Scripts" class="headerlink" title="Add Migration Scripts"></a>Add Migration Scripts</h4><ul>
+<li><p>Create file <a href="https://github.com/aikin/db-migration-flyway/blob/8e9048693674c48adcd236366fb10aa001ed3321/src/main/resources/db.migration.mysql/MySQL-1_1__create_users_table.sql" target="_blank" rel="external">MySQL-1_1__create_users_table.sql</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">USERS</span> (</div><div class="line">  <span class="keyword">ID</span>         <span class="built_in">BIGINT</span> PRIMARY <span class="keyword">KEY</span>    AUTO_INCREMENT,</div><div class="line">  USERNAME   <span class="built_in">VARCHAR</span>(<span class="number">32</span>)  <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">UNIQUE</span>,</div><div class="line">  CREATED_AT <span class="keyword">TIMESTAMP</span>(<span class="number">3</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span>(<span class="number">3</span>)</div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Create Mysql Database <code>flyway_dev</code> with user <code>mysql</code> and password <code>mysql</code></p>
+</li>
+<li><p>Migration</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./gradlew flywayMigrate -i</div></pre></td></tr></table></figure>
+<p><img src="./database.png" alt="database"></p>
+</li>
+</ul>
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p><em>这里只是简单的分享了一下，<code>Gradle</code> 和 <code>Flyway</code> 的集成。<code>Flyway</code> 还有很多功能值得去探索…</em></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><hr>
+<p><a href="https://flywaydb.org/" target="_blank" rel="external">Flyway</a></p>
 
       
     </div>
@@ -207,7 +238,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/angularjs/"> #angularjs </a>
+            <a href="/tags/flyway/"> #flyway </a>
+          
+            <a href="/tags/db-migration/"> #db migration </a>
           
         </div>
       
@@ -220,7 +253,7 @@
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/04/locked-sql-user/">SQL Server 单用户模式到多用户模式</a>
+              <a href="/2016/10/23/why-need-database-migration/">Database Schema Migrations</a>
             
           </div>
         </div>
@@ -235,10 +268,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/11/angularjs-one-tips/"
-     data-title="AngularJS 无聊知识点"
+        <div class="ds-share flat" data-thread-key="2017/02/26/db-migration-flyway/"
+     data-title="数据迁移工具之 - Flyway"
      data-content=""
-     data-url="http://aikin.github.io/2016/10/11/angularjs-one-tips/">
+     data-url="http://aikin.github.io/2017/02/26/db-migration-flyway/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -259,8 +292,8 @@
     
       <div class="comments" id="comments">
         
-          <div class="ds-thread" data-thread-key="2016/10/11/angularjs-one-tips/"
-               data-title="AngularJS 无聊知识点" data-url="http://aikin.github.io/2016/10/11/angularjs-one-tips/">
+          <div class="ds-thread" data-thread-key="2017/02/26/db-migration-flyway/"
+               data-title="数据迁移工具之 - Flyway" data-url="http://aikin.github.io/2017/02/26/db-migration-flyway/">
           </div>
         
       </div>
@@ -307,7 +340,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -321,7 +354,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -374,7 +407,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用-Flyway？"><span class="nav-number">1.</span> <span class="nav-text">如何使用 Flyway？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Setup-Repo-db-migration-flyway："><span class="nav-number">1.1.</span> <span class="nav-text">Setup Repo db-migration-flyway：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Gradle-Flyway-plugin"><span class="nav-number">1.2.</span> <span class="nav-text">Add Gradle Flyway plugin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Config-Flyway"><span class="nav-number">1.3.</span> <span class="nav-text">Config Flyway</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Add-Migration-Scripts"><span class="nav-number">1.4.</span> <span class="nav-text">Add Migration Scripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写在最后"><span class="nav-number">1.5.</span> <span class="nav-text">写在最后</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -392,7 +425,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2014 - 
-  2016
+  2017
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>

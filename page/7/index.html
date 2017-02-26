@@ -158,6 +158,82 @@
           
           
             
+              <a class="post-title-link" href="/2014/10/04/add-qq-mail-into-ipad-air/">
+                ipad 添加 QQ 邮件账户
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Oct 4 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/10/04/add-qq-mail-into-ipad-air/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/04/add-qq-mail-into-ipad-air/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <ol>
+<li>首先要先确定 QQ 邮箱有没有开启 POP3/SMTP服务 和 IMAP/SMTP服务。<ul>
+<li>登录 QQ 邮箱，依次点击‘设置’ -&gt; ‘账户’。</li>
+<li>然后找到 <code>POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务</code>，开启<code>POP3/SMTP服务</code>和<code>IMAP/SMTP服务</code>，保存更改。<br><img src="http://aikin-blog-images.qiniudn.com/qq-mail-confing.png" alt="mail-config"></li>
+</ul>
+</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/04/add-qq-mail-into-ipad-air/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/09/26/angular-events/">
                 AngularJS 事件
               </a>
@@ -287,80 +363,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/08/28/mongoose-remove-function/">
-                使用 mongoose 清除数据
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Aug 28 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/08/28/mongoose-remove-function/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/28/mongoose-remove-function/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>使用 mongoose 封装的方法来删除 mongodb 数据库中的 database、 collections、docs。</p>
-<ul>
-<li><h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> dbUri = <span class="string">"mongodb://localhost/test"</span>;</div><div class="line">mongoose.connect(dbUri, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> db = mongoose.connection.db;</div><div class="line">    db.dropDatabase(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (err) <span class="keyword">return</span> cb(err);</div><div class="line">	    mongoose.disconnect();</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/28/mongoose-remove-function/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -399,7 +401,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -413,7 +415,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
@@ -473,7 +475,7 @@
         <div class="copyright">
   
   &copy; &nbsp;  2014 - 
-  2016
+  2017
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
