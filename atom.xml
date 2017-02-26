@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2017-02-26T10:38:47.000Z</updated>
+  <updated>2017-02-26T10:42:22.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>数据迁移工具之 - Flyway</title>
+    <title>数据迁移工具 - Flyway</title>
     <link href="http://aikin.github.io/2017/02/26/db-migration-flyway/"/>
     <id>http://aikin.github.io/2017/02/26/db-migration-flyway/</id>
     <published>2017-02-26T06:37:48.000Z</published>
-    <updated>2017-02-26T10:38:47.000Z</updated>
+    <updated>2017-02-26T10:42:22.000Z</updated>
     
-    <content type="html"><![CDATA[<p>对于数据迁移的概念，相信大家已经都比较熟悉。那么，什么是数据迁移？为什么需要数据迁移？在这里就不做相关分享啦~。接下来主要分享一下数据迁移工具 <a href="https://github.com/flyway/flyway" target="_blank" rel="external">Flyway</a> 使用。<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<p>对于数据迁移的概念，相信大家已经都比较熟悉。那么，什么是数据迁移？为什么需要数据迁移？在这里就不再做相关分享啦~。接下来主要分享一下数据迁移工具 <a href="https://github.com/flyway/flyway" target="_blank" rel="external">Flyway</a> 使用。<br><a id="more"></a></p>
 <p><img src="./flyway-home.png" alt="flyway home"></p>
 <blockquote>
 <p>Flyway is the Apache v2 licensed open-source tool that makes database migrations easy. It strongly favors simplicity and convention over configuration.</p>
@@ -68,7 +68,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;对于数据迁移的概念，相信大家已经都比较熟悉。那么，什么是数据迁移？为什么需要数据迁移？在这里就不做相关分享啦~。接下来主要分享一下数据迁移工具 &lt;a href=&quot;https://github.com/flyway/flyway&quot;&gt;Flyway&lt;/a&gt; 使用。&lt;br&gt;
+      &lt;p&gt;对于数据迁移的概念，相信大家已经都比较熟悉。那么，什么是数据迁移？为什么需要数据迁移？在这里就不再做相关分享啦~。接下来主要分享一下数据迁移工具 &lt;a href=&quot;https://github.com/flyway/flyway&quot;&gt;Flyway&lt;/a&gt; 使用。&lt;br&gt;
     
     </summary>
     
