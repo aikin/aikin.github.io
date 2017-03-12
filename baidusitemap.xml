@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://aikin.github.io/2017/02/26/db-migration-flyway/</loc>
-    <lastmod>2017-02-26T10:42:22.000Z</lastmod>
+    <lastmod>2017-03-12T02:49:51.000Z</lastmod>
     <data>
         <display>
         <title>数据迁移工具 - Flyway</title>
@@ -14,6 +14,23 @@
         <tag>flyway</tag>
          
         <tag>db migration</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2014/09/13/javascript-the-good-parts/</loc>
+    <lastmod>2017-03-11T14:26:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>《JavaScipt 语言精粹》养分</title>
+        <pubTime>2014-09-13T12:23:15.000Z</pubTime>
+        
+        <tag>reading-notes</tag>
          
          
            
@@ -117,9 +134,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
          
            
@@ -386,9 +403,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
         <tag>db</tag>
          
@@ -521,23 +538,6 @@
         <display>
         <title>《JavaScript 模式》养分</title>
         <pubTime>2014-11-20T13:09:15.000Z</pubTime>
-        
-        <tag>reading-notes</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2014/09/13/javascript-the-good-parts/</loc>
-    <lastmod>2016-03-17T14:55:59.000Z</lastmod>
-    <data>
-        <display>
-        <title>《JavaScipt 语言精粹》养分</title>
-        <pubTime>2014-09-13T12:23:15.000Z</pubTime>
         
         <tag>reading-notes</tag>
          
