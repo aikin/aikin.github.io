@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2017-03-12T02:49:51.000Z</updated>
+  <updated>2017-03-19T14:15:24.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -14,6 +14,67 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>并发“入坑” - 处理器、进程与线程</title>
+    <link href="http://aikin.github.io/2017/03/19/concurrency/"/>
+    <id>http://aikin.github.io/2017/03/19/concurrency/</id>
+    <published>2017-03-18T16:22:54.000Z</published>
+    <updated>2017-03-19T14:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下<code>CPU</code>、<code>Process</code>和<code>Thread</code>之间的关系。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><hr>
+<h3 id="什么是处理器"><a href="#什么是处理器" class="headerlink" title="什么是处理器?"></a>什么是处理器?</h3><blockquote>
+<p>中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大核心部件。– <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8" target="_blank" rel="external">维基百科</a></p>
+</blockquote>
+<p><code>CPU</code>是计算机的核心，控制指令的发布，负责所有的数据计算处理。</p>
+<a id="more"></a>
+<h3 id="什么是进程？"><a href="#什么是进程？" class="headerlink" title="什么是进程？"></a>什么是进程？</h3><blockquote>
+<p>进程（英语：process），是计算机中已运行程序的实体。进程为曾经是分时系统的基本运作单位。在<code>面向进程设计的系统</code>（如早期的UNIX，Linux 2.4及更早的版本）中，进程是程序的基本执行实体；在<code>面向线程设计的系统</code>（如当代多数操作系统、Linux 2.6及更新的版本）中，<em>进程本身不是基本运行单位，而是线程的容器</em>。程序本身只是指令、数据及其组织形式的描述，进程才是程序（那些指令和数据）的真正运行实例。– <a href="https://zh.wikipedia.org/wiki/%E8%BF%9B%E7%A8%8B" target="_blank" rel="external">维基百科</a></p>
+</blockquote>
+<p>进程是操作系统进行资源分配和调度的一个独立单位，是应用程序运行的载体。进程是一种抽象的概念，并没有统一的标准定义。进程一般由程序、数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集合是程序在执行时所需要的数据和工作区；程序控制块(Program Control Block，简称PCB)，包含进程的描述信息和控制信息，是进程存在的唯一标志。</p>
+<h4 id="进程生命周期"><a href="#进程生命周期" class="headerlink" title="进程生命周期"></a>进程生命周期</h4><p><img src="./process-life-cycle.png" alt="进程生命周期"></p>
+<h3 id="什么是线程？"><a href="#什么是线程？" class="headerlink" title="什么是线程？"></a>什么是线程？</h3><blockquote>
+<p>线程（英语：thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。– <a href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B" target="_blank" rel="external">维基百科</a></p>
+</blockquote>
+<p>线程是最小的执行单元,是一个抽象的概念，它的抽象层次比进程抽象层次低。</p>
+<h4 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h4><p><img src="./thread-life-cycle.png" alt="线程生命周期"></p>
+<ul>
+<li><blockquote>
+<p>提示： 新启动的子线程并不会随着主线程的结束而结束。一旦子线程启动起来后，它就拥有和主线程相同的地位，它不会受主线程的影响。<br><img src="./new-thread.png" alt="new thread"></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><hr>
+<h3 id="处理器、进程和线程的关系"><a href="#处理器、进程和线程的关系" class="headerlink" title="处理器、进程和线程的关系"></a>处理器、进程和线程的关系</h3><ul>
+<li>操作系统为进程分配资源，不对线程分配资源。一个进程内可以包含多个线程，同一进程所产生的线程共享同一内存空间。线程是进程的一个实体，是<code>CPU</code>调度和分派的基本单位，也就是说处理调度的是线程。线程本身基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源.</li>
+<li>进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><hr>
+<p><a href="http://blog.csdn.net/luoweifu/article/details/46595285" target="_blank" rel="external">编程思想之多线程与多进程(1)——以操作系统的角度述说线程与进程</a><br><a href="http://www.kancloud.cn/wizardforcel/liaoxuefeng/108670" target="_blank" rel="external">进程和线程</a><br><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="external">进程与线程的一个简单解释</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下&lt;code&gt;CPU&lt;/code&gt;、&lt;code&gt;Process&lt;/code&gt;和&lt;code&gt;Thread&lt;/code&gt;之间的关系。&lt;/p&gt;
+&lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;hr&gt;
+&lt;h3 id=&quot;什么是处理器&quot;&gt;&lt;a href=&quot;#什么是处理器&quot; class=&quot;headerlink&quot; title=&quot;什么是处理器?&quot;&gt;&lt;/a&gt;什么是处理器?&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大核心部件。– &lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8&quot;&gt;维基百科&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;CPU&lt;/code&gt;是计算机的核心，控制指令的发布，负责所有的数据计算处理。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="concurrency" scheme="http://aikin.github.io/tags/concurrency/"/>
+    
+      <category term="cpu" scheme="http://aikin.github.io/tags/cpu/"/>
+    
+      <category term="thread" scheme="http://aikin.github.io/tags/thread/"/>
+    
+      <category term="process" scheme="http://aikin.github.io/tags/process/"/>
+    
+  </entry>
   
   <entry>
     <title>数据迁移工具 - Flyway</title>
@@ -241,9 +302,9 @@
     </summary>
     
     
-      <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
-    
       <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
+    
+      <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
     
       <category term="db" scheme="http://aikin.github.io/tags/db/"/>
     
@@ -492,9 +553,9 @@
     </summary>
     
     
-      <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
-    
       <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
+    
+      <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
     
   </entry>
   
@@ -1630,71 +1691,6 @@
     
     
       <category term="生活" scheme="http://aikin.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AngularJS 事件</title>
-    <link href="http://aikin.github.io/2014/09/26/angular-events/"/>
-    <id>http://aikin.github.io/2014/09/26/angular-events/</id>
-    <published>2014-09-26T11:30:23.000Z</published>
-    <updated>2016-10-03T17:22:01.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>AngularJS 事件系统并不与浏览器的事件系统相通，这意味着，我们只能在作用域上监听 AngularJS 事件而不是 DOM 事件。由于作用域是有层次的(既是继承关系)，所以可以在作用域链上传递事件。在传递事件前，需要先了解触发事件的作用域和处理事件的作用域的关系，这样我们才可以判断事件是向上传递还是向下广播。</p>
-<a id="more"></a>
-<h2 id="a-事件如何传播"><a href="#a-事件如何传播" class="headerlink" title="a. 事件如何传播"></a>a. 事件如何传播</h2><p>什么时候需要向上传递事件？当处理事件的作用域为触发事件的作用域的父级作用域时，就需要将事件向上传递。同理，当处理事件的作用域为触发事件的作用域的子级作用域时，就需要将事件向下传递。<br><strong> 1. 使用<code>$emit</code>向上传递事件 </strong><br>　　使用<code>$emit</code>将事件沿着作用域链向上传递，即从子作用域到父作用域。</p>
-<blockquote>
-<p><strong><em>语法：</em></strong><br>    <strong><code>scope.$emit(name, args)</code></strong></p>
-<p><strong><em>参数：</em></strong></p>
-<p><strong><code>name</code></strong><br>　　类型：<code>String</code>，要触发事件的名称。</p>
-<p><strong><code>args</code></strong><br>　　参数集合，可以是一个也可以是多个，作为对象传递到事件监听者中。</p>
-</blockquote>
-<p><strong>eg-1：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$emit(&apos;just-test-emit&apos;, [&apos;first&apos;], [&apos;second&apos;]);</div></pre></td></tr></table></figure></p>
-<ul>
-<li><strong>eg-1</strong>中，<code>just-test-emit</code>为事件名称，而<code>[first]</code> 和<code>[second]</code>为传递到事件监听者中的参数。</li>
-<li>在<code>$emit()</code>事件函数调用后，事件会从子作用域冒泡到父作用域。在触发事件的作用域之上的所有作用域都会收到这个事件的通知。</li>
-</ul>
-<p><strong> 2. 使用<code>$broadcast</code>向下广播事件 </strong><br>　　<code>$broadcast</code>和<code>$emit</code>用法很类似，只是<code>$broadcast</code>是将事件沿着作用域向下传递，即从父作用域到子作用域。</p>
-<blockquote>
-<p><strong><em>语法：</em></strong><br>    <strong><code>scope.$broadcast(name, args)</code></strong></p>
-<p><strong><em>参数：</em></strong></p>
-<p><strong><code>name</code></strong><br>　　类型：<code>String</code>，要触发事件的名称。</p>
-<p><strong><code>args</code></strong><br>　　参数集合，可以是一个也可以是多个，作为对象传递到事件监听者中。</p>
-</blockquote>
-<p><strong>eg-2：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$broadcast(&apos;just-test-broadcast&apos;, [&apos;first&apos;], [&apos;second&apos;]);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>在<code>$broadcast()</code>事件函数调用后，每个在子作用域注册了事件的监听者都会收到这个事件通知。</li>
-</ul>
-<p><strong> 3. 使用<code>$on</code>监听事件 </strong><br>　　使用<code>$on</code>根据事件的名称，注册一个监听者。同时<code>$on</code>函数会返回一个反注册函数，我们可以通过调用这个反注册函数取消事件监听者。</p>
-<blockquote>
-<p><strong><em>语法：</em></strong><br>    <strong><code>scope.$on(name, listener)</code></strong></p>
-<p><strong><em>参数：</em></strong></p>
-<p><strong><code>name</code></strong><br>　　类型：<code>String</code>，要监听的事件名称。</p>
-<p><strong><code>listener</code></strong><br>　　类型：<code>Function</code>，事件监听者。<br>　　函数的格式:<code>function(event, args...)</code>，AngularJS会把<code>event</code>对象作为第一个参数传给正在监听事件的监听者(不管是自定义的事件还是AngularJS内置的事件)。<code>args</code>为触发事件时传递给事件监听者的参数集合。<code>event</code>(事件)对象属性:<br>　　　<strong><em><code>event.targetScope</code></em></strong><br>　　　　类型：<code>Scope</code>，表示事件触发所在的那个作用域。<br>　　　<strong><em><code>event.currentScope</code></em></strong><br>　　　　类型：<code>Scope</code>，当前事件处理的作用域。<br>　　　<strong><em><code>event.name</code></em></strong><br>　　　　类型：<code>String</code>，事件的名称。<br>　　　<strong><em><code>event.stopPropagation</code></em></strong><br>　　　　类型：<code>Function</code>，调用后会取消事件的冒泡，也就是取消通过<code>$emit</code>触发的事件进一步在作用域链上向上传递。<br>　　　<strong><em><code>event.preventDefault</code></em></strong><br>　　　　类型：<code>Function</code>，调用后会将<code>defaultPrevented</code>设置为<code>true</code>，同时告诉子作用域无需处理这个事件，但是不能阻止事件的传播。<br>　　　<strong><em><code>event.defaultPrevented</code></em></strong><br>　　　　类型：<code>Boolean</code>。</p>
-</blockquote>
-<h2 id="b-事件相关的核心服务"><a href="#b-事件相关的核心服务" class="headerlink" title="b. 事件相关的核心服务"></a>b. 事件相关的核心服务</h2><ul>
-<li><strong> 核心系统的<code>$emitted</code>事件 </strong><br>　　下面的事件从指令向上传递到包含指令调用的作用域。</li>
-</ul>
-<p>　　1. <code>$includeContentRequested</code><br>　　  这个事件从调用<code>ngInclude</code>的作用域向上传递。每次<code>ngInclude</code>的内容被请求时，都会被触发。<br>　　2. <code>$includeContentLoaded</code><br>　　  当<code>ngInclude</code>的内容重新加载时，将会从<code>ngInclude</code>指令上触发。<br>　　3. <code>$includeContentError</code><br>　　  当HTTP请求模板错误时触发。<br>　　4. <code>$viewContentLoaded</code><br>　　  每当<code>ngView</code>内容被重新加载时，将会从当前<code>ngView</code>作用域向上传递事件。</p>
-<ul>
-<li><strong> 核心系统的<code>$broadcast</code>事件 </strong><br>　　1. <code>$locationChangeStart</code><br>　　  当 AngularJS 从 $location 服务(通过$location.path()、$location.search()等)对浏览器的地址作更新时，会触发<code>$locationChangeStart</code>事件。<br>　　2. <code>$locationChangeSuccess</code><br>　　  当且仅当浏览器的地址变更成功后，同时又没有阻止<code>$locationChangeStart</code>事件的情况下，<code>$locationChangeSuccess</code>事件会从<code>$rootScope</code>作用域向下广播出来。<br>　　3. <code>$routeChangeStart</code><br>　　  在路由变更发生之前，<code>$routeChangeStart</code>事件会从<code>$rootScope</code>作用域广播出来。也就是在路由服务开始解析路由变更所需的所有依赖项时。<br>　　4. <code>$routeChangeSuccess</code><br>　　  在所有路由依赖项跟着<code>$routeChangeStart</code>被解析后，<code>$routeChangeSuccess</code>事件就会从<code>$rootScope</code>作用域上广播出来。<code>ngView</code>指令使用<code>$routeChangeSuccess</code>事件来获悉何时实例化控制器并渲染视图。<br>　　5. <code>$routeChangeError</code><br>　　  如果路由对象上任意的<code>resolve</code>属性被拒绝，<code>$routeChangeError</code>就会被触发。<br>　　6. <code>$routeUpdate</code><br>　　  如果<code>$routeProvider</code>上的<code>reloadOnSearch</code>属性被设置成false，并且使用了控制器的同一实例，<code>$routeUpdate</code>就会被触发，同时会从作用域<code>$rootScope</code>向下传递。<br>　　7. <code>$destroy</code><br>　　  在作用域被销毁之前，<code>$destroy</code>事件会在作用域上广播，这样子作用域在父作用域被真正移除之前可以先清理自身。<br>　　  例如，如果在控制器中有一个正在运行的<code>$interval</code>，我们不希望在包含它的控制器已经不存在的情况下，它还继续触发，就可以在作用域销毁前，先取消掉<code>$interval</code>。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> autoPolling = $interval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    initData();</div><div class="line">&#125;, <span class="number">3000</span>);</div><div class="line"></div><div class="line">$scope.stopAutoPolling = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (angular.isDefined(autoPolling)) &#123;</div><div class="line">        $interval.cancel(autoPolling);</div><div class="line">        autoPolling = <span class="literal">undefined</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $scope.stopAutoPolling();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li>《Angular JS权威指南》</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;AngularJS 事件系统并不与浏览器的事件系统相通，这意味着，我们只能在作用域上监听 AngularJS 事件而不是 DOM 事件。由于作用域是有层次的(既是继承关系)，所以可以在作用域链上传递事件。在传递事件前，需要先了解触发事件的作用域和处理事件的作用域的关系，这样我们才可以判断事件是向上传递还是向下广播。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
-    
-      <category term="angularjs" scheme="http://aikin.github.io/tags/angularjs/"/>
     
   </entry>
   

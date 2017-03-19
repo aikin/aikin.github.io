@@ -158,6 +158,85 @@
           
           
             
+              <a class="post-title-link" href="/2014/12/20/ubuntu-auto-startup/">
+                Ubuntu 服务自动启动
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Dec 20 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/12/20/ubuntu-auto-startup/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/20/ubuntu-auto-startup/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>有时候，我们希望服务器重启后能够自动的把相关的服务启动起来。在了解如何让服务自动启动前，我们需要先了解一下，linux系统的启动步骤。</p>
+<h3 id="linux-系统的启动步骤"><a href="#linux-系统的启动步骤" class="headerlink" title="linux 系统的启动步骤"></a>linux 系统的启动步骤</h3><blockquote>
+<ol>
+<li>读取 MBR 的信息，启动 Boot Manager。</li>
+<li>加载系统内核，初始化硬件和设备驱动，启动 init 进程， init 进程是 Linux 的根进程，所有的系统进程都是它的子进程，也就是说 init 进程会根据配置文件继续引导过程，启动其它进程。</li>
+<li>init 进程读取 /etc/inittab 文件中的信息，并进入预设的运行级别。通常情况下 /etc/rcS.d/ 目录下的启动脚本首先被执行，然后是/etc/rcN.d/ 目录。</li>
+<li>根据 /etc/rcS.d/ 文件夹中对应的脚本启动 Xwindow 服务器 xorg，Xwindow 为 Linux 下的图形用户界面系统。</li>
+<li>启动登录管理器，等待用户登录。</li>
+</ol>
+</blockquote>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/12/20/ubuntu-auto-startup/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/12/07/window-life-cycle-events/">
                 window 对象的“生命周期”事件
               </a>
@@ -289,78 +368,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/11/10/prototype-proto/">
-                理解 prototype 和 __proto__
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Nov 10 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/11/10/prototype-proto/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/10/prototype-proto/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="理解-prototype-和-proto"><a href="#理解-prototype-和-proto" class="headerlink" title="理解 prototype 和 __proto__"></a>理解 prototype 和 __proto__</h2><blockquote>
-<p>一个对象的真正原型是被对象内部的<code>[[Prototype]]</code>属性所持有。ECMAScript 引入了标准对象原型访问器<code>Object.getPrototype(object)</code>，到目前为止只有 Firefox 和 Chrome 实现了此访问器。除了IE，其他的浏览器支持非标准的访问器<code>__proto__</code></p>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/10/prototype-proto/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -399,7 +406,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -413,7 +420,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

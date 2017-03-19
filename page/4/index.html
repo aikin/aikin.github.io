@@ -158,6 +158,77 @@
           
           
             
+              <a class="post-title-link" href="/2016/07/20/dockerize-dev-env/">
+                容器化开发环境
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Jul 20 2016
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/07/20/dockerize-dev-env/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/dockerize-dev-env/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>有没有过项目之间各种<code>Java</code>版本开发环境切换的场景；有没有过<code>github</code>上<code>clone</code>回来的代码库，由于各种开发环境依赖无法运行的问题；有没有过进入一个新项目时各种配开发环境到深夜的经历…<code>Come On!</code>为什么会这样，一切都是开发环境问题。为了不让别人痛苦，更不想让自己痛苦，请容器化开发环境吧，让我们享受一键部署开发环境的痛快吧。</p>
+<p>用什么容器化呢？当然是<code>Docker</code>啦，轻量级又好用，又流行，最关键点是本人仅<code>Docker</code>比较熟悉，所以就拿它来搞起啦。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/20/dockerize-dev-env/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/03/auto-test-writed/">
                 我写过的那几类自动化测试
               </a>
@@ -289,85 +360,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/12/20/ubuntu-auto-startup/">
-                Ubuntu 服务自动启动
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Dec 20 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/12/20/ubuntu-auto-startup/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/20/ubuntu-auto-startup/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>有时候，我们希望服务器重启后能够自动的把相关的服务启动起来。在了解如何让服务自动启动前，我们需要先了解一下，linux系统的启动步骤。</p>
-<h3 id="linux-系统的启动步骤"><a href="#linux-系统的启动步骤" class="headerlink" title="linux 系统的启动步骤"></a>linux 系统的启动步骤</h3><blockquote>
-<ol>
-<li>读取 MBR 的信息，启动 Boot Manager。</li>
-<li>加载系统内核，初始化硬件和设备驱动，启动 init 进程， init 进程是 Linux 的根进程，所有的系统进程都是它的子进程，也就是说 init 进程会根据配置文件继续引导过程，启动其它进程。</li>
-<li>init 进程读取 /etc/inittab 文件中的信息，并进入预设的运行级别。通常情况下 /etc/rcS.d/ 目录下的启动脚本首先被执行，然后是/etc/rcN.d/ 目录。</li>
-<li>根据 /etc/rcS.d/ 文件夹中对应的脚本启动 Xwindow 服务器 xorg，Xwindow 为 Linux 下的图形用户界面系统。</li>
-<li>启动登录管理器，等待用户登录。</li>
-</ol>
-</blockquote>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/20/ubuntu-auto-startup/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -406,7 +398,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -420,7 +412,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>

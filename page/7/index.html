@@ -158,6 +158,77 @@
           
           
             
+              <a class="post-title-link" href="/2014/10/24/gulp-nodemon-livereload/">
+                Gulp API 初探和 gulp-nodemon gulp-livereload 配置
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on Oct 24 2014
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2014/10/24/gulp-nodemon-livereload/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2014/10/24/gulp-nodemon-livereload/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p><a href="http://gulpjs.com/">Gulp</a>，是一个自动化任务运行工具(就是让一些如: 图片压缩，js合并，Sass 编译成 CSS，测试，重启服务器等操作，能自动运行的工具。)，和 <a href="http://gruntjs.com/">Grunt</a> 是同一类型的工具。表示之前没有配置过这两类的工具，只是简单的了解过。最近刚好要用到，就在各种 google 了，发现现在使用最广泛的就是 Grunt，中文的学习资料和相应的任务插件也很多。而 Gulp 貌似最近才火起来的吧，第三方插件没有 Grunt 那么多。但是个人对 Gulp 第一印象比较好，感觉写起来更加方便，更有 DSL 感觉。</p>
+<div style="width: 20%; margin-left: auto; margin-right:auto"><br><img src="/images/gulp-2x.png" /></div>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2014/10/24/gulp-nodemon-livereload/#more">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2014/10/04/add-qq-mail-into-ipad-air/">
                 ipad 添加 QQ 邮件账户
               </a>
@@ -293,76 +364,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2014/09/13/javascript-the-good-parts/">
-                《JavaScipt 语言精粹》养分
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on Sep 13 2014
-        </span>
-
-        
-
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2014/09/13/javascript-the-good-parts/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2014/09/13/javascript-the-good-parts/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="《JavaScipt-语言精粹》-作者-Douglas-Crockford"><a href="#《JavaScipt-语言精粹》-作者-Douglas-Crockford" class="headerlink" title="《JavaScipt 语言精粹》 作者: Douglas Crockford"></a>《JavaScipt 语言精粹》 作者: Douglas Crockford</h2><h4 id="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"><a href="#拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。" class="headerlink" title="拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得铁路图实在看着有点费劲。"></a>拿到这本书的时候就读错了名字。悲剧啊。内容写的挺详细的，就是书中用得<strong>铁路图</strong>实在看着有点费劲。</h4><h3 id="养分"><a href="#养分" class="headerlink" title="养分"></a>养分</h3><p><strong>1. <code>beget</code>创建一个使用原对象作为其原型的新的对象。</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Object</span>.beget !== <span class="string">'function'</span>) &#123;</div><div class="line">    <span class="built_in">Object</span>.beget = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">       <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">       F.prototype = obj;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/09/13/javascript-the-good-parts/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -401,7 +402,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -415,7 +416,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">tags</span>
               </a>
           </div>
