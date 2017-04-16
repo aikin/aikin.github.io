@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2017-03-19T14:15:24.000Z</updated>
+  <updated>2017-04-16T04:10:21.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>并发“入坑” - 处理器、进程与线程</title>
+    <title>并发入坑前奏</title>
     <link href="http://aikin.github.io/2017/03/19/concurrency/"/>
     <id>http://aikin.github.io/2017/03/19/concurrency/</id>
     <published>2017-03-18T16:22:54.000Z</published>
-    <updated>2017-03-19T14:15:24.000Z</updated>
+    <updated>2017-04-16T04:10:21.000Z</updated>
     
     <content type="html"><![CDATA[<p>作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下<code>CPU</code>、<code>Process</code>和<code>Thread</code>之间的关系。</p>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><hr>
