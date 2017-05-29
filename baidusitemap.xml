@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2017/05/15/ref-base-data-type/</loc>
+    <lastmod>2017-05-29T06:18:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>栈内和堆内的生命体</title>
+        <pubTime>2017-05-15T13:54:47.000Z</pubTime>
+        
+        <tag>reference</tag>
+         
+        <tag>stack</tag>
+         
+        <tag>heap</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2017/03/19/concurrency/</loc>
     <lastmod>2017-04-16T04:10:21.000Z</lastmod>
     <data>

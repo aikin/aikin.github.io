@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/2017/05/15/ref-base-data-type/</loc>
+    
+    <lastmod>2017-05-29T06:18:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2017/03/19/concurrency/</loc>
     
     <lastmod>2017-04-16T04:10:21.000Z</lastmod>
