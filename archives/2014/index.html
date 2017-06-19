@@ -1,11 +1,27 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<html class="theme-next mist use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
 
 
   <meta name="google-site-verification" content="sXwupEqUXeSBb8k_Geoi-m4kCgGFfthSCmW0PKEuQrE" />
@@ -14,137 +30,259 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/libs/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-
-<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
 
 
 
 
-  <meta name="keywords" content="Hexo,next" />
 
 
 
-  <link rel="alternate" href="/atom.xml" title="aikin'blog" type="application/atom+xml" />
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Kin'blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kin'blog">
+<meta property="og:url" content="http://aikin.github.io/archives/2014/index.html">
+<meta property="og:site_name" content="Kin'blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kin'blog">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    analytics: {
-      google: 'UA-53634746-1'
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
     },
-    sidebar: 'hide'
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
 
-  <script type="text/javascript" src="/js/analytics_google-analytics.js?v=0.4.3"></script>
+
+
+  <link rel="canonical" href="http://aikin.github.io/archives/2014/"/>
 
 
 
 
 
-  <title> Archive </title>
+  <title>Archive | Kin'blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-53634746-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
-<body>
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
-  <div class="container one-column  page-archive ">
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
-    <div id="header" class="header">
-      <div class="header-inner">
-        <h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/" class="brand">
-      <span class="logo">
-        <i class="icon-logo"></i>
-      </span>
-      <span class="site-title">aikin'blog</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kin'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">喜欢coding。喜欢大海。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<div class="site-nav">
+<nav class="site-nav">
   
 
   
-    <ul id="menu" class="menu ">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-          <a href="/">
-            <i class="menu-item-icon icon-home"></i> <br />
-            home
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives">
-            <i class="menu-item-icon icon-archives"></i> <br />
-            archives
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
           </a>
         </li>
       
         
         <li class="menu-item menu-item-brief">
-          <a href="/brief-thought">
-            <i class="menu-item-icon icon-brief"></i> <br />
-            brief
+          <a href="/brief-thought/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
+            
+            Brief
           </a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags">
-            <i class="menu-item-icon icon-tags"></i> <br />
-            tags
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
           </a>
         </li>
+      
+
       
     </ul>
   
 
   
-</div>
+</nav>
 
-      </div>
-    </div>
 
-    <div id="main" class="main">
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
-  <div id="posts" class="posts-collapse">
+  <section id="posts" class="posts-collapse">
     <span class="archive-move-on"></span>
 
     <span class="archive-page-counter">
@@ -171,23 +309,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/12/20/ubuntu-auto-startup/">
-              Ubuntu 服务自动启动
+            <a class="post-title-link" href="/2014/12/20/ubuntu-auto-startup/" itemprop="url">
+              
+                <span itemprop="name">Ubuntu 服务自动启动</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 12-20 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-12-20T19:26:25+08:00"
+              content="Dec 20 2014" >
+          12-20
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -202,23 +346,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/12/07/window-life-cycle-events/">
-              window 对象的“生命周期”事件
+            <a class="post-title-link" href="/2014/12/07/window-life-cycle-events/" itemprop="url">
+              
+                <span itemprop="name">window 对象的“生命周期”事件</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 12-07 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-12-07T14:42:23+08:00"
+              content="Dec 7 2014" >
+          12-07
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -233,23 +383,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/11/20/javascript-patterns/">
-              《JavaScript 模式》养分
+            <a class="post-title-link" href="/2014/11/20/javascript-patterns/" itemprop="url">
+              
+                <span itemprop="name">《JavaScript 模式》养分</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 11-20 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-11-20T21:09:15+08:00"
+              content="Nov 20 2014" >
+          11-20
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -264,23 +420,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/11/10/prototype-proto/">
-              理解 prototype 和 __proto__
+            <a class="post-title-link" href="/2014/11/10/prototype-proto/" itemprop="url">
+              
+                <span itemprop="name">理解 prototype 和 __proto__</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 11-10 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-11-10T20:07:10+08:00"
+              content="Nov 10 2014" >
+          11-10
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -295,23 +457,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/11/08/star-repos/">
-              Star Repositories On GitHub
+            <a class="post-title-link" href="/2014/11/08/star-repos/" itemprop="url">
+              
+                <span itemprop="name">Star Repositories On GitHub</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 11-08 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-11-08T20:16:35+08:00"
+              content="Nov 8 2014" >
+          11-08
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -326,23 +494,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/11/02/mongoose-population/">
-              Mongoose 之 Population
+            <a class="post-title-link" href="/2014/11/02/mongoose-population/" itemprop="url">
+              
+                <span itemprop="name">Mongoose 之 Population</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 11-02 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-11-02T21:30:17+08:00"
+              content="Nov 2 2014" >
+          11-02
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -357,23 +531,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/10/24/gulp-nodemon-livereload/">
-              Gulp API 初探和 gulp-nodemon gulp-livereload 配置
+            <a class="post-title-link" href="/2014/10/24/gulp-nodemon-livereload/" itemprop="url">
+              
+                <span itemprop="name">Gulp API 初探和 gulp-nodemon gulp-livereload 配置</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 10-24 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-10-24T21:08:09+08:00"
+              content="Oct 24 2014" >
+          10-24
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -388,23 +568,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/10/04/add-qq-mail-into-ipad-air/">
-              ipad 添加 QQ 邮件账户
+            <a class="post-title-link" href="/2014/10/04/add-qq-mail-into-ipad-air/" itemprop="url">
+              
+                <span itemprop="name">ipad 添加 QQ 邮件账户</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 10-04 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-10-04T18:05:39+08:00"
+              content="Oct 4 2014" >
+          10-04
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -419,23 +605,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/09/26/angular-events/">
-              AngularJS 事件
+            <a class="post-title-link" href="/2014/09/26/angular-events/" itemprop="url">
+              
+                <span itemprop="name">AngularJS 事件</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 09-26 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-09-26T19:30:23+08:00"
+              content="Sep 26 2014" >
+          09-26
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -450,23 +642,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/09/13/javascript-the-good-parts/">
-              《JavaScipt 语言精粹》养分
+            <a class="post-title-link" href="/2014/09/13/javascript-the-good-parts/" itemprop="url">
+              
+                <span itemprop="name">《JavaScipt 语言精粹》养分</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 09-13 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-09-13T20:23:15+08:00"
+              content="Sep 13 2014" >
+          09-13
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -481,23 +679,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/08/28/mongoose-remove-function/">
-              使用 mongoose 清除数据
+            <a class="post-title-link" href="/2014/08/28/mongoose-remove-function/" itemprop="url">
+              
+                <span itemprop="name">使用 mongoose 清除数据</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 08-28 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-08-28T21:01:36+08:00"
+              content="Aug 28 2014" >
+          08-28
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -512,23 +716,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/08/16/js-call-apply-bind/">
-              “随心所欲”指定 this 的绑定对象
+            <a class="post-title-link" href="/2014/08/16/js-call-apply-bind/" itemprop="url">
+              
+                <span itemprop="name">“随心所欲”指定 this 的绑定对象</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 08-16 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-08-16T20:36:47+08:00"
+              content="Aug 16 2014" >
+          08-16
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -543,23 +753,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/08/08/install-atom-on-ubuntu/">
-              Ubuntu 14.04 安装 Atom
+            <a class="post-title-link" href="/2014/08/08/install-atom-on-ubuntu/" itemprop="url">
+              
+                <span itemprop="name">Ubuntu 14.04 安装 Atom</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 08-08 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-08-08T20:14:45+08:00"
+              content="Aug 8 2014" >
+          08-08
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -574,23 +790,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/08/05/js-this/">
-              javascript 中的 this 关键字
+            <a class="post-title-link" href="/2014/08/05/js-this/" itemprop="url">
+              
+                <span itemprop="name">javascript 中的 this 关键字</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 08-05 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-08-05T20:14:33+08:00"
+              content="Aug 5 2014" >
+          08-05
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -605,23 +827,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/08/03/init/">
-              init blog
+            <a class="post-title-link" href="/2014/08/03/init/" itemprop="url">
+              
+                <span itemprop="name">init blog</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 08-03 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-08-03T20:15:07+08:00"
+              content="Aug 3 2014" >
+          08-03
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -636,23 +864,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/07/16/cocos2d-html5-sprite/">
-              Cocos2d HTML5 Sprite 绑定点击事件
+            <a class="post-title-link" href="/2014/07/16/cocos2d-html5-sprite/" itemprop="url">
+              
+                <span itemprop="name">Cocos2d HTML5 Sprite 绑定点击事件</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 07-16 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-07-16T16:38:05+08:00"
+              content="Jul 16 2014" >
+          07-16
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -667,23 +901,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/06/16/ie-iframe-cache/">
-              IE reload iframe
+            <a class="post-title-link" href="/2014/06/16/ie-iframe-cache/" itemprop="url">
+              
+                <span itemprop="name">IE reload iframe</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 06-16 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-06-16T00:05:24+08:00"
+              content="Jun 16 2014" >
+          06-16
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -698,23 +938,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/03/16/ios7-uinavigationcontroller-uiview/">
-              iOS7 UINavigationController 导致 UIScollView 尺寸变化
+            <a class="post-title-link" href="/2014/03/16/ios7-uinavigationcontroller-uiview/" itemprop="url">
+              
+                <span itemprop="name">iOS7 UINavigationController 导致 UIScollView 尺寸变化</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 03-16 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-03-16T23:38:11+08:00"
+              content="Mar 16 2014" >
+          03-16
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -729,23 +975,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/03/15/mongodb-gui-rockmongo/">
-              MongoDB GUI 之 RockMogo
+            <a class="post-title-link" href="/2014/03/15/mongodb-gui-rockmongo/" itemprop="url">
+              
+                <span itemprop="name">MongoDB GUI 之 RockMogo</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 03-15 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-03-15T23:17:22+08:00"
+              content="Mar 15 2014" >
+          03-15
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -760,23 +1012,29 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/03/05/rails-user-agent/">
-              Rails User Agent
+            <a class="post-title-link" href="/2014/03/05/rails-user-agent/" itemprop="url">
+              
+                <span itemprop="name">Rails User Agent</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 03-05 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-03-05T16:46:10+08:00"
+              content="Mar 5 2014" >
+          03-05
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
@@ -791,40 +1049,49 @@
 
       
 
-  <div class="post post-type-normal">
-    <div class="post-header">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <div class="post-title">
+      <h3 class="post-title">
         
-            <a class="post-title-link" href="/2014/02/20/rails-paperclip/">
-              Rails 使用 Paperclip 上传图片
+            <a class="post-title-link" href="/2014/02/20/rails-paperclip/" itemprop="url">
+              
+                <span itemprop="name">Rails 使用 Paperclip 上传图片</span>
+              
             </a>
         
-      </div>
+      </h3>
 
       <div class="post-meta">
-        <span class="post-time"> 02-20 </span>
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2014-02-20T22:07:00+08:00"
+              content="Feb 20 2014" >
+          02-20
+        </time>
       </div>
 
-    </div>
-  </div>
+    </header>
+  </article>
 
 
 
     
 
-  </div>
+  </section>
 
   
 
 
+
+          </div>
+          
+
+
+          
+
         </div>
-
         
-      </div>
-
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -834,45 +1101,53 @@
     </div>
   </div>
 
-  <div id="sidebar" class="sidebar">
+  <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
       
 
-      <div class="site-overview">
-        <div class="site-author motion-element">
-          <img class="site-author-image" src="/images/avatar.png" alt="aikin" />
-          <p class="site-author-name">aikin</p>
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="aikin" />
+          <p class="site-author-name" itemprop="name">aikin</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
-        <p class="site-description motion-element"></p>
-        <div class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">34</span>
-              <span class="site-state-item-name">posts</span>
-            </a>
-          </div>
+        <nav class="site-state motion-element">
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
-              
-          </div>
-
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">41</span>
-              <span class="site-state-item-name">tags</span>
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">posts</span>
               </a>
-          </div>
+            </div>
+          
 
-        </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
 
         
           <div class="feed-link motion-element">
-            <a href="/atom.xml">
-              <i class="menu-item-icon icon-feed"></i>
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
               RSS
             </a>
           </div>
@@ -882,20 +1157,22 @@
           
             
               <span class="links-of-author-item">
-              <a href="http://weibo.com/uneffacement" target="_blank">Weibo</a>
-            </span>
+                <a href="https://github.com/aikin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
             
               <span class="links-of-author-item">
-              <a href="https://github.com/aikin" target="_blank">GitHub</a>
-            </span>
-            
-              <span class="links-of-author-item">
-              <a href="http://stackoverflow.com/users/2854005/aikin" target="_blank">Stackoverflow</a>
-            </span>
-            
-              <span class="links-of-author-item">
-              <a href="http://segmentfault.com/u/aikin" target="_blank">Segmentfault</a>
-            </span>
+                <a href="http://segmentfault.com/u/aikin" target="_blank" title="Segmentfault">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                  Segmentfault
+                </a>
+              </span>
             
           
         </div>
@@ -903,34 +1180,41 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
         
-      </div>
+        
+
+        
+
+
+      </section>
+
+      
 
       
 
     </div>
-  </div>
+  </aside>
 
 
-    </div>
+        
+      </div>
+    </main>
 
-    <div id="footer" class="footer">
+    <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
-  &copy; &nbsp;  2014 - 
-  2017
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
-    <i class="icon-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
-  <span class="author">aikin</span>
+  <span class="author" itemprop="copyrightHolder">aikin</span>
 </div>
 
+
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -941,40 +1225,80 @@
 </div>
 
 
+        
 
+        
       </div>
-    </div>
+    </footer>
 
-    <div class="back-to-top"></div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
-  <script type="text/javascript" src="/libs/jquery/index.js?v=2.1.3"></script>
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
 
   
   
-  
-    <script type="text/javascript">
-      postMotionOptions = {stagger: 100, drag: true};
-    </script>
-  
-
-
-  
-  <script type="text/javascript" src="/libs/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
-  
-
-  <script type="text/javascript" src="/libs/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/libs/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
-
-
-
-  <script type="text/javascript" src="/js/search-toggle.js"></script>
 
   
   
@@ -984,13 +1308,55 @@
   
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-    });
-  </script>
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://aikinlu.disqus.com/count.js" async></script>
+    
+
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -998,15 +1364,11 @@
 
   
 
-  <!-- lazyload -->
-  <script type="text/javascript" src="/js/lazyload.js"></script>
-      <script type="text/javascript">
-        jQuery(function() {
-            jQuery("#posts img").lazyload({
-              placeholder:"http://www.arao.me/loading.gif",
-                effect:"fadeIn"
-              });
-            });
-    </script>
+  
+
+  
+
+  
+
 </body>
 </html>

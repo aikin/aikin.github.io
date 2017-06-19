@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
+    <lastmod>2017-06-19T16:54:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>容器化开发环境</title>
+        <pubTime>2016-07-19T18:12:44.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>dockerize</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2017/05/15/ref-base-data-type/</loc>
     <lastmod>2017-05-29T06:18:37.000Z</lastmod>
     <data>
@@ -162,25 +181,6 @@
         <pubTime>2014-07-16T08:38:05.000Z</pubTime>
         
         <tag>cocos2d</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
-    <lastmod>2016-10-29T14:48:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>容器化开发环境</title>
-        <pubTime>2016-07-19T18:12:44.000Z</pubTime>
-        
-        <tag>docker</tag>
-         
-        <tag>dockerize</tag>
          
          
            
