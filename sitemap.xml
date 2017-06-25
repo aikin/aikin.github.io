@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/2017/06/25/color-run/</loc>
+    
+    <lastmod>2017-06-25T06:47:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2016/07/20/dockerize-dev-env/</loc>
     
     <lastmod>2017-06-19T16:54:54.000Z</lastmod>
