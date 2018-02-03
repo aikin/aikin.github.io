@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2018/01/20/critial-thinking/</loc>
+    <lastmod>2018-02-03T06:55:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>批判性思维</title>
+        <pubTime>2018-01-20T14:29:50.000Z</pubTime>
+        
+        <tag>Critial Thinking</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2017/06/25/color-run/</loc>
     <lastmod>2017-06-25T06:47:57.000Z</lastmod>
     <data>
@@ -26,9 +43,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
          
            
@@ -462,9 +479,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
         <tag>db</tag>
          
