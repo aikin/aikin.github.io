@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2018-04-01T07:12:43.000Z</updated>
+  <updated>2018-04-03T13:42:08.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -16,11 +16,56 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Do You Really Need @DirtiesContext</title>
+    <link href="http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/"/>
+    <id>http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/</id>
+    <published>2018-04-02T05:52:03.000Z</published>
+    <updated>2018-04-03T13:42:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>测试又随机挂了，该怎么办？加上 <code>@DirtiesContext</code> 试试。真棒，修好了。</p>
+<p>WAIT! WAIT! WAIT! 为什么加 <code>@DirtiesContext</code> 就修好，有没有什么副作用？</p>
+<blockquote>
+<p><code>@DirtiesContext</code> is a spring test annotation which is used to indicate that the application context cached should be removed and reloaded after each test run. The application context removed will also be closed.</p>
+</blockquote>
+<a id="more"></a>
+<p>如上面所述，<code>@DirtiesContext</code> 会导致<code>application context</code>不被缓存，也就是说，有可能会对测试运行的速度有影响。官方文档介绍<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#dirtiescontext" target="_blank" rel="external">@DirtiesContext</a>：</p>
+<blockquote>
+<p><img src="./dirties-context.png" alt="dirties context"></p>
+</blockquote>
+<p>如果在测试类上，使用<code>@DirtiesContext</code>注解，待整个测试类的所有测试执行结束后，该测试的<code>application context</code>会被关闭，同时缓存会清除。<code>@DirtiesContext</code>分为<code>method-level</code>和<code>class-level</code>。</p>
+<ul>
+<li><code>method-level</code>只有当<code>@DirtiesContext</code>注解设置在<strong><code>test method</code></strong>上的才会生效，<code>methodMode</code>有两种配置：<code>BEFORE_METHOD</code>、<code>AFTER_METHOD</code>，默认是<code>AFTER_METHOD</code>。</li>
+<li><code>class-level</code>只有当<code>@DirtiesContext</code>注解设置在<strong><code>test class</code></strong>上的才会生效，<code>classMode</code>有四种配置：<code>BEFORE_CLASS</code>、<code>BEFORE_EACH_TEST_METHOD</code>、<code>AFTER_EACH_TEST_METHOD</code>、<code>AFTER_CLASS</code>，默认是<code>AFTER_CLASS</code>。</li>
+<li>生命周期：<img src="./dirties-context-life-cycle.png" alt="life cycle"></li>
+</ul>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>虽然使用<code>@DirtiesContext</code>，可以保证每个<code>test class</code>的执行上下文的独立性、隔离性，但是也会有让测试运行速度变慢的副作用。所以在使用<code>@DirtiesContext</code>前，弄清楚你是否真的需要使用它。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;测试又随机挂了，该怎么办？加上 &lt;code&gt;@DirtiesContext&lt;/code&gt; 试试。真棒，修好了。&lt;/p&gt;
+&lt;p&gt;WAIT! WAIT! WAIT! 为什么加 &lt;code&gt;@DirtiesContext&lt;/code&gt; 就修好，有没有什么副作用？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;@DirtiesContext&lt;/code&gt; is a spring test annotation which is used to indicate that the application context cached should be removed and reloaded after each test run. The application context removed will also be closed.&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="spring-boot" scheme="http://aikin.github.io/tags/spring-boot/"/>
+    
+      <category term="spring-boot-test" scheme="http://aikin.github.io/tags/spring-boot-test/"/>
+    
+      <category term="DirtiesContext" scheme="http://aikin.github.io/tags/DirtiesContext/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Think Twice Before Using @MockBean</title>
     <link href="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/"/>
     <id>http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/</id>
     <published>2018-03-25T06:00:01.000Z</published>
-    <updated>2018-04-01T07:12:43.000Z</updated>
+    <updated>2018-04-01T14:03:08.000Z</updated>
     
     <content type="html"><![CDATA[<p>号外！号外！号外！你的 <code>spring boot integration tests</code> 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。</p>
 <p>告诉你一个秘密：<code>@MockBean</code>会导致<em>测试类(Test Class)</em>之间<code>spring boot application context</code>不断启动多次！！！</p>
@@ -1186,101 +1231,6 @@
     
     
       <category term="reading-notes" scheme="http://aikin.github.io/tags/reading-notes/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>理解 prototype 和 __proto__</title>
-    <link href="http://aikin.github.io/2014/11/10/prototype-proto/"/>
-    <id>http://aikin.github.io/2014/11/10/prototype-proto/</id>
-    <published>2014-11-10T12:07:10.000Z</published>
-    <updated>2016-10-03T17:34:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="理解-prototype-和-proto"><a href="#理解-prototype-和-proto" class="headerlink" title="理解 prototype 和 __proto__"></a>理解 prototype 和 __proto__</h2><blockquote>
-<p>一个对象的真正原型是被对象内部的<code>[[Prototype]]</code>属性所持有。ECMAScript 引入了标准对象原型访问器<code>Object.getPrototype(object)</code>，到目前为止只有 Firefox 和 Chrome 实现了此访问器。除了IE，其他的浏览器支持非标准的访问器<code>__proto__</code></p>
-</blockquote>
-<a id="more"></a>
-<h3 id="什么是-prototype-和-proto"><a href="#什么是-prototype-和-proto" class="headerlink" title="什么是 prototype 和 __proto__ ?"></a>什么是 <em><code>prototype</code></em> 和 <em><code>__proto__</code></em> ?</h3><p><strong><code>prototype</code></strong> 为构造器(构造函数)的原型，是一个 javascript 的原生对象，它是通过调用构造函数而创建的那个对象实例的原型对象。 其他的对象可以通过他实现属性继承。</p>
-<p><strong><code>__proto__</code></strong> 是对象的内部原型，所有对象的<code>__proto__</code>都指向该对象的构造器的<code>prototype</code>。</p>
-<p>在调用对象的方法时，会通过该对象<code>__proto__</code>在原型链中查找。而构造器的<code>prototype</code> 会用于创建通过<code>new</code>关键字创建的对象的<code>__proto__</code>。</p>
-<ul>
-<li><strong><em>所有构造器(函数)的<code>__proto__</code>都指向<code>Function.prototype</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Number</span>.__proto__   === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">Boolean</span>.__proto__  === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">String</span>.__proto__   === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">Object</span>.__proto__   === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">Array</span>.__proto__    === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">RegExp</span>.__proto__   === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">Error</span>.__proto__    === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line"><span class="built_in">Date</span>.__proto__     === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong><em>注意: JavaScript中有内置(build-in)构造器/对象共计12个（ES5中新加了JSON），这里列举了可访问的8个构造器。剩下如<code>Global</code>不能直接访问，<code>Arguments</code>仅在函数调用时由JS引擎创建，<code>Math、JSON</code>是以对象形式存在的，无需<code>new</code>。它们的<code>__proto__</code>是<code>Object.prototype</code>。如下:</em></strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Math</span>.__proto__ === <span class="built_in">Object</span>.prototype;  <span class="comment">// true</span></div><div class="line"><span class="built_in">JSON</span>.__proto__ === <span class="built_in">Object</span>.prototype;  <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
-<p>以上介绍都是原生的 javascript 的构造器(函数)，当然自定义的构造器也满足:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="keyword">var</span> Man = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">Person.__proto__ === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div><div class="line">Man.__proto__    === <span class="built_in">Function</span>.prototype;   <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
-<p><img src="http://aikin-blog-images.qiniudn.com/js-function-prototype.png" alt="构造函数原型链图"></p>
-<ul>
-<li><strong><em>所有对象的<code>__proto__</code>都指向其构造函数的<code>prototype</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj  = &#123;name: <span class="string">'aikin'</span>&#125;;</div><div class="line"><span class="keyword">var</span> arr  = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="keyword">var</span> reg  = <span class="regexp">/hello/g</span>;</div><div class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>;</div><div class="line"><span class="keyword">var</span> err  = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'exception'</span>);</div><div class="line">obj.__proto__  === <span class="built_in">Object</span>.prototype; <span class="comment">// true</span></div><div class="line">arr.__proto__  === <span class="built_in">Array</span>.prototype;  <span class="comment">// true</span></div><div class="line">reg.__proto__  === <span class="built_in">RegExp</span>.prototype; <span class="comment">// true</span></div><div class="line">date.__proto__ === <span class="built_in">Date</span>.prototype;  <span class="comment">// true</span></div><div class="line">err.__proto__  === <span class="built_in">Error</span>.prototype;  <span class="comment">// true</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>自定义构造函数的实例对象也是如此:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">'aikin'</span>);</div><div class="line">person.__proto__ === Person.prototype; <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
-<p><img src="http://aikin-blog-images.qiniudn.com/js-object-prototype.png" alt="对象原型链图"></p>
-<h3 id="new-关键字做了什么"><a href="#new-关键字做了什么" class="headerlink" title="new 关键字做了什么?"></a><code>new</code> 关键字做了什么?</h3><blockquote>
-<p> new 运算符接受一个函数 F 及其参数：<code>new F(arguments...)</code>。这一过程分为三步：</p>
-<ol>
-<li>创建类的实例。这步是把一个空的对象的<code>__proto__</code>属性设置为<code>F.prototype</code>。</li>
-<li>初始化实例。函数 F 被传入参数并调用，关键字<code>this</code>指向该实例。</li>
-<li>返回实例 当然你也可以<code>return</code>自定义的对象。</li>
-</ol>
-</blockquote>
-<ul>
-<li>new 函数的伪实现:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">new</span> (<span class="params">f</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> ins = &#123; <span class="string">'__proto__'</span>: f.prototype &#125;; <span class="comment">/*第一步*/</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        f.apply(ins, <span class="built_in">arguments</span>);            <span class="comment">/*第二步*/</span></div><div class="line">        <span class="keyword">return</span> ins;                         <span class="comment">/*第三步*/</span></div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="干货呈上-来几道-quiz-吧"><a href="#干货呈上-来几道-quiz-吧" class="headerlink" title="干货呈上(来几道 quiz 吧)"></a>干货呈上(来几道 quiz 吧)</h3><ul>
-<li><strong> quiz-1 </strong></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'aikin'</span>;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        name: <span class="string">'ulaijn'</span></div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> me = <span class="keyword">new</span> Person();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(me.name);  <span class="comment">// ?</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong> quiz-2 </strong></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'aikin'</span>;</div><div class="line">    <span class="keyword">return</span> <span class="string">'ulaijn'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> me = <span class="keyword">new</span> Person();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(me.name);  <span class="comment">// ?</span></div></pre></td></tr></table></figure>
-<ul>
-<li><code>quiz-1</code>和<code>quiz-2</code>运行结果分别是:<code>ulaijn</code>和<code>aikin</code>。这两个测试题主要考察的是对<code>new</code>关键字的理解。</li>
-<li>在<code>quiz-1</code>中，在调用<code>new Person()</code>时，<code>Person</code>构造函数内的<code>this</code>指向是<code>Person</code>的实例，由于<code>Person</code>构造函数返回了一个对象类型的<code>{ name: &#39;ulaijn&#39; }</code>，导致<code>new Person()</code>返回的不是<code>Person</code>构造函数的实例，而是<code>{name: ulaijn}</code>，因为只要当构造函数自定义<code>return</code>的值是对象类型(不为 <em><code>null</code></em>)时，这样将导致使用<code>new</code>关键字调用构造函数后的返回值，替换掉本该返回的构造函数的实例，所以这里的<code>me</code>为<code>{name: &#39;ulaijn&#39;}</code>。</li>
-<li>在<code>quiz-2</code>中，<code>Person</code>构造函数内的<code>this</code>，在调用<code>new Person()</code>时和<code>quiz-1</code>一样都是指向<code>Person</code>的实例，但是由于<code>Person</code>构造函数返回了一个不是对象类型，而是字符串类型的<code>ulaijn</code>，导致<code>new Person()</code>生成的实例无法被替换，所以<code>me.name</code>为<code>aikin</code>。</li>
-</ul>
-<ul>
-<li><strong> quiz-3 </strong></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    <span class="keyword">constructor</span>: Person,</div><div class="line">    name : 'aikin',</div><div class="line">    age : 23</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var aMe = new Person();</div><div class="line">var bMe = new Person();</div><div class="line"></div><div class="line">aMe.name = 'luna';</div><div class="line">bMe.name = 'tom';</div><div class="line"></div><div class="line">console.log(aMe.name);  // ?</div><div class="line">console.log(bMe.name);  // ?</div></pre></td></tr></table></figure>
-<ul>
-<li><strong> quiz-4 </strong></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    <span class="keyword">constructor</span>: Person,</div><div class="line">    info : &#123;</div><div class="line">        name : <span class="string">'aikin'</span>,</div><div class="line">        age  : <span class="number">23</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> aMe = <span class="keyword">new</span> Person();</div><div class="line"><span class="keyword">var</span> bMe = <span class="keyword">new</span> Person();</div><div class="line"></div><div class="line">aMe.info.name = <span class="string">'luna'</span>;</div><div class="line">bMe.info.name = <span class="string">'tom'</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(aMe.info.name);  <span class="comment">// ?</span></div><div class="line"><span class="built_in">console</span>.log(bMe.info.name);  <span class="comment">// ?</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong> quiz-5 </strong></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.info = &#123;</div><div class="line">        name : <span class="string">'aikin'</span>,</div><div class="line">        age  : <span class="number">23</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> aMe = <span class="keyword">new</span> Person();</div><div class="line"><span class="keyword">var</span> bMe = <span class="keyword">new</span> Person();</div><div class="line"></div><div class="line">aMe.info.name = <span class="string">'luna'</span>;</div><div class="line">bMe.info.name = <span class="string">'tom'</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(aMe.info.name);  <span class="comment">// ?</span></div><div class="line"><span class="built_in">console</span>.log(bMe.info.name);  <span class="comment">// ?</span></div></pre></td></tr></table></figure>
-<ul>
-<li><strong> quiz-6 </strong></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.info = &#123;</div><div class="line">        name : <span class="string">'aikin'</span>,</div><div class="line">        age  : <span class="number">23</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.prototype = &#123;</div><div class="line">    <span class="keyword">constructor</span>: Person,</div><div class="line">    info : &#123;</div><div class="line">        name : <span class="string">'aikin'</span>,</div><div class="line">        age  : <span class="number">23</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> aMe = <span class="keyword">new</span> Person();</div><div class="line"><span class="keyword">var</span> bMe = <span class="keyword">new</span> Person();</div><div class="line"></div><div class="line">aMe.info.name = <span class="string">'luna'</span>;</div><div class="line">bMe.info.name = <span class="string">'tom'</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(aMe.info.name);  <span class="comment">// ?</span></div><div class="line"><span class="built_in">console</span>.log(bMe.info.name);  <span class="comment">// ?</span></div></pre></td></tr></table></figure>
-<ul>
-<li><em>quiz-3</em>、<em>quiz-5</em> 和 <em>quiz-6</em> 的运行结果是: <code>luna</code>和<code>tom</code>，而 <em>quiz-4</em> 的运行结果是: <code>tom</code>和<code>tom</code>。这四道题主要考察的是对<code>prototype</code>理解。</li>
-<li><em>quiz-3</em> 中<code>aMe.name = &#39;luna&#39;</code>是赋值的过程，会在<code>aMe</code>中创建<code>name</code>属性，不会修改<code>aMe.__proto__.name</code>，当然<code>bMe</code>也一样。</li>
-<li>对于 <em>quiz-4</em> 来说，<code>aMe.info.name = &#39;luna&#39;</code>是在对<code>aMe.info</code>赋值的过程，所以要先查找出<code>aMe.info</code>对象，因为<code>aMe</code>对象自己没有<code>info</code>属性，所以会从<code>aMe.__proto__</code> 获取到<code>info</code>对象，并修改掉<code>info</code>的<code>name</code>属性。而<code>bMe.info.name = tom</code>也是这个过程，由于<code>aMe.__proto__ === bMe.__proto__</code>，所以<code>bMe.info.name = tom</code>执行后会修改掉<code>bMe.__proto__.info.name</code>，从而导致<code>aMe.info.name</code>也被修改成<code>tom</code>。</li>
-<li><em>quiz-5</em> 和 <em>quiz-6</em> 是考察对原型链查找的规则理解。当实例对象自己有相应的属性，就不会去获取原型链上的属性。就像 <em>quiz-6</em> 里面的<code>aMe</code>实例对象，<code>aMe</code>对象拥有<code>info</code>属性，同时在<code>aMe.__proto__</code>也用拥有<code>info</code>属性，但是<code>aMe.info.name</code>，不会获取<code>aMe.__proto__.info.name</code>，因为在原型链获取相应对象或者函数时，会从对象(实例)本身开始沿着原型链向上查找，只要找到了，就好停止继续查找。</li>
-</ul>
-<p><strong><em> 使用 <code>console.dir(Function)</code> 打印出你的原型链。</em></strong></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html" target="_blank" rel="external">JavaScript中<strong>proto</strong>与prototype的关系</a></li>
-<li><a href="http://blog.jobbole.com/9648/" target="_blank" rel="external">理解JavaScript原型</a></li>
-<li><a href="http://www.cnblogs.com/rexy/p/4086186.html" target="_blank" rel="external">这些javascript面试题，你做对了几道？</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;理解-prototype-和-proto&quot;&gt;&lt;a href=&quot;#理解-prototype-和-proto&quot; class=&quot;headerlink&quot; title=&quot;理解 prototype 和 __proto__&quot;&gt;&lt;/a&gt;理解 prototype 和 __proto__&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;一个对象的真正原型是被对象内部的&lt;code&gt;[[Prototype]]&lt;/code&gt;属性所持有。ECMAScript 引入了标准对象原型访问器&lt;code&gt;Object.getPrototype(object)&lt;/code&gt;，到目前为止只有 Firefox 和 Chrome 实现了此访问器。除了IE，其他的浏览器支持非标准的访问器&lt;code&gt;__proto__&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
     
   </entry>
   

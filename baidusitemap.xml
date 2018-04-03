@@ -4,8 +4,29 @@
 
     
   <url>
+    <loc>http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/</loc>
+    <lastmod>2018-04-03T13:42:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Do You Really Need @DirtiesContext</title>
+        <pubTime>2018-04-02T05:52:03.000Z</pubTime>
+        
+        <tag>spring-boot</tag>
+         
+        <tag>spring-boot-test</tag>
+         
+        <tag>DirtiesContext</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/</loc>
-    <lastmod>2018-04-01T07:12:43.000Z</lastmod>
+    <lastmod>2018-04-01T14:03:08.000Z</lastmod>
     <data>
         <display>
         <title>Think Twice Before Using @MockBean</title>
