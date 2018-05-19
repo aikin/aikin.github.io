@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.github.io/"/>
-  <updated>2018-05-06T07:01:05.000Z</updated>
+  <updated>2018-05-19T16:12:24.000Z</updated>
   <id>http://aikin.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Don&#39;t Use @Transactional On Spring Boot Integration Test</title>
+    <link href="http://aikin.github.io/2018/05/19/do-not-use-transactional-annotation-on-spring-integration-test/"/>
+    <id>http://aikin.github.io/2018/05/19/do-not-use-transactional-annotation-on-spring-integration-test/</id>
+    <published>2018-05-19T14:00:18.000Z</published>
+    <updated>2018-05-19T16:12:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在测试运行时，测试类中 <code>@Transactional</code> 注解，会导致测试中 <code>Entity</code> 数据的操作都是在内存中完成，最终并不会进行 <code>commit</code> 操作，也就是不会将 <code>Entity</code> 数据进行持久化操作，从而导致测试的行为和真实应用的行为不一致。</p>
+<p>事务管理在应用开发中是种不可或缺的设计，它是数据库持久化处理的一种标准。我们知道，应用程序开发离不开对数据的<code>CRUD</code>（增删改查），<strong>事务的<code>ACID</code>性</strong>可以更好保证数据的完整性，保证相关数据的<code>同生共死</code>。单个事务生命周期主要分为三个阶段，<code>BEGIN TRANSACTION</code> -&gt; <code>COMMIT TRANSACTION</code> -&gt; <code>ROLLBACK TRANSACTION</code>。</p>
+<a id="more"></a>
+<p><code>Spring Boot</code>事务的使用分为<strong>命令式</strong>和<strong>声明式</strong>常用的方式是声明式注解（<code>@Transactional</code>）。事务管理既可以在应用层使用，也可以在测试中使用。</p>
+<p>为了保证测试之间的相互独立，测试之间数据不会被相互影响。也许你写过这样的测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootTest</span></div><div class="line"><span class="meta">@ActiveProfiles</span>(<span class="string">"test"</span>)</div><div class="line"><span class="meta">@Transactional</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserControllerTest</span> </span>&#123; &#125;</div></pre></td></tr></table></figure>
+<p><code>@Transactional</code> 通过将数据持久化操作截断，来解决测试之间相互对立，数据相互不影响的问题。然而这样方式会有<strong>副作用</strong>，就是数据持久化的过程不再真实，没有了<code>commit</code>的过程。从而会导致：</p>
+<blockquote>
+<ul>
+<li>无法保证 <code>Entity</code> 之间关联关系，唯一索引和主外键关联的准确性</li>
+<li>无法保证 <code>Entity</code> 创建时间、更新时间和版本化(乐观锁)的赋值逻辑的准确性</li>
+<li>无法保证 <code>Entity</code> 中有 <code>@Transient</code> 注解的属性的赋值逻辑的准确性</li>
+<li>测试的数据不是真实场景存在的问题</li>
+<li>测试中，单个事务中的准备数据，无法在多线程中共享。<br>……</li>
+</ul>
+</blockquote>
+<p>然后 <code>Spring</code> 在测试问题域中引入<strong>事务管理</strong>初衷是什么？为了<strong>解决什么问题</strong>才需要将它引入？官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing-tx" target="_blank" rel="external">Transaction management</a></p>
+<blockquote>
+<p><img src="./transactional-management.png" alt="Transaction management"></p>
+</blockquote>
+<p>按照官方文档意思，为了解决测试运行时，程序访问真实的数据库，改变数据的状态，从而影响到后续的测试问题。</p>
+<p>其实这里应该<strong>批判性思维</strong>一下，为什么测试运行时，需要访问真实的数据库？为什么测试之间的数据会相互影响？<br>对于每个测试来说，每次运行前都应该有干净的上下文，或者说独立的上下文，有数据清理和准备的过程，测试与测试之间相互隔离。也就是说，为什么测试不能用内存数据库或者嵌入式数据库？为什么不是每个测试运行前清理一下数据库中的数据，保证测试用例运行前的<strong>一方净土</strong>，不被上个测试数据影响？</p>
+<p>答案当然是，<strong><em>可以！！！</em></strong></p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>如何做？实现一个 <code>TruncateDatabaseService</code>，只删除表的数据，不删除表的结果。 在测试基类的<code>@BeforeEach</code>，执行 <code>truncate</code>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在测试运行时，测试类中 &lt;code&gt;@Transactional&lt;/code&gt; 注解，会导致测试中 &lt;code&gt;Entity&lt;/code&gt; 数据的操作都是在内存中完成，最终并不会进行 &lt;code&gt;commit&lt;/code&gt; 操作，也就是不会将 &lt;code&gt;Entity&lt;/code&gt; 数据进行持久化操作，从而导致测试的行为和真实应用的行为不一致。&lt;/p&gt;
+&lt;p&gt;事务管理在应用开发中是种不可或缺的设计，它是数据库持久化处理的一种标准。我们知道，应用程序开发离不开对数据的&lt;code&gt;CRUD&lt;/code&gt;（增删改查），&lt;strong&gt;事务的&lt;code&gt;ACID&lt;/code&gt;性&lt;/strong&gt;可以更好保证数据的完整性，保证相关数据的&lt;code&gt;同生共死&lt;/code&gt;。单个事务生命周期主要分为三个阶段，&lt;code&gt;BEGIN TRANSACTION&lt;/code&gt; -&amp;gt; &lt;code&gt;COMMIT TRANSACTION&lt;/code&gt; -&amp;gt; &lt;code&gt;ROLLBACK TRANSACTION&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="transactional" scheme="http://aikin.github.io/tags/transactional/"/>
+    
+      <category term="spring boot" scheme="http://aikin.github.io/tags/spring-boot/"/>
+    
+      <category term="spring boot test" scheme="http://aikin.github.io/tags/spring-boot-test/"/>
+    
+  </entry>
   
   <entry>
     <title>Agile Checker</title>
@@ -57,7 +106,7 @@
     <link href="http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/"/>
     <id>http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/</id>
     <published>2018-04-02T05:52:03.000Z</published>
-    <updated>2018-04-03T13:42:08.000Z</updated>
+    <updated>2018-05-19T15:57:48.000Z</updated>
     
     <content type="html"><![CDATA[<p>测试又随机挂了，该怎么办？加上 <code>@DirtiesContext</code> 试试。真棒，修好了。</p>
 <p>WAIT! WAIT! WAIT! 为什么加 <code>@DirtiesContext</code> 就修好，有没有什么副作用？</p>
@@ -75,7 +124,7 @@
 <li><code>class-level</code>只有当<code>@DirtiesContext</code>注解设置在<strong><code>test class</code></strong>上的才会生效，<code>classMode</code>有四种配置：<code>BEFORE_CLASS</code>、<code>BEFORE_EACH_TEST_METHOD</code>、<code>AFTER_EACH_TEST_METHOD</code>、<code>AFTER_CLASS</code>，默认是<code>AFTER_CLASS</code>。</li>
 <li>生命周期：<img src="./dirties-context-life-cycle.png" alt="life cycle"></li>
 </ul>
-<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>虽然使用<code>@DirtiesContext</code>，可以保证每个<code>test class</code>的执行上下文的独立性、隔离性，但是也会有让测试运行速度变慢的副作用。所以在使用<code>@DirtiesContext</code>前，弄清楚你是否真的需要使用它。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>虽然使用<code>@DirtiesContext</code>，可以保证每个<code>test class</code>的执行上下文的独立性、隔离性，但是也会有让测试运行速度变慢的副作用。所以在使用<code>@DirtiesContext</code>前，弄清楚你是否真的需要使用它。</p>
 ]]></content>
     
     <summary type="html">
@@ -598,9 +647,9 @@
     </summary>
     
     
-      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
-    
       <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
+    
+      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
     
       <category term="db" scheme="http://aikin.github.io/tags/db/"/>
     
@@ -849,9 +898,9 @@
     </summary>
     
     
-      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
-    
       <category term="dockerize" scheme="http://aikin.github.io/tags/dockerize/"/>
+    
+      <category term="docker" scheme="http://aikin.github.io/tags/docker/"/>
     
   </entry>
   
@@ -1171,45 +1220,6 @@
     
     
       <category term="linux" scheme="http://aikin.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>window 对象的“生命周期”事件</title>
-    <link href="http://aikin.github.io/2014/12/07/window-life-cycle-events/"/>
-    <id>http://aikin.github.io/2014/12/07/window-life-cycle-events/</id>
-    <published>2014-12-07T06:42:23.000Z</published>
-    <updated>2016-10-03T17:35:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>“生命周期”事件？什么是”生命周期”事件？好吧，我只是想不到标题，于是就想了个“生命周期”名词，个人觉得比较”高大上” (*^__^*)。其实就是网页加载或关闭时触发的事件。</p>
-<p>访问一个网页时，可能会触发 window 对象的一些事件(onload, onbeforeunload, onunload, onfocus, onblur等)。我们可以在这些事件触发时，实现一些功能，也可以根据这些事件来捕获用户的一些本地行为等等。<br><a id="more"></a><br>  <strong><em> 下面这些事件只是在 chrome 上实践过。</em></strong></p>
-<h2 id="window-onload"><a href="#window-onload" class="headerlink" title=" window.onload: "></a><strong> window.onload: </strong></h2><p>onload 事件，会在页面内容包括图片的所有元素加载完毕后才能触发。而<code>jqery</code>的  $(document).ready() 事件，是DOM结构绘制完毕后就触发。同时 window.onload 不能同时编写多个，如果有多个 window.onload 方法，只会触发其中一个。$(document).ready() 可以同时编写多个，并且都可以得到执行。</p>
-<blockquote>
-<p>支持该事件的 HTML 标签：<br><code>&lt;body&gt;, &lt;frame&gt;, &lt;frameset&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;script&gt;</code></p>
-</blockquote>
-<p><strong> eg-1: </strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"主君，加载已经完毕!"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h2 id="window-onbeforeunload"><a href="#window-onbeforeunload" class="headerlink" title=" window.onbeforeunload: "></a><strong> window.onbeforeunload: </strong></h2><p>onbeforeunload 事件，在页面刷新或关闭前触发。可以用来提示用户，是否要离开当前页面。</p>
-<p><strong> eg-2: </strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onbeforeunload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'你舍得离开吗？'</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h2 id="window-onunload"><a href="#window-onunload" class="headerlink" title=" window.onunload: "></a><strong> window.onunload: </strong></h2><p>onunload 事件，也是在页面刷新或关闭前触发。区别是 onbeforeunload 在 onunload 之前触发，也就是 onbeforeunload 可以阻止 onunload 的触发。不过这个方法在 chrome 时有效时无效。在 safari 正常使用。</p>
-<p><strong> eg-3: </strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"拜拜啦!"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h3 id="下面比较一下-window-和-jQuery-这些事件执行的顺序"><a href="#下面比较一下-window-和-jQuery-这些事件执行的顺序" class="headerlink" title="下面比较一下 window 和 jQuery 这些事件执行的顺序:"></a>下面比较一下 window 和 jQuery 这些事件执行的顺序:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    post(<span class="string">"document ready!"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="built_in">window</span>).unload(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    post(<span class="string">"jquery unload!"</span>);</div><div class="line">&#125;).load(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    post(<span class="string">"jquery load!"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    post(<span class="string">"window onload!"</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">window</span>.onbeforeunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    post(<span class="string">"window onbeforeunload!"</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">window</span>.onunload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    post(<span class="string">"window onunload!"</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">post</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">    $.ajax(&#123;</div><div class="line">        url    : <span class="string">"/events_test"</span>,</div><div class="line">        method : <span class="string">"POST"</span>,</div><div class="line">        data   : &#123; event: event &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 执行顺序:</span></div><div class="line"><span class="comment">// document ready!</span></div><div class="line"><span class="comment">// jquery load!</span></div><div class="line"><span class="comment">// window onload!</span></div><div class="line"><span class="comment">// window onbeforeunload!</span></div><div class="line"><span class="comment">// jquery unload!</span></div><div class="line"><span class="comment">// window unload!</span></div></pre></td></tr></table></figure>
-<ul>
-<li>jquery doucment ready 先触发，接着是 jquery load，然后是 window onload。</li>
-<li>window beforeunload 先触发， 接着是 window onunload，然后 jquery unload。</li>
-<li>window onunload 和 jquery unload 事件在 chrome 有时候会触发，有时候不会触发。</li>
-</ul>
-<p><strong><em> 这些事件还需要在其他浏览器实践一下。</em></strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;“生命周期”事件？什么是”生命周期”事件？好吧，我只是想不到标题，于是就想了个“生命周期”名词，个人觉得比较”高大上” (*^__^*)。其实就是网页加载或关闭时触发的事件。&lt;/p&gt;
-&lt;p&gt;访问一个网页时，可能会触发 window 对象的一些事件(onload, onbeforeunload, onunload, onfocus, onblur等)。我们可以在这些事件触发时，实现一些功能，也可以根据这些事件来捕获用户的一些本地行为等等。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="javascript" scheme="http://aikin.github.io/tags/javascript/"/>
     
   </entry>
   

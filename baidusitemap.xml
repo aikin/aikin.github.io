@@ -4,16 +4,18 @@
 
     
   <url>
-    <loc>http://aikin.github.io/2018/05/06/agile-checker/</loc>
-    <lastmod>2018-05-06T07:01:05.000Z</lastmod>
+    <loc>http://aikin.github.io/2018/05/19/do-not-use-transactional-annotation-on-spring-integration-test/</loc>
+    <lastmod>2018-05-19T16:12:24.000Z</lastmod>
     <data>
         <display>
-        <title>Agile Checker</title>
-        <pubTime>2018-05-06T06:30:05.000Z</pubTime>
+        <title>Don't Use @Transactional On Spring Boot Integration Test</title>
+        <pubTime>2018-05-19T14:00:18.000Z</pubTime>
         
-        <tag>Agile</tag>
+        <tag>transactional</tag>
          
-        <tag>Scrum</tag>
+        <tag>spring boot</tag>
+         
+        <tag>spring boot test</tag>
          
          
            
@@ -24,7 +26,7 @@
     
   <url>
     <loc>http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/</loc>
-    <lastmod>2018-04-03T13:42:08.000Z</lastmod>
+    <lastmod>2018-05-19T15:57:48.000Z</lastmod>
     <data>
         <display>
         <title>Do You Really Need @DirtiesContext</title>
@@ -35,6 +37,25 @@
         <tag>spring-boot-test</tag>
          
         <tag>DirtiesContext</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://aikin.github.io/2018/05/06/agile-checker/</loc>
+    <lastmod>2018-05-06T07:01:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>Agile Checker</title>
+        <pubTime>2018-05-06T06:30:05.000Z</pubTime>
+        
+        <tag>Agile</tag>
+         
+        <tag>Scrum</tag>
          
          
            
@@ -102,9 +123,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
          
            
@@ -538,9 +559,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
         <tag>db</tag>
          
@@ -700,7 +721,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
@@ -717,6 +737,7 @@
     </data>
     </url>
 
+    
     
     
 </urlset>

@@ -129,7 +129,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
 @DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
 <meta property="og:image" content="http://aikin.github.io/./dirties-context.png">
 <meta property="og:image" content="http://aikin.github.io/./dirties-context-life-cycle.png">
-<meta property="og:updated_time" content="2018-04-03T13:42:08.000Z">
+<meta property="og:updated_time" content="2018-05-19T15:57:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Do You Really Need @DirtiesContext">
 <meta name="twitter:description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。
@@ -399,7 +399,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
 <li><code>class-level</code>只有当<code>@DirtiesContext</code>注解设置在<strong><code>test class</code></strong>上的才会生效，<code>classMode</code>有四种配置：<code>BEFORE_CLASS</code>、<code>BEFORE_EACH_TEST_METHOD</code>、<code>AFTER_EACH_TEST_METHOD</code>、<code>AFTER_CLASS</code>，默认是<code>AFTER_CLASS</code>。</li>
 <li>生命周期：<img src="./dirties-context-life-cycle.png" alt="life cycle"></li>
 </ul>
-<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>虽然使用<code>@DirtiesContext</code>，可以保证每个<code>test class</code>的执行上下文的独立性、隔离性，但是也会有让测试运行速度变慢的副作用。所以在使用<code>@DirtiesContext</code>前，弄清楚你是否真的需要使用它。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>虽然使用<code>@DirtiesContext</code>，可以保证每个<code>test class</code>的执行上下文的独立性、隔离性，但是也会有让测试运行速度变慢的副作用。所以在使用<code>@DirtiesContext</code>前，弄清楚你是否真的需要使用它。</p>
 
       
     </div>
@@ -575,7 +575,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -588,7 +588,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -650,7 +650,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在最后"><span class="nav-number">1.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最后"><span class="nav-number">1.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
             
 
           </div>
