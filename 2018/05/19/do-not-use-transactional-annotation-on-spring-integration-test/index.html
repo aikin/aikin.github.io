@@ -124,7 +124,7 @@
 <meta property="og:description" content="在测试运行时，测试类中 @Transactional 注解，会导致测试中 Entity 数据的操作都是在内存中完成，最终并不会进行 commit 操作，也就是不会将 Entity 数据进行持久化操作，从而导致测试的行为和真实应用的行为不一致。
 事务管理在应用开发中是种不可或缺的设计，它是数据库持久化处理的一种标准。我们知道，应用程序开发离不开对数据的CRUD（增删改查），事务的ACID性可以更好保">
 <meta property="og:image" content="http://aikin.github.io/./transactional-management.png">
-<meta property="og:updated_time" content="2018-05-19T16:12:24.000Z">
+<meta property="og:updated_time" content="2018-05-20T07:23:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Don't Use @Transactional On Spring Boot Integration Test">
 <meta name="twitter:description" content="在测试运行时，测试类中 @Transactional 注解，会导致测试中 Entity 数据的操作都是在内存中完成，最终并不会进行 commit 操作，也就是不会将 Entity 数据进行持久化操作，从而导致测试的行为和真实应用的行为不一致。
@@ -399,7 +399,10 @@
 <p>按照官方文档意思，为了解决测试运行时，程序访问真实的数据库，改变数据的状态，从而影响到后续的测试问题。</p>
 <p>其实这里应该<strong>批判性思维</strong>一下，为什么测试运行时，需要访问真实的数据库？为什么测试之间的数据会相互影响？<br>对于每个测试来说，每次运行前都应该有干净的上下文，或者说独立的上下文，有数据清理和准备的过程，测试与测试之间相互隔离。也就是说，为什么测试不能用内存数据库或者嵌入式数据库？为什么不是每个测试运行前清理一下数据库中的数据，保证测试用例运行前的<strong>一方净土</strong>，不被上个测试数据影响？</p>
 <p>答案当然是，<strong><em>可以！！！</em></strong></p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>如何做？实现一个 <code>TruncateDatabaseService</code>，只删除表的数据，不删除表的结果。 在测试基类的<code>@BeforeEach</code>，执行 <code>truncate</code>。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>如何做？实现一个 <code>TruncateDatabaseService</code>，只删除表的数据，不删除表的结果。 在测试基类的<code>@BeforeEach</code>，执行 <code>truncate</code>。源码<a href="https://github.com/aikin/truncate-database" target="_blank" rel="external">Truncate Database</a>：</p>
+<blockquote>
+<p><a href="https://github.com/aikin/truncate-database/blob/master/src/test/java/me/aikin/truncate/database/TruncateDatabaseBasicOnHibernateService.java" target="_blank" rel="external">TruncateDatabaseBasicOnHibernateService</a><br><a href="https://github.com/aikin/truncate-database/blob/master/src/test/java/me/aikin/truncate/database/TruncateDatabaseBasicOnMybatisService.java" target="_blank" rel="external">TruncateDatabaseBasicOnMybatisService</a></p>
+</blockquote>
 
       
     </div>
