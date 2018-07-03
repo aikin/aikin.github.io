@@ -116,11 +116,13 @@
 
 
 <meta name="description" content="最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面SQL语句查询相关被锁的表：1234567USE yourdatabase;GOSELECT request_session_id AS spid,       OBJECT_NAME(resource_associated_entity_id) AS tableNameF">
+<meta name="keywords" content="SQLServer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL Server 单用户模式到多用户模式">
 <meta property="og:url" content="http://aikin.github.io/2016/10/04/locked-sql-user/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面SQL语句查询相关被锁的表：1234567USE yourdatabase;GOSELECT request_session_id AS spid,       OBJECT_NAME(resource_associated_entity_id) AS tableNameF">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2016-11-13T09:19:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL Server 单用户模式到多用户模式">
@@ -267,6 +269,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -371,9 +383,9 @@
       
 
       
-        <p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> yourdatabase;</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</div><div class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</div><div class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</div><div class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</div></pre></td></tr></table></figure></p>
+        <p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> yourdatabase;</span><br><span class="line">GO</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</span><br><span class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</span><br><span class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</span><br><span class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>结果并没有发现锁的存在，但是发现数据库设置是单用户模式。将单用户模式修改为多用户模式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> [<span class="keyword">master</span>]</div><div class="line"><span class="keyword">GO</span></div><div class="line"></div><div class="line"><span class="comment">--查询运行的用户</span></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> master.dbo.sysprocesses</div><div class="line"><span class="keyword">WHERE</span> dbid=db_id(<span class="string">'dbname'</span>)</div><div class="line"></div><div class="line"><span class="comment">--将第一个语句运行后的结果替代 spid</span></div><div class="line"><span class="keyword">Kill</span> spid</div><div class="line"></div><div class="line"><span class="comment">--修改为多用户模式</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> DBNAME <span class="keyword">SET</span> MULTI_USER</div></pre></td></tr></table></figure></p>
+<p>结果并没有发现锁的存在，但是发现数据库设置是单用户模式。将单用户模式修改为多用户模式：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> [<span class="keyword">master</span>]</span><br><span class="line"><span class="keyword">GO</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--查询运行的用户</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> master.dbo.sysprocesses</span><br><span class="line"><span class="keyword">WHERE</span> dbid=db_id(<span class="string">'dbname'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">--将第一个语句运行后的结果替代 spid</span></span><br><span class="line"><span class="keyword">Kill</span> spid</span><br><span class="line"></span><br><span class="line"><span class="comment">--修改为多用户模式</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> DBNAME <span class="keyword">SET</span> MULTI_USER</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -754,19 +766,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

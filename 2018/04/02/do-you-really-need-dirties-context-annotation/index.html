@@ -115,28 +115,21 @@
 
 
 
-<meta name="description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。
-WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作用？
-
-@DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
+<meta name="description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。 WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作用？  @DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
+<meta name="keywords" content="spring-boot,spring-boot-test,DirtiesContext">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Do You Really Need @DirtiesContext">
 <meta property="og:url" content="http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。
-WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作用？
-
-@DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
-<meta property="og:image" content="http://aikin.github.io/./dirties-context.png">
-<meta property="og:image" content="http://aikin.github.io/./dirties-context-life-cycle.png">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。 WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作用？  @DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/dirties-context.png">
+<meta property="og:image" content="http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/dirties-context-life-cycle.png">
 <meta property="og:updated_time" content="2018-05-19T15:57:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Do You Really Need @DirtiesContext">
-<meta name="twitter:description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。
-WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作用？
-
-@DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
-<meta name="twitter:image" content="http://aikin.github.io/./dirties-context.png">
+<meta name="twitter:description" content="测试又随机挂了，该怎么办？加上 @DirtiesContext 试试。真棒，修好了。 WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作用？  @DirtiesContext is a spring test annotation which is used to indicate that the application context cach">
+<meta name="twitter:image" content="http://aikin.github.io/2018/04/02/do-you-really-need-dirties-context-annotation/dirties-context.png">
 
 
 
@@ -279,6 +272,16 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -389,7 +392,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
 <p><code>@DirtiesContext</code> is a spring test annotation which is used to indicate that the application context cached should be removed and reloaded after each test run. The application context removed will also be closed.</p>
 </blockquote>
 <a id="more"></a>
-<p>如上面所述，<code>@DirtiesContext</code> 会导致<code>application context</code>不被缓存，也就是说，有可能会对测试运行的速度有影响。官方文档介绍<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#dirtiescontext" target="_blank" rel="external">@DirtiesContext</a>：</p>
+<p>如上面所述，<code>@DirtiesContext</code> 会导致<code>application context</code>不被缓存，也就是说，有可能会对测试运行的速度有影响。官方文档介绍<a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#dirtiescontext" target="_blank" rel="noopener">@DirtiesContext</a>：</p>
 <blockquote>
 <p><img src="./dirties-context.png" alt="dirties context"></p>
 </blockquote>
@@ -809,19 +812,7 @@ WAIT! WAIT! WAIT! 为什么加 @DirtiesContext 就修好，有没有什么副作
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

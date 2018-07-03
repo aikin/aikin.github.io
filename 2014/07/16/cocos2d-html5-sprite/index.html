@@ -116,11 +116,13 @@
 
 
 <meta name="description" content="在Cocos2d HTML5,  发现 Sprite 类没有点击事件，需要注册点击的代理, 才能接受点击事件。下面一段代码写了一个可以接受点击事件的 DemoSprite 类。">
+<meta name="keywords" content="cocos2d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cocos2d HTML5 Sprite 绑定点击事件">
 <meta property="og:url" content="http://aikin.github.io/2014/07/16/cocos2d-html5-sprite/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="在Cocos2d HTML5,  发现 Sprite 类没有点击事件，需要注册点击的代理, 才能接受点击事件。下面一段代码写了一个可以接受点击事件的 DemoSprite 类。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2016-10-30T08:51:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cocos2d HTML5 Sprite 绑定点击事件">
@@ -267,6 +269,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -373,7 +385,7 @@
       
         <p>在<code>Cocos2d HTML5</code>,  发现 Sprite 类没有点击事件，需要注册点击的代理, 才能接受点击事件。下面一段代码写了一个可以接受点击事件的 DemoSprite 类。</p>
 <a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> DemoSprite = cc.Sprite.extend(&#123;</div><div class="line"></div><div class="line">    _touchBegan: <span class="literal">false</span>,</div><div class="line">    _touchEnabled: <span class="literal">true</span>,</div><div class="line"></div><div class="line">    ctor: <span class="function"><span class="keyword">function</span> (<span class="params">image</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>._super();</div><div class="line">        <span class="keyword">this</span>.init(image);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onEnter: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        cc.Director.getInstance().getTouchDispatcher()._addTargetedDelegate(<span class="keyword">this</span>, <span class="number">0</span>);  <span class="comment">// 当Sprite加载完后， 注册点击事件（有好几种注册的方式，在这里就不一一介绍了）。</span></div><div class="line">        <span class="keyword">this</span>._touchEnabled = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">this</span>._super();</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onExit: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        cc.Director.getInstance().getTouchDispatcher()._removeDelegate(<span class="keyword">this</span>);</div><div class="line">          <span class="comment">//当Sprite退出后，取消点击事件的注册。</span></div><div class="line">        <span class="keyword">this</span>._touchEnabled = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">this</span>._super();</div><div class="line">    &#125;,</div><div class="line">    touchRect: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getBoundingBoxToWorld();</div><div class="line">    &#125;,</div><div class="line">    onTouchBegan: <span class="function"><span class="keyword">function</span> (<span class="params">touch, event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (cc.rectContainsPoint(<span class="keyword">this</span>.touchRect(), touch.getLocation())) &#123;</div><div class="line">            <span class="comment">//当点击在 Sprite 范围内时，执行。</span></div><div class="line">            <span class="comment">//在这里处理点击事件。</span></div><div class="line">            <span class="keyword">this</span>._touchBegan = <span class="literal">true</span>;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回true， 才会执行 onTouchEnded方法。</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onTouchEnded: <span class="function"><span class="keyword">function</span> (<span class="params">touch, event</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._touchBegan) &#123;</div><div class="line">            <span class="keyword">this</span>._touchBegan = <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DemoSprite = cc.Sprite.extend(&#123;</span><br><span class="line"></span><br><span class="line">    _touchBegan: <span class="literal">false</span>,</span><br><span class="line">    _touchEnabled: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    ctor: <span class="function"><span class="keyword">function</span> (<span class="params">image</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._super();</span><br><span class="line">        <span class="keyword">this</span>.init(image);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    onEnter: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        cc.Director.getInstance().getTouchDispatcher()._addTargetedDelegate(<span class="keyword">this</span>, <span class="number">0</span>);  <span class="comment">// 当Sprite加载完后， 注册点击事件（有好几种注册的方式，在这里就不一一介绍了）。</span></span><br><span class="line">        <span class="keyword">this</span>._touchEnabled = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">this</span>._super();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    onExit: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        cc.Director.getInstance().getTouchDispatcher()._removeDelegate(<span class="keyword">this</span>);</span><br><span class="line">          <span class="comment">//当Sprite退出后，取消点击事件的注册。</span></span><br><span class="line">        <span class="keyword">this</span>._touchEnabled = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>._super();</span><br><span class="line">    &#125;,</span><br><span class="line">    touchRect: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getBoundingBoxToWorld();</span><br><span class="line">    &#125;,</span><br><span class="line">    onTouchBegan: <span class="function"><span class="keyword">function</span> (<span class="params">touch, event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cc.rectContainsPoint(<span class="keyword">this</span>.touchRect(), touch.getLocation())) &#123;</span><br><span class="line">            <span class="comment">//当点击在 Sprite 范围内时，执行。</span></span><br><span class="line">            <span class="comment">//在这里处理点击事件。</span></span><br><span class="line">            <span class="keyword">this</span>._touchBegan = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//返回true， 才会执行 onTouchEnded方法。</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    onTouchEnded: <span class="function"><span class="keyword">function</span> (<span class="params">touch, event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._touchBegan) &#123;</span><br><span class="line">            <span class="keyword">this</span>._touchBegan = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -754,19 +766,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

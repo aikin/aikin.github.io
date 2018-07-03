@@ -116,11 +116,13 @@
 
 
 <meta name="description" content="Gulp，是一个自动化任务运行工具(就是让一些如: 图片压缩，js合并，Sass 编译成 CSS，测试，重启服务器等操作，能自动运行的工具。)，和 Grunt 是同一类型的工具。表示之前没有配置过这两类的工具，只是简单的了解过。最近刚好要用到，就在各种 google 了，发现现在使用最广泛的就是 Grunt，中文的学习资料和相应的任务插件也很多。而 Gulp 貌似最近才火起来的吧，第三方插件没有">
+<meta name="keywords" content="gulp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gulp API 初探和 gulp-nodemon gulp-livereload 配置">
 <meta property="og:url" content="http://aikin.github.io/2014/10/24/gulp-nodemon-livereload/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="Gulp，是一个自动化任务运行工具(就是让一些如: 图片压缩，js合并，Sass 编译成 CSS，测试，重启服务器等操作，能自动运行的工具。)，和 Grunt 是同一类型的工具。表示之前没有配置过这两类的工具，只是简单的了解过。最近刚好要用到，就在各种 google 了，发现现在使用最广泛的就是 Grunt，中文的学习资料和相应的任务插件也很多。而 Gulp 貌似最近才火起来的吧，第三方插件没有">
+<meta property="og:locale" content="default">
 <meta property="og:image" content="http://aikin.github.io/images/gulp-2x.png">
 <meta property="og:image" content="http://aikin.github.io/images/livereload.png">
 <meta property="og:updated_time" content="2016-10-03T17:25:29.000Z">
@@ -270,6 +272,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -374,59 +386,87 @@
       
 
       
-        <p><a href="http://gulpjs.com/" target="_blank" rel="external">Gulp</a>，是一个自动化任务运行工具(就是让一些如: 图片压缩，js合并，Sass 编译成 CSS，测试，重启服务器等操作，能自动运行的工具。)，和 <a href="http://gruntjs.com/" target="_blank" rel="external">Grunt</a> 是同一类型的工具。表示之前没有配置过这两类的工具，只是简单的了解过。最近刚好要用到，就在各种 google 了，发现现在使用最广泛的就是 Grunt，中文的学习资料和相应的任务插件也很多。而 Gulp 貌似最近才火起来的吧，第三方插件没有 Grunt 那么多。但是个人对 Gulp 第一印象比较好，感觉写起来更加方便，更有 DSL 感觉。</p>
+        <p><a href="http://gulpjs.com/" target="_blank" rel="noopener">Gulp</a>，是一个自动化任务运行工具(就是让一些如: 图片压缩，js合并，Sass 编译成 CSS，测试，重启服务器等操作，能自动运行的工具。)，和 <a href="http://gruntjs.com/" target="_blank" rel="noopener">Grunt</a> 是同一类型的工具。表示之前没有配置过这两类的工具，只是简单的了解过。最近刚好要用到，就在各种 google 了，发现现在使用最广泛的就是 Grunt，中文的学习资料和相应的任务插件也很多。而 Gulp 貌似最近才火起来的吧，第三方插件没有 Grunt 那么多。但是个人对 Gulp 第一印象比较好，感觉写起来更加方便，更有 DSL 感觉。</p>
 <div style="width: 20%; margin-left: auto; margin-right:auto"><br><img src="/images/gulp-2x.png"></div>
 
 <a id="more"></a>
-<h1 id="gulp-一些-API-的语法"><a href="#gulp-一些-API-的语法" class="headerlink" title=" gulp 一些 API 的语法"></a><strong><em> gulp 一些 API 的语法</em></strong></h1><h2 id="gulp-task-gulp-src-gulp-dest-gulp-watch"><a href="#gulp-task-gulp-src-gulp-dest-gulp-watch" class="headerlink" title="gulp.task()　gulp.src()　gulp.dest()　gulp.watch()"></a><code>gulp.task()</code>　<code>gulp.src()</code>　<code>gulp.dest()</code>　<code>gulp.watch()</code></h2><p>下面是 <a href="https://github.com/dlmanning/gulp-sass.git" target="_blank" rel="external">gulp-sass</a>(用于将 scss 编译成 css 的插件) 插件的例子:<br><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</div><div class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>)；</div><div class="line"></div><div class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">'./scss/*.scss'</span>)</div><div class="line">        .pipe(sass())</div><div class="line">        .pipe(gulp.dest(<span class="string">'./css'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.watch(<span class="string">'./scss/*.scss'</span>, [<span class="string">'sass'</span>]);</div></pre></td></tr></table></figure></p>
-<p><strong>1. <code>task</code>方法是<code>gulp</code>用于定义一个具体任务的方法。如果需要执行任务，在终端执行<code>gulp task-name</code>。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulptaskname-deps-fn" target="_blank" rel="external"><code>task</code></a> 方法的语法如:</strong></p>
+<h1 id="gulp-一些-API-的语法"><a href="#gulp-一些-API-的语法" class="headerlink" title=" gulp 一些 API 的语法"></a><strong><em> gulp 一些 API 的语法</em></strong></h1><h2 id="gulp-task-gulp-src-gulp-dest-gulp-watch"><a href="#gulp-task-gulp-src-gulp-dest-gulp-watch" class="headerlink" title="gulp.task()　gulp.src()　gulp.dest()　gulp.watch()"></a><code>gulp.task()</code>　<code>gulp.src()</code>　<code>gulp.dest()</code>　<code>gulp.watch()</code></h2><p>下面是 <a href="https://github.com/dlmanning/gulp-sass.git" target="_blank" rel="noopener">gulp-sass</a>(用于将 scss 编译成 css 的插件) 插件的例子:<br><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>)；</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    gulp.src(<span class="string">'./scss/*.scss'</span>)</span><br><span class="line">        .pipe(sass())</span><br><span class="line">        .pipe(gulp.dest(<span class="string">'./css'</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.watch(<span class="string">'./scss/*.scss'</span>, [<span class="string">'sass'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. <code>task</code>方法是<code>gulp</code>用于定义一个具体任务的方法。如果需要执行任务，在终端执行<code>gulp task-name</code>。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulptaskname-deps-fn" target="_blank" rel="noopener"><code>task</code></a> 方法的语法如:</strong></p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>gulp.task(name[, deps], fn)</code></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><code>name</code></strong><br>　　类型：<code>String</code>， 指任务名，就像上述的<strong><code>eg-1</code></strong>例子的<code>sass</code>。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>deps</code></strong><br>　　类型：<code>Array</code>，指在跑当前任务时，对其它任务的依赖。也就是要执行当前任务，会先执行这些依赖的任务。如: <code>gulp.task(&#39;demo&#39;, [&#39;demo1&#39;, &#39;demo2&#39;], function(){ });</code>会先同时执行任务<code>&#39;demo1&#39;, &#39;demo2&#39;</code>，最后执行任务<code>&#39;demo&#39;</code>。<br><strong><code>fn</code></strong><br>　　类型：<code>function</code>，指运行任务时，要执行的具体操作的内容。</p>
 </blockquote>
-<p><strong>2. <code>src</code>方法是指定源文件的输入路径，<code>pipe</code>有点像是封闭的“流水线”，某个产品经过上一个工序处理后，就转入下一个工序去处理，直到完成。也就是将上一步的输出转化下一步的输入的中间者。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpsrcglobs-options" target="_blank" rel="external"><code>src</code></a> 方法的语法如:</strong></p>
+<p><strong>2. <code>src</code>方法是指定源文件的输入路径，<code>pipe</code>有点像是封闭的“流水线”，某个产品经过上一个工序处理后，就转入下一个工序去处理，直到完成。也就是将上一步的输出转化下一步的输入的中间者。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpsrcglobs-options" target="_blank" rel="noopener"><code>src</code></a> 方法的语法如:</strong></p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>gulp.src(globs[, options])</code></strong></p>
-<p><strong><em>参数：</em></strong></p>
-<p><strong><code>globs</code></strong><br>　　类型：<code>String</code> 或 <code>Array</code>，指定源文件的路径，可以是单个路径，也可以是个路径数组。<br>　　路径匹配支持通配符：<br>　　　　1. <code>app.js</code>　　　　指定具体文件<br>　　　　2. <code>js/*</code>　　　　　匹配 js 目录下所有的文件，不包括子文件夹<br>　　　　3. <code>js/*.js</code>　　　 匹配 js 目录下所有的扩展名为 .js 的文件，不包括子文件夹<br>　　　　4. <code>js/*/*.js</code>　　匹配 js 目录下第一层子文件夹里的扩展名为 .js 的文件<br>　　　　5. <code>js/**/*.js</code>　 匹配 js 目录下所有文件夹层次下扩展名为 .js 的文件<br>　　　　6. <code>!js/try.js</code>　 不包括 try.js 文件，在前五条文件匹配模式前加<code>!</code>，就忽略掉相应的文件</p>
-<p><strong><code>options</code></strong><br>　　类型：<code>Object</code>，有3个属性<code>buffer</code>，<code>read</code>，<code>base</code>。<br>　　　<strong><em><code>options.butter</code></em></strong><br>　　　　类型：<code>Boolean</code>，默认：<code>true</code><br>　　　　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#optionsbuffer" target="_blank" rel="external">gulp-api</a> 上描述到，如设置为<code>false</code>，返回的文件内容将会以数据流的形式体现，而不是数据<br>　　　　块的形式。还提示到有可能一些插件没有实现支持数据流的形式。<br>　　　　(表示不太明白，有待研究。-_-|||)<br>　　　<strong><em><code>options.read</code></em></strong><br>　　　　类型：<code>Boolean</code>，默认：<code>true</code><br>　　　　返回的文件内容为<code>null</code>，不执行读取文件操作。<br>　　　<strong><em><code>options.base</code></em></strong><br>　　　　类型：<code>String</code><br>　　　　设置输出路径以某个路径的某个组成部分为基础向后拼接。具体例子可以参考 <a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#optionsbase" target="_blank" rel="external">gulp-api</a>。</p>
 </blockquote>
-<p><strong>3. <code>dest</code>方法是指定被处理完的文件的输出路径，就像<code>eg-1</code>例子里的<code>gulp.dest(&#39;./css&#39;)</code>意思就是将编译完成的 css 文件保存到 <code>/css</code>目录中。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpdestpath-options" target="_blank" rel="external"><code>dest</code></a> 方法的语法如:</strong></p>
+<blockquote>
+<p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
+<p><strong><code>globs</code></strong><br>　　类型：<code>String</code> 或 <code>Array</code>，指定源文件的路径，可以是单个路径，也可以是个路径数组。<br>　　路径匹配支持通配符：<br>　　　　1. <code>app.js</code>　　　　指定具体文件<br>　　　　2. <code>js/*</code>　　　　　匹配 js 目录下所有的文件，不包括子文件夹<br>　　　　3. <code>js/*.js</code>　　　 匹配 js 目录下所有的扩展名为 .js 的文件，不包括子文件夹<br>　　　　4. <code>js/*/*.js</code>　　匹配 js 目录下第一层子文件夹里的扩展名为 .js 的文件<br>　　　　5. <code>js/**/*.js</code>　 匹配 js 目录下所有文件夹层次下扩展名为 .js 的文件<br>　　　　6. <code>!js/try.js</code>　 不包括 try.js 文件，在前五条文件匹配模式前加<code>!</code>，就忽略掉相应的文件</p>
+</blockquote>
+<blockquote>
+<p><strong><code>options</code></strong><br>　　类型：<code>Object</code>，有3个属性<code>buffer</code>，<code>read</code>，<code>base</code>。<br>　　　<strong><em><code>options.butter</code></em></strong><br>　　　　类型：<code>Boolean</code>，默认：<code>true</code><br>　　　　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#optionsbuffer" target="_blank" rel="noopener">gulp-api</a> 上描述到，如设置为<code>false</code>，返回的文件内容将会以数据流的形式体现，而不是数据<br>　　　　块的形式。还提示到有可能一些插件没有实现支持数据流的形式。<br>　　　　(表示不太明白，有待研究。-_-|||)<br>　　　<strong><em><code>options.read</code></em></strong><br>　　　　类型：<code>Boolean</code>，默认：<code>true</code><br>　　　　返回的文件内容为<code>null</code>，不执行读取文件操作。<br>　　　<strong><em><code>options.base</code></em></strong><br>　　　　类型：<code>String</code><br>　　　　设置输出路径以某个路径的某个组成部分为基础向后拼接。具体例子可以参考 <a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#optionsbase" target="_blank" rel="noopener">gulp-api</a>。</p>
+</blockquote>
+<p><strong>3. <code>dest</code>方法是指定被处理完的文件的输出路径，就像<code>eg-1</code>例子里的<code>gulp.dest(&#39;./css&#39;)</code>意思就是将编译完成的 css 文件保存到 <code>/css</code>目录中。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpdestpath-options" target="_blank" rel="noopener"><code>dest</code></a> 方法的语法如:</strong></p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>gulp.dest(path[, options])</code></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><code>path</code></strong><br>　　类型：<code>String</code> 或 <code>Function</code>，指定输出文件的文件夹路径，可以是字符串，也可以是一个返回文件夹路径的函数。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>options</code></strong><br>　　类型：<code>Object</code>，有2个属性<code>cwd</code>，<code>mode</code>。<br>　　　<strong><em><code>options.cwd</code></em></strong><br>　　　　类型：<code>String</code>，默认：<code>process.cwd()</code><br>　　　　 设置输出文件夹路径的相对路径，默认为当前脚本的工作目录的路径。<br>　　　<strong><em><code>options.mode</code></em></strong><br>　　　　类型：<code>String</code>，默认：<code>0777</code><br>　　　　设置被创建文件夹的权限。</p>
 </blockquote>
-<p><strong>4. <code>watch</code>方法是用于监听文件变化，文件一修改就会执行指定的任务。在<code>eg-1</code>例子中，通过监听<code>&#39;./scss/*.scss&#39;</code>文件，一旦文件发生修改就会执行任务<code>sass</code>。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpwatchglob--opts-tasks-or-gulpwatchglob--opts-cb" target="_blank" rel="external"><code>watch</code></a> 方法的语法如:</strong></p>
+<p><strong>4. <code>watch</code>方法是用于监听文件变化，文件一修改就会执行指定的任务。在<code>eg-1</code>例子中，通过监听<code>&#39;./scss/*.scss&#39;</code>文件，一旦文件发生修改就会执行任务<code>sass</code>。<br>　<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpwatchglob--opts-tasks-or-gulpwatchglob--opts-cb" target="_blank" rel="noopener"><code>watch</code></a> 方法的语法如:</strong></p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>gulp.watch(glob [, opts], tasks) or gulp.watch(glob [, opts, cb])</code></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><code>glob</code></strong><br>　　类型：<code>String</code> 或 <code>Array</code>，指定源文件的路径，可以是单个路径，也可以是个路径数组。路径匹配和上述<code>gulp.src()</code>方法路径匹配的模式一样。</p>
-<p><strong><code>opts</code></strong><br>　　类型：<code>Object</code>，有4个属性<code>interval</code>，<code>debounceDelay</code>，<code>mode</code>，<code>cwd</code>。<br>　　具体可以参考<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#opts" target="_blank" rel="external">gulp-api</a>这里就不一一介绍了。</p>
+</blockquote>
+<blockquote>
+<p><strong><code>opts</code></strong><br>　　类型：<code>Object</code>，有4个属性<code>interval</code>，<code>debounceDelay</code>，<code>mode</code>，<code>cwd</code>。<br>　　具体可以参考<a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#opts" target="_blank" rel="noopener">gulp-api</a>这里就不一一介绍了。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>tasks</code></strong><br>　　类型：<code>Array</code>，监听到文件变化后，要被执行的任务的名字组成的数组。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>cb(event)</code></strong><br>　　类型：<code>Function</code>，监听到变化后，回调的函数。会传递出一个对象类型的<code>event</code>参数。<br>　　　<strong><em><code>event.type</code></em></strong><br>　　　　类型：<code>String</code>，表示操作的类型：added, changed or deleted<br>　　　<strong><em><code>event.path</code></em></strong><br>　　　　类型：<code>String</code>，被修改文件的路径。</p>
 </blockquote>
-<h1 id="gulp-nodemon-和-gulp-livereload-配置："><a href="#gulp-nodemon-和-gulp-livereload-配置：" class="headerlink" title=" gulp-nodemon 和 gulp-livereload 配置："></a><strong><em> gulp-nodemon 和 gulp-livereload 配置：</em></strong></h1><h2 id="gulp安装"><a href="#gulp安装" class="headerlink" title="gulp安装"></a><code>gulp</code>安装</h2><p>全局安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g gulp</div></pre></td></tr></table></figure></p>
-<p>安装在项目开发环境:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp --save-dev</div></pre></td></tr></table></figure></p>
+<h1 id="gulp-nodemon-和-gulp-livereload-配置："><a href="#gulp-nodemon-和-gulp-livereload-配置：" class="headerlink" title=" gulp-nodemon 和 gulp-livereload 配置："></a><strong><em> gulp-nodemon 和 gulp-livereload 配置：</em></strong></h1><h2 id="gulp安装"><a href="#gulp安装" class="headerlink" title="gulp安装"></a><code>gulp</code>安装</h2><p>全局安装:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g gulp</span><br></pre></td></tr></table></figure></p>
+<p>安装在项目开发环境:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp --save-dev</span><br></pre></td></tr></table></figure></p>
 <h2 id="gulp-nodemon和gulp-livereload安装"><a href="#gulp-nodemon和gulp-livereload安装" class="headerlink" title="gulp-nodemon和gulp-livereload安装"></a><code>gulp-nodemon</code>和<code>gulp-livereload</code>安装</h2><ul>
-<li><a href="https://github.com/JacksonGariety/gulp-nodemon" target="_blank" rel="external">gulp-nodemon</a> 是重启服务器的插件。</li>
-<li><a href="https://github.com/vohof/gulp-livereload.git" target="_blank" rel="external">gulp-livereload</a> 后端控制前端同步刷新，不过需要依赖 chrome 插件 LiveReload</li>
+<li><a href="https://github.com/JacksonGariety/gulp-nodemon" target="_blank" rel="noopener">gulp-nodemon</a> 是重启服务器的插件。</li>
+<li><a href="https://github.com/vohof/gulp-livereload.git" target="_blank" rel="noopener">gulp-livereload</a> 后端控制前端同步刷新，不过需要依赖 chrome 插件 LiveReload</li>
 </ul>
-<p>安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-nodemon gulp-livereload --save-dev</div></pre></td></tr></table></figure></p>
-<p>为了能让服务器可以控制 chrome 自动刷新，需要安装 <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei" target="_blank" rel="external">LiveReload</a> 插件。</p>
+<p>安装:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gulp-nodemon gulp-livereload --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>为了能让服务器可以控制 chrome 自动刷新，需要安装 <a href="https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei" target="_blank" rel="noopener">LiveReload</a> 插件。</p>
 <p><img src="/images/livereload.png" style="height=200px"></p>
-<h2 id="gulpfile-js配置"><a href="#gulpfile-js配置" class="headerlink" title="gulpfile.js配置"></a><code>gulpfile.js</code>配置</h2><p>在工程的目录下，新建 gulpfile.js 文件。如下简单的配置:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="comment">//引入 gulp 和 nodemon livereload 插件</span></div><div class="line"><span class="keyword">var</span> gulp       = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</div><div class="line"><span class="keyword">var</span> nodemon    = <span class="built_in">require</span>(<span class="string">'gulp-nodemon'</span>);</div><div class="line"><span class="keyword">var</span> livereload = <span class="built_in">require</span>(<span class="string">'gulp-livereload'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 一些文件的路径</span></div><div class="line"><span class="keyword">var</span> paths = &#123;</div><div class="line">    client: [</div><div class="line">    <span class="string">'client/javascripts/**/*.js'</span>,</div><div class="line">    <span class="string">'client/stylesheets/**/*.css'</span></div><div class="line">    ],</div><div class="line">    server: &#123;</div><div class="line">        index: <span class="string">'app.js'</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// nodemon 的配置</span></div><div class="line"><span class="keyword">var</span> nodemonConfig = &#123;</div><div class="line">    script : paths.server.index,</div><div class="line">    ignore : [</div><div class="line">        <span class="string">"tmp/**"</span>,</div><div class="line">        <span class="string">"public/**"</span>,</div><div class="line">        <span class="string">"views/**"</span></div><div class="line">    ],</div><div class="line">    env    : &#123;</div><div class="line">        <span class="string">"NODE_ENV"</span>: <span class="string">"development"</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 使用 nodemone 跑起服务器</span></div><div class="line">gulp.task(<span class="string">'serve'</span>, [<span class="string">'livereload'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> nodemon(nodemonConfig);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 当客户端被监听的文件改变时，刷新浏览器</span></div><div class="line">gulp.task(<span class="string">'livereload'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    livereload.listen();</div><div class="line">    <span class="keyword">var</span> server = livereload();</div><div class="line">    <span class="keyword">return</span> gulp.watch(paths.client, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">        server.changed(event.path);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// develop 任务， 同时开启 serve、livereload 任务</span></div><div class="line">gulp.task(<span class="string">'develop'</span>, [<span class="string">'serve'</span>, <span class="string">'livereload'</span>]);</div></pre></td></tr></table></figure></p>
+<h2 id="gulpfile-js配置"><a href="#gulpfile-js配置" class="headerlink" title="gulpfile.js配置"></a><code>gulpfile.js</code>配置</h2><p>在工程的目录下，新建 gulpfile.js 文件。如下简单的配置:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//引入 gulp 和 nodemon livereload 插件</span></span><br><span class="line"><span class="keyword">var</span> gulp       = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> nodemon    = <span class="built_in">require</span>(<span class="string">'gulp-nodemon'</span>);</span><br><span class="line"><span class="keyword">var</span> livereload = <span class="built_in">require</span>(<span class="string">'gulp-livereload'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一些文件的路径</span></span><br><span class="line"><span class="keyword">var</span> paths = &#123;</span><br><span class="line">    client: [</span><br><span class="line">    <span class="string">'client/javascripts/**/*.js'</span>,</span><br><span class="line">    <span class="string">'client/stylesheets/**/*.css'</span></span><br><span class="line">    ],</span><br><span class="line">    server: &#123;</span><br><span class="line">        index: <span class="string">'app.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// nodemon 的配置</span></span><br><span class="line"><span class="keyword">var</span> nodemonConfig = &#123;</span><br><span class="line">    script : paths.server.index,</span><br><span class="line">    ignore : [</span><br><span class="line">        <span class="string">"tmp/**"</span>,</span><br><span class="line">        <span class="string">"public/**"</span>,</span><br><span class="line">        <span class="string">"views/**"</span></span><br><span class="line">    ],</span><br><span class="line">    env    : &#123;</span><br><span class="line">        <span class="string">"NODE_ENV"</span>: <span class="string">"development"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 nodemone 跑起服务器</span></span><br><span class="line">gulp.task(<span class="string">'serve'</span>, [<span class="string">'livereload'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nodemon(nodemonConfig);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当客户端被监听的文件改变时，刷新浏览器</span></span><br><span class="line">gulp.task(<span class="string">'livereload'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    livereload.listen();</span><br><span class="line">    <span class="keyword">var</span> server = livereload();</span><br><span class="line">    <span class="keyword">return</span> gulp.watch(paths.client, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        server.changed(event.path);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// develop 任务， 同时开启 serve、livereload 任务</span></span><br><span class="line">gulp.task(<span class="string">'develop'</span>, [<span class="string">'serve'</span>, <span class="string">'livereload'</span>]);</span><br></pre></td></tr></table></figure></p>
 <p><strong>这里只是写了一些，我在体验<code>gulp</code>时，总结的一些东西(方便自己记忆^_^)。如果需要更详细的介绍可以看我参考的那些链接。</strong></p>
 <p><strong><em>gulp, 你是那么美。。。</em></strong></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md" target="_blank" rel="external">gulp-api-docs</a></li>
-<li><a href="http://segmentfault.com/blog/laopopo/1190000000372547" target="_blank" rel="external">前端构建工具gulp入门教程</a></li>
-<li><a href="http://www.html-js.com/article/2083" target="_blank" rel="external">gulp构建进阶</a></li>
-<li><a href="http://www.dbpoo.com/getting-started-with-gulp/" target="_blank" rel="external">Gulp安装及配合组件构建前端开发一体化</a></li>
-<li><a href="http://javascript.ruanyifeng.com/tool/gulp.html#toc2" target="_blank" rel="external">Gulp：任务自动管理工具</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md" target="_blank" rel="noopener">gulp-api-docs</a></li>
+<li><a href="http://segmentfault.com/blog/laopopo/1190000000372547" target="_blank" rel="noopener">前端构建工具gulp入门教程</a></li>
+<li><a href="http://www.html-js.com/article/2083" target="_blank" rel="noopener">gulp构建进阶</a></li>
+<li><a href="http://www.dbpoo.com/getting-started-with-gulp/" target="_blank" rel="noopener">Gulp安装及配合组件构建前端开发一体化</a></li>
+<li><a href="http://javascript.ruanyifeng.com/tool/gulp.html#toc2" target="_blank" rel="noopener">Gulp：任务自动管理工具</a></li>
 </ul>
 
       
@@ -833,19 +873,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

@@ -116,11 +116,12 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kin'blog">
+<meta property="og:title" content="Kin&#39;blog">
 <meta property="og:url" content="http://aikin.github.io/page/8/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kin'blog">
+<meta name="twitter:title" content="Kin&#39;blog">
 
 
 
@@ -265,6 +266,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -373,7 +384,7 @@
       
         
           <h1 id="《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新"><a href="#《JavaScript-模式》作者-Stoyan-Stefanov-译-陈新" class="headerlink" title="《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新"></a>《JavaScript 模式》作者: Stoyan Stefanov 译: 陈新</h1><h3 id="养分"><a href="#养分" class="headerlink" title="养分"></a>养分</h3><p><strong><em>1. 自调用构造函数: </em></strong> 实现不使用<code>new</code>关键字，构造出实例。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Waffle</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="keyword">if</span> ((!<span class="keyword">this</span> <span class="keyword">instanceof</span> Waffle)) &#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Waffle();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">this</span>.tastes = <span class="string">"yummy"</span>;</div><div class="line">&#125;</div><div class="line">Waffle.prototype.wantAnother = <span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> first   = <span class="keyword">new</span> Waffle(),</div><div class="line">    section = Waffle();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(first.tastes);     <span class="comment">// yummy</span></div><div class="line"><span class="built_in">console</span>.log(section.tastes);   <span class="comment">// yummy</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Waffle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> ((!<span class="keyword">this</span> <span class="keyword">instanceof</span> Waffle)) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Waffle();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span>.tastes = <span class="string">"yummy"</span>;</span><br><span class="line">&#125;</span><br><span class="line">Waffle.prototype.wantAnother = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> first   = <span class="keyword">new</span> Waffle(),</span><br><span class="line">    section = Waffle();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(first.tastes);     <span class="comment">// yummy</span></span><br><span class="line"><span class="built_in">console</span>.log(section.tastes);   <span class="comment">// yummy</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2014/11/20/javascript-patterns/#more" rel="contents">
@@ -629,11 +640,11 @@
 
       
         
-          <p>这里记录的是笔者在 <a href="https://github.com/">github</a>上 Star 的库，持续更新。</p>
+          <p>这里记录的是笔者在 <a href="https://github.com/" target="_blank" rel="noopener">github</a>上 Star 的库，持续更新。</p>
 <h2 id="JS-类"><a href="#JS-类" class="headerlink" title="JS 类"></a>JS 类</h2><ul>
-<li><a href="https://github.com/getify/LABjs.git">LABjs</a></li>
-<li><a href="https://github.com/jrburke/requirejs.git">requirejs</a></li>
-<li><a href="https://github.com/seajs/seajs.git">seajs</a><blockquote>
+<li><a href="https://github.com/getify/LABjs.git" target="_blank" rel="noopener">LABjs</a></li>
+<li><a href="https://github.com/jrburke/requirejs.git" target="_blank" rel="noopener">requirejs</a></li>
+<li><a href="https://github.com/seajs/seajs.git" target="_blank" rel="noopener">seajs</a><blockquote>
 <ul>
 <li>LABjs 是一个文件加载器, 核心价值是性能优化</li>
 <li>RequireJS 和 SeaJS 则是模块加载器，倡导的是一种模块化开发理念，核心价值是        让 JavaScript 的模块化开发变得更简单自然。</li>
@@ -937,19 +948,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

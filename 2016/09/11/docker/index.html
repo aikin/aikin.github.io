@@ -116,19 +116,21 @@
 
 
 <meta name="description" content="Docker 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？">
+<meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="容器化开发环境 - 操作系统虚拟化">
 <meta property="og:url" content="http://aikin.github.io/2016/09/11/docker/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="Docker 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？">
-<meta property="og:image" content="http://aikin.github.io/./os-virtualization.jpg">
-<meta property="og:image" content="http://aikin.github.io/vm.jpg">
-<meta property="og:image" content="http://aikin.github.io/docker.jpg">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2016/09/11/docker/os-virtualization.jpg">
+<meta property="og:image" content="http://aikin.github.io/2016/09/11/docker/vm.jpg">
+<meta property="og:image" content="http://aikin.github.io/2016/09/11/docker/docker.jpg">
 <meta property="og:updated_time" content="2016-10-03T17:27:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="容器化开发环境 - 操作系统虚拟化">
 <meta name="twitter:description" content="Docker 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？">
-<meta name="twitter:image" content="http://aikin.github.io/./os-virtualization.jpg">
+<meta name="twitter:image" content="http://aikin.github.io/2016/09/11/docker/os-virtualization.jpg">
 
 
 
@@ -271,6 +273,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -375,7 +387,7 @@
       
 
       
-        <p><a href="https://www.docker.com/" target="_blank" rel="external">Docker</a> 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？</p>
+        <p><a href="https://www.docker.com/" target="_blank" rel="noopener">Docker</a> 是操作系统级别的轻量级虚拟化技术，也就是实现轻量级的操作系统虚拟化。它能够让应用的分发、部署和管理都变得前所未有的高效和轻松。同时它也是一个用 go 语言实现的开源项目，源代码在 github 上。那么什么是虚拟化？什么又是操作系统虚拟化？</p>
 <a id="more"></a>
 <blockquote>
 <ul>
@@ -390,7 +402,7 @@
 <h5 id="容器虚拟化技术-Docker"><a href="#容器虚拟化技术-Docker" class="headerlink" title="容器虚拟化技术(Docker)"></a><strong><em>容器虚拟化技术(Docker)</em></strong></h5><blockquote>
 <p><img style="margin: auto;" src="docker.jpg"><br><code>Docker</code> 几乎就没有什么虚拟化的东西，并且直接复用了 Host 主机的 OS，在 Docker Engine 层面实现了调度和隔离重量一下子就降低了好几个档次。 Docker 的容器利用了 <code>LXC</code>，管理利用了 <code>namespaces</code> 来做权限的控制和隔离， <code>cgroups</code> 来进行资源的配置，并且还通过 <code>aufs</code> 来进一步提高文件系统的资源利用率。<br><code>Docker Container</code> 来说启动和销毁都是秒级的，而且它底层依赖的技术<code>lxc(linux container)</code>完全是内核特性，没有任何中间层开销，对于资源的利用率极高性能接近物理机。</p>
 </blockquote>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/docker-core-technology-preview" target="_blank" rel="external">Docker核心技术预览</a><br><a href="http://book.51cto.com/art/201301/377685.htm" target="_blank" rel="external">CPU虚拟化</a><br><a href="https://www.docker.com/what-docker" target="_blank" rel="external">what docker</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/docker-core-technology-preview" target="_blank" rel="noopener">Docker核心技术预览</a><br><a href="http://book.51cto.com/art/201301/377685.htm" target="_blank" rel="noopener">CPU虚拟化</a><br><a href="https://www.docker.com/what-docker" target="_blank" rel="noopener">what docker</a></p>
 
       
     </div>
@@ -796,19 +808,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

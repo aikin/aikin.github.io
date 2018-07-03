@@ -115,33 +115,23 @@
 
 
 
-<meta name="description" content="数据是所有程序处理的根本，而引用数据类型和基础数据类型是对数据的不同抽象。在我们学习过的编程语言中，都有它们的身影，然而它们的具象会有所不同。比如：
-
-
-JavaScript 基础数据类型：undefined,null,number,boolean,string；引用数据类型：Object,Boolean,Number,String，Array，Class。
-Java 基础数据类型：byte,">
+<meta name="description" content="数据是所有程序处理的根本，而引用数据类型和基础数据类型是对数据的不同抽象。在我们学习过的编程语言中，都有它们的身影，然而它们的具象会有所不同。比如：   JavaScript 基础数据类型：undefined,null,number,boolean,string；引用数据类型：Object,Boolean,Number,String，Array，Class。 Java 基础数据类型：byte,">
+<meta name="keywords" content="reference,stack,heap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈内和堆内的生命体">
 <meta property="og:url" content="http://aikin.github.io/2017/05/15/ref-base-data-type/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="数据是所有程序处理的根本，而引用数据类型和基础数据类型是对数据的不同抽象。在我们学习过的编程语言中，都有它们的身影，然而它们的具象会有所不同。比如：
-
-
-JavaScript 基础数据类型：undefined,null,number,boolean,string；引用数据类型：Object,Boolean,Number,String，Array，Class。
-Java 基础数据类型：byte,">
-<meta property="og:image" content="http://aikin.github.io/./memory.png">
-<meta property="og:image" content="http://aikin.github.io/./stack-head.png">
-<meta property="og:image" content="http://aikin.github.io/./stack-head-line.png">
-<meta property="og:image" content="http://aikin.github.io/./thread-memory.png">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="数据是所有程序处理的根本，而引用数据类型和基础数据类型是对数据的不同抽象。在我们学习过的编程语言中，都有它们的身影，然而它们的具象会有所不同。比如：   JavaScript 基础数据类型：undefined,null,number,boolean,string；引用数据类型：Object,Boolean,Number,String，Array，Class。 Java 基础数据类型：byte,">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2017/05/15/ref-base-data-type/memory.png">
+<meta property="og:image" content="http://aikin.github.io/2017/05/15/ref-base-data-type/stack-head.png">
+<meta property="og:image" content="http://aikin.github.io/2017/05/15/ref-base-data-type/stack-head-line.png">
+<meta property="og:image" content="http://aikin.github.io/2017/05/15/ref-base-data-type/thread-memory.png">
 <meta property="og:updated_time" content="2017-05-29T06:18:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈内和堆内的生命体">
-<meta name="twitter:description" content="数据是所有程序处理的根本，而引用数据类型和基础数据类型是对数据的不同抽象。在我们学习过的编程语言中，都有它们的身影，然而它们的具象会有所不同。比如：
-
-
-JavaScript 基础数据类型：undefined,null,number,boolean,string；引用数据类型：Object,Boolean,Number,String，Array，Class。
-Java 基础数据类型：byte,">
-<meta name="twitter:image" content="http://aikin.github.io/./memory.png">
+<meta name="twitter:description" content="数据是所有程序处理的根本，而引用数据类型和基础数据类型是对数据的不同抽象。在我们学习过的编程语言中，都有它们的身影，然而它们的具象会有所不同。比如：   JavaScript 基础数据类型：undefined,null,number,boolean,string；引用数据类型：Object,Boolean,Number,String，Array，Class。 Java 基础数据类型：byte,">
+<meta name="twitter:image" content="http://aikin.github.io/2017/05/15/ref-base-data-type/memory.png">
 
 
 
@@ -284,6 +274,16 @@ Java 基础数据类型：byte,">
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -410,15 +410,15 @@ Java 基础数据类型：byte,">
 <h3 id="栈内存和堆内存"><a href="#栈内存和堆内存" class="headerlink" title="栈内存和堆内存"></a>栈内存和堆内存</h3><p>在对模型有大概的了解之后，那么如何和代码进行映射呢？接着上图(一图顶千言)：<br><img src="./stack-head.png" alt="stack head"></p>
 <p>如图所示，左边的是栈内存，右边的堆内存。按照栈的操作方式，程序的执行顺序：<code>main() --&gt; d.go() --&gt; dog.setName()</code>。每个方法都有局部变量(<code>d</code>,<code>dog</code>,<code>dogName</code>)，也存储在栈内存中。每个局部变量都指向堆内存一个引用类型对象。</p>
 <p>在上一段伪代码(C#)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public void Method1() &#123;</div><div class="line">  int i = 4;</div><div class="line">  int y = 2;</div><div class="line">  class1 cls1 = new class1();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void Method1() &#123;</span><br><span class="line">  int i = 4;</span><br><span class="line">  int y = 2;</span><br><span class="line">  class1 cls1 = new class1();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>代码逻辑很简单，都是赋值操作。在栈和堆中又是如何反应的？上图：<br><img src="./stack-head-line.png" alt="stack head"></p>
 <p>图中演绎了变量在栈内存和堆内存中的生命周期。执行 <code>int i = 4</code>后，<code>i=4</code>分配到栈内存，同理<code>y=2</code>也被分配到栈内存中，按照栈的特性，先入后出，所以<code>y=2</code>会在<code>i=4</code>上面。<br>当执行<code>class1 cls1 = new class1()</code>, 局部变量 <code>cls1</code> 会被堆栈，同时指向堆内存中的引用类型创建的内存空间。当方法执行结束后，栈内存中的变量所占用的内存空间会被释放，而堆内存中占用的内存空间，会被 <code>GC</code> 回收。</p>
 <h3 id="多线程之间内存关系"><a href="#多线程之间内存关系" class="headerlink" title="多线程之间内存关系"></a>多线程之间内存关系</h3><p>多线程之间共享<code>堆内存</code>，每个线程都有<code>Thread Local Storage</code> 和 私有的栈内存。由于多线程之间是共享堆内存的，所以一个线程对一个共享变量的修改对另一个线程是可见的。也就是说，在一个线程中对共享变量修改后，要在其它线程能够得知共享变量的变化，展现内存可见性的特性。<br><img src="./thread-memory.png" alt="thread memory"></p>
 <p><strong><em>写在最后：掌握如何分析变量是在栈内存和堆内存，可以有利于更好的写性能高的并发程序，理解为什么需要锁的根本原因。</em></strong></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><hr>
 <ul>
-<li><a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap" target="_blank" rel="external">What and where are the stack and heap?</a></li>
-<li><a href="https://www.codeproject.com/Articles/76153/Six-important-NET-concepts-Stack-heap-value-types#Stack%20and%20Heap" target="_blank" rel="external">Six important .NET concepts: Stack, heap, value types, reference types, boxing, and unboxing</a></li>
+<li><a href="https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap" target="_blank" rel="noopener">What and where are the stack and heap?</a></li>
+<li><a href="https://www.codeproject.com/Articles/76153/Six-important-NET-concepts-Stack-heap-value-types#Stack%20and%20Heap" target="_blank" rel="noopener">Six important .NET concepts: Stack, heap, value types, reference types, boxing, and unboxing</a></li>
 </ul>
 
       
@@ -829,19 +829,7 @@ Java 基础数据类型：byte,">
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

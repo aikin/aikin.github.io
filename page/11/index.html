@@ -116,11 +116,12 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kin'blog">
+<meta property="og:title" content="Kin&#39;blog">
 <meta property="og:url" content="http://aikin.github.io/page/11/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kin'blog">
+<meta name="twitter:title" content="Kin&#39;blog">
 
 
 
@@ -265,6 +266,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -374,7 +385,7 @@
         
           <p>有的时候，函数的调用者(<code>this</code>关键字的绑定对象)并不是你期望的对象。面对这样情况，我们希望可以自定义<code>this</code>的绑定对象。在 javascript 中可以是用<strong><em><code>call apply bind</code></em></strong>方法来指定 this 关键字的绑定对象。
 　</p>
-<h3 id="a-call-方法"><a href="#a-call-方法" class="headerlink" title="a. call 方法"></a>a. <strong>call 方法</strong></h3><h4 id="先看个例子："><a href="#先看个例子：" class="headerlink" title="先看个例子："></a>先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> me = &#123;</div><div class="line">    fullName: <span class="string">'aikin'</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> you = &#123;</div><div class="line">    fullName: <span class="string">'you'</span></div><div class="line">&#125;;</div><div class="line">　</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</div><div class="line">&#125;</div><div class="line">　</div><div class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></div><div class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></div><div class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></div></pre></td></tr></table></figure></p>
+<h3 id="a-call-方法"><a href="#a-call-方法" class="headerlink" title="a. call 方法"></a>a. <strong>call 方法</strong></h3><h4 id="先看个例子："><a href="#先看个例子：" class="headerlink" title="先看个例子："></a>先看个例子：</h4><p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> me = &#123;</span><br><span class="line">    fullName: <span class="string">'aikin'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> you = &#123;</span><br><span class="line">    fullName: <span class="string">'you'</span></span><br><span class="line">&#125;;</span><br><span class="line">　</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speakFullName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.fullName);</span><br><span class="line">&#125;</span><br><span class="line">　</span><br><span class="line">speakFullName();           <span class="comment">//=&gt; undefined</span></span><br><span class="line">speakFullName.call(me);    <span class="comment">//=&gt; aikin</span></span><br><span class="line">speakFullName.call(you);   <span class="comment">//=&gt; you</span></span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2014/08/16/js-call-apply-bind/#more" rel="contents">
@@ -501,8 +512,8 @@
 
       
         
-          <p>  <img src='/images/atom.png' /></p>
-<p> <a href="https://atom.io/">Atom</a> 是 github 内部的编辑软件。按照 Github 的说法，这是一款非同一般的编辑器，是 21 世纪的创新产品，他们希望将来“从菜鸟到黑客都在使用 Atom 编写代码”。</p>
+          <p>  <img src="/images/atom.png"></p>
+<p> <a href="https://atom.io/" target="_blank" rel="noopener">Atom</a> 是 github 内部的编辑软件。按照 Github 的说法，这是一款非同一般的编辑器，是 21 世纪的创新产品，他们希望将来“从菜鸟到黑客都在使用 Atom 编写代码”。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2014/08/08/install-atom-on-ubuntu/#more" rel="contents">
@@ -630,8 +641,8 @@
       
         
           <p>what is this？ 在 javascript 中，每个 function 都有一个 this 关键字的隐私绑定。当调用某个 function 时，这个 function 的 this 绑定将会被确定。</p>
-<p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</div><div class="line">&#125;</div><div class="line">test();</div><div class="line">　</div><div class="line"><span class="comment">// this is ---Window &#123;top: Window, window: Window, location: Location, external: Object, chrome: Object…&#125;</span></div></pre></td></tr></table></figure></p>
-<p><strong>eg-2：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> test2 = &#123;</div><div class="line">    <span class="built_in">console</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">test2.console();</div><div class="line">　</div><div class="line"><span class="comment">// this is ---Object &#123;console: function&#125;</span></div></pre></td></tr></table></figure></p>
+<p><strong>eg-1：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line">　</span><br><span class="line"><span class="comment">// this is ---Window &#123;top: Window, window: Window, location: Location, external: Object, chrome: Object…&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>eg-2：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test2 = &#123;</span><br><span class="line">    <span class="built_in">console</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'this is ---'</span>, <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">test2.console();</span><br><span class="line">　</span><br><span class="line"><span class="comment">// this is ---Object &#123;console: function&#125;</span></span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2014/08/05/js-this/#more" rel="contents">
@@ -926,19 +937,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

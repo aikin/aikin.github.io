@@ -115,22 +115,21 @@
 
 
 
-<meta name="description" content="RockMongo 是一个PHP5写的，开源的 MongoDB 管理工具。
-安装 php1$ sudo apt-get install apache2 php5 php5-dev dh-make-php">
+<meta name="description" content="RockMongo 是一个PHP5写的，开源的 MongoDB 管理工具。 安装 php1$ sudo apt-get install apache2 php5 php5-dev dh-make-php">
+<meta name="keywords" content="MongoDB,RockMongo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB GUI 之 RockMogo">
 <meta property="og:url" content="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="RockMongo 是一个PHP5写的，开源的 MongoDB 管理工具。
-安装 php1$ sudo apt-get install apache2 php5 php5-dev dh-make-php">
-<meta property="og:image" content="http://aikin.github.io/./rockmongo-login.png">
-<meta property="og:image" content="http://aikin.github.io/./rockmongo-index.png">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="RockMongo 是一个PHP5写的，开源的 MongoDB 管理工具。 安装 php1$ sudo apt-get install apache2 php5 php5-dev dh-make-php">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/rockmongo-login.png">
+<meta property="og:image" content="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/rockmongo-index.png">
 <meta property="og:updated_time" content="2016-10-03T17:32:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB GUI 之 RockMogo">
-<meta name="twitter:description" content="RockMongo 是一个PHP5写的，开源的 MongoDB 管理工具。
-安装 php1$ sudo apt-get install apache2 php5 php5-dev dh-make-php">
-<meta name="twitter:image" content="http://aikin.github.io/./rockmongo-login.png">
+<meta name="twitter:description" content="RockMongo 是一个PHP5写的，开源的 MongoDB 管理工具。 安装 php1$ sudo apt-get install apache2 php5 php5-dev dh-make-php">
+<meta name="twitter:image" content="http://aikin.github.io/2014/03/15/mongodb-gui-rockmongo/rockmongo-login.png">
 
 
 
@@ -273,6 +272,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -377,19 +386,19 @@
       
 
       
-        <p><a href="https://github.com/iwind/rockmongo" target="_blank" rel="external">RockMongo</a> 是一个PHP5写的，开源的 MongoDB 管理工具。</p>
-<h3 id="安装-php"><a href="#安装-php" class="headerlink" title="安装 php"></a>安装 php</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install apache2 php5 php5-dev dh-make-php</div></pre></td></tr></table></figure>
+        <p><a href="https://github.com/iwind/rockmongo" target="_blank" rel="noopener">RockMongo</a> 是一个PHP5写的，开源的 MongoDB 管理工具。</p>
+<h3 id="安装-php"><a href="#安装-php" class="headerlink" title="安装 php"></a>安装 php</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install apache2 php5 php5-dev dh-make-php</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="安装-RockMongo"><a href="#安装-RockMongo" class="headerlink" title="安装 RockMongo"></a>安装 RockMongo</h3><p><strong>1. 下载 RockMongo：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo wget http://rock-php.googlecode.com/files/rockmongo-v1.1.2.zip</div></pre></td></tr></table></figure></p>
-<p><strong>2. 解压rockmongo，并将解压后的文件移动到 /var/www 下：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo  unzip rockmongo-v1.1.2.zip</div><div class="line">$ sudo mv rockmongo /var/www/</div><div class="line">$ sudo chown -R www-data:www-data /var/www/</div></pre></td></tr></table></figure></p>
-<h3 id="安装-mongo-依赖"><a href="#安装-mongo-依赖" class="headerlink" title="安装 mongo 依赖"></a>安装 mongo 依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pecl install <span class="_">-f</span> mongo 2.2.0</div></pre></td></tr></table></figure>
-<h3 id="编辑-php-ini文件-终端输入"><a href="#编辑-php-ini文件-终端输入" class="headerlink" title="编辑 php.ini文件 终端输入"></a>编辑 php.ini文件 终端输入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo gedit /etc/php5/apache2/php.ini</div></pre></td></tr></table></figure>
+<h3 id="安装-RockMongo"><a href="#安装-RockMongo" class="headerlink" title="安装 RockMongo"></a>安装 RockMongo</h3><p><strong>1. 下载 RockMongo：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo wget http://rock-php.googlecode.com/files/rockmongo-v1.1.2.zip</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 解压rockmongo，并将解压后的文件移动到 /var/www 下：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo  unzip rockmongo-v1.1.2.zip</span><br><span class="line">$ sudo mv rockmongo /var/www/</span><br><span class="line">$ sudo chown -R www-data:www-data /var/www/</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装-mongo-依赖"><a href="#安装-mongo-依赖" class="headerlink" title="安装 mongo 依赖"></a>安装 mongo 依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pecl install -f mongo 2.2.0</span><br></pre></td></tr></table></figure>
+<h3 id="编辑-php-ini文件-终端输入"><a href="#编辑-php-ini文件-终端输入" class="headerlink" title="编辑 php.ini文件 终端输入"></a>编辑 php.ini文件 终端输入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit /etc/php5/apache2/php.ini</span><br></pre></td></tr></table></figure>
 <p>添加内容如下：</p>
 <blockquote>
 <p>extension_dir = “/usr/lib/php5/20100525+lfs”<br>extension = “mongo.so”</p>
 </blockquote>
-<h3 id="重启-apach"><a href="#重启-apach" class="headerlink" title="重启 apach"></a>重启 apach</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo /etc/init.d/apache2 restart</div></pre></td></tr></table></figure>
-<h3 id="使用-rockmongo"><a href="#使用-rockmongo" class="headerlink" title="使用 rockmongo"></a>使用 rockmongo</h3><p> <strong>1. 在浏览器上输入url：<a href="http://127.0.1.1/rockmongo/" target="_blank" rel="external">http://127.0.1.1/rockmongo/</a></strong></p>
+<h3 id="重启-apach"><a href="#重启-apach" class="headerlink" title="重启 apach"></a>重启 apach</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/apache2 restart</span><br></pre></td></tr></table></figure>
+<h3 id="使用-rockmongo"><a href="#使用-rockmongo" class="headerlink" title="使用 rockmongo"></a>使用 rockmongo</h3><p> <strong>1. 在浏览器上输入url：<a href="http://127.0.1.1/rockmongo/" target="_blank" rel="noopener">http://127.0.1.1/rockmongo/</a></strong></p>
 <p> <img src="./rockmongo-login.png" alt="login"></p>
 <p> <strong>2. 默认的登入的用户名和密码： admin admin  。 登陆后将会出现：</strong></p>
 <p>  <img src="./rockmongo-index.png" alt="index"></p>
@@ -800,19 +809,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

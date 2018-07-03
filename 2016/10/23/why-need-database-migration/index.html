@@ -116,11 +116,13 @@
 
 
 <meta name="description" content="对于企业和基于 web 的应用程序来说，Migration 就是将一个平台移到另一个平台。Database Migration就是通过migration scripts数据库从一个状态转换到另一个状态，每一个migration script都会对数据库进行修改，修改的内容可能是创建一张新表、更新表的结构、更新表中的数据、删除一张表和创建索引，等等。一般迁移脚本会提供两个“互斥”功能，一个是Up用于">
+<meta name="keywords" content="DB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Database Schema Migrations">
 <meta property="og:url" content="http://aikin.github.io/2016/10/23/why-need-database-migration/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="对于企业和基于 web 的应用程序来说，Migration 就是将一个平台移到另一个平台。Database Migration就是通过migration scripts数据库从一个状态转换到另一个状态，每一个migration script都会对数据库进行修改，修改的内容可能是创建一张新表、更新表的结构、更新表中的数据、删除一张表和创建索引，等等。一般迁移脚本会提供两个“互斥”功能，一个是Up用于">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2016-12-17T17:39:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Database Schema Migrations">
@@ -267,6 +269,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -377,16 +389,16 @@
 <p>大部分项目都会有多个的环境（test, stage, prod），那么保证这些环境下的数据库的一致性的难度会成倍增加。比如，在开发应用的程序的过程中，创建一张新表、同时建立索引，那也就意味着，这些操作也需要在其它的每一个环境（test，stage，prod）发生，当然也包括团队其他成员的本地环境，这样才能保证数据库的一致性， 这个过程将面临很大的挑战。 为了让整个流程更加简单方便安全，可以给数据库加上版本控制功能，也就是数据库迁移功能，这样可以让团队在修改数据库结构或内容的同时，可以保持彼此本地环境数据库版本的一致性。</p>
 <p><strong><em>数据库迁移的工具：</em></strong></p>
 <ul>
-<li><p><a href="https://flywaydb.org/" target="_blank" rel="external">Flyway</a> <code>Java</code></p>
+<li><p><a href="https://flywaydb.org/" target="_blank" rel="noopener">Flyway</a> <code>Java</code></p>
 </li>
-<li><p><a href="http://www.mybatis.org/migrations/" target="_blank" rel="external">MyBatis Migrations</a> <code>Java</code></p>
+<li><p><a href="http://www.mybatis.org/migrations/" target="_blank" rel="noopener">MyBatis Migrations</a> <code>Java</code></p>
 </li>
-<li><p><a href="http://docs.sequelizejs.com/en/latest/docs/migrations/" target="_blank" rel="external">Sequelize</a> <code>Node.js</code></p>
+<li><p><a href="http://docs.sequelizejs.com/en/latest/docs/migrations/" target="_blank" rel="noopener">Sequelize</a> <code>Node.js</code></p>
 </li>
-<li><p><a href="http://www.fluentnhibernate.org/" target="_blank" rel="external">Fluent NHibernate</a> <code>C#</code></p>
+<li><p><a href="http://www.fluentnhibernate.org/" target="_blank" rel="noopener">Fluent NHibernate</a> <code>C#</code></p>
 </li>
 </ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://flywaydb.org/getstarted/why" target="_blank" rel="external">Flyway</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://flywaydb.org/getstarted/why" target="_blank" rel="noopener">Flyway</a></p>
 
       
     </div>
@@ -792,19 +804,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

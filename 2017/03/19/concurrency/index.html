@@ -115,29 +115,22 @@
 
 
 
-<meta name="description" content="作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下CPU、Process和Thread之间的关系。
-概念
-什么是处理器?
-中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大">
+<meta name="description" content="作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下CPU、Process和Thread之间的关系。 概念 什么是处理器? 中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大">
+<meta name="keywords" content="concurrency,cpu,thread,process">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发入坑前奏">
 <meta property="og:url" content="http://aikin.github.io/2017/03/19/concurrency/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下CPU、Process和Thread之间的关系。
-概念
-什么是处理器?
-中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大">
-<meta property="og:image" content="http://aikin.github.io/./process-life-cycle.png">
-<meta property="og:image" content="http://aikin.github.io/./thread-life-cycle.png">
-<meta property="og:image" content="http://aikin.github.io/./new-thread.png">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下CPU、Process和Thread之间的关系。 概念 什么是处理器? 中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2017/03/19/concurrency/process-life-cycle.png">
+<meta property="og:image" content="http://aikin.github.io/2017/03/19/concurrency/thread-life-cycle.png">
+<meta property="og:image" content="http://aikin.github.io/2017/03/19/concurrency/new-thread.png">
 <meta property="og:updated_time" content="2017-04-16T04:10:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发入坑前奏">
-<meta name="twitter:description" content="作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下CPU、Process和Thread之间的关系。
-概念
-什么是处理器?
-中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大">
-<meta name="twitter:image" content="http://aikin.github.io/./process-life-cycle.png">
+<meta name="twitter:description" content="作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下CPU、Process和Thread之间的关系。 概念 什么是处理器? 中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大">
+<meta name="twitter:image" content="http://aikin.github.io/2017/03/19/concurrency/process-life-cycle.png">
 
 
 
@@ -280,6 +273,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -387,17 +390,17 @@
         <p>作为非科班生，在搞清楚什么是并发？什么是并行？之前，还是需要先了解一下<code>CPU</code>、<code>Process</code>和<code>Thread</code>之间的关系。</p>
 <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><hr>
 <h3 id="什么是处理器"><a href="#什么是处理器" class="headerlink" title="什么是处理器?"></a>什么是处理器?</h3><blockquote>
-<p>中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大核心部件。– <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8" target="_blank" rel="external">维基百科</a></p>
+<p>中央处理器 （英语：Central Processing Unit，缩写：CPU），是计算机的主要设备之一，功能主要是解释计算机指令以及处理计算机软件中的数据。计算机的可编程性主要是指对中央处理器的编程。中央处理器、内部存储器和输入/输出设备是现代电脑的三大核心部件。– <a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8" target="_blank" rel="noopener">维基百科</a></p>
 </blockquote>
 <p><code>CPU</code>是计算机的核心，控制指令的发布，负责所有的数据计算处理。</p>
 <a id="more"></a>
 <h3 id="什么是进程？"><a href="#什么是进程？" class="headerlink" title="什么是进程？"></a>什么是进程？</h3><blockquote>
-<p>进程（英语：process），是计算机中已运行程序的实体。进程为曾经是分时系统的基本运作单位。在<code>面向进程设计的系统</code>（如早期的UNIX，Linux 2.4及更早的版本）中，进程是程序的基本执行实体；在<code>面向线程设计的系统</code>（如当代多数操作系统、Linux 2.6及更新的版本）中，<em>进程本身不是基本运行单位，而是线程的容器</em>。程序本身只是指令、数据及其组织形式的描述，进程才是程序（那些指令和数据）的真正运行实例。– <a href="https://zh.wikipedia.org/wiki/%E8%BF%9B%E7%A8%8B" target="_blank" rel="external">维基百科</a></p>
+<p>进程（英语：process），是计算机中已运行程序的实体。进程为曾经是分时系统的基本运作单位。在<code>面向进程设计的系统</code>（如早期的UNIX，Linux 2.4及更早的版本）中，进程是程序的基本执行实体；在<code>面向线程设计的系统</code>（如当代多数操作系统、Linux 2.6及更新的版本）中，<em>进程本身不是基本运行单位，而是线程的容器</em>。程序本身只是指令、数据及其组织形式的描述，进程才是程序（那些指令和数据）的真正运行实例。– <a href="https://zh.wikipedia.org/wiki/%E8%BF%9B%E7%A8%8B" target="_blank" rel="noopener">维基百科</a></p>
 </blockquote>
 <p>进程是操作系统进行资源分配和调度的一个独立单位，是应用程序运行的载体。进程是一种抽象的概念，并没有统一的标准定义。进程一般由程序、数据集合和进程控制块三部分组成。程序用于描述进程要完成的功能，是控制进程执行的指令集；数据集合是程序在执行时所需要的数据和工作区；程序控制块(Program Control Block，简称PCB)，包含进程的描述信息和控制信息，是进程存在的唯一标志。</p>
 <h4 id="进程生命周期"><a href="#进程生命周期" class="headerlink" title="进程生命周期"></a>进程生命周期</h4><p><img src="./process-life-cycle.png" alt="进程生命周期"></p>
 <h3 id="什么是线程？"><a href="#什么是线程？" class="headerlink" title="什么是线程？"></a>什么是线程？</h3><blockquote>
-<p>线程（英语：thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。– <a href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B" target="_blank" rel="external">维基百科</a></p>
+<p>线程（英语：thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。– <a href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B" target="_blank" rel="noopener">维基百科</a></p>
 </blockquote>
 <p>线程是最小的执行单元,是一个抽象的概念，它的抽象层次比进程抽象层次低。</p>
 <h4 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h4><p><img src="./thread-life-cycle.png" alt="线程生命周期"></p>
@@ -413,7 +416,7 @@
 <li>进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。</li>
 </ul>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><hr>
-<p><a href="http://blog.csdn.net/luoweifu/article/details/46595285" target="_blank" rel="external">编程思想之多线程与多进程(1)——以操作系统的角度述说线程与进程</a><br><a href="http://www.kancloud.cn/wizardforcel/liaoxuefeng/108670" target="_blank" rel="external">进程和线程</a><br><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="external">进程与线程的一个简单解释</a></p>
+<p><a href="http://blog.csdn.net/luoweifu/article/details/46595285" target="_blank" rel="noopener">编程思想之多线程与多进程(1)——以操作系统的角度述说线程与进程</a><br><a href="http://www.kancloud.cn/wizardforcel/liaoxuefeng/108670" target="_blank" rel="noopener">进程和线程</a><br><a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="noopener">进程与线程的一个简单解释</a></p>
 
       
     </div>
@@ -825,19 +828,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

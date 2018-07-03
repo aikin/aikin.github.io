@@ -116,11 +116,12 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Kin'blog">
+<meta property="og:title" content="Kin&#39;blog">
 <meta property="og:url" content="http://aikin.github.io/page/4/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kin'blog">
+<meta name="twitter:title" content="Kin&#39;blog">
 
 
 
@@ -262,6 +263,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
           </a>
         </li>
       
@@ -501,7 +512,7 @@
         
           <p>  整理以前笔记时，发现几个简单的无聊的<code>AngularJS</code>知识点。</p>
 <ul>
-<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="string">`use strict`</span></div><div class="line">angular.module(<span class="string">"App"</span>)</div><div class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</div><div class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></div><div class="line">    <span class="keyword">var</span> original = $location.path;</div><div class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</div><div class="line">        <span class="keyword">var</span> lastRoute = $route.current;</div><div class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          $route.current = lastRoute;</div><div class="line">          un();</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> original.apply($location, [path]);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`use strict`</span></span><br><span class="line">angular.module(<span class="string">"App"</span>)</span><br><span class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</span><br><span class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></span><br><span class="line">    <span class="keyword">var</span> original = $location.path;</span><br><span class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> lastRoute = $route.current;</span><br><span class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          $route.current = lastRoute;</span><br><span class="line">          un();</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> original.apply($location, [path]);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
           <!--noindex-->
@@ -630,7 +641,7 @@
 
       
         
-          <p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">USE</span> yourdatabase;</div><div class="line">GO</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</div><div class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</div><div class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</div><div class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</div></pre></td></tr></table></figure></p>
+          <p>  最近遇到 SQL Server 数据库的数据从其它库同步导入，同时也无法删除的问题。一开始的直接以为数据库被锁死，执行下面<code>SQL</code>语句查询相关被锁的表：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> yourdatabase;</span><br><span class="line">GO</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> request_session_id <span class="keyword">AS</span> spid,</span><br><span class="line">       OBJECT_NAME(resource_associated_entity_id) <span class="keyword">AS</span> tableName</span><br><span class="line"><span class="keyword">FROM</span> sys.dm_tran_locks</span><br><span class="line"><span class="keyword">WHERE</span> resource_type=<span class="string">'OBJECT'</span>;</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/10/04/locked-sql-user/#more" rel="contents">
@@ -925,19 +936,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

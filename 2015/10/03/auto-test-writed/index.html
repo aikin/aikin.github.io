@@ -115,24 +115,20 @@
 
 
 
-<meta name="description" content="什么是自动化测试？
-自动化测试是相对于手动化测试存在的，对比于手动测试来说(比如需要测试GUI的时候，测试人员需要用鼠标去手动测试)，自动化测试就是使用程序或脚本来测试相应的功能。 其实就是将一切可以由程序自动完成的测试任务转化为相应的自动化测试框架来自动执行。
-实现自动化测试的目的是为了改进软件测试生命周期的效率和有效性，通过重复测试来提高测试效率。同时在我看来自动化测试还可以防止程序出 bug">
+<meta name="description" content="什么是自动化测试？ 自动化测试是相对于手动化测试存在的，对比于手动测试来说(比如需要测试GUI的时候，测试人员需要用鼠标去手动测试)，自动化测试就是使用程序或脚本来测试相应的功能。 其实就是将一切可以由程序自动完成的测试任务转化为相应的自动化测试框架来自动执行。 实现自动化测试的目的是为了改进软件测试生命周期的效率和有效性，通过重复测试来提高测试效率。同时在我看来自动化测试还可以防止程序出 bug">
+<meta name="keywords" content="automated testing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我写过的那几类自动化测试">
 <meta property="og:url" content="http://aikin.github.io/2015/10/03/auto-test-writed/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="什么是自动化测试？
-自动化测试是相对于手动化测试存在的，对比于手动测试来说(比如需要测试GUI的时候，测试人员需要用鼠标去手动测试)，自动化测试就是使用程序或脚本来测试相应的功能。 其实就是将一切可以由程序自动完成的测试任务转化为相应的自动化测试框架来自动执行。
-实现自动化测试的目的是为了改进软件测试生命周期的效率和有效性，通过重复测试来提高测试效率。同时在我看来自动化测试还可以防止程序出 bug">
-<meta property="og:image" content="http://aikin.github.io/./test-pyramid.jpeg">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="什么是自动化测试？ 自动化测试是相对于手动化测试存在的，对比于手动测试来说(比如需要测试GUI的时候，测试人员需要用鼠标去手动测试)，自动化测试就是使用程序或脚本来测试相应的功能。 其实就是将一切可以由程序自动完成的测试任务转化为相应的自动化测试框架来自动执行。 实现自动化测试的目的是为了改进软件测试生命周期的效率和有效性，通过重复测试来提高测试效率。同时在我看来自动化测试还可以防止程序出 bug">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2015/10/03/auto-test-writed/test-pyramid.jpeg">
 <meta property="og:updated_time" content="2016-10-03T17:29:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我写过的那几类自动化测试">
-<meta name="twitter:description" content="什么是自动化测试？
-自动化测试是相对于手动化测试存在的，对比于手动测试来说(比如需要测试GUI的时候，测试人员需要用鼠标去手动测试)，自动化测试就是使用程序或脚本来测试相应的功能。 其实就是将一切可以由程序自动完成的测试任务转化为相应的自动化测试框架来自动执行。
-实现自动化测试的目的是为了改进软件测试生命周期的效率和有效性，通过重复测试来提高测试效率。同时在我看来自动化测试还可以防止程序出 bug">
-<meta name="twitter:image" content="http://aikin.github.io/./test-pyramid.jpeg">
+<meta name="twitter:description" content="什么是自动化测试？ 自动化测试是相对于手动化测试存在的，对比于手动测试来说(比如需要测试GUI的时候，测试人员需要用鼠标去手动测试)，自动化测试就是使用程序或脚本来测试相应的功能。 其实就是将一切可以由程序自动完成的测试任务转化为相应的自动化测试框架来自动执行。 实现自动化测试的目的是为了改进软件测试生命周期的效率和有效性，通过重复测试来提高测试效率。同时在我看来自动化测试还可以防止程序出 bug">
+<meta name="twitter:image" content="http://aikin.github.io/2015/10/03/auto-test-writed/test-pyramid.jpeg">
 
 
 
@@ -275,6 +271,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -390,7 +396,7 @@
 <p>在编写集成测试时，我们需要关注的是接口输出是否能够正确的对应上相应的输入(就是输入经过集成后模块间的处理后是否能输出正确结果)，同时也需要关注模块内部的表现，但是不需要对模块内部功能和运作进行详细的了解，只需要了解模块的接口之间是如何相互作用(协作运行)的，可以说集成测试也属于灰盒测试。</p>
 <h4 id="功能测试-Integration-Testing"><a href="#功能测试-Integration-Testing" class="headerlink" title="功能测试 (Integration Testing)"></a><strong><em>功能测试 (Integration Testing)</em></strong></h4><p>功能测试是完成从系统的边界外，不对系统内部做任何假设，就是以用户的方式对系统进行使用测试，来检测系统是否达到用户要求的功能。功能测试也称为黑盒测试，系统就是一个黑盒，在编写功能测试时不考虑系统内部结构和逻辑结构，通过对系统的相应功能的接口进行测试，来检查系统功能是否满足需求卡的功能。功能测试编写和维护都比较困难，而且运行起来的比较慢。测试者选择有效输入和无效输入来验证是否正确的输出。</p>
 <hr>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.tych.io/tech/2013/07/10/unit-test.html" target="_blank" rel="external">unit test</a><br><a href="https://msdn.microsoft.com/zh-cn/library/aa292197" target="_blank" rel="external">单元测试</a><br><a href="http://www.cnblogs.com/yuyijq/archive/2011/12/14/2287531.html" target="_blank" rel="external">关于自动化测试</a>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.tych.io/tech/2013/07/10/unit-test.html" target="_blank" rel="noopener">unit test</a><br><a href="https://msdn.microsoft.com/zh-cn/library/aa292197" target="_blank" rel="noopener">单元测试</a><br><a href="http://www.cnblogs.com/yuyijq/archive/2011/12/14/2287531.html" target="_blank" rel="noopener">关于自动化测试</a>
 　　</p>
 
       
@@ -797,19 +803,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

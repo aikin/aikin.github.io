@@ -115,22 +115,18 @@
 
 
 
-<meta name="description" content="整理以前笔记时，发现几个简单的无聊的AngularJS知识点。
-
-实现修改 URL， 不刷新页面12345678910111213141516`use strict`angular.module(&quot;App&quot;)  .run(function($rootScope, $route, $location, $routeParams) &amp;#123;// 重写 $location.path 实现修改 u">
+<meta name="description" content="整理以前笔记时，发现几个简单的无聊的AngularJS知识点。  实现修改 URL， 不刷新页面12345678910111213141516`use strict`angular.module(&quot;App&quot;)  .run(function($rootScope, $route, $location, $routeParams) &amp;#123;// 重写 $location.path 实现修改 u">
+<meta name="keywords" content="angularjs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS 无聊知识点">
 <meta property="og:url" content="http://aikin.github.io/2016/10/16/angularjs-one-tips/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="整理以前笔记时，发现几个简单的无聊的AngularJS知识点。
-
-实现修改 URL， 不刷新页面12345678910111213141516`use strict`angular.module(&quot;App&quot;)  .run(function($rootScope, $route, $location, $routeParams) &amp;#123;// 重写 $location.path 实现修改 u">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="整理以前笔记时，发现几个简单的无聊的AngularJS知识点。  实现修改 URL， 不刷新页面12345678910111213141516`use strict`angular.module(&quot;App&quot;)  .run(function($rootScope, $route, $location, $routeParams) &amp;#123;// 重写 $location.path 实现修改 u">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2017-01-06T05:16:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS 无聊知识点">
-<meta name="twitter:description" content="整理以前笔记时，发现几个简单的无聊的AngularJS知识点。
-
-实现修改 URL， 不刷新页面12345678910111213141516`use strict`angular.module(&quot;App&quot;)  .run(function($rootScope, $route, $location, $routeParams) &amp;#123;// 重写 $location.path 实现修改 u">
+<meta name="twitter:description" content="整理以前笔记时，发现几个简单的无聊的AngularJS知识点。  实现修改 URL， 不刷新页面12345678910111213141516`use strict`angular.module(&quot;App&quot;)  .run(function($rootScope, $route, $location, $routeParams) &amp;#123;// 重写 $location.path 实现修改 u">
 
 
 
@@ -273,6 +269,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -379,12 +385,12 @@
       
         <p>  整理以前笔记时，发现几个简单的无聊的<code>AngularJS</code>知识点。</p>
 <ul>
-<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="string">`use strict`</span></div><div class="line">angular.module(<span class="string">"App"</span>)</div><div class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</div><div class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></div><div class="line">    <span class="keyword">var</span> original = $location.path;</div><div class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</div><div class="line">        <span class="keyword">var</span> lastRoute = $route.current;</div><div class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          $route.current = lastRoute;</div><div class="line">          un();</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> original.apply($location, [path]);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<li><strong><em>实现修改 URL， 不刷新页面</em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`use strict`</span></span><br><span class="line">angular.module(<span class="string">"App"</span>)</span><br><span class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">$rootScope, $route, $location, $routeParams</span>) </span>&#123;</span><br><span class="line"><span class="comment">// 重写 $location.path 实现修改 url, 但不刷新页面。</span></span><br><span class="line">    <span class="keyword">var</span> original = $location.path;</span><br><span class="line">    $location.path = <span class="function"><span class="keyword">function</span> (<span class="params">path, reload</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (reload === <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> lastRoute = $route.current;</span><br><span class="line">        <span class="keyword">var</span> un = $rootScope.$on(<span class="string">'$locationChangeSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          $route.current = lastRoute;</span><br><span class="line">          un();</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> original.apply($location, [path]);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <a id="more"></a>
 <ul>
-<li><strong><em>统计 <code>angularJS</code> 的 <code>watchers</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</div><div class="line">  <span class="keyword">var</span> watchers = [];</div><div class="line">  <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</div><div class="line">      angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</div><div class="line">        watchers.push(watcher);</div><div class="line">      &#125;);</div><div class="line">    &#125;</div><div class="line">    angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</div><div class="line">      f($(childElement));</div><div class="line">    &#125;);</div><div class="line">  &#125;;</div><div class="line">  f(root);</div><div class="line">  <span class="built_in">console</span>.log(watchers.length);</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<li><strong><em>统计 <code>angularJS</code> 的 <code>watchers</code></em></strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> root = $(<span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>));</span><br><span class="line">  <span class="keyword">var</span> watchers = [];</span><br><span class="line">  <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (element.data().hasOwnProperty(<span class="string">'$scope'</span>)) &#123;</span><br><span class="line">      angular.forEach(element.data().$scope.$$watchers, <span class="function"><span class="keyword">function</span> (<span class="params">watcher</span>) </span>&#123;</span><br><span class="line">        watchers.push(watcher);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    angular.forEach(element.children(), <span class="function"><span class="keyword">function</span> (<span class="params">childElement</span>) </span>&#123;</span><br><span class="line">      f($(childElement));</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  f(root);</span><br><span class="line">  <span class="built_in">console</span>.log(watchers.length);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>只是想找个地方记录一下。。。</p>
@@ -768,19 +774,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

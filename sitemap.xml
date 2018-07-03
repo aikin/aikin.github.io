@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.github.io/about/index.html</loc>
+    
+    <lastmod>2018-07-03T15:49:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/2018/05/19/do-not-use-transactional-annotation-on-spring-integration-test/</loc>
     
     <lastmod>2018-05-20T07:23:53.000Z</lastmod>
@@ -282,6 +289,13 @@
   </url>
   
   <url>
+    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
+    
+    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.github.io/tags/index.html</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
@@ -292,20 +306,6 @@
     <loc>http://aikin.github.io/instagram/index.html</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/2014/08/08/install-atom-on-ubuntu/</loc>
-    
-    <lastmod>2016-03-17T14:47:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://aikin.github.io/about/index.html</loc>
-    
-    <lastmod>2016-03-17T14:47:06.000Z</lastmod>
     
   </url>
   

@@ -116,11 +116,13 @@
 
 
 <meta name="description" content="AngularJS 事件系统并不与浏览器的事件系统相通，这意味着，我们只能在作用域上监听 AngularJS 事件而不是 DOM 事件。由于作用域是有层次的(既是继承关系)，所以可以在作用域链上传递事件。在传递事件前，需要先了解触发事件的作用域和处理事件的作用域的关系，这样我们才可以判断事件是向上传递还是向下广播。">
+<meta name="keywords" content="javascript,angularjs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AngularJS 事件">
 <meta property="og:url" content="http://aikin.github.io/2014/09/26/angular-events/index.html">
-<meta property="og:site_name" content="Kin'blog">
+<meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="AngularJS 事件系统并不与浏览器的事件系统相通，这意味着，我们只能在作用域上监听 AngularJS 事件而不是 DOM 事件。由于作用域是有层次的(既是继承关系)，所以可以在作用域链上传递事件。在传递事件前，需要先了解触发事件的作用域和处理事件的作用域的关系，这样我们才可以判断事件是向上传递还是向下广播。">
+<meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2016-10-03T17:22:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AngularJS 事件">
@@ -267,6 +269,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -376,11 +388,17 @@
 <h2 id="a-事件如何传播"><a href="#a-事件如何传播" class="headerlink" title="a. 事件如何传播"></a>a. 事件如何传播</h2><p>什么时候需要向上传递事件？当处理事件的作用域为触发事件的作用域的父级作用域时，就需要将事件向上传递。同理，当处理事件的作用域为触发事件的作用域的子级作用域时，就需要将事件向下传递。<br><strong> 1. 使用<code>$emit</code>向上传递事件 </strong><br>　　使用<code>$emit</code>将事件沿着作用域链向上传递，即从子作用域到父作用域。</p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>scope.$emit(name, args)</code></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><code>name</code></strong><br>　　类型：<code>String</code>，要触发事件的名称。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>args</code></strong><br>　　参数集合，可以是一个也可以是多个，作为对象传递到事件监听者中。</p>
 </blockquote>
-<p><strong>eg-1：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$emit(&apos;just-test-emit&apos;, [&apos;first&apos;], [&apos;second&apos;]);</div></pre></td></tr></table></figure></p>
+<p><strong>eg-1：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scope.$emit(&apos;just-test-emit&apos;, [&apos;first&apos;], [&apos;second&apos;]);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li><strong>eg-1</strong>中，<code>just-test-emit</code>为事件名称，而<code>[first]</code> 和<code>[second]</code>为传递到事件监听者中的参数。</li>
 <li>在<code>$emit()</code>事件函数调用后，事件会从子作用域冒泡到父作用域。在触发事件的作用域之上的所有作用域都会收到这个事件的通知。</li>
@@ -388,19 +406,31 @@
 <p><strong> 2. 使用<code>$broadcast</code>向下广播事件 </strong><br>　　<code>$broadcast</code>和<code>$emit</code>用法很类似，只是<code>$broadcast</code>是将事件沿着作用域向下传递，即从父作用域到子作用域。</p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>scope.$broadcast(name, args)</code></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><code>name</code></strong><br>　　类型：<code>String</code>，要触发事件的名称。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>args</code></strong><br>　　参数集合，可以是一个也可以是多个，作为对象传递到事件监听者中。</p>
 </blockquote>
-<p><strong>eg-2：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$scope.$broadcast(&apos;just-test-broadcast&apos;, [&apos;first&apos;], [&apos;second&apos;]);</div></pre></td></tr></table></figure></p>
+<p><strong>eg-2：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scope.$broadcast(&apos;just-test-broadcast&apos;, [&apos;first&apos;], [&apos;second&apos;]);</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>在<code>$broadcast()</code>事件函数调用后，每个在子作用域注册了事件的监听者都会收到这个事件通知。</li>
 </ul>
 <p><strong> 3. 使用<code>$on</code>监听事件 </strong><br>　　使用<code>$on</code>根据事件的名称，注册一个监听者。同时<code>$on</code>函数会返回一个反注册函数，我们可以通过调用这个反注册函数取消事件监听者。</p>
 <blockquote>
 <p><strong><em>语法：</em></strong><br>    <strong><code>scope.$on(name, listener)</code></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><em>参数：</em></strong></p>
+</blockquote>
+<blockquote>
 <p><strong><code>name</code></strong><br>　　类型：<code>String</code>，要监听的事件名称。</p>
+</blockquote>
+<blockquote>
 <p><strong><code>listener</code></strong><br>　　类型：<code>Function</code>，事件监听者。<br>　　函数的格式:<code>function(event, args...)</code>，AngularJS会把<code>event</code>对象作为第一个参数传给正在监听事件的监听者(不管是自定义的事件还是AngularJS内置的事件)。<code>args</code>为触发事件时传递给事件监听者的参数集合。<code>event</code>(事件)对象属性:<br>　　　<strong><em><code>event.targetScope</code></em></strong><br>　　　　类型：<code>Scope</code>，表示事件触发所在的那个作用域。<br>　　　<strong><em><code>event.currentScope</code></em></strong><br>　　　　类型：<code>Scope</code>，当前事件处理的作用域。<br>　　　<strong><em><code>event.name</code></em></strong><br>　　　　类型：<code>String</code>，事件的名称。<br>　　　<strong><em><code>event.stopPropagation</code></em></strong><br>　　　　类型：<code>Function</code>，调用后会取消事件的冒泡，也就是取消通过<code>$emit</code>触发的事件进一步在作用域链上向上传递。<br>　　　<strong><em><code>event.preventDefault</code></em></strong><br>　　　　类型：<code>Function</code>，调用后会将<code>defaultPrevented</code>设置为<code>true</code>，同时告诉子作用域无需处理这个事件，但是不能阻止事件的传播。<br>　　　<strong><em><code>event.defaultPrevented</code></em></strong><br>　　　　类型：<code>Boolean</code>。</p>
 </blockquote>
 <h2 id="b-事件相关的核心服务"><a href="#b-事件相关的核心服务" class="headerlink" title="b. 事件相关的核心服务"></a>b. 事件相关的核心服务</h2><ul>
@@ -410,7 +440,7 @@
 <ul>
 <li><strong> 核心系统的<code>$broadcast</code>事件 </strong><br>　　1. <code>$locationChangeStart</code><br>　　  当 AngularJS 从 $location 服务(通过$location.path()、$location.search()等)对浏览器的地址作更新时，会触发<code>$locationChangeStart</code>事件。<br>　　2. <code>$locationChangeSuccess</code><br>　　  当且仅当浏览器的地址变更成功后，同时又没有阻止<code>$locationChangeStart</code>事件的情况下，<code>$locationChangeSuccess</code>事件会从<code>$rootScope</code>作用域向下广播出来。<br>　　3. <code>$routeChangeStart</code><br>　　  在路由变更发生之前，<code>$routeChangeStart</code>事件会从<code>$rootScope</code>作用域广播出来。也就是在路由服务开始解析路由变更所需的所有依赖项时。<br>　　4. <code>$routeChangeSuccess</code><br>　　  在所有路由依赖项跟着<code>$routeChangeStart</code>被解析后，<code>$routeChangeSuccess</code>事件就会从<code>$rootScope</code>作用域上广播出来。<code>ngView</code>指令使用<code>$routeChangeSuccess</code>事件来获悉何时实例化控制器并渲染视图。<br>　　5. <code>$routeChangeError</code><br>　　  如果路由对象上任意的<code>resolve</code>属性被拒绝，<code>$routeChangeError</code>就会被触发。<br>　　6. <code>$routeUpdate</code><br>　　  如果<code>$routeProvider</code>上的<code>reloadOnSearch</code>属性被设置成false，并且使用了控制器的同一实例，<code>$routeUpdate</code>就会被触发，同时会从作用域<code>$rootScope</code>向下传递。<br>　　7. <code>$destroy</code><br>　　  在作用域被销毁之前，<code>$destroy</code>事件会在作用域上广播，这样子作用域在父作用域被真正移除之前可以先清理自身。<br>　　  例如，如果在控制器中有一个正在运行的<code>$interval</code>，我们不希望在包含它的控制器已经不存在的情况下，它还继续触发，就可以在作用域销毁前，先取消掉<code>$interval</code>。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> autoPolling = $interval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    initData();</div><div class="line">&#125;, <span class="number">3000</span>);</div><div class="line"></div><div class="line">$scope.stopAutoPolling = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (angular.isDefined(autoPolling)) &#123;</div><div class="line">        $interval.cancel(autoPolling);</div><div class="line">        autoPolling = <span class="literal">undefined</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $scope.stopAutoPolling();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> autoPolling = $interval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    initData();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line">$scope.stopAutoPolling = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (angular.isDefined(autoPolling)) &#123;</span><br><span class="line">        $interval.cancel(autoPolling);</span><br><span class="line">        autoPolling = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $scope.stopAutoPolling();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>《Angular JS权威指南》</li>
 </ul>
@@ -821,19 +851,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 

@@ -115,31 +115,30 @@
 
 
 
-<meta name="description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。
-告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
+<meta name="description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。 告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
+<meta name="keywords" content="spring-boot-test,MockBean">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Think Twice Before Using @MockBean">
 <meta property="og:url" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/index.html">
-<meta property="og:site_name" content="Kin'blog">
-<meta property="og:description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。
-告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
-<meta property="og:image" content="http://aikin.github.io/./account-controller.png">
-<meta property="og:image" content="http://aikin.github.io/./token-controller.png">
-<meta property="og:image" content="http://aikin.github.io/./spring-boot-log.png">
-<meta property="og:image" content="http://aikin.github.io/./mock-bean.png">
-<meta property="og:image" content="http://aikin.github.io/./context-management.png">
-<meta property="og:image" content="http://aikin.github.io/./testing-ctx-management.png">
-<meta property="og:image" content="http://aikin.github.io/./context-caching.png">
-<meta property="og:image" content="http://aikin.github.io/./mock-customizer.png">
-<meta property="og:image" content="http://aikin.github.io/./redis-configuration-mocker.png">
-<meta property="og:image" content="http://aikin.github.io/./redis-configuration.png">
-<meta property="og:image" content="http://aikin.github.io/./token-controller-fixed.png">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。 告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/account-controller.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/token-controller.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/spring-boot-log.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/mock-bean.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/context-management.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/testing-ctx-management.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/context-caching.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/mock-customizer.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/redis-configuration-mocker.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/redis-configuration.png">
+<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/token-controller-fixed.png">
 <meta property="og:updated_time" content="2018-04-01T14:03:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Think Twice Before Using @MockBean">
-<meta name="twitter:description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。
-告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
-<meta name="twitter:image" content="http://aikin.github.io/./account-controller.png">
+<meta name="twitter:description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。 告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
+<meta name="twitter:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/account-controller.png">
 
 
 
@@ -282,6 +281,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -389,8 +398,8 @@
         <p>号外！号外！号外！你的 <code>spring boot integration tests</code> 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。</p>
 <p>告诉你一个秘密：<code>@MockBean</code>会导致<em>测试类(Test Class)</em>之间<code>spring boot application context</code>不断启动多次！！！</p>
 <a id="more"></a>
-<p>不信，那么我们请看栗子 <a href="https://github.com/aikin/mockbean-annotation/tree/25b7b0e4b0e0b4213d918a2a6870efba562b2aec" target="_blank" rel="external">MockBean Annotation</a>:</p>
-<p>这项目有两个测试类，<a href="https://github.com/aikin/mockbean-annotation/blob/25b7b0e4b0e0b4213d918a2a6870efba562b2aec/src/test/java/me/aikin/mockbean/AboutControllerTest.java" target="_blank" rel="external">AboutControllerTest</a> 和 <a href="https://github.com/aikin/mockbean-annotation/blob/25b7b0e4b0e0b4213d918a2a6870efba562b2aec/src/test/java/me/aikin/mockbean/TokenControllerTest.java" target="_blank" rel="external">TokenControllerTest</a></p>
+<p>不信，那么我们请看栗子 <a href="https://github.com/aikin/mockbean-annotation/tree/25b7b0e4b0e0b4213d918a2a6870efba562b2aec" target="_blank" rel="noopener">MockBean Annotation</a>:</p>
+<p>这项目有两个测试类，<a href="https://github.com/aikin/mockbean-annotation/blob/25b7b0e4b0e0b4213d918a2a6870efba562b2aec/src/test/java/me/aikin/mockbean/AboutControllerTest.java" target="_blank" rel="noopener">AboutControllerTest</a> 和 <a href="https://github.com/aikin/mockbean-annotation/blob/25b7b0e4b0e0b4213d918a2a6870efba562b2aec/src/test/java/me/aikin/mockbean/TokenControllerTest.java" target="_blank" rel="noopener">TokenControllerTest</a></p>
 <p><strong><em>AccountControllerTest:</em></strong></p>
 <blockquote>
 <p><img src="./account-controller.png" alt="about controller test"></p>
@@ -404,7 +413,7 @@
 <p><img src="./spring-boot-log.png" alt="spring boot log"></p>
 </blockquote>
 <p>如上图所示，<code>spring boot</code> 启动两次。而<code>spring boot</code> 的启动时间也比较耗时，所以<code>@MockBean</code>，很有可能导致测试运行的很慢。那<code>@MockBean</code>到底是个怎么样的存在？</p>
-<h1 id="WHAT"><a href="#WHAT" class="headerlink" title="WHAT"></a>WHAT</h1><p> 写过<code>spring boot integration test</code>的小伙伴，对于<code>@MockBean</code>应该会比较熟悉。在写测试时，对于一些应用的外部依赖需要进行一些<a href="https://martinfowler.com/bliki/TestDouble.html" target="_blank" rel="external"><code>Mock</code></a> 处理，比如：<code>Redis</code>、<code>ElasticSearch</code>、<code>ExternalService</code> 等。官方文档介绍 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html#boot-features-testing-spring-boot-applications-mocking-beans" target="_blank" rel="external">Mocking and spying beans</a>：</p>
+<h1 id="WHAT"><a href="#WHAT" class="headerlink" title="WHAT"></a>WHAT</h1><p> 写过<code>spring boot integration test</code>的小伙伴，对于<code>@MockBean</code>应该会比较熟悉。在写测试时，对于一些应用的外部依赖需要进行一些<a href="https://martinfowler.com/bliki/TestDouble.html" target="_blank" rel="noopener"><code>Mock</code></a> 处理，比如：<code>Redis</code>、<code>ElasticSearch</code>、<code>ExternalService</code> 等。官方文档介绍 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html#boot-features-testing-spring-boot-applications-mocking-beans" target="_blank" rel="noopener">Mocking and spying beans</a>：</p>
 <blockquote>
 <p><img src="./mock-bean.png" alt="mock bean"></p>
 <ul>
@@ -414,39 +423,39 @@
 </ul>
 </blockquote>
 <p>也就是说，<code>@MockBean</code>会改变<code>spring boot application context beans</code>，导致使用了<code>@MockBean</code>的测试类之间的需要不同<code>application context</code>，从而导致<code>spring boot application context</code>重启。为什么需要不同<code>application context</code> 就需要重启？？？带着疑惑，我们接着往下看。</p>
-<h1 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h1><h2 id="Spring-Boot-Application-Context"><a href="#Spring-Boot-Application-Context" class="headerlink" title="Spring Boot Application Context"></a>Spring Boot Application Context</h2><p>什么是<code>application context</code>？简单理解，就是应用程序运行所需要的上下文。官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-ctx-management" target="_blank" rel="external">Context Management</a>:</p>
+<h1 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h1><h2 id="Spring-Boot-Application-Context"><a href="#Spring-Boot-Application-Context" class="headerlink" title="Spring Boot Application Context"></a>Spring Boot Application Context</h2><p>什么是<code>application context</code>？简单理解，就是应用程序运行所需要的上下文。官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-ctx-management" target="_blank" rel="noopener">Context Management</a>:</p>
 <blockquote>
 <p><img src="./context-management.png" alt="context-management"></p>
 </blockquote>
-<p>官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing-ctx-management" target="_blank" rel="external">Context management and caching</a>：</p>
+<p>官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testing-ctx-management" target="_blank" rel="noopener">Context management and caching</a>：</p>
 <blockquote>
 <p><img src="./testing-ctx-management.png" alt="testing-ctx-management"></p>
 </blockquote>
 <p>根据官方文档意思，<code>application context</code>为初始化测试实例提供上下文，如果需要不同的<code>application context</code>实例化不同的测试，就需要重新启动<code>spring boot</code>，创建不同<code>applicaiton context</code>。文档还说到，为了解决<code>spring boot application context</code>启动慢的问题，会做<strong>缓存处理</strong>。那<code>@MockBean</code>到底破坏了什么样的缓存规则，从而导致<code>spring boot</code>重启多次？是什么导致打开方式出了问题？</p>
-<h2 id="Spring-Boot-Application-Context-Cache"><a href="#Spring-Boot-Application-Context-Cache" class="headerlink" title="Spring Boot Application Context Cache"></a>Spring Boot Application Context Cache</h2><p>要回答这个问题，就要先了解[application context caching]的<code>uniquely key</code>包含的内容，附上官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-ctx-management-caching" target="_blank" rel="external">Context caching</a>：</p>
+<h2 id="Spring-Boot-Application-Context-Cache"><a href="#Spring-Boot-Application-Context-Cache" class="headerlink" title="Spring Boot Application Context Cache"></a>Spring Boot Application Context Cache</h2><p>要回答这个问题，就要先了解[application context caching]的<code>uniquely key</code>包含的内容，附上官方文档介绍 <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-ctx-management-caching" target="_blank" rel="noopener">Context caching</a>：</p>
 <blockquote>
 <p><img src="./context-caching.png" alt="Context Caching"></p>
 </blockquote>
 <p>根据文档的描述，不难知道<code>application context cacheing</code>是通过<code>key:value</code>方式进行缓存的，唯一键为组合键，包含：<code>locations、classes、contextInitializerClasses、contextCustomizers、contextLoader、parent、activeProfiles、propertySourceLocations、propertySourceProperties、resourceBasePath</code>。</p>
-<p>而<code>@MockBean</code>的使用会导致每个<code>application context</code>中<code>contextCustomizer</code>的不同，从而导致存储在<code>context cache</code>中的<code>application context</code>的<code>uniquely key</code>不同，最终导致<code>application context</code>在测试类之间不能共享。虽然没有官方文档说明这一点，不过在<br><a href="https://github.com/spring-projects/spring-boot/blob/3198bf4f59a375c3b4d70202b34be710788e6f40/spring-boot-test/src/main/java/org/springframework/boot/test/mock/mockito/MockitoContextCustomizerFactory.java" target="_blank" rel="external">org.springframework.boot.test.mock.mockito.MockitoContextCustomizerFactory</a> 源代码中可以找到一些痕迹：</p>
+<p>而<code>@MockBean</code>的使用会导致每个<code>application context</code>中<code>contextCustomizer</code>的不同，从而导致存储在<code>context cache</code>中的<code>application context</code>的<code>uniquely key</code>不同，最终导致<code>application context</code>在测试类之间不能共享。虽然没有官方文档说明这一点，不过在<br><a href="https://github.com/spring-projects/spring-boot/blob/3198bf4f59a375c3b4d70202b34be710788e6f40/spring-boot-test/src/main/java/org/springframework/boot/test/mock/mockito/MockitoContextCustomizerFactory.java" target="_blank" rel="noopener">org.springframework.boot.test.mock.mockito.MockitoContextCustomizerFactory</a> 源代码中可以找到一些痕迹：</p>
 <blockquote>
 <p><img src="./mock-customizer.png" alt="MockitoContextCustomizerFactory"></p>
 </blockquote>
 <p>图中所说的<code>MergedContextConfiguration</code>就是<code>application context caching</code>的<code>uniquely key</code>。</p>
 <h1 id="HOW"><a href="#HOW" class="headerlink" title="HOW"></a>HOW</h1><p>对于<code>spring boot integration test</code> 来说，除了 <code>external service(clients...)</code> 需要被 <code>Mock</code>，其它的内部依赖(service、repository…)都不应该被<code>Mock</code>。<code>external service</code> 可以在配置层，进行<code>Mock</code>，然后在测试类中，直接通过<code>@Auotwrite</code>方式注入：</p>
-<p><a href="https://github.com/aikin/mockbean-annotation/blob/master/src/test/java/me/aikin/mockbean/RedisTemplateBeanConfigurationMocker.java" target="_blank" rel="external">RedisTemplateBeanConfigurationMocker</a>：</p>
+<p><a href="https://github.com/aikin/mockbean-annotation/blob/master/src/test/java/me/aikin/mockbean/RedisTemplateBeanConfigurationMocker.java" target="_blank" rel="noopener">RedisTemplateBeanConfigurationMocker</a>：</p>
 <blockquote>
 <p><img src="./redis-configuration-mocker.png" alt="redis configuration mocker"></p>
 </blockquote>
-<p><a href="https://github.com/aikin/mockbean-annotation/blob/master/src/main/java/me/aikin/mockbean/RedisConfiguration.java" target="_blank" rel="external">RedisConfiguration</a>：</p>
+<p><a href="https://github.com/aikin/mockbean-annotation/blob/master/src/main/java/me/aikin/mockbean/RedisConfiguration.java" target="_blank" rel="noopener">RedisConfiguration</a>：</p>
 <blockquote>
 <p><img src="./redis-configuration.png" alt="redis configuration"></p>
 </blockquote>
-<p><a href="https://github.com/aikin/mockbean-annotation/blob/master/src/test/java/me/aikin/mockbean/TokenControllerTest.java" target="_blank" rel="external">TokenControllerTest</a>:</p>
+<p><a href="https://github.com/aikin/mockbean-annotation/blob/master/src/test/java/me/aikin/mockbean/TokenControllerTest.java" target="_blank" rel="noopener">TokenControllerTest</a>:</p>
 <blockquote>
 <p><img src="./token-controller-fixed.png" alt="token-controller-fixed"></p>
 </blockquote>
-<p><code>TokenControllerTest</code>，直接 @Autowrite <code>RedisTemplateBeanConfigurationMocker</code> 中配置的，<code>RedisTemplate @Bean</code>。完成栗子，请查<a href="https://github.com/aikin/mockbean-annotation" target="_blank" rel="external">mockbean-annotation</a>。</p>
+<p><code>TokenControllerTest</code>，直接 @Autowrite <code>RedisTemplateBeanConfigurationMocker</code> 中配置的，<code>RedisTemplate @Bean</code>。完成栗子，请查<a href="https://github.com/aikin/mockbean-annotation" target="_blank" rel="noopener">mockbean-annotation</a>。</p>
 <h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p><code>spring boot integration test</code> 相对于 <code>api test</code>，应该更关注<code>api</code>功能的完整性，了解依赖的边界，不需要<code>Mock</code>的，就不要<code>Mock</code>，比如：<code>service, repository…</code>。对于外部依赖，统一在<strong>配置层</strong>完成 <code>Mock</code>，比如：<code>client、redis、rabbitmq...</code>。</p>
 
       
@@ -855,19 +864,7 @@
 
 
 
-	
 
-
-
-
-
-  
-
-
-
-
-
-  
 
 
 
