@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>http://aikin.me/2018/04/02/do-you-really-need-dirties-context-annotation/</loc>
     <lastmod>2018-07-06T05:20:34.000Z</lastmod>
@@ -81,7 +82,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/</loc>
     <lastmod>2018-04-01T14:03:08.000Z</lastmod>
@@ -141,9 +141,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
          
            
@@ -577,9 +577,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>dockerize</tag>
+         
+        <tag>docker</tag>
          
         <tag>db</tag>
          

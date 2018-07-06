@@ -343,9 +343,9 @@
     </summary>
     
     
-      <category term="docker" scheme="http://aikin.me/tags/docker/"/>
-    
       <category term="dockerize" scheme="http://aikin.me/tags/dockerize/"/>
+    
+      <category term="docker" scheme="http://aikin.me/tags/docker/"/>
     
       <category term="db" scheme="http://aikin.me/tags/db/"/>
     
@@ -442,9 +442,9 @@
     </summary>
     
     
-      <category term="docker" scheme="http://aikin.me/tags/docker/"/>
-    
       <category term="dockerize" scheme="http://aikin.me/tags/dockerize/"/>
+    
+      <category term="docker" scheme="http://aikin.me/tags/docker/"/>
     
   </entry>
   
