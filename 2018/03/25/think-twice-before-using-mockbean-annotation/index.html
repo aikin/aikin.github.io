@@ -119,26 +119,26 @@
 <meta name="keywords" content="spring-boot-test,MockBean">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Think Twice Before Using @MockBean">
-<meta property="og:url" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/index.html">
+<meta property="og:url" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/index.html">
 <meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。 告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/account-controller.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/token-controller.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/spring-boot-log.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/mock-bean.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/context-management.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/testing-ctx-management.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/context-caching.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/mock-customizer.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/redis-configuration-mocker.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/redis-configuration.png">
-<meta property="og:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/token-controller-fixed.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/account-controller.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/token-controller.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/spring-boot-log.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/mock-bean.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/context-management.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/testing-ctx-management.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/context-caching.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/mock-customizer.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/redis-configuration-mocker.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/redis-configuration.png">
+<meta property="og:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/token-controller-fixed.png">
 <meta property="og:updated_time" content="2018-04-01T14:03:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Think Twice Before Using @MockBean">
 <meta name="twitter:description" content="号外！号外！号外！你的 spring boot integration tests 运行慢吗，是不是每跑一次测试，你都在等待，等待它全绿的那一瞬间。如果你遇到，那请接着往下看，也许可以帮助到你。如果你没有遇到，那也请往下看，因为也许以后你会遇到。 告诉你一个秘密：@MockBean会导致测试类(Test Class)之间spring boot application context不断启动多次！！">
-<meta name="twitter:image" content="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/account-controller.png">
+<meta name="twitter:image" content="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/account-controller.png">
 
 
 
@@ -166,7 +166,7 @@
 
 
 
-  <link rel="canonical" href="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/"/>
+  <link rel="canonical" href="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/"/>
 
 
 
@@ -320,7 +320,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="aikin">
@@ -485,7 +485,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/" title="Think Twice Before Using @MockBean">http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/</a>
+      <a href="http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/" title="Think Twice Before Using @MockBean">http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -848,7 +848,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://aikin.github.io/2018/03/25/think-twice-before-using-mockbean-annotation/';
+          this.page.url = 'http://aikin.me/2018/03/25/think-twice-before-using-mockbean-annotation/';
           this.page.identifier = '2018/03/25/think-twice-before-using-mockbean-annotation/';
           this.page.title = 'Think Twice Before Using @MockBean';
         };

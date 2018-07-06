@@ -119,19 +119,19 @@
 <meta name="keywords" content="dockerize,debugger,break point">
 <meta property="og:type" content="article">
 <meta property="og:title" content="容器化开发环境 - 如何断点调试容器中的应用">
-<meta property="og:url" content="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/index.html">
+<meta property="og:url" content="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/index.html">
 <meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:description" content="上一篇容器化开发环境已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过断点的方式来调试程序或定位BUG，那么如何断点调试运行在容器中的应用呢？？？ 容器就像一个虚拟机，就像一个远程的服务器，要断点调试容器中的应用，就像要断点调试虚拟机和远程的服务器上的应用一样。如何配置一个可以远程断点调试的应用，每个语言，每个框架都有不同的方式，接下来介绍的例子使用的技术栈如下：">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/open.png">
-<meta property="og:image" content="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/add.png">
-<meta property="og:image" content="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/debugger.png">
-<meta property="og:image" content="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/debugging.png">
+<meta property="og:image" content="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/open.png">
+<meta property="og:image" content="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/add.png">
+<meta property="og:image" content="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/debugger.png">
+<meta property="og:image" content="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/debugging.png">
 <meta property="og:updated_time" content="2016-10-03T17:27:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="容器化开发环境 - 如何断点调试容器中的应用">
 <meta name="twitter:description" content="上一篇容器化开发环境已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过断点的方式来调试程序或定位BUG，那么如何断点调试运行在容器中的应用呢？？？ 容器就像一个虚拟机，就像一个远程的服务器，要断点调试容器中的应用，就像要断点调试虚拟机和远程的服务器上的应用一样。如何配置一个可以远程断点调试的应用，每个语言，每个框架都有不同的方式，接下来介绍的例子使用的技术栈如下：">
-<meta name="twitter:image" content="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/open.png">
+<meta name="twitter:image" content="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/open.png">
 
 
 
@@ -159,7 +159,7 @@
 
 
 
-  <link rel="canonical" href="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/"/>
+  <link rel="canonical" href="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/"/>
 
 
 
@@ -313,7 +313,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="aikin">
@@ -388,7 +388,7 @@
       
 
       
-        <p>上一篇<a href="http://aikin.me/2016/07/20/dockerize-dev-env/#more" target="_blank" rel="noopener">容器化开发环境</a>已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过<code>断点的方式</code>来调试程序或定位<code>BUG</code>，那么如何断点调试运行在容器中的应用呢？？？</p>
+        <p>上一篇<a href="http://aikin.me/2016/07/20/dockerize-dev-env/#more">容器化开发环境</a>已经简单的介绍了如何容器化开发环境。在开发过程中，很多时候都需要通过<code>断点的方式</code>来调试程序或定位<code>BUG</code>，那么如何断点调试运行在容器中的应用呢？？？</p>
 <p>容器就像一个虚拟机，就像一个远程的服务器，要断点调试容器中的应用，就像要断点调试虚拟机和远程的服务器上的应用一样。如何配置一个可以远程断点调试的应用，每个语言，每个框架都有不同的方式，接下来介绍的例子使用的技术栈如下：</p>
 <a id="more"></a>
 <ul>
@@ -470,7 +470,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>Post link:</strong>
-      <a href="http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/" title="容器化开发环境 - 如何断点调试容器中的应用">http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/</a>
+      <a href="http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/" title="容器化开发环境 - 如何断点调试容器中的应用">http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright Notice: </strong>
@@ -835,7 +835,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://aikin.github.io/2016/08/28/how-to-debug-app-in-dockerize-dev-env/';
+          this.page.url = 'http://aikin.me/2016/08/28/how-to-debug-app-in-dockerize-dev-env/';
           this.page.identifier = '2016/08/28/how-to-debug-app-in-dockerize-dev-env/';
           this.page.title = '容器化开发环境 - 如何断点调试容器中的应用';
         };

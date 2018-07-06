@@ -117,7 +117,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kin&#39;blog">
-<meta property="og:url" content="http://aikin.github.io/page/5/index.html">
+<meta property="og:url" content="http://aikin.me/page/5/index.html">
 <meta property="og:site_name" content="Kin&#39;blog">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -149,7 +149,7 @@
 
 
 
-  <link rel="canonical" href="http://aikin.github.io/page/5/"/>
+  <link rel="canonical" href="http://aikin.me/page/5/"/>
 
 
 
@@ -305,7 +305,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://aikin.github.io/2016/10/04/locked-sql-user/">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2016/10/04/locked-sql-user/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="aikin">
@@ -432,7 +432,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://aikin.github.io/2016/09/24/dockerize-db-isolation/">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2016/09/24/dockerize-db-isolation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="aikin">
@@ -510,7 +510,7 @@
 
       
         
-          <p>上一篇<a href="http://aikin.github.io/2016/09/17/dockerize-database/">容器化开发环境 - 数据库连接和迁移</a>分享了关于如何给容器中的应用创建数据库连接，接下来将分享一下如何将数据库从应用容器中分离出来。</p>
+          <p>上一篇<a href="http://aikin.github.io/2016/09/17/dockerize-database/" target="_blank" rel="noopener">容器化开发环境 - 数据库连接和迁移</a>分享了关于如何给容器中的应用创建数据库连接，接下来将分享一下如何将数据库从应用容器中分离出来。</p>
 <p>为什么要进行分离？当应用和数据库在同一个容器中运行时，也就意味着，应用和数据库的生命周期捆绑在了一起，应用和数据库的运行就会出现相互干扰现象，应用的异常将有可能导致容器的停止，同时也将导致数据库的关闭。更主要的原因是，很多时候需要多个容器中的应用连接一个数据库，为了保证容器之间的运行相互独立，相互不影响，就有必要将数据库隔离在独立的容器中运行，让数据库和容器独处二人世界，同时保证数据库的生命周期不在受其它应用影响。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -560,7 +560,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://aikin.github.io/2016/09/17/dockerize-database/">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2016/09/17/dockerize-database/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="aikin">
@@ -638,7 +638,7 @@
 
       
         
-          <p>在<a href="http://aikin.me/2016/07/20/dockerize-dev-env/" target="_blank" rel="noopener">容器化开发环境</a>中分享了如何容器化本地的开发环境。对于一个<code>Web</code>应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何<code>Setup</code>一个容器中的数据库。例子将会使用的技术栈：</p>
+          <p>在<a href="http://aikin.me/2016/07/20/dockerize-dev-env/">容器化开发环境</a>中分享了如何容器化本地的开发环境。对于一个<code>Web</code>应用，数据库似乎是必不可少的东西。下面会通过例子来介绍一下如何<code>Setup</code>一个容器中的数据库。例子将会使用的技术栈：</p>
 <ul>
 <li><a href="https://www.mysql.com/" target="_blank" rel="noopener">MySQL</a></li>
 <li><a href="https://flywaydb.org/" target="_blank" rel="noopener">Flyway</a></li>
