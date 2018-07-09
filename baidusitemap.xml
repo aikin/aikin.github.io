@@ -674,9 +674,9 @@
         <title>AngularJS 事件</title>
         <pubTime>2014-09-26T11:30:23.000Z</pubTime>
         
-        <tag>javascript</tag>
-         
         <tag>angularjs</tag>
+         
+        <tag>javascript</tag>
          
          
            
@@ -756,7 +756,6 @@
     </url>
 
     
-    
   <url>
     <loc>http://aikin.me/2014/08/08/install-atom-on-ubuntu/</loc>
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
@@ -773,5 +772,6 @@
     </data>
     </url>
 
+    
     
 </urlset>
