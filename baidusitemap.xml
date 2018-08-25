@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://aikin.me/2018/08/25/command-line-app-in-nodejs/</loc>
+    <lastmod>2018-08-25T07:02:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>第一个 NPM 包 - Node.js 交互式命令行应用脚手架生成器</title>
+        <pubTime>2018-08-25T05:40:19.000Z</pubTime>
+        
+        <tag>Node.js</tag>
+         
+        <tag>TypeScript</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.me/2018/07/06/in-the-third-year/</loc>
     <lastmod>2018-07-10T01:01:33.000Z</lastmod>
     <data>
@@ -756,8 +775,6 @@
     </url>
 
     
-    
-    
   <url>
     <loc>http://aikin.me/2014/08/08/install-atom-on-ubuntu/</loc>
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
@@ -774,4 +791,6 @@
     </data>
     </url>
 
+    
+    
 </urlset>
