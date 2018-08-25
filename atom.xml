@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.me/"/>
-  <updated>2018-08-25T07:24:51.000Z</updated>
+  <updated>2018-08-25T07:27:49.000Z</updated>
   <id>http://aikin.me/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://aikin.me/2018/08/25/command-line-app-in-nodejs/"/>
     <id>http://aikin.me/2018/08/25/command-line-app-in-nodejs/</id>
     <published>2018-08-25T05:40:19.000Z</published>
-    <updated>2018-08-25T07:24:51.000Z</updated>
+    <updated>2018-08-25T07:27:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>八月！！！ 要月底了~ 博客还没有写。啊啊啊啊……. </p><p>写点啥？不知道啊！好吧，去咖啡店找点灵感吧。</p><hr><p>灵感来了</p><hr><a id="more"></a><p>最近一不小心，发布第一 NPM 包，<a href="https://www.npmjs.com/package/@aikin/gcli_" target="_blank" rel="noopener">gcli_</a>。它是个怎么样存在？</p><p>平时撸代码时，有时候需要写一下小工具，帮助更好的完成一些功能。比如说，爬数据，查看一些 github 的 数据….</p><h3 id="交互式命令行应用程序"><a href="#交互式命令行应用程序" class="headerlink" title="交互式命令行应用程序"></a>交互式命令行应用程序</h3><p>码农圈里，有很多类似的交互式命令行程序，比如：<a href="https://github.com/commitizen/cz-cli" target="_blank" rel="noopener">cz-cli</a>: </p><p><a href="https://asciinema.org/a/198088" target="_blank" rel="noopener"><strong>录屏</strong></a></p><p><img src="./cz.png" alt="asciicast"></p><p>更多命令行应用程序：</p><ul><li><a href="https://github.com/agarrharr/awesome-cli-apps" target="_blank" rel="noopener">awesome-cli-apps</a></li><li><a href="https://github.com/herrbischoff/awesome-command-line-apps" target="_blank" rel="noopener">awesome-command-line-apps</a></li></ul><h3 id="命令行应用生成器"><a href="#命令行应用生成器" class="headerlink" title="命令行应用生成器"></a>命令行应用生成器</h3><p><code>gcli_</code> 是一个可快速构建出 <code>Node.js</code> 交互式命令行应用脚手架生成器。</p><h4 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h4><blockquote><p><img src="./cloud-word.png" alt="tech cloud word"></p></blockquote><h4 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h4><p><a href="https://asciinema.org/a/198099" target="_blank" rel="noopener"><strong>录屏</strong></a></p><p><img src="./gcli_.png" alt="asciicast"></p><p><strong>安装</strong>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i @aikin/gcli_ -g</span><br></pre></td></tr></table></figure></p><p><strong>生成命令行脚手架</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir try</span><br><span class="line"></span><br><span class="line">$ cd try</span><br><span class="line"></span><br><span class="line">$ gcli_ G</span><br><span class="line"></span><br><span class="line">$ npm i</span><br></pre></td></tr></table></figure></p><p><strong>使用</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build</span><br><span class="line"></span><br><span class="line">$ ./bin/try --help</span><br></pre></td></tr></table></figure></p><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>时间在流逝，青春还要继续。吹着海风，码两行代码，喝一口咖啡…</p>]]></content>
     
