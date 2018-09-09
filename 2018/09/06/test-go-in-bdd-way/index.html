@@ -1,0 +1,874 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="sXwupEqUXeSBb8k_Geoi-m4kCgGFfthSCmW0PKEuQrE" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Test,Go,Golang," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Kin'blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近在学习Go。然后不禁想感叹，为什么有些小伙伴的Go测试可读性可以这么怪(cha)。说好的测试即文档呢？说好的测试边界呢？说好的Given When Then呢？是我功力不行吗？ 我一直相信，编程思想或说方法论都属于可迁移的知识，不管在哪种语言体内。可是看完一些 Go 的测试栗子，我开始慌了~">
+<meta name="keywords" content="Test,Go,Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 的测试有点怪，我该怎么办???">
+<meta property="og:url" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/index.html">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="最近在学习Go。然后不禁想感叹，为什么有些小伙伴的Go测试可读性可以这么怪(cha)。说好的测试即文档呢？说好的测试边界呢？说好的Given When Then呢？是我功力不行吗？ 我一直相信，编程思想或说方法论都属于可迁移的知识，不管在哪种语言体内。可是看完一些 Go 的测试栗子，我开始慌了~">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/go-test-bad.png">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/go-test-good.png">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/bdd.png">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/bdd-test.png">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/bdd-given-when-then.png">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/given-when-then.png">
+<meta property="og:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/coffee.jpeg">
+<meta property="og:updated_time" content="2018-09-09T08:55:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Golang 的测试有点怪，我该怎么办???">
+<meta name="twitter:description" content="最近在学习Go。然后不禁想感叹，为什么有些小伙伴的Go测试可读性可以这么怪(cha)。说好的测试即文档呢？说好的测试边界呢？说好的Given When Then呢？是我功力不行吗？ 我一直相信，编程思想或说方法论都属于可迁移的知识，不管在哪种语言体内。可是看完一些 Go 的测试栗子，我开始慌了~">
+<meta name="twitter:image" content="http://aikin.me/2018/09/06/test-go-in-bdd-way/go-test-bad.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://aikin.me/2018/09/06/test-go-in-bdd-way/"/>
+
+
+
+
+
+  <title>Golang 的测试有点怪，我该怎么办??? | Kin'blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-53634746-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kin'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">喜欢coding。喜欢大海。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-brief">
+          <a href="/brief-thought/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
+            
+            Brief
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2018/09/06/test-go-in-bdd-way/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aikin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kin'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Golang 的测试有点怪，我该怎么办???</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-06T13:08:12+08:00">
+                Sep 6 2018
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/06/test-go-in-bdd-way/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/06/test-go-in-bdd-way/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近在学习<code>Go</code>。然后不禁想感叹，为什么有些小伙伴的<code>Go</code>测试可读性可以这么怪(cha)。说好的测试即文档呢？说好的测试边界呢？说好的<code>Given When Then</code>呢？是我功力不行吗？</p>
+<p>我一直相信，编程思想或说方法论都属于可迁移的知识，不管在哪种语言体内。可是看完一些 <code>Go</code> 的测试栗子，我开始慌了~</p>
+<a id="more"></a>
+<p>不信？看官请看：</p>
+<blockquote>
+<p><img src="./go-test-bad.png" alt="sample"></p>
+</blockquote>
+<p>由于测试用例太长，没法截全。没错，太长，一屏都装不下。好奇的你，请戳 -&gt;&gt;&gt; <a href="https://github.com/arnauddri/algorithms/blob/master/data-structures/linked-list/linked_list_test.go" target="_blank" rel="noopener"><strong>戳我</strong></a></p>
+<p>不知道你品起来如何，反正我品起来着实有点苦涩。</p>
+<p>这样的栗子，在<a href="https://github.com/avelino/awesome-go" target="_blank" rel="noopener"><code>awesome-go</code></a>列表的开源库，还不少。不行，不行，不能被带歪了(<strong>PS: GitHub 的确是全球最大的基友社区啊，容易带歪人，hahaha</strong>)。</p>
+<p>插播一条：多品整洁，简单的代码，<strong>有利于保护发际线</strong>。</p>
+<p>当然不能“一棒子打死船人”，要有发现美的眼睛。看官请看：</p>
+<blockquote>
+<p><img src="go-test-good.png" alt="smaple-handle"></p>
+</blockquote>
+<p>这是大神<a href="https://github.com/tj" target="_blank" rel="noopener"><code>TJ Holowaychuk</code></a>写的，果然不同凡响。好奇的你，请戳 -&gt;&gt;&gt; <a href="https://github.com/apex/up/blob/master/handler/handler_test.go" target="_blank" rel="noopener"><strong>戳我</strong></a></p>
+<p>满足什么条件的测试，是值得品味的？我觉得，第一是<code>可读性</code>，第二还是<code>可读性</code>，第三还是<code>可读性</code>。</p>
+<p>常听说 <strong>测试即文档</strong>，那么问题来了，好读的文档，长啥样？读小学的时候，老师就有教导说，写作文要，结构清晰，中心思想突出!!!</p>
+<p>写测试代码也是如此，要写出她（计算机）能理解的“文章”，也要写出我们能品的“文章”。那么，落地<a href="https://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank" rel="noopener"><code>BDD</code></a> 模式的测试，无疑是种好的选择。</p>
+<p>看官请看：</p>
+<blockquote>
+<p><img src="bdd.png" alt="BDD"></p>
+</blockquote>
+<p>中心思想突出，结构清晰。开头先描述主要功能，然后根据不同用例场景分别对待描述。</p>
+<p>落地的栗子：</p>
+<blockquote>
+<p><img src="./bdd-test.png" alt="BDD TEST"></p>
+</blockquote>
+<p><strong><em>有木有看起来很舒服！！！你是不是在想，测试实现代码呢？看官您接着看：</em></strong></p>
+<blockquote>
+<p><img src="./bdd-given-when-then.png" alt="BDD TEST DETAIL"></p>
+</blockquote>
+<p>完整栗子，好奇的你，请戳 -&gt;&gt;&gt; <a href="https://github.com/aikin/go-algorithms/blob/master/data-structures/linked-list/linked_list_test.go" target="_blank" rel="noopener">戳我</a></p>
+<p><strong><em>上面的栗子，落地就是测试三段式，<code>GIVE-WHEN-THEN</code>：</em></strong></p>
+<blockquote>
+<p><img src="./given-when-then.png" alt="given when then"></p>
+</blockquote>
+<ul>
+<li><strong>Given:</strong> set up context for a behaviour</li>
+<li><strong>When:</strong> specify some action</li>
+<li><strong>Then:</strong> specify some outcome</li>
+</ul>
+<p><code>Action + Outcome = Behaviour</code>，行为是测试关注的核心。<code>Given</code>，测试用例业务场景的准备，主要包含<strong>准备业务数据</strong>、<strong>Mock 外部依赖</strong>、<strong>准备用户信息</strong>。 随着业务的越复杂，测试上下文的准备也会越来与复杂，<strong>准备业务数据</strong>的过程也会越来越耗时间。举个栗子，对于<code>API</code>测试来说，相对需要花时间写的就是<code>Given</code>的过程。<code>Then</code>，主要是写断言，<code>Assert</code>一下<code>API</code>的返回数据，<code>When</code>，触发的动作，就是简单的发一下请求，调用一下<code>API</code>。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><blockquote>
+<p><img src="./coffee.jpeg" width="360px"></p>
+</blockquote>
+<p><strong><em> 咖啡喝完了，接下不知道怎么写了…</em></strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>Post author:</strong>
+      aikin
+    </li>
+    <li class="post-copyright-link">
+      <strong>Post link:</strong>
+      <a href="http://aikin.me/2018/09/06/test-go-in-bdd-way/" title="Golang 的测试有点怪，我该怎么办???">http://aikin.me/2018/09/06/test-go-in-bdd-way/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright Notice: </strong>
+      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Test/" rel="tag"># Test</a>
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/25/command-line-app-in-nodejs/" rel="next" title="基于 TypeScript 的 Node.js 交互式命令行应用">
+                <i class="fa fa-chevron-left"></i> 基于 TypeScript 的 Node.js 交互式命令行应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="aikin" />
+          <p class="site-author-name" itemprop="name">aikin</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aikin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://segmentfault.com/u/aikin" target="_blank" title="Segmentfault">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                  Segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">1.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">aikin</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://aikinlu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://aikin.me/2018/09/06/test-go-in-bdd-way/';
+          this.page.identifier = '2018/09/06/test-go-in-bdd-way/';
+          this.page.title = 'Golang 的测试有点怪，我该怎么办???';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://aikinlu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
