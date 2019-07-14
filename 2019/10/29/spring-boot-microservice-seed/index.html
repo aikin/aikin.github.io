@@ -1,0 +1,908 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="sXwupEqUXeSBb8k_Geoi-m4kCgGFfthSCmW0PKEuQrE" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="spring-boot,microservice," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Kin'blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一个工地要启动项目，前期需要搭建基础设施支撑后续搬砖顺利。比如：脚手架的搭建、安全、监控 等。 对于软件工程也是类似，每个项目的初期都需要搭建基础设施。那么对于一个微服务项目，你有用微服务模板吗？一个简单又可以快速帮助搭建的微服务的模板。自从微服务的潮起，搬砖的工作变成多工地模式，每个工地都需要搭建好一套基础设施。 作为 DRY 原则的信奉者，一切重复劳动都是浪费青春(我的青春还需要留着浪呢)。将">
+<meta name="keywords" content="spring-boot,microservice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务模板之 SpringBoot">
+<meta property="og:url" content="http://aikin.me/2019/10/29/spring-boot-microservice-seed/index.html">
+<meta property="og:site_name" content="Kin&#39;blog">
+<meta property="og:description" content="一个工地要启动项目，前期需要搭建基础设施支撑后续搬砖顺利。比如：脚手架的搭建、安全、监控 等。 对于软件工程也是类似，每个项目的初期都需要搭建基础设施。那么对于一个微服务项目，你有用微服务模板吗？一个简单又可以快速帮助搭建的微服务的模板。自从微服务的潮起，搬砖的工作变成多工地模式，每个工地都需要搭建好一套基础设施。 作为 DRY 原则的信奉者，一切重复劳动都是浪费青春(我的青春还需要留着浪呢)。将">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-14T12:54:31.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务模板之 SpringBoot">
+<meta name="twitter:description" content="一个工地要启动项目，前期需要搭建基础设施支撑后续搬砖顺利。比如：脚手架的搭建、安全、监控 等。 对于软件工程也是类似，每个项目的初期都需要搭建基础设施。那么对于一个微服务项目，你有用微服务模板吗？一个简单又可以快速帮助搭建的微服务的模板。自从微服务的潮起，搬砖的工作变成多工地模式，每个工地都需要搭建好一套基础设施。 作为 DRY 原则的信奉者，一切重复劳动都是浪费青春(我的青春还需要留着浪呢)。将">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://aikin.me/2019/10/29/spring-boot-microservice-seed/"/>
+
+
+
+
+
+  <title>微服务模板之 SpringBoot | Kin'blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-53634746-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kin'blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">喜欢coding。喜欢大海。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-brief">
+          <a href="/brief-thought/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
+            
+            Brief
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://aikin.me/2019/10/29/spring-boot-microservice-seed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aikin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kin'blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">微服务模板之 SpringBoot</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-29T20:51:55+08:00">
+                Oct 29 2019
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/10/29/spring-boot-microservice-seed/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/10/29/spring-boot-microservice-seed/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一个工地要启动项目，前期需要搭建基础设施支撑后续搬砖顺利。比如：脚手架的搭建、安全、监控 等。</p>
+<p>对于软件工程也是类似，每个项目的初期都需要搭建基础设施。那么对于一个微服务项目，你有用微服务模板吗？一个简单又可以快速帮助搭建的微服务的模板。自从微服务的潮起，搬砖的工作变成多工地模式，每个工地都需要搭建好一套基础设施。</p>
+<p>作为 DRY 原则的信奉者，一切重复劳动都是浪费青春(我的青春还需要留着浪呢)。将重复的抽离出来，构建成模板，然后就是模板规模使用（复制粘贴）。</p>
+<a id="more"></a>
+<p>在软件工程领域，一个工程的初始化，包括：技术选型，工程实践，持续集成，持续交付等。展开来说，包括：</p>
+<ul>
+<li>技术栈</li>
+<li>代码规范</li>
+<li>配置管理</li>
+<li>测试策略</li>
+<li>应用层</li>
+<li>数据管理</li>
+<li>集成策略</li>
+<li>安全策略</li>
+<li>持续交付</li>
+<li>运维监控</li>
+</ul>
+<p>那么对于一个基于 SpringBoot 技术栈的微服务工程，每个维度如何去落地搭建？</p>
+<h5 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h5><ul>
+<li>Checkstyle/PMD/FindBugs/AlibabaJavaCodingGuidelines</li>
+<li>EditorConfig</li>
+<li>SonarQube </li>
+<li>API Normalize</li>
+</ul>
+<h5 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h5><ul>
+<li>Version control system: Git</li>
+<li>Build Tool And Dependencies Management：Gradle、Maven </li>
+<li>Config Management: Spring Cloud Config</li>
+<li>Env management: Vagrant/Gradle<ul>
+<li><code>memory size setup</code></li>
+<li><code>network port link</code></li>
+<li><code>database link</code></li>
+<li><code>related to the envrionment configuration</code> </li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h5 id="测试策略"><a href="#测试策略" class="headerlink" title="测试策略"></a>测试策略</h5><ul>
+<li>Unit Test</li>
+<li>Component Test</li>
+<li>API Test </li>
+<li>Contract Test</li>
+<li>Integration Test</li>
+<li>Performance Test</li>
+<li>Test Coverage</li>
+</ul>
+<h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><ul>
+<li>DDD Tactics</li>
+<li>DIP</li>
+<li>AOP</li>
+<li>ORM</li>
+<li>Asnyc</li>
+<li>Transactional Management </li>
+<li>DSL</li>
+<li>API Design: RESTfuls(Idempotent, Error Handling, etc.)</li>
+</ul>
+<h5 id="数据管理"><a href="#数据管理" class="headerlink" title="数据管理"></a>数据管理</h5><ul>
+<li>Migration: Database schema management: flyway</li>
+<li>Database: RDBMS</li>
+<li>Message: Kafaka</li>
+<li>Cache: Redis、Spring Cache</li>
+</ul>
+<h5 id="集成策略"><a href="#集成策略" class="headerlink" title="集成策略"></a>集成策略</h5><ul>
+<li>API Semantic Versioning</li>
+<li>Event Driven</li>
+<li>Service Discovery/Register</li>
+<li>Service Fallback: Hystrix</li>
+<li>Load Balance: Ribbon</li>
+<li>API Call: Feign</li>
+<li>….</li>
+</ul>
+<h5 id="安全策略"><a href="#安全策略" class="headerlink" title="安全策略"></a>安全策略</h5><ul>
+<li>Auth: session management、Json web token</li>
+<li>Permission: Data permission、Feature permission</li>
+<li>Security: CORS、XSS、SQL Inject</li>
+<li>…</li>
+</ul>
+<h5 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h5><ul>
+<li>Pipeline: GoCD/Jenkins(pipeline as code)</li>
+<li>Containeize: Docker</li>
+<li>Container Scheduling and Management: Kubernetes、Docker Compose</li>
+<li>Container management platform: Rancher</li>
+<li>…</li>
+</ul>
+<h5 id="运维监控"><a href="#运维监控" class="headerlink" title="运维监控"></a>运维监控</h5><ul>
+<li>APM: APP Dynamic、Pinpoint、Grafana、Prometheus、Zipkin</li>
+<li>Logging System: EFK</li>
+<li>Cerebro</li>
+<li>…</li>
+</ul>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>持续更新…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>Post author:</strong>
+      aikin
+    </li>
+    <li class="post-copyright-link">
+      <strong>Post link:</strong>
+      <a href="http://aikin.me/2019/10/29/spring-boot-microservice-seed/" title="微服务模板之 SpringBoot">http://aikin.me/2019/10/29/spring-boot-microservice-seed/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright Notice: </strong>
+      All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring-boot/" rel="tag"># spring-boot</a>
+          
+            <a href="/tags/microservice/" rel="tag"># microservice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/06/test-go-in-bdd-way/" rel="next" title="Golang 的测试有点怪">
+                <i class="fa fa-chevron-left"></i> Golang 的测试有点怪
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="aikin" />
+          <p class="site-author-name" itemprop="name">aikin</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/aikin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://segmentfault.com/u/aikin" target="_blank" title="Segmentfault">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                  Segmentfault
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码规范"><span class="nav-number">1.</span> <span class="nav-text">代码规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置管理"><span class="nav-number">2.</span> <span class="nav-text">配置管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试策略"><span class="nav-number">3.</span> <span class="nav-text">测试策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用层"><span class="nav-number">4.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据管理"><span class="nav-number">5.</span> <span class="nav-text">数据管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集成策略"><span class="nav-number">6.</span> <span class="nav-text">集成策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全策略"><span class="nav-number">7.</span> <span class="nav-text">安全策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#持续交付"><span class="nav-number">8.</span> <span class="nav-text">持续交付</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运维监控"><span class="nav-number">9.</span> <span class="nav-text">运维监控</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写在最后"><span class="nav-number"></span> <span class="nav-text">写在最后</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">aikin</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://aikinlu.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://aikin.me/2019/10/29/spring-boot-microservice-seed/';
+          this.page.identifier = '2019/10/29/spring-boot-microservice-seed/';
+          this.page.title = '微服务模板之 SpringBoot';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://aikinlu.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

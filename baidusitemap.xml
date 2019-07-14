@@ -4,8 +4,27 @@
 
     
   <url>
+    <loc>http://aikin.me/2019/10/29/spring-boot-microservice-seed/</loc>
+    <lastmod>2019-07-14T12:54:31.396Z</lastmod>
+    <data>
+        <display>
+        <title>微服务模板之 SpringBoot</title>
+        <pubTime>2019-10-29T12:51:55.000Z</pubTime>
+        
+        <tag>spring-boot</tag>
+         
+        <tag>microservice</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://aikin.me/2018/09/06/test-go-in-bdd-way/</loc>
-    <lastmod>2018-09-10T05:47:28.000Z</lastmod>
+    <lastmod>2018-09-10T07:00:52.000Z</lastmod>
     <data>
         <display>
         <title>Golang 的测试有点怪</title>

@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://aikin.me/2019/10/29/spring-boot-microservice-seed/</loc>
+    
+    <lastmod>2019-07-14T12:54:31.396Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://aikin.me/2018/09/06/test-go-in-bdd-way/</loc>
     
-    <lastmod>2018-09-10T05:47:28.000Z</lastmod>
+    <lastmod>2018-09-10T07:00:52.000Z</lastmod>
     
   </url>
   
@@ -324,14 +331,14 @@
   </url>
   
   <url>
-    <loc>http://aikin.me/tags/index.html</loc>
+    <loc>http://aikin.me/instagram/index.html</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://aikin.me/instagram/index.html</loc>
+    <loc>http://aikin.me/tags/index.html</loc>
     
     <lastmod>2016-03-17T14:47:08.000Z</lastmod>
     
