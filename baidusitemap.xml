@@ -4,16 +4,18 @@
 
     
   <url>
-    <loc>http://aikin.me/2019/10/29/spring-boot-microservice-seed/</loc>
-    <lastmod>2019-07-14T12:54:31.396Z</lastmod>
+    <loc>http://aikin.me/2018/10/29/spring-boot-microservice-seed/</loc>
+    <lastmod>2019-07-22T15:54:53.711Z</lastmod>
     <data>
         <display>
         <title>微服务模板之 SpringBoot</title>
-        <pubTime>2019-10-29T12:51:55.000Z</pubTime>
+        <pubTime>2018-10-29T12:51:55.000Z</pubTime>
         
         <tag>spring-boot</tag>
          
         <tag>microservice</tag>
+         
+        <tag>service template</tag>
          
          
            
