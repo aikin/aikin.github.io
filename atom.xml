@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://aikin.me/"/>
-  <updated>2019-07-22T15:54:53.711Z</updated>
+  <updated>2019-08-11T09:26:38.244Z</updated>
   <id>http://aikin.me/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>微服务模板之 SpringBoot</title>
+    <title>微服务模板</title>
     <link href="http://aikin.me/2018/10/29/spring-boot-microservice-seed/"/>
     <id>http://aikin.me/2018/10/29/spring-boot-microservice-seed/</id>
     <published>2018-10-29T12:51:55.000Z</published>
-    <updated>2019-07-22T15:54:53.711Z</updated>
+    <updated>2019-08-11T09:26:38.244Z</updated>
     
     <content type="html"><![CDATA[<p>一个工地要启动项目，前期需要搭建基础设施支撑后续搬砖顺利。比如：脚手架的搭建、安全、监控 等。</p><p>对于软件工程也是类似，每个项目的初期都需要搭建基础设施。那么对于一个微服务项目，你有用微服务模板吗？一个简单又可以快速帮助搭建的微服务的模板。自从微服务的潮起，搬砖的工作变成多工地模式，每个工地都需要搭建好一套基础设施。</p><p>作为 DRY 原则的信奉者，一切重复劳动都是浪费青春(我的青春还需要留着浪呢)。将重复的抽离出来，构建成模板，然后就是模板规模使用（复制粘贴）。</p><a id="more"></a><p>在软件工程领域，一个工程的初始化，包括：技术选型，工程实践，持续集成，持续交付等。展开来说，包括：</p><ul><li>技术栈</li><li>代码规范</li><li>配置管理</li><li>测试策略</li><li>应用层</li><li>数据管理</li><li>集成策略</li><li>安全策略</li><li>持续交付</li><li>运维监控</li></ul><p>那么对于一个基于 SpringBoot 技术栈的微服务工程，每个维度如何去落地搭建？</p><h5 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h5><ul><li>Checkstyle/PMD/FindBugs/AlibabaJavaCodingGuidelines</li><li>EditorConfig</li><li>SonarQube </li><li>API Normalize</li></ul><h5 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h5><ul><li>Version control system: Git</li><li>Build Tool And Dependencies Management：Gradle、Maven </li><li>Config Management: Spring Cloud Config</li><li>Env management: Vagrant/Gradle<ul><li><code>memory size setup</code></li><li><code>network port link</code></li><li><code>database link</code></li><li><code>related to the envrionment configuration</code> </li><li>…</li></ul></li></ul><h5 id="测试策略"><a href="#测试策略" class="headerlink" title="测试策略"></a>测试策略</h5><ul><li>Unit Test</li><li>Component Test</li><li>API Test </li><li>Contract Test</li><li>Integration Test</li><li>Performance Test</li><li>Test Coverage</li></ul><h5 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h5><ul><li>DDD Tactics</li><li>DIP</li><li>AOP</li><li>ORM</li><li>Asnyc</li><li>Transactional Management </li><li>DSL</li><li>API Design: RESTfuls(Idempotent, Error Handling, etc.)</li></ul><h5 id="数据管理"><a href="#数据管理" class="headerlink" title="数据管理"></a>数据管理</h5><ul><li>Migration: Database schema management: flyway</li><li>Database: RDBMS</li><li>Message: Kafaka</li><li>Cache: Redis、Spring Cache</li></ul><h5 id="集成策略"><a href="#集成策略" class="headerlink" title="集成策略"></a>集成策略</h5><ul><li>API Semantic Versioning</li><li>Event Driven</li><li>Service Discovery/Register</li><li>Service Fallback: Hystrix</li><li>Load Balance: Ribbon</li><li>API Call: Feign</li><li>….</li></ul><h5 id="安全策略"><a href="#安全策略" class="headerlink" title="安全策略"></a>安全策略</h5><ul><li>Auth: session management、Json web token</li><li>Permission: Data permission、Feature permission</li><li>Security: CORS、XSS、SQL Inject</li><li>…</li></ul><h5 id="持续交付"><a href="#持续交付" class="headerlink" title="持续交付"></a>持续交付</h5><ul><li>Pipeline: GoCD/Jenkins(pipeline as code)</li><li>Containeize: Docker</li><li>Container Scheduling and Management: Kubernetes、Docker Compose</li><li>Container management platform: Rancher</li><li>…</li></ul><h5 id="运维监控"><a href="#运维监控" class="headerlink" title="运维监控"></a>运维监控</h5><ul><li>APM: APP Dynamic、Pinpoint、Grafana、Prometheus、Zipkin</li><li>Logging System: EFK</li><li>Cerebro</li><li>…</li></ul><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p><a href="https://github.com/aikin/spring-boot-microservice-template" target="_blank" rel="noopener"><strong><em>具体栗子</em></strong></a> </p><hr><p><strong> 持续更新… </strong></p>]]></content>
     
@@ -440,9 +440,9 @@
     </summary>
     
     
-      <category term="dockerize" scheme="http://aikin.me/tags/dockerize/"/>
-    
       <category term="docker" scheme="http://aikin.me/tags/docker/"/>
+    
+      <category term="dockerize" scheme="http://aikin.me/tags/dockerize/"/>
     
       <category term="db" scheme="http://aikin.me/tags/db/"/>
     

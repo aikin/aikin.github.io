@@ -5,10 +5,10 @@
     
   <url>
     <loc>http://aikin.me/2018/10/29/spring-boot-microservice-seed/</loc>
-    <lastmod>2019-07-22T15:54:53.711Z</lastmod>
+    <lastmod>2019-08-11T09:26:38.244Z</lastmod>
     <data>
         <display>
-        <title>微服务模板之 SpringBoot</title>
+        <title>微服务模板</title>
         <pubTime>2018-10-29T12:51:55.000Z</pubTime>
         
         <tag>spring-boot</tag>
@@ -219,9 +219,9 @@
         <title>容器化开发环境</title>
         <pubTime>2016-07-19T18:12:44.000Z</pubTime>
         
-        <tag>dockerize</tag>
-         
         <tag>docker</tag>
+         
+        <tag>dockerize</tag>
          
          
            
@@ -655,9 +655,9 @@
         <title>容器化开发环境 - 应用和数据库隔离</title>
         <pubTime>2016-09-24T12:50:46.000Z</pubTime>
         
-        <tag>dockerize</tag>
-         
         <tag>docker</tag>
+         
+        <tag>dockerize</tag>
          
         <tag>db</tag>
          
